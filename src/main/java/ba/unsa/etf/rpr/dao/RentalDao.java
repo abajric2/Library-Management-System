@@ -15,7 +15,7 @@ public interface RentalDao extends Dao<Rental> {
      * returns a list of all rentals where the return deadline has been exceeded
      * @return list of rentals
      */
-    List<Rental> deadlineExceedings ();
+    List<Rental> getDeadlineExceedings ();
 
     /**
      * returns a list of all rentals based on the specified return deadline date
