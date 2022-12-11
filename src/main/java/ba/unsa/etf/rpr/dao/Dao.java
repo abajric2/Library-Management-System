@@ -32,7 +32,7 @@ public interface Dao<T> {
      * @param id unique data of an entity in the database
      * @return entity found based on id
      */
-    T getById (int id);
+    T searchById (int id);
 
     /**
      * return all data from the database
