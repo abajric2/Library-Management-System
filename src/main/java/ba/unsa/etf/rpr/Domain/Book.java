@@ -1,5 +1,12 @@
 package ba.unsa.etf.rpr.Domain;
 
+
+/**
+ *
+ * Class related to the "BOOKS" table in the database
+ * It follows the POJO specification
+ * @author Amina Bajric
+ */
 public class Book {
     private int bookID;
     private String title;
@@ -78,6 +85,10 @@ public class Book {
         this.avilableNumber = avilableNumber;
     }
 
+    /**
+     * method for printing a book in the form "book title, author, year of publication"
+     * @return string containing basic information about the book
+     */
     @Override
     public String toString() {
         return title + ", " + author + ", " + yearOfPublication;
