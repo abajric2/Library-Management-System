@@ -2,10 +2,9 @@ package ba.unsa.etf.rpr.Domain;
 
 
 /**
- *
- * Class related to the "BOOKS" table in the database
+ * Class for basic information and methods for managing books in a library
  * It follows the POJO specification
- * @author Amina Bajric
+ * @author Amina BAjric
  */
 public class Book {
     private int bookID;
