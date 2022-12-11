@@ -75,7 +75,28 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public List<Book> searchByTitle(String title) {
-        return null;
+        String query = "SELECT * FROM BOOKS WHERE TITLE = ?";
+        List<Book> books = new ArrayList<>();
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, title);
+            ResultSet r = stmt.executeQuery();
+            while(r.next()) {
+                Book book = new Book();
+                book.setBookID(r.getInt("BOOK_ID"));
+                book.setTitle(r.getString("TITLE"));
+                book.setAuthor(r.getString("AUTHOR"));
+                book.setYearOfPublication(r.getString("YEAR_OF_PUBLICATION"));
+                book.setGenre(r.getString("GENRE"));
+                book.setTotalNumber(r.getInt("TOTAL_NUMBER"));
+                book.setAvilableNumber(r.getInt("AVAILABLE_NUMBER"));
+                books.add(book);
+            }
+            r.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
     }
 
     @Override
