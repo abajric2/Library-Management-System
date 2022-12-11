@@ -101,9 +101,20 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public boolean isAvailable(String title, String author) {
-        return false;
+        String query = "SELECT DISTINCT AVAILABLE_NUMBER FROM BOOKS WHERE TITLE = ? AND AUTHOR = ?";
+        boolean available = false;
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, title);
+            stmt.setString(2, author);
+            ResultSet r = stmt.executeQuery();
+            if(r.next() && r.getInt("AVAILABLE_NUMBER")>0) available = true;  // statement returns distinct values, so it will return only one row or none
+            else available = false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return available;
     }
-
     @Override
     public Book add(Book item) {
         String insert = "INSERT INTO BOOKS(TITLE, AUTHOR, YEAR_OF_PUBLICATION, GENRE, TOTAL_NUMBER, AVAILABLE_NUMBER) VALUES(?, ?, ?, ?, ?, ?)";
