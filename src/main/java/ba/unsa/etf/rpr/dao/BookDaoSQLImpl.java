@@ -159,7 +159,7 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public void delete(Book item) {
-        String dlt = "DELETE FROM BOOK WHERE BOOK_ID = ?";
+        String dlt = "DELETE FROM BOOKS WHERE BOOK_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, item.getBookID());

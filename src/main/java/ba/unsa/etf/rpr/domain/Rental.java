@@ -9,16 +9,26 @@ import java.util.Date;
  * @author Amina Bajric
  */
 public class Rental {
+    private int rentalID;
     private int bookID;
     private int memberID;
     private Date rentDate;
     private Date returnDeadline;
 
-    public Rental(int bookID, int memberID, Date rentDate, Date returnDeadline) {
+    public Rental(int rentalID, int bookID, int memberID, Date rentDate, Date returnDeadline) {
+        this.rentalID = rentalID;
         this.bookID = bookID;
         this.memberID = memberID;
         this.rentDate = rentDate;
         this.returnDeadline = returnDeadline;
+    }
+
+    public int getRentalID() {
+        return rentalID;
+    }
+
+    public void setRentalID(int rentalID) {
+        this.rentalID = rentalID;
     }
 
     public Rental() {
