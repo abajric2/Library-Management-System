@@ -1,9 +1,11 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 
 import java.io.FileReader;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -41,26 +43,92 @@ public class MemberDaoSQLImpl implements MemberDao {
 
     @Override
     public Member update(Member item) {
+        String updt = "UPDATE MEMBERS SET FIRST_NAME = ?, LAST_NAME = ? WHERE MEMBER_ID = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(updt, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, item.getFirstName());
+            stmt.setString(2, item.getLastName());
+            stmt.setInt(3, item.getMemberID());
+            stmt.executeUpdate();
+            return item;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public void delete(Member item) {
-
+        String dlt = "DELETE FROM MEMBERS WHERE MEMBER_ID = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, item.getMemberID());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Member searchById(int id) {
+        String query = "SELECT * FROM MEMBERS WHERE MEMBER_ID = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet r = stmt.executeQuery();
+            if(r.next()) {
+                Member member = new Member();
+                member.setMemberID(r.getInt("MEMBER_ID"));
+                member.setFirstName(r.getString("FIRST_NAME"));
+                member.setLastName(r.getString("LAST_NAME"));
+                r.close();
+                return member;
+            }
+            else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public List<Member> getAll() {
-        return null;
+        String query = "SELECT * FROM MEMBERS";
+        List<Member> members = new ArrayList<>();
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet r = stmt.executeQuery();
+            while(r.next()) {
+                Member member = new Member(r.getInt(1), r.getString(2), r.getString(3));
+                members.add(member);
+            }
+            r.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
     }
-
     @Override
     public List<Member> searchByName(String name) {
-        return null;
+        String query = "SELECT * FROM BOOKS WHERE FIRST_NAME || ' ' || LAST_NAME = ?";
+        List<Member> members = new ArrayList<>();
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, name);
+            ResultSet r = stmt.executeQuery();
+            while(r.next()) {
+                Member member = new Member();
+                member.setMemberID(r.getInt("MEMBER_ID"));
+                member.setFirstName(r.getString("FIRST_NAME"));
+                member.setLastName(r.getString("LAST_NAME"));
+                members.add(member);
+            }
+            r.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
     }
 }
