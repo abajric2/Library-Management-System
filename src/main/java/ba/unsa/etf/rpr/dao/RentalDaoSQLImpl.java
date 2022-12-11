@@ -1,9 +1,11 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
 
 import java.io.FileReader;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -74,12 +76,45 @@ public class RentalDaoSQLImpl implements RentalDao {
 
     @Override
     public Rental searchById(int id) {
+        String query = "SELECT * FROM RENTALS WHERE RENTAL_ID = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet r = stmt.executeQuery();
+            if(r.next()) {
+                Rental rental = new Rental();
+                rental.setBookID(r.getInt("BOOK_ID"));
+                rental.setMemberID(r.getInt("MEMBER_ID"));
+                rental.setRentDate(r.getDate("RENT_DATE"));
+                rental.setReturnDeadline(r.getDate("RETURN_DEADLINE"));
+                r.close();
+                return rental;
+            }
+            else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public List<Rental> getAll() {
-        return null;
+        String query = "SELECT * FROM RENTALS";
+        List<Rental> rentals = new ArrayList<>();
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet r = stmt.executeQuery();
+            while(r.next()) {
+                Rental rental = new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
+                rentals.add(rental);
+            }
+            r.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rentals;
     }
 
     @Override
