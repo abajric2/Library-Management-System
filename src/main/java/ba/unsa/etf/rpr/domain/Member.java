@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.Domain;
+package ba.unsa.etf.rpr.domain;
 
 /**
  * Class for basic information and methods for managing members of a library

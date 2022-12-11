@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.Domain;
+package ba.unsa.etf.rpr.domain;
 
 
 /**
