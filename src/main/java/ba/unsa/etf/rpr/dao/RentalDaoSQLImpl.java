@@ -137,6 +137,20 @@ public class RentalDaoSQLImpl implements RentalDao {
 
     @Override
     public List<Rental> searchByReturnDeadline(Date returnDeadline) {
-        return null;
+        String query = "SELECT * FROM RENTALS WHERE RETURN_DEADLINE = ?";
+        List<Rental> rentals = new ArrayList<>();
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setDate(1, (java.sql.Date) returnDeadline);
+            ResultSet r = stmt.executeQuery();
+            while(r.next()) {
+                Rental rental = new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
+                rentals.add(rental);
+            }
+            r.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rentals;
     }
 }
