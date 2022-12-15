@@ -17,7 +17,7 @@ public class MemberDaoSQLImpl implements MemberDao {
             FileReader reader = new FileReader("db.properties");
             Properties p = new Properties();
             p.load(reader);
-            this.connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7583880", p.getProperty("username"), p.getProperty("password"));
+            this.connection = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_RPRBaza123321", p.getProperty("username"), p.getProperty("password"));
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -112,7 +112,7 @@ public class MemberDaoSQLImpl implements MemberDao {
     }
     @Override
     public List<Member> searchByName(String name) {
-        String query = "SELECT * FROM BOOKS WHERE FIRST_NAME || ' ' || LAST_NAME = ?";
+        String query = "SELECT * FROM MEMBERS WHERE CONCAT(CONCAT(FIRST_NAME, ' '), LAST_NAME) = ?";
         List<Member> members = new ArrayList<>();
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);

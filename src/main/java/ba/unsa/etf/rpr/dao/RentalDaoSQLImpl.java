@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
 
@@ -18,7 +19,7 @@ public class RentalDaoSQLImpl implements RentalDao {
             FileReader reader = new FileReader("db.properties");
             Properties p = new Properties();
             p.load(reader);
-            this.connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7583880", p.getProperty("username"), p.getProperty("password"));
+            this.connection = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_RPRBaza123321", p.getProperty("username"), p.getProperty("password"));
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -37,9 +38,32 @@ public class RentalDaoSQLImpl implements RentalDao {
             ResultSet r = stmt.getGeneratedKeys();
             r.next();
             item.setRentalID(r.getInt(1));
+            /*
+            When we add an entity related to book rentals,
+            it is necessary to reduce the number of available
+            books for the book that is rented
+             */
+            String check = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.BOOK_ID = ?";
+            PreparedStatement checkstmt = this.connection.prepareStatement(check);
+            checkstmt.setInt(1, item.getBookID());
+            ResultSet cr = checkstmt.executeQuery();
+            /*
+            It can return multiple rows, but the data we need will be the same in each row
+            (because it refers to the book_id), so it is enough to consider only one
+             */
+            if(cr.next() && cr.getInt(7) > 0) {
+                BookDaoSQLImpl b = new BookDaoSQLImpl();
+                b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
+                        cr.getString(5), cr.getInt(6), cr.getInt(7) - 1));
+            }
+            else {
+                Rental rental = new Rental(item.getRentalID(), item.getBookID(), item.getMemberID(), item.getRentDate(), item.getReturnDeadline());
+                delete(rental);
+                throw new SQLException("The book is not available in the library");
+            }
             return item;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -69,6 +93,21 @@ public class RentalDaoSQLImpl implements RentalDao {
             PreparedStatement stmt = this.connection.prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, item.getRentalID());
             stmt.executeUpdate();
+            /*
+            When we delete an entity related to book rentals,
+            we need to increase the number of available books
+            for the book that was returned
+             */
+            String availableNumberUpdate = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.BOOK_ID = ?";
+            PreparedStatement updatestmt = this.connection.prepareStatement(availableNumberUpdate);
+            updatestmt.setInt(1, item.getBookID());
+            ResultSet cr = updatestmt.executeQuery();
+            if(cr.next()) {
+                BookDaoSQLImpl b = new BookDaoSQLImpl();
+                b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
+                        cr.getString(5), cr.getInt(6), cr.getInt(7) + 1));
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -119,7 +158,7 @@ public class RentalDaoSQLImpl implements RentalDao {
 
     @Override
     public List<Rental> getDeadlineExceedings() {
-        String query = "SELECT * FROM RENTALS WHERE SYSDATE>RETURN_DEADLINE";
+        String query = "SELECT * FROM RENTALS WHERE CURDATE()>RETURN_DEADLINE";
         List<Rental> rentals = new ArrayList<>();
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);

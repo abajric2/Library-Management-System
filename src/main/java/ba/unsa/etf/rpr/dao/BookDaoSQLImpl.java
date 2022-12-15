@@ -15,7 +15,7 @@ public class BookDaoSQLImpl implements BookDao {
             FileReader reader = new FileReader("db.properties");
             Properties p = new Properties();
             p.load(reader);
-            this.connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7583880", p.getProperty("username"), p.getProperty("password"));
+            this.connection = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_RPRBaza123321", p.getProperty("username"), p.getProperty("password"));
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -23,7 +23,7 @@ public class BookDaoSQLImpl implements BookDao {
     }
     @Override
     public List<Book> searchByAuthor(String author) {
-        String query = "SELECT * FROM BOOKS WHERE AUTHOR = ?";
+        String query = "SELECT * FROM Books WHERE AUTHOR = ?";
         List<Book> books = new ArrayList<>();
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -49,7 +49,7 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public List<Book> searchByGenre(String genre) {
-        String query = "SELECT * FROM BOOKS WHERE GENRE = ?";
+        String query = "SELECT * FROM Books WHERE GENRE = ?";
         List<Book> books = new ArrayList<>();
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -75,7 +75,7 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public List<Book> searchByTitle(String title) {
-        String query = "SELECT * FROM BOOKS WHERE TITLE = ?";
+        String query = "SELECT * FROM Books WHERE TITLE = ?";
         List<Book> books = new ArrayList<>();
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -101,7 +101,7 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public boolean isAvailable(String title, String author) {
-        String query = "SELECT DISTINCT AVAILABLE_NUMBER FROM BOOKS WHERE TITLE = ? AND AUTHOR = ?";
+        String query = "SELECT DISTINCT AVAILABLE_NUMBER FROM Books WHERE TITLE = ? AND AUTHOR = ?";
         boolean available = false;
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -117,7 +117,7 @@ public class BookDaoSQLImpl implements BookDao {
     }
     @Override
     public Book add(Book item) {
-        String insert = "INSERT INTO BOOKS(TITLE, AUTHOR, YEAR_OF_PUBLICATION, GENRE, TOTAL_NUMBER, AVAILABLE_NUMBER) VALUES(?, ?, ?, ?, ?, ?)";
+        String insert = "INSERT INTO Books(TITLE, AUTHOR, YEAR_OF_PUBLICATION, GENRE, TOTAL_NUMBER, AVAILABLE_NUMBER) VALUES(?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getTitle());
@@ -139,7 +139,7 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public Book update(Book item) {
-        String updt = "UPDATE BOOKS SET TITLE = ?, AUTHOR = ?, YEAR_OF_PUBLICATION = ?, GENRE = ?, TOTAL_NUMBER = ?, AVAILABLE_NUMBER = ? WHERE BOOK_ID = ?";
+        String updt = "UPDATE Books SET TITLE = ?, AUTHOR = ?, YEAR_OF_PUBLICATION = ?, GENRE = ?, TOTAL_NUMBER = ?, AVAILABLE_NUMBER = ? WHERE BOOK_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(updt, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getTitle());
@@ -159,7 +159,7 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public void delete(Book item) {
-        String dlt = "DELETE FROM BOOKS WHERE BOOK_ID = ?";
+        String dlt = "DELETE FROM Books WHERE BOOK_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, item.getBookID());
@@ -171,7 +171,7 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public Book searchById(int id) {
-        String query = "SELECT * FROM BOOKS WHERE BOOK_ID = ?";
+        String query = "SELECT * FROM Books WHERE BOOK_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
             stmt.setInt(1, id);
@@ -199,7 +199,7 @@ public class BookDaoSQLImpl implements BookDao {
 
     @Override
     public List<Book> getAll() {
-        String query = "SELECT * FROM BOOKS";
+        String query = "SELECT * FROM Books";
         List<Book> books = new ArrayList<>();
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);

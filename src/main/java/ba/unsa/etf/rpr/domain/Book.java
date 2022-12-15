@@ -90,6 +90,6 @@ public class Book {
      */
     @Override
     public String toString() {
-        return title + ", " + author + ", " + yearOfPublication;
+        return title + ", " + author;
     }
 }

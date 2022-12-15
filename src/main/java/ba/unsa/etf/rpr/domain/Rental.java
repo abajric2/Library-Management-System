@@ -32,6 +32,8 @@ public class Rental {
     }
 
     public Rental() {
+        this.rentDate = new Date();
+        this.returnDeadline = new Date();
     }
 
     public int getBookID() {
