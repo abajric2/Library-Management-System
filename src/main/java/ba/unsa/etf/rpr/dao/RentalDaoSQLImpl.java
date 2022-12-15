@@ -157,6 +157,13 @@ public class RentalDaoSQLImpl implements RentalDao {
     }
 
     @Override
+    public void viewAll() {
+        List<Rental> l = new ArrayList<>();
+        l = getAll();
+        for(Rental r : l) System.out.println(r);
+    }
+
+    @Override
     public List<Rental> getDeadlineExceedings() {
         String query = "SELECT * FROM RENTALS WHERE CURDATE()>RETURN_DEADLINE";
         List<Rental> rentals = new ArrayList<>();
