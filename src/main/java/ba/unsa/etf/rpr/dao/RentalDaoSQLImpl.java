@@ -6,10 +6,8 @@ import ba.unsa.etf.rpr.domain.Rental;
 
 import java.io.FileReader;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import java.sql.Date;
+import java.util.*;
 
 public class RentalDaoSQLImpl implements RentalDao {
     private Connection connection;
@@ -212,6 +210,38 @@ public class RentalDaoSQLImpl implements RentalDao {
         }
         return null;
     }
+
+    /**
+     * adds n months to the date passed as a parameter
+     * @param date
+     * @param n
+     * @return Date
+     */
+    private static Date addMonths(Date date, int n)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MONTH, n);
+        return (Date) cal.getTime();
+    }
+    @Override
+    public Rental rentABook(int memberID, String bookTitle, String author) {
+        Rental r = checkUsersRental(memberID);
+        if(r != null) {
+            System.out.println("You can't rent a book because you haven't returned the one you rented earlier.");
+            return null;
+        }
+        BookDaoSQLImpl bimpl = new BookDaoSQLImpl();
+        Book b = bimpl.searchByTitleAndAuthor(bookTitle, author);
+        Date currDate = (Date) new java.util.Date();
+        /*
+        As id we send anything because it will generate itself.
+        The rental date is the current date and the return deadline is 3 months after the current date
+         */
+        Rental newRent = add(new Rental(1, b.getBookID(), memberID, currDate, addMonths(currDate, 3)));
+        return newRent;
+    }
+
     @Override
     public void viewAll() {
         List<Rental> l = new ArrayList<>();

@@ -4,7 +4,7 @@ import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
