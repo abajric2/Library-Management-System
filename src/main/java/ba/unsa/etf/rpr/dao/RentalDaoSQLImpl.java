@@ -25,6 +25,11 @@ public class RentalDaoSQLImpl implements RentalDao {
     }
     @Override
     public Rental add(Rental item) {
+        Rental check = checkUsersRental(item.getMemberID());
+        if(check != null) {
+            System.out.println("You can't rent a book because you haven't returned the one you previously rented");
+            return null;
+        }
         String insert = "INSERT INTO RENTALS(BOOK_ID, MEMBER_ID, RENT_DATE, RETURN_DEADLINE) VALUES(?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
