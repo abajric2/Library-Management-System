@@ -155,12 +155,44 @@ public class RentalDaoSQLImpl implements RentalDao {
         }
         return rentals;
     }
-
+    Member getMember (Rental r) {
+        String query = "SELECT * FROM MEMBERS m, RENTALS r WHERE m.MEMBER_ID = r.MEMBER_ID AND r.RENTAL_ID = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1, r.getRentalID());
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                Member m = new Member(rs.getInt(1), rs.getString(2), rs.getString(3));
+                return m;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    Book getBook (Rental r) {
+        String query = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.RENTAL_ID = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1, r.getRentalID());
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                Book b = new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getInt(6), rs.getInt(7));
+                return b;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public void viewAll() {
         List<Rental> l = new ArrayList<>();
         l = getAll();
-        for(Rental r : l) System.out.println(r);
+        for(int i = 0; i < l.size(); i++) {
+            System.out.println("\"" + getBook(l.get(i)) + "\" is rented by " + getMember(l.get(i)) + ". " + l.get(i));
+        }
     }
 
     @Override
