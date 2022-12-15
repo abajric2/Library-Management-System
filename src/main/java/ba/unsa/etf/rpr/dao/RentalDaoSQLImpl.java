@@ -85,6 +85,21 @@ public class RentalDaoSQLImpl implements RentalDao {
         }
         return null;
     }
+    public Rental checkUsersRental (int memberID) {
+        String query = "SELECT * FROM RENTALS WHERE MEMBER_ID = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1, memberID);
+            ResultSet r = stmt.executeQuery();
+            if(r.next()) {
+                return new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public void delete(Rental item) {
