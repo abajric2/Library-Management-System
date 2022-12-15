@@ -78,7 +78,6 @@ public class Rental {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String rent = simpleDateFormat.format(rentDate);
         String returndl = simpleDateFormat.format(returnDeadline);
-        return "Date of renting: " + rent + System.lineSeparator()
-                + "Deadline for return: " + returndl;
+        return "The book was rented on " + rent + " and should be returned until " + returndl;
     }
 }
