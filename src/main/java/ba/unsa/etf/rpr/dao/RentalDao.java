@@ -26,8 +26,32 @@ public interface RentalDao extends Dao<Rental> {
      * @return list of rentals
      */
     List<Rental> searchByReturnDeadline(Date returnDeadline);
+
+    /**
+     * checks whether the user with the id sent as a parameter already has a rental,
+     * if so it returns that rental, if not it returns null
+     * @param memberID id from library member
+     * @return Rental
+     */
     public Rental checkUsersRental (int memberID);
+
+    /**
+     * returns the book that was borrowed to the library
+     * @param memberID member from user who rented the book
+     */
     public void returnRentedBook (int memberID);
+
+    /**
+     * returns the library member who rented the book
+     * @param r Rental
+     * @return library member
+     */
     public Member getMember (Rental r);
+
+    /**
+     * returns the book that is rented
+     * @param r Rental
+     * @return Book
+     */
     public Book getBook (Rental r);
 }
