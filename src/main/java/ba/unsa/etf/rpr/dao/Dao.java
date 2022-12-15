@@ -39,4 +39,9 @@ public interface Dao<T> {
      * @return list of all entities from database
      */
     List<T> getAll ();
+
+    /**
+     * prints all data from the database in the format defined by the toString method
+     */
+    void viewAll();
 }
