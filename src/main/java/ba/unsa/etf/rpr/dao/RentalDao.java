@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Book;
+import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
 
 import java.util.Date;
@@ -26,4 +28,6 @@ public interface RentalDao extends Dao<Rental> {
     List<Rental> searchByReturnDeadline(Date returnDeadline);
     public Rental checkUsersRental (int memberID);
     public void returnRentedBook (int memberID);
+    public Member getMember (Rental r);
+    public Book getBook (Rental r);
 }

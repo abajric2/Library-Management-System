@@ -85,6 +85,7 @@ public class RentalDaoSQLImpl implements RentalDao {
         }
         return null;
     }
+    @Override
     public Rental checkUsersRental (int memberID) {
         String query = "SELECT * FROM RENTALS WHERE MEMBER_ID = ?";
         try {
@@ -94,11 +95,19 @@ public class RentalDaoSQLImpl implements RentalDao {
             if(r.next()) {
                 return new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
             }
-
+            else throw new NoRentalException("You currently have no rented books.");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        catch (NoRentalException e) {
+            System.out.println(e.getMessage());
         }
         return null;
+    }
+    @Override
+    public void returnRentedBook (int memberID) {
+        Rental r = checkUsersRental(memberID);
+        if(r != null) delete(r);
     }
 
     @Override
@@ -170,7 +179,8 @@ public class RentalDaoSQLImpl implements RentalDao {
         }
         return rentals;
     }
-    Member getMember (Rental r) {
+    @Override
+    public Member getMember(Rental r) {
         String query = "SELECT * FROM MEMBERS m, RENTALS r WHERE m.MEMBER_ID = r.MEMBER_ID AND r.RENTAL_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -185,7 +195,8 @@ public class RentalDaoSQLImpl implements RentalDao {
         }
         return null;
     }
-    Book getBook (Rental r) {
+    @Override
+    public Book getBook (Rental r) {
         String query = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.RENTAL_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
