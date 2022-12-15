@@ -25,4 +25,5 @@ public interface RentalDao extends Dao<Rental> {
      */
     List<Rental> searchByReturnDeadline(Date returnDeadline);
     public Rental checkUsersRental (int memberID);
+    public void returnRentedBook (int memberID);
 }
