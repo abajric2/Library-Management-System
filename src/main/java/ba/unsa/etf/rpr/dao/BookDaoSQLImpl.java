@@ -100,6 +100,30 @@ public class BookDaoSQLImpl implements BookDao {
     }
 
     @Override
+    public Book searchByTitleAndAuthor(String title, String author) {
+        String query = "SELECT * FROM Books WHERE TITLE = ? AND AUTHOR = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, title);
+            stmt.setString(2, author);
+            ResultSet r = stmt.executeQuery();
+            /*
+            we can expect that one or no rows will be returned,
+            because in practice there is very little chance that
+            there will be two different books that have the same
+            title and the same author name
+             */
+            if(r.next()) {
+                return new Book(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),
+                        r.getString(5), r.getInt(6), r.getInt(7));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public boolean isAvailable(String title, String author) {
         String query = "SELECT DISTINCT AVAILABLE_NUMBER FROM Books WHERE TITLE = ? AND AUTHOR = ?";
         boolean available = false;
