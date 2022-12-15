@@ -215,4 +215,11 @@ public class BookDaoSQLImpl implements BookDao {
         }
         return books;
     }
+
+    @Override
+    public void viewAll() {
+        List<Book> l = new ArrayList<>();
+        l = getAll();
+        for(Book b : l) System.out.println(b);
+    }
 }
