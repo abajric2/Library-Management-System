@@ -25,8 +25,8 @@ public class RentalDaoSQLImpl implements RentalDao {
     }
     @Override
     public Rental add(Rental item) {
-        Rental check = checkUsersRental(item.getMemberID());
-        if(check != null) {
+        Rental usercheck = checkUsersRental(item.getMemberID());
+        if(usercheck != null) {
             System.out.println("You can't rent a book because you haven't returned the one you previously rented");
             return null;
         }
