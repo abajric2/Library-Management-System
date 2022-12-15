@@ -110,6 +110,14 @@ public class MemberDaoSQLImpl implements MemberDao {
         }
         return members;
     }
+
+    @Override
+    public void viewAll() {
+        List<Member> l = new ArrayList<>();
+        l = getAll();
+        for(Member m : l) System.out.println(m);
+    }
+
     @Override
     public List<Member> searchByName(String name) {
         String query = "SELECT * FROM MEMBERS WHERE CONCAT(CONCAT(FIRST_NAME, ' '), LAST_NAME) = ?";
