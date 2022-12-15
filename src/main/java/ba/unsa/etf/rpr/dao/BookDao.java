@@ -32,6 +32,15 @@ public interface BookDao extends Dao<Book> {
     List<Book> searchByTitle(String title);
 
     /**
+     * returns the book with the title given as a parameter,
+     * by the author whose name is also given by the parameter
+     * @param title
+     * @param author
+     * @return Book
+     */
+    Book searchByTitleAndAuthor(String title, String author);
+
+    /**
      * method that returns true if a book with a given title
      * and by a given author is currently available in the library,
      * and false otherwise
