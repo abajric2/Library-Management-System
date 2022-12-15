@@ -92,14 +92,14 @@ public class RentalDaoSQLImpl implements RentalDao {
             PreparedStatement stmt = this.connection.prepareStatement(query);
             stmt.setInt(1, memberID);
             ResultSet r = stmt.executeQuery();
+            /*
+            one user can have only one rent, so it will return either only one line or nothing
+             */
             if(r.next()) {
                 return new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
             }
-            else throw new NoRentalException("You currently have no rented books.");
+            else return null;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        catch (NoRentalException e) {
             System.out.println(e.getMessage());
         }
         return null;
