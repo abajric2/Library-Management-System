@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.domain;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Class that contains basic information about borrowing a book from the library
@@ -32,8 +32,8 @@ public class Rental {
     }
 
     public Rental() {
-        this.rentDate = new Date();
-        this.returnDeadline = new Date();
+        this.rentDate = (java.sql.Date) new java.util.Date();
+        this.returnDeadline = (java.sql.Date) new java.util.Date();
     }
 
     public int getBookID() {

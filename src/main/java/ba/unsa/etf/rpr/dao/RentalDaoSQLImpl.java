@@ -222,12 +222,24 @@ public class RentalDaoSQLImpl implements RentalDao {
      * @param n
      * @return Date
      */
-    private static Date addMonths(Date date, int n)
+    private java.sql.Date addMonths(java.sql.Date date, int n)
     {
-        Calendar cal = Calendar.getInstance();
+        String query = "SELECT DATE_ADD(?, INTERVAL ? MONTH)";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setDate(1, date);
+            stmt.setInt(2, n);
+            ResultSet r = stmt.executeQuery();
+            r.next();
+            return r.getDate(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+       /* Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.MONTH, n);
-        return (Date) cal.getTime();
+        return (java.sql.Date) cal.getTime();*/
     }
     @Override
     public Rental rentABook(int memberID, String bookTitle, String author) {
@@ -238,7 +250,8 @@ public class RentalDaoSQLImpl implements RentalDao {
         }
         BookDaoSQLImpl bimpl = new BookDaoSQLImpl();
         Book b = bimpl.searchByTitleAndAuthor(bookTitle, author);
-        Date currDate = (Date) new java.util.Date();
+        long millis=System.currentTimeMillis();
+        java.sql.Date currDate = new java.sql.Date(millis);
         /*
         As id we send anything because it will generate itself.
         The rental date is the current date and the return deadline is 3 months after the current date
@@ -275,7 +288,7 @@ public class RentalDaoSQLImpl implements RentalDao {
     }
 
     @Override
-    public List<Rental> searchByReturnDeadline(Date returnDeadline) {
+    public List<Rental> searchByReturnDeadline(java.sql.Date returnDeadline) {
         String query = "SELECT * FROM RENTALS WHERE RETURN_DEADLINE = ?";
         List<Rental> rentals = new ArrayList<>();
         try {
