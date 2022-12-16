@@ -111,6 +111,7 @@ public class RentalDaoSQLImpl implements RentalDao {
     public void returnRentedBook (int memberID) {
         Rental r = checkUsersRental(memberID);
         if(r != null) delete(r);
+        else System.out.println("You have not rented any books");
     }
 
     @Override
