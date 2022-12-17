@@ -23,8 +23,46 @@ public class MemberDaoSQLImpl implements MemberDao {
             e.printStackTrace();
         }
     }
+    private boolean isAlreadyExistingUsername (Member m) {
+        String query = "SELECT * FROM MEMBERS WHERE USERNAME = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, m.getUsername());
+            ResultSet r = stmt.executeQuery();
+            /*
+            username is unique so it will return one or no rows
+             */
+            if(r.next()) return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    private boolean isAlreadyExistingPassword (Member m) {
+        String query = "SELECT * FROM MEMBERS WHERE PASSWORD = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, m.getPassword());
+            ResultSet r = stmt.executeQuery();
+            /*
+            username is unique so it will return one or no rows
+             */
+            if(r.next()) return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     @Override
     public Member add(Member item) {
+        if(isAlreadyExistingUsername(item)) {
+            System.out.println("Someone is already using this username");
+            return null;
+        }
+        if(isAlreadyExistingPassword(item)) {
+            System.out.println("Someone is already using this password");
+            return null;
+        }
         String insert = "INSERT INTO MEMBERS(FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ADMIN) VALUES(?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
@@ -46,6 +84,14 @@ public class MemberDaoSQLImpl implements MemberDao {
 
     @Override
     public Member update(Member item) {
+        if(isAlreadyExistingUsername(item)) {
+            System.out.println("Someone is already using this username");
+            return null;
+        }
+        if(isAlreadyExistingPassword(item)) {
+            System.out.println("Someone is already using this password");
+            return null;
+        }
         String updt = "UPDATE MEMBERS SET FIRST_NAME = ?, LAST_NAME = ?, USERNAME = ?, PASSWORD = ?, IS_ADMIN = ? WHERE MEMBER_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(updt, Statement.RETURN_GENERATED_KEYS);
