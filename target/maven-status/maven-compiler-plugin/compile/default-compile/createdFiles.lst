@@ -1,6 +1,7 @@
 ba\unsa\etf\rpr\dao\BookDaoSQLImpl.class
 ba\unsa\etf\rpr\dao\RentalDao.class
 ba\unsa\etf\rpr\dao\Dao.class
+ba\unsa\etf\rpr\controllers\SampleController.class
 ba\unsa\etf\rpr\dao\BookDao.class
 ba\unsa\etf\rpr\domain\Rental.class
 ba\unsa\etf\rpr\dao\RentalDaoSQLImpl.class

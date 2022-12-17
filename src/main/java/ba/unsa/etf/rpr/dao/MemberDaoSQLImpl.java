@@ -25,11 +25,14 @@ public class MemberDaoSQLImpl implements MemberDao {
     }
     @Override
     public Member add(Member item) {
-        String insert = "INSERT INTO MEMBERS(FIRST_NAME, LAST_NAME) VALUES(?, ?)";
+        String insert = "INSERT INTO MEMBERS(FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ADMIN) VALUES(?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getFirstName());
             stmt.setString(2, item.getLastName());
+            stmt.setString(3, item.getUsername());
+            stmt.setString(4, item.getPassword());
+            stmt.setBoolean(5, item.isAdmin());
             stmt.executeUpdate();
             ResultSet r = stmt.getGeneratedKeys();
             r.next();
@@ -43,12 +46,15 @@ public class MemberDaoSQLImpl implements MemberDao {
 
     @Override
     public Member update(Member item) {
-        String updt = "UPDATE MEMBERS SET FIRST_NAME = ?, LAST_NAME = ? WHERE MEMBER_ID = ?";
+        String updt = "UPDATE MEMBERS SET FIRST_NAME = ?, LAST_NAME = ?, USERNAME = ?, PASSWORD = ?, IS_ADMIN = ? WHERE MEMBER_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(updt, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getFirstName());
             stmt.setString(2, item.getLastName());
-            stmt.setInt(3, item.getMemberID());
+            stmt.setString(3, item.getUsername());
+            stmt.setString(4, item.getPassword());
+            stmt.setBoolean(5, item.isAdmin());
+            stmt.setInt(6, item.getMemberID());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {
@@ -81,6 +87,9 @@ public class MemberDaoSQLImpl implements MemberDao {
                 member.setMemberID(r.getInt("MEMBER_ID"));
                 member.setFirstName(r.getString("FIRST_NAME"));
                 member.setLastName(r.getString("LAST_NAME"));
+                member.setUsername(r.getString("USERNAME"));
+                member.setPassword(r.getString("PASSWORD"));
+                member.setAdmin(r.getBoolean("IS_ADMIN"));
                 r.close();
                 return member;
             }
@@ -101,7 +110,8 @@ public class MemberDaoSQLImpl implements MemberDao {
             PreparedStatement stmt = this.connection.prepareStatement(query);
             ResultSet r = stmt.executeQuery();
             while(r.next()) {
-                Member member = new Member(r.getInt(1), r.getString(2), r.getString(3));
+                Member member = new Member(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),
+                        r.getString(5), r.getBoolean(6));
                 members.add(member);
             }
             r.close();
@@ -131,6 +141,9 @@ public class MemberDaoSQLImpl implements MemberDao {
                 member.setMemberID(r.getInt("MEMBER_ID"));
                 member.setFirstName(r.getString("FIRST_NAME"));
                 member.setLastName(r.getString("LAST_NAME"));
+                member.setUsername(r.getString("USERNAME"));
+                member.setPassword(r.getString("PASSWORD"));
+                member.setAdmin(r.getBoolean("IS_ADMIN"));
                 members.add(member);
             }
             r.close();

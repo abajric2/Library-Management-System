@@ -7,19 +7,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane prefHeight="198.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane prefHeight="236.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.SampleController">
   <columnConstraints>
     <ColumnConstraints />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="115.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="2.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.79998779296875" minWidth="10.0" prefWidth="85.79998779296875" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.00006103515625" minWidth="10.0" prefWidth="116.60002441406249" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.60002441406252" minWidth="10.0" prefWidth="123.79997558593752" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="115.0" minWidth="10.0" prefWidth="95.19999999999999" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="48.800048828125" minWidth="0.0" prefWidth="0.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints vgrow="SOMETIMES" />
@@ -30,16 +33,16 @@
       <RowConstraints vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ButtonBar prefHeight="26.0" prefWidth="137.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <ButtonBar prefHeight="26.0" prefWidth="137.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1">
         <buttons>
           <Button minWidth="9.0" mnemonicParsing="false" text="Cancel" />
-            <Button defaultButton="true" minWidth="74.0" mnemonicParsing="false" prefHeight="26.0" text="OK" />
+            <Button fx:id="okButtonID" defaultButton="true" minWidth="74.0" mnemonicParsing="false" onAction="#nekaAkcija" prefHeight="26.0" text="OK" />
         </buttons>
          <GridPane.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </GridPane.margin>
       </ButtonBar>
-      <VBox GridPane.columnIndex="1" GridPane.columnSpan="4">
+      <VBox GridPane.columnIndex="2" GridPane.columnSpan="4">
          <children>
             <HBox>
                <children>
@@ -48,7 +51,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="26.0" prefWidth="206.0">
+                  <TextField fx:id="usernameID" prefHeight="26.0" prefWidth="206.0">
                      <HBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </HBox.margin></TextField>
@@ -56,7 +59,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="59.0" text="Password">
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="61.0" text="Password">
                      <HBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </HBox.margin></Label>
@@ -68,6 +71,11 @@
                </children></HBox>
          </children>
       </VBox>
-      <Hyperlink alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="205.0" text="Don't have an account? Sign up" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <Hyperlink alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="203.0" text="Don't have an account? Sign up" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <ImageView fitHeight="150.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+         <image>
+            <Image url="@../img/books.jpg" />
+         </image>
+      </ImageView>
    </children>
 </GridPane>
