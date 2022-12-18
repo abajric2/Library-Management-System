@@ -23,7 +23,7 @@ public class MemberDaoSQLImpl implements MemberDao {
             e.printStackTrace();
         }
     }
-    private boolean isAlreadyExistingUsername (Member m) {
+    private Member checkUsername (Member m) {
         String query = "SELECT * FROM MEMBERS WHERE USERNAME = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -32,13 +32,16 @@ public class MemberDaoSQLImpl implements MemberDao {
             /*
             username is unique so it will return one or no rows
              */
-            if(r.next()) return true;
+            if(r.next()) {
+                return new Member(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),
+                        r.getString(5), r.getBoolean(6));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
-    private boolean isAlreadyExistingPassword (Member m) {
+    private Member checkPassword (Member m) {
         String query = "SELECT * FROM MEMBERS WHERE PASSWORD = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
@@ -47,19 +50,22 @@ public class MemberDaoSQLImpl implements MemberDao {
             /*
             username is unique so it will return one or no rows
              */
-            if(r.next()) return true;
+            if(r.next()) return new Member(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),
+                    r.getString(5), r.getBoolean(6));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
     @Override
     public Member add(Member item) {
-        if(isAlreadyExistingUsername(item)) {
+        Member checkU = checkUsername(item);
+        if(checkU != null) {
             System.out.println("Someone is already using this username");
             return null;
         }
-        if(isAlreadyExistingPassword(item)) {
+        Member checkP = checkPassword(item);
+        if(checkP != null) {
             System.out.println("Someone is already using this password");
             return null;
         }
@@ -84,12 +90,15 @@ public class MemberDaoSQLImpl implements MemberDao {
 
     @Override
     public Member update(Member item) {
-        if(isAlreadyExistingUsername(item)) {
+        Member checkU = checkUsername(item);
+        if(checkU != null && checkU.getMemberID() != item.getMemberID()) {
             System.out.println("Someone is already using this username");
             return null;
         }
-        if(isAlreadyExistingPassword(item)) {
-            System.out.println("Someone is already using this password");
+        Member checkP = checkPassword(item);
+        if(checkP != null) {
+            if(checkP.getMemberID() == item.getMemberID()) System.out.println("You are already using this password");
+            else System.out.println("Someone is already using this password");
             return null;
         }
         String updt = "UPDATE MEMBERS SET FIRST_NAME = ?, LAST_NAME = ?, USERNAME = ?, PASSWORD = ?, IS_ADMIN = ? WHERE MEMBER_ID = ?";
