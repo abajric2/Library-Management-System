@@ -207,4 +207,32 @@ public class MemberDaoSQLImpl implements MemberDao {
         }
         return members;
     }
+
+    @Override
+    public Member searchByUserameandPassword(String username, String password) {
+        String query = "SELECT * FROM MEMBERS WHERE USERNAME = ? AND PASSWORD = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet r = stmt.executeQuery();
+            if(r.next()) {
+                Member member = new Member();
+                member.setMemberID(r.getInt("MEMBER_ID"));
+                member.setFirstName(r.getString("FIRST_NAME"));
+                member.setLastName(r.getString("LAST_NAME"));
+                member.setUsername(r.getString("USERNAME"));
+                member.setPassword(r.getString("PASSWORD"));
+                member.setAdmin(r.getBoolean("IS_ADMIN"));
+                r.close();
+                return member;
+            }
+            else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

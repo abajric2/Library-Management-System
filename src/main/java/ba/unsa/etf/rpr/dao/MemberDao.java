@@ -16,4 +16,5 @@ public interface MemberDao extends Dao<Member> {
      * @return list of members
      */
     List<Member> searchByName (String name);
+    Member searchByUserameandPassword(String username, String password);
 }
