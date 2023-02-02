@@ -10,8 +10,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class LoginController {

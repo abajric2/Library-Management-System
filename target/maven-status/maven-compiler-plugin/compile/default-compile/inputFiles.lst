@@ -3,7 +3,6 @@ C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\NoRent
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\Dao.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\controllers\RegistrationController.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\TestnaKlasa.java
-C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\controllers\NestoCintroller.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\BookDao.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\RentalDaoSQLImpl.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\domain\Book.java
@@ -13,5 +12,4 @@ C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\BookDa
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\domain\Rental.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\RentalDao.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\MemberDaoSQLImpl.java
-C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\controllers\StariLoginController.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\MemberDao.java
