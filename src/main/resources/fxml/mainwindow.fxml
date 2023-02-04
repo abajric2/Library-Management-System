@@ -5,7 +5,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -115,25 +117,44 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f0d89e; -fx-alignment: center;" GridPane.columnIndex="3" GridPane.rowSpan="2147483647">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f0d89e;" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647" GridPane.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="allBooksId" mnemonicParsing="false" onAction="#allBooksAction" prefHeight="50.0" prefWidth="150.0" text="List of all books" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="50.0" top="50.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="byAuthorId" mnemonicParsing="false" onAction="#byAuthorAction" prefHeight="50.0" prefWidth="150.0" text="Search by author" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="byTitleId" mnemonicParsing="false" onAction="#byTitleAction" prefHeight="50.0" prefWidth="150.0" text="Search by title" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="10.0" />
-                     </VBox.margin>
-                  </Button>
+                  <VBox prefHeight="388.0" prefWidth="183.0" style="-fx-background-color: #f0d89e;">
+                     <children>
+                        <Button fx:id="allBooksId" mnemonicParsing="false" onAction="#allBooksAction" prefHeight="31.0" prefWidth="126.0" text="List of all books" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="byAuthorId" mnemonicParsing="false" onAction="#byAuthorAction" prefHeight="31.0" prefWidth="126.0" text="Search by author" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <TextField fx:id="authorNameId" promptText="author's name" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="15.0" right="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button fx:id="byTitleId" mnemonicParsing="false" onAction="#byTitleAction" prefHeight="31.0" prefWidth="126.0" text="Search by title" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <TextField fx:id="bookTitleId" promptText="book title" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="15.0" right="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <ListView fx:id="listId" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ListView>
                </children>
-            </VBox>
+            </HBox>
             <Separator opacity="0.5" orientation="VERTICAL" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowSpan="3" GridPane.vgrow="ALWAYS">
                <effect>
                   <ColorAdjust brightness="1.0" />

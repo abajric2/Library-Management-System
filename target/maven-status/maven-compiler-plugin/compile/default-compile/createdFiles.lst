@@ -13,6 +13,7 @@ ba\unsa\etf\rpr\controllers\RegistrationController$2.class
 ba\unsa\etf\rpr\dao\RentalDaoSQLImpl.class
 ba\unsa\etf\rpr\controllers\MainWindowController.class
 ba\unsa\etf\rpr\controllers\RegistrationController.class
+ba\unsa\etf\rpr\controllers\AllBooksController.class
 ba\unsa\etf\rpr\dao\NoRentalException.class
 ba\unsa\etf\rpr\dao\MemberDaoSQLImpl.class
 ba\unsa\etf\rpr\domain\Book.class
