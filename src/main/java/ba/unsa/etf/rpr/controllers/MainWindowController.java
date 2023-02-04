@@ -25,6 +25,10 @@ public class MainWindowController {
     public Button helpId;
     public TextField authorNameId;
     public TextField bookTitleId;
+    public TextField rentAuthorId;
+    public TextField rentTitleId;
+    public TextField returnAuthorId;
+    public TextField returnTitleId;
     public Label labelId;
     public ListView listId;
     private Member memeber;
