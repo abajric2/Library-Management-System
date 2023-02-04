@@ -1,14 +1,15 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.dao.MemberDaoSQLImpl;
+import ba.unsa.etf.rpr.domain.Member;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -38,7 +39,33 @@ public class LoginController {
 
     }
 
-    public void signIn(ActionEvent actionEvent) {
+    public void signIn(ActionEvent actionEvent) throws IOException {
+        if(usernameId.getText().isEmpty() || passwordId.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Fill in all fields!");
+            alert.setContentText("You must fill in all the fields provided!");
+            alert.showAndWait();
+            return;
+        }
+        MemberDaoSQLImpl mimp = new MemberDaoSQLImpl();
+        Member m = mimp.searchByUserameandPassword(usernameId.getText(), passwordId.getText());
+        if(m == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("User not found!");
+            alert.setContentText("The user with the entered data was not found!");
+            alert.showAndWait();
+            return;
+        }
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainwindow.fxml"));
+        MainWindowController controller = new MainWindowController(m);
+        loader.setController(controller);
+        myStage.setTitle("Main window");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.show();
     }
 
 }
