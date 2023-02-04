@@ -1,0 +1,11 @@
+.tbButton {
+    -fx-alignment: right;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+.tbButton:pressed {
+    -fx-background-color: gray;
+}
+.tbButton:hover {
+    -fx-background-color: darkgray;
+}
