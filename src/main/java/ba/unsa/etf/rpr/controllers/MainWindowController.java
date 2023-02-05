@@ -135,7 +135,7 @@ public class MainWindowController {
             alert.showAndWait();
             return;
         }
-        BookDaoSQLImpl b = new BookDaoSQLImpl();
+        /*BookDaoSQLImpl b = new BookDaoSQLImpl();
         Book book = b.searchByTitleAndAuthor(rentTitleId.getText(), rentAuthorId.getText());
         if(book == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -144,7 +144,7 @@ public class MainWindowController {
             alert.setContentText("No book was found with the title and author you entered!");
             alert.showAndWait();
             return;
-        }
+        }*/
         RentalDaoSQLImpl r = new RentalDaoSQLImpl();
         Rental rental = r.checkUsersRental(memeber.getMemberID());
         if(rental == null) {
@@ -156,6 +156,8 @@ public class MainWindowController {
             return;
         }
         else {
+
+            r.returnRentedBook(memeber.getMemberID());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
