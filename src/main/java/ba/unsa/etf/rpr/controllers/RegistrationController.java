@@ -92,6 +92,11 @@ public class RegistrationController {
             alert.showAndWait();
             return;
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("You have successfully created an account! Sign in to continue!");
+        alert.showAndWait();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();

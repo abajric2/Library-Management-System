@@ -4,6 +4,7 @@ ba\unsa\etf\rpr\dao\BookDao.class
 ba\unsa\etf\rpr\domain\Rental.class
 ba\unsa\etf\rpr\controllers\LoginController.class
 ba\unsa\etf\rpr\domain\Member.class
+ba\unsa\etf\rpr\controllers\MainWindowController$1.class
 ba\unsa\etf\rpr\App.class
 ba\unsa\etf\rpr\dao\MemberDao.class
 ba\unsa\etf\rpr\TestnaKlasa.class

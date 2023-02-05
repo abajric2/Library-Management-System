@@ -9,7 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +75,9 @@ public class MainWindowController {
     }
 
     public void logOutAction(ActionEvent actionEvent) {
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 
 
@@ -108,9 +113,56 @@ public class MainWindowController {
             alert.showAndWait();
             return;
         }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("You have successfully rented a book!");
+            alert.showAndWait();
+            int id = rental.getBookID();
+            book = b.searchById(id);
+            labelId.setText("According to current records, you currently have book \"" + book.getTitle() + "\" by author "
+                    + book.getAuthor() + ". To rent a new book, you need to return this one first.");
+        }
     }
 
     public void returnAction(ActionEvent actionEvent) {
+        if(rentTitleId.getText().isEmpty() || rentAuthorId.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Fill in all fields!");
+            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.showAndWait();
+            return;
+        }
+        BookDaoSQLImpl b = new BookDaoSQLImpl();
+        Book book = b.searchByTitleAndAuthor(rentTitleId.getText(), rentAuthorId.getText());
+        if(book == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("No books found!");
+            alert.setContentText("No book was found with the title and author you entered!");
+            alert.showAndWait();
+            return;
+        }
+        RentalDaoSQLImpl r = new RentalDaoSQLImpl();
+        Rental rental = r.checkUsersRental(memeber.getMemberID());
+        if(rental == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("You have no rented books!");
+            alert.setContentText("You can't return a book because you don't currently have any rented!");
+            alert.showAndWait();
+            return;
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("You have successfully returned the rented book");
+            alert.showAndWait();
+            labelId.setText("According to the current record, you have no rented books.");
+        }
     }
 
     public void allBooksAction(ActionEvent actionEvent) {
