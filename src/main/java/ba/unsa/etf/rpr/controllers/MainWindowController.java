@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MainWindowController {
     public Button profileBttnId;
@@ -127,14 +128,14 @@ public class MainWindowController {
     }
 
     public void returnAction(ActionEvent actionEvent) {
-        if(rentTitleId.getText().isEmpty() || rentAuthorId.getText().isEmpty()) {
+        /*if(rentTitleId.getText().isEmpty() || rentAuthorId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fill in all fields!");
             alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
             alert.showAndWait();
             return;
-        }
+        }*/
         /*BookDaoSQLImpl b = new BookDaoSQLImpl();
         Book book = b.searchByTitleAndAuthor(rentTitleId.getText(), rentAuthorId.getText());
         if(book == null) {
@@ -156,14 +157,22 @@ public class MainWindowController {
             return;
         }
         else {
+            Book book = r.getBook(rental);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Are you sure you want to return the book?");
+            alert.setContentText("You currently have book \"" + book.getTitle() + "\" by author " + book.getAuthor() + " rented. Are you sure you want to return it?");
 
-            r.returnRentedBook(memeber.getMemberID());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("You have successfully returned the rented book");
-            alert.showAndWait();
-            labelId.setText("According to the current record, you have no rented books.");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                r.returnRentedBook(memeber.getMemberID());
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("You have successfully returned the rented book");
+                alert.showAndWait();
+                labelId.setText("According to the current record, you have no rented books.");
+            }
         }
     }
 
