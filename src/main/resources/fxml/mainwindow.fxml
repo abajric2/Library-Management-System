@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
@@ -60,7 +61,7 @@
       </VBox>
    </top>
    <bottom>
-      <HBox prefHeight="0.0" prefWidth="684.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+      <HBox style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
             <ButtonBar HBox.hgrow="ALWAYS">
               <buttons>
@@ -91,9 +92,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #f0d89e;" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
+            <VBox style="-fx-background-color: #f0d89e;" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
                <children>
-                  <Label fx:id="labelId" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="304.0" wrapText="true" VBox.vgrow="ALWAYS">
+                  <Label fx:id="labelId" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true">
                      <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
@@ -101,21 +102,38 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <VBox prefHeight="287.0" prefWidth="344.0">
+                  <VBox>
                      <children>
-                        <Button fx:id="rentId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#rentAction" prefHeight="31.0" prefWidth="146.0" style="-fx-alignment: center;" text="Rent a book" textAlignment="CENTER">
+                        <HBox>
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
-                        </Button>
+                           <children>
+                              <Label text="Choose the book you want to rent/return, or enter the title and author's name below!" wrapText="true">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="choiceBoxId" style="-fx-background-color: black;">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="12.0" />
+                                 </HBox.margin>
+                              </ChoiceBox>
+                           </children>
+                        </HBox>
+                        <Label text="Are you sure you want to return/rent this book?" wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
                         <HBox>
                            <children>
-                              <TextField fx:id="rentTitleId" promptText="book title">
+                              <TextField fx:id="rentTitleId" promptText="book title" style="-fx-background-color: #cfb482; -fx-prompt-text-fill: #716c6c;">
                                  <font>
                                     <Font name="System Italic" size="12.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="rentAuthorId" promptText="author's name">
+                              <TextField fx:id="rentAuthorId" promptText="author's name" style="-fx-background-color: #cfb482; -fx-prompt-text-fill: #716c6c;">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
@@ -128,31 +146,16 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <Button fx:id="returnId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#returnAction" prefHeight="31.0" prefWidth="146.0" style="-fx-alignment: center;" text="Return the rented book" textAlignment="CENTER">
+                        <Button fx:id="rentId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#rentAction" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: black;" text="Rent a book" textAlignment="CENTER" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <HBox>
-                           <children>
-                              <TextField fx:id="returnTitleId" promptText="book title">
-                                 <font>
-                                    <Font name="System Italic" size="12.0" />
-                                 </font>
-                              </TextField>
-                              <TextField fx:id="returnAuthorId" promptText="author's name">
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="System Italic" size="12.0" />
-                                 </font>
-                              </TextField>
-                           </children>
+                        <Button fx:id="returnId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#returnAction" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: black;" text="Return the rented book" textAlignment="CENTER" textFill="WHITE">
                            <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
-                        </HBox>
+                        </Button>
                      </children>
                   </VBox>
                </children>
@@ -161,17 +164,17 @@
                <children>
                   <VBox prefHeight="388.0" prefWidth="183.0" style="-fx-background-color: #f0d89e;">
                      <children>
-                        <Button fx:id="allBooksId" mnemonicParsing="false" onAction="#allBooksAction" prefHeight="31.0" prefWidth="126.0" text="List of all books" VBox.vgrow="ALWAYS">
+                        <Button fx:id="allBooksId" mnemonicParsing="false" onAction="#allBooksAction" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: black;" text="List of all books" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="byAuthorId" mnemonicParsing="false" onAction="#byAuthorAction" prefHeight="31.0" prefWidth="126.0" text="Search by author" VBox.vgrow="ALWAYS">
+                        <Button fx:id="byAuthorId" mnemonicParsing="false" onAction="#byAuthorAction" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: black;" text="Search by author" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <TextField fx:id="authorNameId" promptText="author's name" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="authorNameId" promptText="author's name" style="-fx-background-color: #cfb482; -fx-prompt-text-fill: #716c6c;" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" />
                            </VBox.margin>
@@ -179,12 +182,12 @@
                               <Font name="System Italic" size="12.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="byTitleId" mnemonicParsing="false" onAction="#byTitleAction" prefHeight="31.0" prefWidth="126.0" text="Search by title" VBox.vgrow="ALWAYS">
+                        <Button fx:id="byTitleId" mnemonicParsing="false" onAction="#byTitleAction" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: black;" text="Search by title" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <TextField fx:id="bookTitleId" promptText="book title" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="bookTitleId" promptText="book title" style="-fx-background-color: #cfb482; -fx-prompt-text-fill: #716c6c;" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" />
                            </VBox.margin>

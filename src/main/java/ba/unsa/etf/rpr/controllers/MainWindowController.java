@@ -7,6 +7,7 @@ import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -29,6 +30,7 @@ public class MainWindowController {
     public TextField rentTitleId;
     public TextField returnAuthorId;
     public TextField returnTitleId;
+    public ChoiceBox<Book> choiceBoxId;
     public Label labelId;
     public ListView listId;
     private Member memeber;
@@ -50,7 +52,23 @@ public class MainWindowController {
             labelId.setText("According to current records, you currently have book \"" + book.getTitle() + "\" by author "
                     + book.getAuthor() + ". To rent a new book, you need to return this one first.");
         }
+        BookDaoSQLImpl b = new BookDaoSQLImpl();
+        List<Book> books = new ArrayList<>(b.getAll());
+        choiceBoxId.setItems(FXCollections.observableList(books));
+        choiceBoxId.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Book book = choiceBoxId.getValue();
+                rentTitleId.setText(book.getTitle());
+                rentAuthorId.setText(book.getAuthor());
+            }
+        });
+       // choiceBoxId.setOnAction(this::getCurrentBook);
     }
+   /* public void getCurrentBook(ActionEvent event) {
+        Book book = choiceBoxId.getValue();
+
+    }*/
     public void profileBttnAction(ActionEvent actionEvent) {
     }
 
@@ -62,6 +80,34 @@ public class MainWindowController {
     }
 
     public void rentAction(ActionEvent actionEvent) {
+        if(rentTitleId.getText().isEmpty() || rentAuthorId.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Fill in all fields!");
+            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.showAndWait();
+            return;
+        }
+        BookDaoSQLImpl b = new BookDaoSQLImpl();
+        Book book = b.searchByTitleAndAuthor(rentTitleId.getText(), rentAuthorId.getText());
+        if(book == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("No books found!");
+            alert.setContentText("No book was found with the title and author you entered!");
+            alert.showAndWait();
+            return;
+        }
+        RentalDaoSQLImpl r = new RentalDaoSQLImpl();
+        Rental rental = r.rentABook(memeber.getMemberID(), rentTitleId.getText(), rentAuthorId.getText());
+        if(rental == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("You already have a rented book!");
+            alert.setContentText("To rent a new book, you must first return the one you currently have!");
+            alert.showAndWait();
+            return;
+        }
     }
 
     public void returnAction(ActionEvent actionEvent) {
@@ -98,8 +144,8 @@ public class MainWindowController {
         if(bookTitleId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
-            alert.setHeaderText("The author input field is empty!");
-            alert.setContentText("You must enter the name of the author whose books you want to view!");
+            alert.setHeaderText("The title input field is empty!");
+            alert.setContentText("You must enter the title of the book you want to view!");
             alert.showAndWait();
             return;
         }

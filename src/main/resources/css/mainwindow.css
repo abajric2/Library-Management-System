@@ -8,3 +8,6 @@
 .tbButton:hover {
     -fx-background-color: darkgray;
 }
+/*.choice-box .label {
+     -fx-text-fill: white;
+}*/
