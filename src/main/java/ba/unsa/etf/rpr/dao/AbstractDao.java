@@ -65,5 +65,12 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             throw new LibraryException(e.getMessage(), e);
         }
     }
-
+    public T executeQueryUnique(String query, Object[] parameters) throws LibraryException{
+        List<T> result = executeQuery(query, parameters);
+        if (result != null && result.size() == 1){
+            return result.get(0);
+        }else{
+            throw new LibraryException("Object not found");
+        }
+    }
 }
