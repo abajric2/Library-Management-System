@@ -27,7 +27,7 @@ public interface Dao<T> {
      * deletes entity from the database based on matching id
      * @param item data that needs to be deleted, the id must match an existing one
      */
-    void delete (T item);
+    void delete (T item) throws LibraryException;
 
     /**
      * returns entity from the database that matches id
