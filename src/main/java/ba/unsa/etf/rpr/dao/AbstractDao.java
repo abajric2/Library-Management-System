@@ -65,6 +65,14 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             throw new LibraryException(e.getMessage(), e);
         }
     }
+
+    /**
+     * method for executing queries that are known to return only one row
+     * @param query
+     * @param parameters
+     * @return the object returned by the query
+     * @throws LibraryException an exception is thrown if no row is returned
+     */
     public T executeQueryUnique(String query, Object[] parameters) throws LibraryException{
         List<T> result = executeQuery(query, parameters);
         if (result != null && result.size() == 1){
@@ -73,4 +81,9 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             throw new LibraryException("Object not found");
         }
     }
+    public T searchById(int id) throws LibraryException {
+        return executeQueryUnique("SELECT * FROM " + this.table + " WHERE id = ?", new Object[]{id});
+    }
+
+
 }

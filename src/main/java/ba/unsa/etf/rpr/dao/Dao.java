@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.exceptions.LibraryException;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,7 @@ public interface Dao<T> {
      * @param item that needs to be added
      * @return item that is added
      */
-    T add (T item);
+    T add (T item) throws LibraryException;
 
     /**
      * updates entity in the database based on matching id
@@ -32,13 +34,13 @@ public interface Dao<T> {
      * @param id unique data of an entity in the database
      * @return entity found based on id
      */
-    T searchById (int id);
+    T searchById (int id) throws LibraryException;
 
     /**
      * return all data from the database
      * @return list of all entities from database
      */
-    List<T> getAll ();
+    List<T> getAll () throws LibraryException;
 
     /**
      * prints all data from the database in the format defined by the toString method
