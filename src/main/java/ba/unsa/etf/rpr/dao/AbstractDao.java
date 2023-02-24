@@ -77,7 +77,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         List<T> result = executeQuery(query, parameters);
         if (result != null && result.size() == 1){
             return result.get(0);
-        }else{
+        }else {
             throw new LibraryException("Object not found");
         }
     }
@@ -88,16 +88,4 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     public List<T> getAll() throws LibraryException {
         return executeQuery("SELECT * FROM "+ table, null);
     }
-
-    public void delete (T item) throws LibraryException {
-        String sql = "DELETE FROM "+ table +" WHERE id = ?";
-        try{
-            PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, item.getId());
-            stmt.executeUpdate();
-        }catch (SQLException e){
-            throw new LibraryException(e.getMessage(), e);
-        }
-    }
-
 }

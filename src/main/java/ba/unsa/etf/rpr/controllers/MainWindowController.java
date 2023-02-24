@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.dao.RentalDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
+import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,7 +42,7 @@ public class MainWindowController {
         this.memeber = m;
     }
     @FXML
-    public void initialize() {
+    public void initialize() throws LibraryException {
         welcomeLabel.setText(welcomeLabel.getText() + " " + memeber.getFirstName() + "!");
         RentalDaoSQLImpl r = new RentalDaoSQLImpl();
         Rental rent = r.checkUsersRental(memeber.getMemberID());
@@ -85,7 +86,7 @@ public class MainWindowController {
     public void helpAction(ActionEvent actionEvent) {
     }
 
-    public void rentAction(ActionEvent actionEvent) {
+    public void rentAction(ActionEvent actionEvent) throws LibraryException {
         if(rentTitleId.getText().isEmpty() || rentAuthorId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -176,13 +177,13 @@ public class MainWindowController {
         }
     }
 
-    public void allBooksAction(ActionEvent actionEvent) {
+    public void allBooksAction(ActionEvent actionEvent) throws LibraryException {
         BookDaoSQLImpl b = new BookDaoSQLImpl();
         List<Book> books = new ArrayList<>(b.getAll());
         listId.setItems(FXCollections.observableList(books));
     }
 
-    public void byAuthorAction(ActionEvent actionEvent) {
+    public void byAuthorAction(ActionEvent actionEvent) throws LibraryException {
         if(authorNameId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -203,7 +204,7 @@ public class MainWindowController {
         else listId.setItems(FXCollections.observableList(books));
     }
 
-    public void byTitleAction(ActionEvent actionEvent) {
+    public void byTitleAction(ActionEvent actionEvent) throws LibraryException {
         if(bookTitleId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");

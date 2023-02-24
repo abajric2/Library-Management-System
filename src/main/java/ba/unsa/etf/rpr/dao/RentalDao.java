@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
+import ba.unsa.etf.rpr.exceptions.LibraryException;
 
 import java.sql.Date;
 import java.util.List;
@@ -64,5 +65,5 @@ public interface RentalDao extends Dao<Rental> {
      * @param author author of the book given by the second parameter
      * @return new rental or null
      */
-    Rental rentABook (int memberID, String bookTitle, String author);
+    Rental rentABook (int memberID, String bookTitle, String author) throws LibraryException;
 }

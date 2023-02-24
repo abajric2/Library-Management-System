@@ -6,7 +6,7 @@ package ba.unsa.etf.rpr.domain;
  * It follows the POJO specification
  * @author Amina BAjric
  */
-public class Book {
+public class Book implements Idable {
     private int bookID;
     private String title;
     private String author;
@@ -28,11 +28,11 @@ public class Book {
     public Book() {
     }
 
-    public int getBookID() {
+    public int getId() {
         return bookID;
     }
 
-    public void setBookID(int bookID) {
+    public void setId(int bookID) {
         this.bookID = bookID;
     }
 
@@ -92,4 +92,8 @@ public class Book {
     public String toString() {
         return title + ", " + author;
     }
+
+
+
+
 }

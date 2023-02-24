@@ -3,10 +3,10 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
+import ba.unsa.etf.rpr.exceptions.LibraryException;
 
 import java.io.FileReader;
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
 
 public class RentalDaoSQLImpl implements RentalDao {
@@ -67,6 +67,8 @@ public class RentalDaoSQLImpl implements RentalDao {
             return item;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (LibraryException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -138,6 +140,8 @@ public class RentalDaoSQLImpl implements RentalDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (LibraryException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -244,7 +248,7 @@ public class RentalDaoSQLImpl implements RentalDao {
         return (java.sql.Date) cal.getTime();*/
     }
     @Override
-    public Rental rentABook(int memberID, String bookTitle, String author) {
+    public Rental rentABook(int memberID, String bookTitle, String author) throws LibraryException {
         Rental r = checkUsersRental(memberID);
         if(r != null) {
             System.out.println("You can't rent a book because you haven't returned the one you rented earlier.");
@@ -258,7 +262,7 @@ public class RentalDaoSQLImpl implements RentalDao {
         As id we send anything because it will generate itself.
         The rental date is the current date and the return deadline is 3 months after the current date
          */
-        Rental newRent = add(new Rental(1, b.getBookID(), memberID, currDate, addMonths(currDate, 3)));
+        Rental newRent = add(new Rental(1, b.getId(), memberID, currDate, addMonths(currDate, 3)));
         return newRent;
     }
 

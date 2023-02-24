@@ -21,7 +21,7 @@ public interface Dao<T> {
      * @param item new data, the id must match an existing one
      * @return updated version of the data
      */
-    T update (T item);
+    T update (T item) throws LibraryException;
 
     /**
      * deletes entity from the database based on matching id
@@ -45,5 +45,5 @@ public interface Dao<T> {
     /**
      * prints all data from the database in the format defined by the toString method
      */
-    void viewAll();
+    void viewAll() throws LibraryException;
 }

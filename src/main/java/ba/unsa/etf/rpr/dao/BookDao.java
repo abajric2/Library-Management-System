@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Book;
+import ba.unsa.etf.rpr.exceptions.LibraryException;
 
 import java.util.List;
 
@@ -15,21 +16,21 @@ public interface BookDao extends Dao<Book> {
      * @param author name of the author
      * @return list of books
      */
-    List<Book> searchByAuthor (String author);
+    List<Book> searchByAuthor (String author) throws LibraryException;
 
     /**
      * method that returns a list of all books in the library of the desired genre
      * @param genre
      * @return list of books
      */
-    List<Book> searchByGenre (String genre);
+    List<Book> searchByGenre (String genre) throws LibraryException;
 
     /**
      * method that returns a list of all books in the library with the desired title
      * @param title
      * @return list of books
      */
-    List<Book> searchByTitle(String title);
+    List<Book> searchByTitle(String title) throws LibraryException;
 
     /**
      * returns the book with the title given as a parameter,
@@ -38,7 +39,7 @@ public interface BookDao extends Dao<Book> {
      * @param author
      * @return Book
      */
-    Book searchByTitleAndAuthor(String title, String author);
+    Book searchByTitleAndAuthor(String title, String author) throws LibraryException;
 
     /**
      * method that returns true if a book with a given title
@@ -47,5 +48,5 @@ public interface BookDao extends Dao<Book> {
      * @param title
      * @param author
      */
-    boolean isAvailable (String title, String author);
+    boolean isAvailable (String title, String author) throws LibraryException;
 }
