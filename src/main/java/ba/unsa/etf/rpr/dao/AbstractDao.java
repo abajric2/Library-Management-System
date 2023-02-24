@@ -47,5 +47,23 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     public abstract T row2object(ResultSet rs) throws LibraryException;
 
     public abstract Map<String, Object> object2row(T object);
+    public List<T> executeQuery(String query, Object[] parameters) throws LibraryException {
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+            if (parameters != null){
+                for(int i = 1; i <= parameters.length; i++){
+                    stmt.setObject(i, parameters[i-1]);
+                }
+            }
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<T> resultList = new ArrayList<>();
+            while (rs.next()) {
+                resultList.add(row2object(rs));
+            }
+            return resultList;
+        } catch (SQLException e) {
+            throw new LibraryException(e.getMessage(), e);
+        }
+    }
 
 }
