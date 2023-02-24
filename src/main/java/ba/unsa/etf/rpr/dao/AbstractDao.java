@@ -44,4 +44,5 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     public static Connection getConnection(){
         return AbstractDao.connection;
     }
+    public abstract T row2object(ResultSet rs) throws LibraryException;
 }
