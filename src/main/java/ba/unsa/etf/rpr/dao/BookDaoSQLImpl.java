@@ -245,10 +245,10 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         return row;
     }
 
-    @Override
+   /* @Override
     public Book getById(int id) throws LibraryException {
         return executeQueryUnique("SELECT * FROM Books WHERE BOOK_ID = ?", new Object[]{id});
-    }
+    }*/
 
     @Override
     public Book searchById(int id) throws LibraryException {

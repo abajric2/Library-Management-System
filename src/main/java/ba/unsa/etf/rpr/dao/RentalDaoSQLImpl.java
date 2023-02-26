@@ -229,10 +229,10 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         return row;
     }
 
-    @Override
+  /*  @Override
     public Rental getById(int id) throws LibraryException {
         return executeQueryUnique("SELECT * FROM RENTALS WHERE RENTAL_ID = ?", new Object[]{id});
-    }
+    }*/
 
     @Override
     public void delete(Rental item) throws LibraryException {

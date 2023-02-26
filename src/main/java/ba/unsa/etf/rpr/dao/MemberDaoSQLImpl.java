@@ -199,10 +199,10 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         return row;
     }
 
-    @Override
+   /* @Override
     public Member getById(int id) throws LibraryException {
         return executeQueryUnique("SELECT * FROM MEMBERS WHERE MEMBER_ID = ?", new Object[]{id});
-    }
+    }*/
 
     @Override
     public void delete(Member item) throws LibraryException {

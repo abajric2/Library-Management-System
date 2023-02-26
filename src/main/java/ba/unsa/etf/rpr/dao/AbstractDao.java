@@ -111,7 +111,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             throw new LibraryException("Object not found");
         }
     }
-    public abstract T getById(int id) throws LibraryException;
+    /*public abstract T getById(int id) throws LibraryException;*/
     public abstract void delete(T item) throws LibraryException;
     public abstract T add(T item) throws LibraryException;
     public abstract T searchById(int id) throws LibraryException;
@@ -120,7 +120,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     public List<T> getAll() throws LibraryException {
         return executeQuery("SELECT * FROM "+ table, null);
     }
-    @Override
+
     public void viewAll() throws LibraryException {
         List<T> l = new ArrayList<>();
         l = getAll();
