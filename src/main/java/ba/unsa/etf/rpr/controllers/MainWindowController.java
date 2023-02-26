@@ -72,7 +72,7 @@ public class MainWindowController {
         listId.setItems(FXCollections.observableList(books));
         welcomeLabel.setText(welcomeLabel.getText() + " " + memeber.getFirstName() + "!");
         RentalDaoSQLImpl r = new RentalDaoSQLImpl();
-        Rental rent = r.checkUsersRental(memeber.getMemberID());
+        Rental rent = r.checkUsersRental(memeber.getId());
         if(rent == null) {
             labelId.setText("According to the current record, you have no rented books.");
         }
@@ -134,7 +134,7 @@ public class MainWindowController {
                 return;
         }
         RentalDaoSQLImpl r = new RentalDaoSQLImpl();
-        Rental rental = r.rentABook(memeber.getMemberID(), rentTitleId.getText(), rentAuthorId.getText());
+        Rental rental = r.rentABook(memeber.getId(), rentTitleId.getText(), rentAuthorId.getText());
         if(rental == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -176,7 +176,7 @@ public class MainWindowController {
             return;
         }*/
         RentalDaoSQLImpl r = new RentalDaoSQLImpl();
-        Rental rental = r.checkUsersRental(memeber.getMemberID());
+        Rental rental = r.checkUsersRental(memeber.getId());
         if(rental == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -194,7 +194,7 @@ public class MainWindowController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                r.returnRentedBook(memeber.getMemberID());
+                r.returnRentedBook(memeber.getId());
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Dialog");
                 alert.setHeaderText(null);

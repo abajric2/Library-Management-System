@@ -7,11 +7,25 @@ import java.sql.*;
 import java.util.*;
 
 public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
-    private Connection connection;
 
+    private static  BookDaoSQLImpl instance = null;
     public BookDaoSQLImpl() {
         super("Books");
     }
+
+    public static BookDaoSQLImpl getInstance(){
+        if(instance==null)
+            instance = new BookDaoSQLImpl();
+        return instance;
+    }
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
+
+    /* public BookDaoSQLImpl() {
+        super("Books");
+    }*/
     @Override
     public List<Book> searchByAuthor(String author) throws LibraryException {
         return executeQuery("SELECT * FROM Books WHERE AUTHOR LIKE concat('%', ? ,'%')", new Object[]{author});
@@ -185,15 +199,23 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
     }
 
     @Override
-    public void delete(Book item) {
-        String dlt = "DELETE FROM Books WHERE BOOK_ID = ?";
+    public void delete(Book item) throws LibraryException {
+        String sql = "DELETE FROM Books WHERE id = ?";
+        try{
+            PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, item.getId());
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            throw new LibraryException(e.getMessage(), e);
+        }
+       /* String dlt = "DELETE FROM Books WHERE BOOK_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, item.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
@@ -236,10 +258,4 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         return executeQueryUnique("SELECT * FROM Books WHERE BOOK_ID = ?", new Object[]{id});
     }
 
-    @Override
-    public void viewAll() throws LibraryException {
-        List<Book> l = new ArrayList<>();
-        l = getAll();
-        for(Book b : l) System.out.println(b);
-    }
 }

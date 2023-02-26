@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.dao.MemberDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Member;
+import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.css.Style;
@@ -54,7 +55,7 @@ public class RegistrationController {
  }
 
 
-    public void signUp(ActionEvent actionEvent) {
+    public void signUp(ActionEvent actionEvent) throws LibraryException {
         if(firstNameId.getText().isEmpty() || lastNameId.getText().isEmpty() || usernameId.getText().isEmpty() ||
                 passwordId.getText().isEmpty() || confirmPasswordId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

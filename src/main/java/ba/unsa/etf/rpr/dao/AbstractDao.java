@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Idable;
+import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 
 import java.sql.*;
@@ -118,5 +119,11 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
     public List<T> getAll() throws LibraryException {
         return executeQuery("SELECT * FROM "+ table, null);
+    }
+    @Override
+    public void viewAll() throws LibraryException {
+        List<T> l = new ArrayList<>();
+        l = getAll();
+        for(T t : l) System.out.println(t);
     }
 }

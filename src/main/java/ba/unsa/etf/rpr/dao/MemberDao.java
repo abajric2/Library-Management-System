@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Member;
+import ba.unsa.etf.rpr.exceptions.LibraryException;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public interface MemberDao extends Dao<Member> {
      * @param name library member full name
      * @return list of members
      */
-    List<Member> searchByName (String name);
-    Member searchByUserameandPassword(String username, String password);
+    List<Member> searchByName (String name) throws LibraryException;
+    Member searchByUserameandPassword(String username, String password) throws LibraryException;
 }

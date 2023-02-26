@@ -5,7 +5,7 @@ package ba.unsa.etf.rpr.domain;
  * It follows the POJO specification
  * @author Amina Bajric
  */
-public class Member {
+public class Member implements Idable {
     private int memberID;
     private String firstName;
     private String lastName;
@@ -49,11 +49,11 @@ public class Member {
     public Member() {
     }
 
-    public int getMemberID() {
+    public int getId() {
         return memberID;
     }
 
-    public void setMemberID(int memberID) {
+    public void setId(int memberID) {
         this.memberID = memberID;
     }
 
@@ -80,4 +80,6 @@ public class Member {
     public String toString() {
         return firstName + " " + lastName;
     }
+
+
 }

@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.dao.MemberDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Member;
+import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -40,7 +41,7 @@ public class LoginController {
 
     }
 
-    public void signIn(ActionEvent actionEvent) throws IOException {
+    public void signIn(ActionEvent actionEvent) throws IOException, LibraryException {
         if(usernameId.getText().isEmpty() || passwordId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
