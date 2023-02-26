@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.dao.MemberDaoSQLImpl;
+import ba.unsa.etf.rpr.business.MemberManager;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.beans.value.ChangeListener;
@@ -83,7 +83,7 @@ public class RegistrationController {
         }
         Member member = new Member(1, firstNameId.getText(), lastNameId.getText(), usernameId.getText(),
                 passwordId.getText(), false);
-        MemberDaoSQLImpl m = new MemberDaoSQLImpl();
+        MemberManager m = new MemberManager();
         try {
             Member check = m.add(member);
         } catch (LibraryException e) {

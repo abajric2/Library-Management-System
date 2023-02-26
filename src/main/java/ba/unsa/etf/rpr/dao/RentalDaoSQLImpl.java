@@ -10,7 +10,7 @@ import java.util.*;
 
 public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
     private static RentalDaoSQLImpl instance = null;
-    public RentalDaoSQLImpl() {
+    private RentalDaoSQLImpl() {
         super("RENTALS");
     }
 
@@ -75,7 +75,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             (because it refers to the book_id), so it is enough to consider only one
              */
             if(cr.next() && cr.getInt(7) > 0) {
-                BookDaoSQLImpl b = new BookDaoSQLImpl();
+                BookDaoSQLImpl b = BookDaoSQLImpl.getInstance();
                 b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
                         cr.getString(5), cr.getInt(6), cr.getInt(7) - 1));
             }
@@ -251,7 +251,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             updatestmt.setInt(1, item.getBookID());
             ResultSet cr = updatestmt.executeQuery();
             if(cr.next()) {
-                BookDaoSQLImpl b = new BookDaoSQLImpl();
+                BookDaoSQLImpl b = BookDaoSQLImpl.getInstance();
                 b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
                         cr.getString(5), cr.getInt(6), cr.getInt(7) + 1));
             }
@@ -332,7 +332,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         if(r != null) {
             throw new LibraryException("You can't rent a book because you haven't returned the one you rented earlier.");
         }
-        BookDaoSQLImpl bimpl = new BookDaoSQLImpl();
+        BookDaoSQLImpl bimpl = BookDaoSQLImpl.getInstance();
         Book b = new Book();
         try {
             b = bimpl.searchByTitleAndAuthor(bookTitle, author);

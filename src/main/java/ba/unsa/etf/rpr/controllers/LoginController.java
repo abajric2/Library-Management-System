@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.MemberManager;
 import ba.unsa.etf.rpr.dao.MemberDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
@@ -51,7 +52,7 @@ public class LoginController {
             alert.showAndWait();
             return;
         }
-        MemberDaoSQLImpl mimp = new MemberDaoSQLImpl();
+        MemberManager mimp = new MemberManager();
         Member m = new Member();
         try {
             m = mimp.searchByUserameandPassword(usernameId.getText(), passwordId.getText());

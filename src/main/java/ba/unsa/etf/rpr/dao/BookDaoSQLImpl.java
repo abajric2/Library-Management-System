@@ -9,7 +9,7 @@ import java.util.*;
 public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
 
     private static  BookDaoSQLImpl instance = null;
-    public BookDaoSQLImpl() {
+    private BookDaoSQLImpl() {
         super("Books");
     }
 
@@ -23,9 +23,6 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
             instance=null;
     }
 
-    /* public BookDaoSQLImpl() {
-        super("Books");
-    }*/
     @Override
     public List<Book> searchByAuthor(String author) throws LibraryException {
         return executeQuery("SELECT * FROM Books WHERE AUTHOR LIKE concat('%', ? ,'%')", new Object[]{author});

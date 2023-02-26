@@ -1,22 +1,14 @@
 package ba.unsa.etf.rpr.business;
 
-import ba.unsa.etf.rpr.dao.BookDaoSQLImpl;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-public class RentalDao {
+public class RentalManager {
     public List<Rental> getAll() throws LibraryException {
         return DaoFactory.rentalDao().getAll();
     }

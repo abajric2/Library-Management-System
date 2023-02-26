@@ -8,7 +8,7 @@ import java.util.*;
 
 public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     private static  MemberDaoSQLImpl instance = null;
-    public MemberDaoSQLImpl() {
+    private MemberDaoSQLImpl() {
         super("MEMBERS");
     }
 

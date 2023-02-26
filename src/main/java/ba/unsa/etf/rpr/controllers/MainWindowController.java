@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.dao.BookDaoSQLImpl;
-import ba.unsa.etf.rpr.dao.RentalDaoSQLImpl;
+import ba.unsa.etf.rpr.business.BookManager;
+import ba.unsa.etf.rpr.business.RentalManager;
 import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
@@ -48,7 +48,7 @@ public class MainWindowController {
         authorNameId.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                BookDaoSQLImpl b = new BookDaoSQLImpl();
+                BookManager b = new BookManager();
                 try {
                     listId.setItems(FXCollections.observableList(b.searchByAuthor(n)));
                 } catch (LibraryException e) {
@@ -59,7 +59,7 @@ public class MainWindowController {
         bookTitleId.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                BookDaoSQLImpl b = new BookDaoSQLImpl();
+                BookManager b = new BookManager();
                 try {
                     listId.setItems(FXCollections.observableList(b.searchByTitle(n)));
                 } catch (LibraryException e) {
@@ -67,23 +67,23 @@ public class MainWindowController {
                 }
             }
         });
-        BookDaoSQLImpl b = new BookDaoSQLImpl();
+        BookManager b = new BookManager();
         List<Book> books = new ArrayList<>(b.getAll());
         listId.setItems(FXCollections.observableList(books));
         welcomeLabel.setText(welcomeLabel.getText() + " " + memeber.getFirstName() + "!");
-        RentalDaoSQLImpl r = new RentalDaoSQLImpl();
+        RentalManager r = new RentalManager();
         Rental rent = r.checkUsersRental(memeber.getId());
         if(rent == null) {
             labelId.setText("According to the current record, you have no rented books.");
         }
         else {
             int id = rent.getBookID();
-            b = new BookDaoSQLImpl();
+            b = new BookManager();
             Book book = b.searchById(id);
             labelId.setText("According to current records, you currently have book \"" + book.getTitle() + "\" by author "
                     + book.getAuthor() + ". To rent a new book, you need to return this one first.");
         }
-        b = new BookDaoSQLImpl();
+        b = new BookManager();
         books = new ArrayList<>(b.getAll());
         choiceBoxId.setItems(FXCollections.observableList(books));
         choiceBoxId.setOnAction(new EventHandler<ActionEvent>() {
@@ -121,7 +121,7 @@ public class MainWindowController {
             alert.showAndWait();
             return;
         }
-        BookDaoSQLImpl b = new BookDaoSQLImpl();
+        BookManager b = new BookManager();
         Book book = new Book();
         try {
             book = b.searchByTitleAndAuthor(rentTitleId.getText(), rentAuthorId.getText());
@@ -133,7 +133,7 @@ public class MainWindowController {
                 alert.showAndWait();
                 return;
         }
-        RentalDaoSQLImpl r = new RentalDaoSQLImpl();
+        RentalManager r = new RentalManager();
         try {
             Rental rental = r.rentABook(memeber.getId(), rentTitleId.getText(), rentAuthorId.getText());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -174,7 +174,7 @@ public class MainWindowController {
             alert.showAndWait();
             return;
         }*/
-        RentalDaoSQLImpl r = new RentalDaoSQLImpl();
+        RentalManager r = new RentalManager();
         Rental rental = r.checkUsersRental(memeber.getId());
         if(rental == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -205,7 +205,7 @@ public class MainWindowController {
     }
 
     public void allBooksAction(ActionEvent actionEvent) throws LibraryException {
-        BookDaoSQLImpl b = new BookDaoSQLImpl();
+        BookManager b = new BookManager();
         List<Book> books = new ArrayList<>(b.getAll());
         listId.setItems(FXCollections.observableList(books));
     }
