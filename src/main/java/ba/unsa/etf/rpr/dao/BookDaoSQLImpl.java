@@ -14,17 +14,17 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
     }
     @Override
     public List<Book> searchByAuthor(String author) throws LibraryException {
-        return executeQuery("SELECT * FROM Books WHERE AUTHOR = ?", new Object[]{author});
+        return executeQuery("SELECT * FROM Books WHERE AUTHOR LIKE concat('%', ? ,'%')", new Object[]{author});
     }
 
     @Override
     public List<Book> searchByGenre(String genre) throws LibraryException {
-        return executeQuery("SELECT * FROM Books WHERE GENRE = ?", new Object[]{genre});
+        return executeQuery("SELECT * FROM Books WHERE GENRE LIKE concat('%', ? ,'%')", new Object[]{genre});
     }
 
     @Override
     public List<Book> searchByTitle(String title) throws LibraryException {
-        return executeQuery("SELECT * FROM Books WHERE TITLE = ?", new Object[]{title});
+        return executeQuery("SELECT * FROM Books WHERE TITLE LIKE concat('%', ? ,'%')", new Object[]{title});
      /*   String query = "SELECT * FROM Books WHERE TITLE = ?";
         List<Book> books = new ArrayList<>();
         try {
@@ -96,27 +96,11 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         }
         return available;*/
     }
-    private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row){
-        StringBuilder columns = new StringBuilder();
-        StringBuilder questions = new StringBuilder();
 
-        int counter = 0;
-        for (Map.Entry<String, Object> entry: row.entrySet()) {
-            counter++;
-            if (entry.getKey().equals("BOOK_ID")) continue; //skip insertion of id due autoincrement
-            columns.append(entry.getKey());
-            questions.append("?");
-            if (row.size() != counter) {
-                columns.append(",");
-                questions.append(",");
-            }
-        }
-        return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
-    }
     @Override
     public Book add(Book item) throws LibraryException {
         Map<String, Object> row = object2row(item);
-        Map.Entry<String, String> columns = prepareInsertParts(row);
+        Map.Entry<String, String> columns = prepareInsertParts(row, "BOOK_ID");
         StringBuilder builder = new StringBuilder();
         builder.append("INSERT INTO ").append("Books");
         builder.append(" (").append(columns.getKey()).append(") ");
@@ -156,23 +140,11 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         }
         return null;*/
     }
-    private String prepareUpdateParts(Map<String, Object> row){
-        StringBuilder columns = new StringBuilder();
-        int counter = 0;
-        for (Map.Entry<String, Object> entry: row.entrySet()) {
-            counter++;
-            if (entry.getKey().equals("BOOK_ID")) continue;
-            columns.append(entry.getKey()).append("= ?");
-            if (row.size() != counter) {
-                columns.append(",");
-            }
-        }
-        return columns.toString();
-    }
+
     @Override
     public Book update(Book item) throws LibraryException {
         Map<String, Object> row = object2row(item);
-        String updateColumns = prepareUpdateParts(row);
+        String updateColumns = prepareUpdateParts(row, "BOOK_ID");
         StringBuilder builder = new StringBuilder();
         builder.append("UPDATE ")
                 .append("Books")
@@ -252,6 +224,16 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         row.put("TOTAL_NUMBER", object.getTotalNumber());
         row.put("AVAILABLE_NUMBER", object.getAvilableNumber());
         return row;
+    }
+
+    @Override
+    public Book getById(int id) throws LibraryException {
+        return executeQueryUnique("SELECT * FROM Books WHERE BOOK_ID = ?", new Object[]{id});
+    }
+
+    @Override
+    public Book searchById(int id) throws LibraryException {
+        return executeQueryUnique("SELECT * FROM Books WHERE BOOK_ID = ?", new Object[]{id});
     }
 
     @Override

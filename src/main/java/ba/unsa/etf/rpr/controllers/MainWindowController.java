@@ -6,6 +6,8 @@ import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -43,6 +45,31 @@ public class MainWindowController {
     }
     @FXML
     public void initialize() throws LibraryException {
+        authorNameId.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                BookDaoSQLImpl b = new BookDaoSQLImpl();
+                try {
+                    listId.setItems(FXCollections.observableList(b.searchByAuthor(n)));
+                } catch (LibraryException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        bookTitleId.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                BookDaoSQLImpl b = new BookDaoSQLImpl();
+                try {
+                    listId.setItems(FXCollections.observableList(b.searchByTitle(n)));
+                } catch (LibraryException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        BookDaoSQLImpl b = new BookDaoSQLImpl();
+        List<Book> books = new ArrayList<>(b.getAll());
+        listId.setItems(FXCollections.observableList(books));
         welcomeLabel.setText(welcomeLabel.getText() + " " + memeber.getFirstName() + "!");
         RentalDaoSQLImpl r = new RentalDaoSQLImpl();
         Rental rent = r.checkUsersRental(memeber.getMemberID());
@@ -51,13 +78,13 @@ public class MainWindowController {
         }
         else {
             int id = rent.getBookID();
-            BookDaoSQLImpl b = new BookDaoSQLImpl();
+            b = new BookDaoSQLImpl();
             Book book = b.searchById(id);
             labelId.setText("According to current records, you currently have book \"" + book.getTitle() + "\" by author "
                     + book.getAuthor() + ". To rent a new book, you need to return this one first.");
         }
-        BookDaoSQLImpl b = new BookDaoSQLImpl();
-        List<Book> books = new ArrayList<>(b.getAll());
+        b = new BookDaoSQLImpl();
+        books = new ArrayList<>(b.getAll());
         choiceBoxId.setItems(FXCollections.observableList(books));
         choiceBoxId.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -67,12 +94,11 @@ public class MainWindowController {
                 rentAuthorId.setText(book.getAuthor());
             }
         });
-       // choiceBoxId.setOnAction(this::getCurrentBook);
+        // choiceBoxId.setOnAction(this::getCurrentBook);
     }
-   /* public void getCurrentBook(ActionEvent event) {
-        Book book = choiceBoxId.getValue();
-
-    }*/
+    /* public void getCurrentBook(ActionEvent event) {
+         Book book = choiceBoxId.getValue();
+     }*/
     public void profileBttnAction(ActionEvent actionEvent) {
     }
 
@@ -96,14 +122,16 @@ public class MainWindowController {
             return;
         }
         BookDaoSQLImpl b = new BookDaoSQLImpl();
-        Book book = b.searchByTitleAndAuthor(rentTitleId.getText(), rentAuthorId.getText());
-        if(book == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("No books found!");
-            alert.setContentText("No book was found with the title and author you entered!");
-            alert.showAndWait();
-            return;
+        Book book = new Book();
+        try {
+            book = b.searchByTitleAndAuthor(rentTitleId.getText(), rentAuthorId.getText());
+        } catch(LibraryException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("No books found!");
+                alert.setContentText("No book was found with the title and author you entered!");
+                alert.showAndWait();
+                return;
         }
         RentalDaoSQLImpl r = new RentalDaoSQLImpl();
         Rental rental = r.rentABook(memeber.getMemberID(), rentTitleId.getText(), rentAuthorId.getText());

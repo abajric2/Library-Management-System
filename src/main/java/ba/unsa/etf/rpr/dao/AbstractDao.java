@@ -65,7 +65,36 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             throw new LibraryException(e.getMessage(), e);
         }
     }
+    Map.Entry<String, String> prepareInsertParts(Map<String, Object> row, String idName){
+        StringBuilder columns = new StringBuilder();
+        StringBuilder questions = new StringBuilder();
 
+        int counter = 0;
+        for (Map.Entry<String, Object> entry: row.entrySet()) {
+            counter++;
+            if (entry.getKey().equals(idName)) continue;
+            columns.append(entry.getKey());
+            questions.append("?");
+            if (row.size() != counter) {
+                columns.append(",");
+                questions.append(",");
+            }
+        }
+        return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
+    }
+    String prepareUpdateParts(Map<String, Object> row, String idName){
+        StringBuilder columns = new StringBuilder();
+        int counter = 0;
+        for (Map.Entry<String, Object> entry: row.entrySet()) {
+            counter++;
+            if (entry.getKey().equals(idName)) continue;
+            columns.append(entry.getKey()).append("= ?");
+            if (row.size() != counter) {
+                columns.append(",");
+            }
+        }
+        return columns.toString();
+    }
     /**
      * method for executing queries that are known to return only one row
      * @param query
@@ -81,9 +110,11 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             throw new LibraryException("Object not found");
         }
     }
-    public T searchById(int id) throws LibraryException {
-        return executeQueryUnique("SELECT * FROM " + this.table + " WHERE id = ?", new Object[]{id});
-    }
+    public abstract T getById(int id) throws LibraryException;
+    public abstract void delete(T item) throws LibraryException;
+    public abstract T add(T item) throws LibraryException;
+    public abstract T searchById(int id) throws LibraryException;
+    public abstract T update(T item) throws LibraryException;
 
     public List<T> getAll() throws LibraryException {
         return executeQuery("SELECT * FROM "+ table, null);
