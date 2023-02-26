@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -51,8 +52,10 @@ public class LoginController {
             return;
         }
         MemberDaoSQLImpl mimp = new MemberDaoSQLImpl();
-        Member m = mimp.searchByUserameandPassword(usernameId.getText(), passwordId.getText());
-        if(m == null) {
+        Member m = new Member();
+        try {
+            m = mimp.searchByUserameandPassword(usernameId.getText(), passwordId.getText());
+        } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("User not found!");

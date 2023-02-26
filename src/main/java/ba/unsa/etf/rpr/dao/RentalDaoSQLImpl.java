@@ -5,14 +5,27 @@ import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 
-import java.io.FileReader;
 import java.sql.*;
 import java.util.*;
 
-public class RentalDaoSQLImpl implements RentalDao {
-    private Connection connection;
-
+public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
+    private static RentalDaoSQLImpl instance = null;
     public RentalDaoSQLImpl() {
+        super("RENTALS");
+    }
+
+    public static RentalDaoSQLImpl getInstance(){
+        if(instance==null)
+            instance = new RentalDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance(){
+        if(instance!=null)
+            instance=null;
+    }
+
+ /*   public RentalDaoSQLImpl() {
         try {
             FileReader reader = new FileReader("db.properties");
             Properties p = new Properties();
@@ -22,32 +35,39 @@ public class RentalDaoSQLImpl implements RentalDao {
         catch(Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
     @Override
-    public Rental add(Rental item) {
+    public Rental add(Rental item) throws LibraryException {
+
         Rental usercheck = checkUsersRental(item.getMemberID());
         if(usercheck != null) {
-            System.out.println("You can't rent a book because you haven't returned the one you previously rented");
-            return null;
+            throw new LibraryException("You can't rent a book because you haven't returned the one you previously rented");
         }
-        String insert = "INSERT INTO RENTALS(BOOK_ID, MEMBER_ID, RENT_DATE, RETURN_DEADLINE) VALUES(?, ?, ?, ?)";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, item.getBookID());
-            stmt.setInt(2, item.getMemberID());
-            stmt.setDate(3, (java.sql.Date) item.getRentDate());
-            stmt.setDate(4, (java.sql.Date) item.getReturnDeadline());
+        Map<String, Object> row = object2row(item);
+        Map.Entry<String, String> columns = prepareInsertParts(row, "RENTAL_ID");
+        StringBuilder builder = new StringBuilder();
+        builder.append("INSERT INTO ").append("RENTALS");
+        builder.append(" (").append(columns.getKey()).append(") ");
+        builder.append("VALUES (").append(columns.getValue()).append(")");
+        try{
+            PreparedStatement stmt = getConnection().prepareStatement(builder.toString(), Statement.RETURN_GENERATED_KEYS);
+            int counter = 1;
+            for (Map.Entry<String, Object> entry: row.entrySet()) {
+                if (entry.getKey().equals("RENTAL_ID")) continue;
+                stmt.setObject(counter, entry.getValue());
+                counter++;
+            }
             stmt.executeUpdate();
-            ResultSet r = stmt.getGeneratedKeys();
-            r.next();
-            item.setRentalID(r.getInt(1));
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            item.setId(rs.getInt(1));
             /*
             When we add an entity related to book rentals,
             it is necessary to reduce the number of available
             books for the book that is rented
              */
             String check = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.BOOK_ID = ?";
-            PreparedStatement checkstmt = this.connection.prepareStatement(check);
+            PreparedStatement checkstmt = getConnection().prepareStatement(check);
             checkstmt.setInt(1, item.getBookID());
             ResultSet cr = checkstmt.executeQuery();
             /*
@@ -60,7 +80,45 @@ public class RentalDaoSQLImpl implements RentalDao {
                         cr.getString(5), cr.getInt(6), cr.getInt(7) - 1));
             }
             else {
-                Rental rental = new Rental(item.getRentalID(), item.getBookID(), item.getMemberID(), item.getRentDate(), item.getReturnDeadline());
+                Rental rental = new Rental(item.getId(), item.getBookID(), item.getMemberID(), item.getRentDate(), item.getReturnDeadline());
+                delete(rental);
+                throw new LibraryException("The book is not available in the library");
+            }
+            return item;
+        }catch (SQLException e){
+            throw new LibraryException(e.getMessage(), e);
+        }///////////
+      /*  String insert = "INSERT INTO RENTALS(BOOK_ID, MEMBER_ID, RENT_DATE, RETURN_DEADLINE) VALUES(?, ?, ?, ?)";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, item.getBookID());
+            stmt.setInt(2, item.getMemberID());
+            stmt.setDate(3, (java.sql.Date) item.getRentDate());
+            stmt.setDate(4, (java.sql.Date) item.getReturnDeadline());
+            stmt.executeUpdate();
+            ResultSet r = stmt.getGeneratedKeys();
+            r.next();
+            item.setId(r.getInt(1));
+            /*
+            When we add an entity related to book rentals,
+            it is necessary to reduce the number of available
+            books for the book that is rented
+             */
+          /*  String check = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.BOOK_ID = ?";
+            PreparedStatement checkstmt = this.connection.prepareStatement(check);
+            checkstmt.setInt(1, item.getBookID());
+            ResultSet cr = checkstmt.executeQuery();*/
+            /*
+            It can return multiple rows, but the data we need will be the same in each row
+            (because it refers to the book_id), so it is enough to consider only one
+             */
+           /* if(cr.next() && cr.getInt(7) > 0) {
+                BookDaoSQLImpl b = new BookDaoSQLImpl();
+                b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
+                        cr.getString(5), cr.getInt(6), cr.getInt(7) - 1));
+            }
+            else {
+                Rental rental = new Rental(item.getId(), item.getBookID(), item.getMemberID(), item.getRentDate(), item.getReturnDeadline());
                 delete(rental);
                 throw new SQLException("The book is not available in the library");
             }
@@ -70,31 +128,61 @@ public class RentalDaoSQLImpl implements RentalDao {
         } catch (LibraryException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return null;*/
     }
 
     @Override
-    public Rental update(Rental item) {
-        String updt = "UPDATE RENTALS SET BOOK_ID = ?, MEMBER_ID = ?, RENT_DATE = ?, RETURN_DEADLINE = ? WHERE RENTAL_ID = ?";
+    public Rental update(Rental item) throws LibraryException {
+        Map<String, Object> row = object2row(item);
+        String updateColumns = prepareUpdateParts(row, "RENTAL_ID");
+        StringBuilder builder = new StringBuilder();
+        builder.append("UPDATE ")
+                .append("RENTAL")
+                .append(" SET ")
+                .append(updateColumns)
+                .append(" WHERE RENTAL_ID = ?");
+
+        try{
+            PreparedStatement stmt = getConnection().prepareStatement(builder.toString());
+            int counter = 1;
+            for (Map.Entry<String, Object> entry: row.entrySet()) {
+                if (entry.getKey().equals("RENTAL_ID")) continue; // skip ID
+                stmt.setObject(counter, entry.getValue());
+                counter++;
+            }
+            stmt.setObject(counter, item.getId());
+            stmt.executeUpdate();
+            return item;
+        }catch (SQLException e){
+            throw new LibraryException(e.getMessage(), e);
+        }
+       /* String updt = "UPDATE RENTALS SET BOOK_ID = ?, MEMBER_ID = ?, RENT_DATE = ?, RETURN_DEADLINE = ? WHERE RENTAL_ID = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(updt, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, item.getBookID());
             stmt.setInt(2, item.getMemberID());
             stmt.setDate(3, (java.sql.Date) item.getRentDate());
             stmt.setDate(4, (java.sql.Date) item.getReturnDeadline());
-            stmt.setInt(5, item.getRentalID());
+            stmt.setInt(5, item.getId());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return null;*/
     }
     @Override
-    public Rental checkUsersRental (int memberID) {
+    public Rental checkUsersRental (int memberID) throws LibraryException {
+      /*  Rental r = new Rental();
+        try {
+            r = executeQueryUnique("SELECT * FROM RENTALS WHERE MEMBER_ID = ?", new Object[]{memberID});
+        } catch (LibraryException e) {
+            return null;
+        }
+        return r;*/
         String query = "SELECT * FROM RENTALS WHERE MEMBER_ID = ?";
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setInt(1, memberID);
             ResultSet r = stmt.executeQuery();
             /*
@@ -105,23 +193,53 @@ public class RentalDaoSQLImpl implements RentalDao {
             }
             else return null;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new LibraryException("No rentals found");
         }
-        return null;
     }
     @Override
-    public void returnRentedBook (int memberID) {
+    public void returnRentedBook (int memberID) throws LibraryException {
         Rental r = checkUsersRental(memberID);
         if(r != null) delete(r);
-        else System.out.println("You have not rented any books");
+        else throw new LibraryException("You have not rented any books");
     }
 
     @Override
-    public void delete(Rental item) {
+    public Rental row2object(ResultSet rs) throws LibraryException {
+        try {
+            Rental rental = new Rental();
+            rental.setId(rs.getInt("RENTAL_ID"));
+            rental.setBookID(rs.getInt("BOOK_ID"));
+            rental.setMemberID(rs.getInt("MEMBER_ID"));
+            rental.setRentDate(rs.getDate("RENT_DATE"));
+            rental.setReturnDeadline(rs.getDate("RETURN_DEADLINE"));
+            return rental;
+        } catch (SQLException e) {
+            throw new LibraryException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public Map<String, Object> object2row(Rental object) {
+        Map<String, Object> row = new TreeMap<>();
+        row.put("RENTAL_ID", object.getId());
+        row.put("BOOK_ID", object.getBookID());
+        row.put("MEMBER_ID", object.getMemberID());
+        row.put("RENT_DATE", object.getRentDate());
+        row.put("RETURN_DEADLINE", object.getReturnDeadline());
+        return row;
+    }
+
+    @Override
+    public Rental getById(int id) throws LibraryException {
+        return executeQueryUnique("SELECT * FROM RENTALS WHERE RENTAL_ID = ?", new Object[]{id});
+    }
+
+    @Override
+    public void delete(Rental item) throws LibraryException {
         String dlt = "DELETE FROM RENTALS WHERE RENTAL_ID = ?";
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, item.getRentalID());
+            PreparedStatement stmt = getConnection().prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, item.getId());
             stmt.executeUpdate();
             /*
             When we delete an entity related to book rentals,
@@ -129,7 +247,7 @@ public class RentalDaoSQLImpl implements RentalDao {
             for the book that was returned
              */
             String availableNumberUpdate = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.BOOK_ID = ?";
-            PreparedStatement updatestmt = this.connection.prepareStatement(availableNumberUpdate);
+            PreparedStatement updatestmt = getConnection().prepareStatement(availableNumberUpdate);
             updatestmt.setInt(1, item.getBookID());
             ResultSet cr = updatestmt.executeQuery();
             if(cr.next()) {
@@ -139,60 +257,23 @@ public class RentalDaoSQLImpl implements RentalDao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new LibraryException(e.getMessage(), e);
         } catch (LibraryException e) {
-            throw new RuntimeException(e);
+            throw new LibraryException(e.getMessage(), e);
         }
     }
 
     @Override
-    public Rental searchById(int id) {
-        String query = "SELECT * FROM RENTALS WHERE RENTAL_ID = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setInt(1, id);
-            ResultSet r = stmt.executeQuery();
-            if(r.next()) {
-                Rental rental = new Rental();
-                rental.setBookID(r.getInt("BOOK_ID"));
-                rental.setMemberID(r.getInt("MEMBER_ID"));
-                rental.setRentDate(r.getDate("RENT_DATE"));
-                rental.setReturnDeadline(r.getDate("RETURN_DEADLINE"));
-                r.close();
-                return rental;
-            }
-            else {
-                return null;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Rental searchById(int id) throws LibraryException {
+        return executeQueryUnique("SELECT * FROM RENTALS WHERE RENTAL_ID = ?", new Object[]{id});
     }
 
     @Override
-    public List<Rental> getAll() {
-        String query = "SELECT * FROM RENTALS";
-        List<Rental> rentals = new ArrayList<>();
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            ResultSet r = stmt.executeQuery();
-            while(r.next()) {
-                Rental rental = new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
-                rentals.add(rental);
-            }
-            r.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rentals;
-    }
-    @Override
-    public Member getMember(Rental r) {
+    public Member getMember(Rental r) throws LibraryException {
         String query = "SELECT * FROM MEMBERS m, RENTALS r WHERE m.MEMBER_ID = r.MEMBER_ID AND r.RENTAL_ID = ?";
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setInt(1, r.getRentalID());
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+            stmt.setInt(1, r.getId());
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
                 Member m = new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
@@ -200,16 +281,16 @@ public class RentalDaoSQLImpl implements RentalDao {
                 return m;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new LibraryException(e.getMessage(), e);
         }
         return null;
     }
     @Override
-    public Book getBook (Rental r) {
+    public Book getBook (Rental r) throws LibraryException {
         String query = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.RENTAL_ID = ?";
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setInt(1, r.getRentalID());
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+            stmt.setInt(1, r.getId());
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
                 Book b = new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
@@ -217,7 +298,7 @@ public class RentalDaoSQLImpl implements RentalDao {
                 return b;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new LibraryException(e.getMessage(), e);
         }
         return null;
     }
@@ -228,20 +309,18 @@ public class RentalDaoSQLImpl implements RentalDao {
      * @param n
      * @return Date
      */
-    private java.sql.Date addMonths(java.sql.Date date, int n)
-    {
+    private java.sql.Date addMonths(java.sql.Date date, int n) throws LibraryException {
         String query = "SELECT DATE_ADD(?, INTERVAL ? MONTH)";
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setDate(1, date);
             stmt.setInt(2, n);
             ResultSet r = stmt.executeQuery();
             r.next();
             return r.getDate(1);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new LibraryException(e.getMessage(), e);
         }
-        return null;
        /* Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.MONTH, n);
@@ -251,11 +330,15 @@ public class RentalDaoSQLImpl implements RentalDao {
     public Rental rentABook(int memberID, String bookTitle, String author) throws LibraryException {
         Rental r = checkUsersRental(memberID);
         if(r != null) {
-            System.out.println("You can't rent a book because you haven't returned the one you rented earlier.");
-            return null;
+            throw new LibraryException("You can't rent a book because you haven't returned the one you rented earlier.");
         }
         BookDaoSQLImpl bimpl = new BookDaoSQLImpl();
-        Book b = bimpl.searchByTitleAndAuthor(bookTitle, author);
+        Book b = new Book();
+        try {
+            b = bimpl.searchByTitleAndAuthor(bookTitle, author);
+        } catch (LibraryException e) {
+            throw new LibraryException("No books found");
+        }
         long millis=System.currentTimeMillis();
         java.sql.Date currDate = new java.sql.Date(millis);
         /*
@@ -266,21 +349,13 @@ public class RentalDaoSQLImpl implements RentalDao {
         return newRent;
     }
 
-    @Override
-    public void viewAll() {
-        List<Rental> l = new ArrayList<>();
-        l = getAll();
-        for(int i = 0; i < l.size(); i++) {
-            System.out.println("\"" + getBook(l.get(i)) + "\" is rented by " + getMember(l.get(i)) + ". " + l.get(i));
-        }
-    }
 
     @Override
-    public List<Rental> getDeadlineExceedings() {
+    public List<Rental> getDeadlineExceedings() throws LibraryException {
         String query = "SELECT * FROM RENTALS WHERE CURDATE()>RETURN_DEADLINE";
         List<Rental> rentals = new ArrayList<>();
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             ResultSet r = stmt.executeQuery();
             while(r.next()) {
                 Rental rental = new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
@@ -288,17 +363,17 @@ public class RentalDaoSQLImpl implements RentalDao {
             }
             r.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new LibraryException("No deadline exceedings found!");
         }
         return rentals;
     }
 
     @Override
-    public List<Rental> searchByReturnDeadline(java.sql.Date returnDeadline) {
+    public List<Rental> searchByReturnDeadline(java.sql.Date returnDeadline) throws LibraryException {
         String query = "SELECT * FROM RENTALS WHERE RETURN_DEADLINE = ?";
         List<Rental> rentals = new ArrayList<>();
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
+            PreparedStatement stmt = getConnection().prepareStatement(query);
             stmt.setDate(1, (java.sql.Date) returnDeadline);
             ResultSet r = stmt.executeQuery();
             while(r.next()) {
@@ -307,7 +382,7 @@ public class RentalDaoSQLImpl implements RentalDao {
             }
             r.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new LibraryException("No return deadlines found!");
         }
         return rentals;
     }

@@ -8,7 +8,7 @@ import java.sql.Date;
  * It follows the POJO specification
  * @author Amina Bajric
  */
-public class Rental {
+public class Rental implements Idable {
     private int rentalID;
     private int bookID;
     private int memberID;
@@ -23,11 +23,11 @@ public class Rental {
         this.returnDeadline = returnDeadline;
     }
 
-    public int getRentalID() {
+    public int getId() {
         return rentalID;
     }
 
-    public void setRentalID(int rentalID) {
+    public void setId(int rentalID) {
         this.rentalID = rentalID;
     }
 

@@ -134,16 +134,8 @@ public class MainWindowController {
                 return;
         }
         RentalDaoSQLImpl r = new RentalDaoSQLImpl();
-        Rental rental = r.rentABook(memeber.getId(), rentTitleId.getText(), rentAuthorId.getText());
-        if(rental == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("You already have a rented book!");
-            alert.setContentText("To rent a new book, you must first return the one you currently have!");
-            alert.showAndWait();
-            return;
-        }
-        else {
+        try {
+            Rental rental = r.rentABook(memeber.getId(), rentTitleId.getText(), rentAuthorId.getText());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -153,10 +145,17 @@ public class MainWindowController {
             book = b.searchById(id);
             labelId.setText("According to current records, you currently have book \"" + book.getTitle() + "\" by author "
                     + book.getAuthor() + ". To rent a new book, you need to return this one first.");
+        } catch (LibraryException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("You already have a rented book!");
+            alert.setContentText("To rent a new book, you must first return the one you currently have!");
+            alert.showAndWait();
+            return;
         }
     }
 
-    public void returnAction(ActionEvent actionEvent) {
+    public void returnAction(ActionEvent actionEvent) throws LibraryException {
         /*if(rentTitleId.getText().isEmpty() || rentAuthorId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -212,7 +211,7 @@ public class MainWindowController {
     }
 
     public void byAuthorAction(ActionEvent actionEvent) throws LibraryException {
-        if(authorNameId.getText().isEmpty()) {
+      /*  if(authorNameId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("The author input field is empty!");
@@ -229,11 +228,11 @@ public class MainWindowController {
             alert.setContentText("No book was found by the author you entered!");
             alert.showAndWait();
         }
-        else listId.setItems(FXCollections.observableList(books));
+        else listId.setItems(FXCollections.observableList(books));*/
     }
 
     public void byTitleAction(ActionEvent actionEvent) throws LibraryException {
-        if(bookTitleId.getText().isEmpty()) {
+      /*  if(bookTitleId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("The title input field is empty!");
@@ -250,6 +249,6 @@ public class MainWindowController {
             alert.setContentText("No book was found with the title you entered!");
             alert.showAndWait();
         }
-        else listId.setItems(FXCollections.observableList(books));
+        else listId.setItems(FXCollections.observableList(books));*/
     }
 }

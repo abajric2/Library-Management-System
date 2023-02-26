@@ -84,8 +84,9 @@ public class RegistrationController {
         Member member = new Member(1, firstNameId.getText(), lastNameId.getText(), usernameId.getText(),
                 passwordId.getText(), false);
         MemberDaoSQLImpl m = new MemberDaoSQLImpl();
-        Member check = m.add(member);
-        if(check == null) {
+        try {
+            Member check = m.add(member);
+        } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Username or password error");
