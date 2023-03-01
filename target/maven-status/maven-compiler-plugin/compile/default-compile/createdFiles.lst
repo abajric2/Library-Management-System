@@ -21,6 +21,7 @@ ba\unsa\etf\rpr\domain\Idable.class
 ba\unsa\etf\rpr\controllers\RegistrationController$2.class
 ba\unsa\etf\rpr\dao\DaoFactory.class
 ba\unsa\etf\rpr\controllers\AdminMainWindowController.class
+ba\unsa\etf\rpr\controllers\ManageBooksController$BookModel.class
 ba\unsa\etf\rpr\dao\AbstractDao$1.class
 ba\unsa\etf\rpr\dao\RentalDaoSQLImpl.class
 ba\unsa\etf\rpr\controllers\MainWindowController.class
