@@ -64,14 +64,26 @@ public class LoginController {
             alert.showAndWait();
             return;
         }
-        Stage myStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainwindow.fxml"));
-        MainWindowController controller = new MainWindowController(m);
-        loader.setController(controller);
-        myStage.setTitle("Main window");
-        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        myStage.setResizable(true);
-        myStage.show();
+        if(m.isAdmin()) {
+            Stage myStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMainWindow.fxml"));
+            AdminMainWindowController controller = new AdminMainWindowController(m);
+            loader.setController(controller);
+            myStage.setTitle("Main window");
+            myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            myStage.setResizable(true);
+            myStage.show();
+        }
+        else {
+            Stage myStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainwindow.fxml"));
+            MainWindowController controller = new MainWindowController(m);
+            loader.setController(controller);
+            myStage.setTitle("Main window");
+            myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            myStage.setResizable(true);
+            myStage.show();
+        }
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
