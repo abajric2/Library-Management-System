@@ -9,10 +9,7 @@ import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class RegistrationController {
@@ -22,22 +19,28 @@ public class RegistrationController {
     public PasswordField passwordId;
     public PasswordField confirmPasswordId;
     public Button signUpId;
+    public Label chckPasswordLngth;
+    public Label chckPasswordSame;
 
- @FXML
+    @FXML
  public void initialize() {
      passwordId.textProperty().addListener(new ChangeListener<String>() {
          @Override
          public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
              if (n.length() >= 8) {
                  passwordId.setStyle("-fx-background-color: yellowgreen;");
-
+                 chckPasswordLngth.setText("");
              } else {
+                 chckPasswordLngth.setText("Password must be at least 8 characters long!");
                  passwordId.setStyle("-fx-background-color: red;");
              }
              if(!confirmPasswordId.getText().isEmpty() && passwordId.getText().equals(confirmPasswordId.getText())) {
+                 chckPasswordSame.setText("");
                  confirmPasswordId.setStyle("-fx-background-color: yellowgreen;");
              } else {
                  if(!confirmPasswordId.getText().isEmpty()) confirmPasswordId.setStyle("-fx-background-color: red;");
+                 if(confirmPasswordId.getText().isEmpty()) chckPasswordSame.setText("");
+                 else chckPasswordSame.setText("The password does not match!");
              }
          }
      });
@@ -46,8 +49,10 @@ public class RegistrationController {
          public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
              // System.out.println(o + " " + n);
              if (confirmPasswordId.getText().equals(passwordId.getText())) {
+                 chckPasswordSame.setText("");
                  confirmPasswordId.setStyle("-fx-background-color: yellowgreen;");
              } else {
+                 chckPasswordSame.setText("The password does not match!");
                  confirmPasswordId.setStyle("-fx-background-color: red;");
              }
          }

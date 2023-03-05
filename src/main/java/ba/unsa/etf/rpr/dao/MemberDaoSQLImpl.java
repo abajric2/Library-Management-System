@@ -75,10 +75,10 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         if(checkU != null) {
             throw new LibraryException("Someone is already using this username");
         }
-        Member checkP = checkPassword(item);
+      /*  Member checkP = checkPassword(item);
         if(checkP != null) {
             throw new LibraryException("Someone is already using this password");
-        }
+        }*/
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row, "MEMBER_ID");
         StringBuilder builder = new StringBuilder();
@@ -129,7 +129,7 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         Member checkP = checkPassword(item);
         if(checkP != null) {
             if(checkP.getId() == item.getId()) throw new LibraryException("You are already using this password");
-            else throw new LibraryException("Someone is already using this password");
+           // else throw new LibraryException("Someone is already using this password");
         }
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row, "MEMBER_ID");

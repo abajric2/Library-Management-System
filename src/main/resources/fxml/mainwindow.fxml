@@ -169,12 +169,7 @@
                               <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="byAuthorId" mnemonicParsing="false" onAction="#byAuthorAction" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: black;" text="Search by author" textFill="WHITE" VBox.vgrow="ALWAYS">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Button>
-                        <TextField fx:id="authorNameId" promptText="author's name" style="-fx-background-color: #cfb482; -fx-prompt-text-fill: #716c6c;" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="authorNameId" promptText="search by author" style="-fx-background-color: #cfb482; -fx-prompt-text-fill: #716c6c;" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" />
                            </VBox.margin>
@@ -182,18 +177,18 @@
                               <Font name="System Italic" size="12.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="byTitleId" mnemonicParsing="false" onAction="#byTitleAction" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: black;" text="Search by title" textFill="WHITE" VBox.vgrow="ALWAYS">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Button>
-                        <TextField fx:id="bookTitleId" promptText="book title" style="-fx-background-color: #cfb482; -fx-prompt-text-fill: #716c6c;" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="bookTitleId" promptText="search by title" style="-fx-background-color: #cfb482; -fx-prompt-text-fill: #716c6c;" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" />
                            </VBox.margin>
                            <font>
                               <Font name="System Italic" size="12.0" />
                            </font>
+                        </TextField>
+                        <TextField fx:id="genreId" promptText="search by genre" style="-fx-background-color: #cfb482; -fx-prompt-text-fill: #716c6c;">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="15.0" right="10.0" />
+                           </VBox.margin>
                         </TextField>
                      </children>
                   </VBox>

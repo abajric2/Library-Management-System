@@ -32,6 +32,7 @@ public class MainWindowController {
     public Button helpId;
     public TextField authorNameId;
     public TextField bookTitleId;
+    public TextField genreId;
     public TextField rentAuthorId;
     public TextField rentTitleId;
     public TextField returnAuthorId;
@@ -62,6 +63,17 @@ public class MainWindowController {
                 BookManager b = new BookManager();
                 try {
                     listId.setItems(FXCollections.observableList(b.searchByTitle(n)));
+                } catch (LibraryException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        genreId.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                BookManager b = new BookManager();
+                try {
+                    listId.setItems(FXCollections.observableList(b.searchByGenre(n)));
                 } catch (LibraryException e) {
                     e.printStackTrace();
                 }

@@ -128,6 +128,15 @@ public class ManageBooksController {
     }
 
     public void updateAction(ActionEvent actionEvent) throws LibraryException {
+        if(titleLabel.getText().isEmpty() || authorLabel.getText().isEmpty() || yearLabel.getText().isEmpty() ||
+        genreLabel.getText().isEmpty() || totalNumberLabel.getText().isEmpty() || availableNumberLabel.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Fill in all fields!");
+            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.showAndWait();
+            return;
+        }
         if(idUpdate == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -159,18 +168,36 @@ public class ManageBooksController {
             alert.setHeaderText("Update error!");
             alert.setContentText("You can't update this book!");
             alert.showAndWait();
+            idUpdate = null;
         }
     }
 
     public void addAction(ActionEvent actionEvent) {
+        if(titleLabel.getText().isEmpty() || authorLabel.getText().isEmpty() || yearLabel.getText().isEmpty() ||
+                genreLabel.getText().isEmpty() || totalNumberLabel.getText().isEmpty() || availableNumberLabel.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Fill in all fields!");
+            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.showAndWait();
+            return;
+        }
+        if(idUpdate != null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Add error!");
+            alert.setContentText("You cannot add a book that already exists, if you want to make changes, use the update option!");
+            alert.showAndWait();
+            return;
+        }
         Book b = new Book();
         b.setId(1);
-        b.setTitle(model.title.get());
-        b.setAuthor(model.author.get());
-        b.setYearOfPublication(model.yearOfPublication.get());
-        b.setGenre(model.genre.get());
-        b.setTotalNumber(Integer.parseInt(model.totalNumber.get()));
-        b.setAvilableNumber(Integer.parseInt(model.availableNumber.get()));
+        b.setTitle(titleLabel.getText());
+        b.setAuthor(authorLabel.getText());
+        b.setYearOfPublication(yearOfPublication.getText());
+        b.setGenre(genre.getText());
+        b.setTotalNumber(Integer.parseInt(totalNumberLabel.getText()));
+        b.setAvilableNumber(Integer.parseInt(availableNumberLabel.getText()));
         try {
             manager.add(b);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
