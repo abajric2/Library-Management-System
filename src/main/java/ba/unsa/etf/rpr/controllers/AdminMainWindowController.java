@@ -44,7 +44,15 @@ public class AdminMainWindowController {
     public void manageUser(ActionEvent actionEvent) {
     }
 
-    public void manageBooks(ActionEvent actionEvent) {
+    public void manageBooks(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manageBooks.fxml"));
+        ManageBooksController controller = new ManageBooksController();
+        loader.setController(controller);
+        myStage.setTitle("Manage books");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.show();
     }
 
     public void regularUserMode(ActionEvent actionEvent) throws IOException {
