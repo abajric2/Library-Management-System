@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.Optional;
+
 public class ManageBooksController {
     public Button allBooksId;
     public TextField byTitleId;
@@ -222,8 +224,9 @@ public class ManageBooksController {
         }
     }
 
+
     public void deleteAction(ActionEvent actionEvent) throws LibraryException {
-        if(idUpdate == null) {
+        if (idUpdate == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Delete error!");
@@ -231,32 +234,43 @@ public class ManageBooksController {
             alert.showAndWait();
             return;
         }
-        Book b = new Book();
-        b.setId(idUpdate);
-        b.setTitle(model.title.get());
-        b.setAuthor(model.author.get());
-        b.setYearOfPublication(model.yearOfPublication.get());
-        b.setGenre(model.genre.get());
-        b.setTotalNumber(Integer.parseInt(model.totalNumber.get()));
-        b.setAvilableNumber(Integer.parseInt(model.availableNumber.get()));
-       // try {
-            manager.delete(b);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Successfully deleted!");
-            alert.showAndWait();
-            tableId.setItems(FXCollections.observableList(manager.getAll()));
-            idUpdate = null;
-      /*  } catch (LibraryException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Delete error!");
-            alert.setContentText("You can't delete this book!");
-            alert.showAndWait();
-            idUpdate = null;
-        }*/
+
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation Dialog");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Are you sure you want to delete the book '"
+                + model.title.get() + "' by '" + model.author.get() + "'?");
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Book b = new Book();
+            b.setId(idUpdate);
+            b.setTitle(model.title.get());
+            b.setAuthor(model.author.get());
+            b.setYearOfPublication(model.yearOfPublication.get());
+            b.setGenre(model.genre.get());
+            b.setTotalNumber(Integer.parseInt(model.totalNumber.get()));
+            b.setAvilableNumber(Integer.parseInt(model.availableNumber.get()));
+            try {
+                manager.delete(b);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully deleted!");
+                alert.showAndWait();
+                tableId.setItems(FXCollections.observableList(manager.getAll()));
+                idUpdate = null;
+            } catch (LibraryException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Delete error!");
+                alert.setContentText("You can't delete this book!");
+                alert.showAndWait();
+                idUpdate = null;
+            }
+        }
     }
+
 
     public class BookModel {
         public SimpleStringProperty title = new SimpleStringProperty("");
