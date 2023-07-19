@@ -35,6 +35,12 @@ public class ManageBooksController {
     public Button updateBttn;
     public Button addBttn;
     public TextField availableNumberLabel;
+    public TextField updtTitle;
+    public TextField updtAuthor;
+    public TextField updtYear;
+    public TextField updtGenre;
+    public TextField updtTotal;
+    public TextField updtAvailable;
     private BookModel model = new BookModel();
     private Integer idUpdate;
 
@@ -173,8 +179,8 @@ public class ManageBooksController {
     }
 
     public void addAction(ActionEvent actionEvent) {
-        if(titleLabel.getText().isEmpty() || authorLabel.getText().isEmpty() || yearLabel.getText().isEmpty() ||
-                genreLabel.getText().isEmpty() || totalNumberLabel.getText().isEmpty() || availableNumberLabel.getText().isEmpty()) {
+        if(updtTitle.getText().isEmpty() || updtAuthor.getText().isEmpty() || updtYear.getText().isEmpty() ||
+                updtGenre.getText().isEmpty() || updtTotal.getText().isEmpty() || updtAvailable.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fill in all fields!");
@@ -182,22 +188,22 @@ public class ManageBooksController {
             alert.showAndWait();
             return;
         }
-        if(idUpdate != null) {
+     /*   if(idUpdate != null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Add error!");
             alert.setContentText("You cannot add a book that already exists, if you want to make changes, use the update option!");
             alert.showAndWait();
             return;
-        }
+        }*/
         Book b = new Book();
         b.setId(1);
-        b.setTitle(titleLabel.getText());
-        b.setAuthor(authorLabel.getText());
-        b.setYearOfPublication(yearOfPublication.getText());
-        b.setGenre(genre.getText());
-        b.setTotalNumber(Integer.parseInt(totalNumberLabel.getText()));
-        b.setAvilableNumber(Integer.parseInt(availableNumberLabel.getText()));
+        b.setTitle(updtTitle.getText());
+        b.setAuthor(updtAuthor.getText());
+        b.setYearOfPublication(updtYear.getText());
+        b.setGenre(updtGenre.getText());
+        b.setTotalNumber(Integer.parseInt(updtTotal.getText()));
+        b.setAvilableNumber(Integer.parseInt(updtAvailable.getText()));
         try {
             manager.add(b);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
