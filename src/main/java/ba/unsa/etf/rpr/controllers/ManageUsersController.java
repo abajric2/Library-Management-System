@@ -156,11 +156,22 @@ public class ManageUsersController {
             return;
         }
 
+        Member selectedItem = (Member) tableId.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Delete error!");
+            alert.setContentText("Choose the member you want to delete in the table!");
+            alert.showAndWait();
+            return;
+        }
+
+        String usernameToDelete = selectedItem.getUsername();
+
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirmation Dialog");
         confirmAlert.setHeaderText(null);
-        confirmAlert.setContentText("Are you sure you want to delete the member "
-                + model.firstName.get() + " " + model.lastName.get() + "?");
+        confirmAlert.setContentText("Are you sure you want to delete the member with username: " + usernameToDelete + "?");
         Optional<ButtonType> result = confirmAlert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
