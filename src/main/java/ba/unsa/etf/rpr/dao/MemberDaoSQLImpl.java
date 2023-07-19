@@ -206,7 +206,7 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
 
     @Override
     public void delete(Member item) throws LibraryException {
-        String sql = "DELETE FROM MEMBERS WHERE id = ?";
+        String sql = "DELETE FROM MEMBERS WHERE MEMBER_ID = ?";
         try{
             PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getId());

@@ -197,7 +197,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
 
     @Override
     public void delete(Book item) throws LibraryException {
-        String sql = "DELETE FROM Books WHERE id = ?";
+        String sql = "DELETE FROM Books WHERE BOOK_ID = ?";
         try{
             PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getId());

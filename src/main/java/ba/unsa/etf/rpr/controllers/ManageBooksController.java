@@ -41,6 +41,7 @@ public class ManageBooksController {
     public TextField updtGenre;
     public TextField updtTotal;
     public TextField updtAvailable;
+    public Button deleteBttn;
     private BookModel model = new BookModel();
     private Integer idUpdate;
 
@@ -219,6 +220,42 @@ public class ManageBooksController {
             alert.setContentText("You can't add book!");
             alert.showAndWait();
         }
+    }
+
+    public void deleteAction(ActionEvent actionEvent) throws LibraryException {
+        if(idUpdate == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Delete error!");
+            alert.setContentText("Choose the book you want to delete in the table!");
+            alert.showAndWait();
+            return;
+        }
+        Book b = new Book();
+        b.setId(idUpdate);
+        b.setTitle(model.title.get());
+        b.setAuthor(model.author.get());
+        b.setYearOfPublication(model.yearOfPublication.get());
+        b.setGenre(model.genre.get());
+        b.setTotalNumber(Integer.parseInt(model.totalNumber.get()));
+        b.setAvilableNumber(Integer.parseInt(model.availableNumber.get()));
+       // try {
+            manager.delete(b);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Successfully deleted!");
+            alert.showAndWait();
+            tableId.setItems(FXCollections.observableList(manager.getAll()));
+            idUpdate = null;
+      /*  } catch (LibraryException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Delete error!");
+            alert.setContentText("You can't delete this book!");
+            alert.showAndWait();
+            idUpdate = null;
+        }*/
     }
 
     public class BookModel {
