@@ -139,7 +139,8 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
-            alert.setContentText("An error occurred while attempting to update this user. Check if someone is already using the username you entered!");
+            if(m.getPassword().length() < 8) alert.setContentText("Password must be at least 8 characters long!");
+            else alert.setContentText("An error occurred while attempting to update this user. Check if someone is already using the username you entered!");
             alert.showAndWait();
             idUpdate = null;
         }
@@ -227,7 +228,8 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("You can't add member!");
-            alert.setContentText("An error occurred while attempting to add new user. Check if someone is already using the username you entered!");
+            if(m.getPassword().length() < 8) alert.setContentText("Password must be at least 8 characters long!");
+            else alert.setContentText("An error occurred while attempting to update this user. Check if someone is already using the username you entered!");
             alert.showAndWait();
         }
     }

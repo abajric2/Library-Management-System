@@ -1,3 +1,4 @@
+ba\unsa\etf\rpr\controllers\ManageUsersController.class
 ba\unsa\etf\rpr\controllers\MainWindowController$1.class
 ba\unsa\etf\rpr\App.class
 ba\unsa\etf\rpr\controllers\MainWindowController$4.class
@@ -6,6 +7,7 @@ ba\unsa\etf\rpr\dao\MemberDao.class
 ba\unsa\etf\rpr\controllers\ManageBooksController.class
 ba\unsa\etf\rpr\dao\BookDaoSQLImpl.class
 ba\unsa\etf\rpr\controllers\MainWindowController$3.class
+ba\unsa\etf\rpr\controllers\ManageUsersController$1.class
 ba\unsa\etf\rpr\dao\DaoFactory.class
 ba\unsa\etf\rpr\controllers\AdminMainWindowController.class
 ba\unsa\etf\rpr\dao\AbstractDao$1.class
@@ -24,6 +26,7 @@ ba\unsa\etf\rpr\business\BookManager.class
 ba\unsa\etf\rpr\controllers\ManageBooksController$3.class
 ba\unsa\etf\rpr\exceptions\LibraryException.class
 ba\unsa\etf\rpr\controllers\LoginController.class
+ba\unsa\etf\rpr\controllers\ManageUsersController$MemberModel.class
 ba\unsa\etf\rpr\domain\Member.class
 ba\unsa\etf\rpr\business\MemberManager.class
 ba\unsa\etf\rpr\dao\Dao.class
