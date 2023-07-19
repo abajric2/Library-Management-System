@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 
@@ -72,6 +73,9 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     @Override
     public Member add(Member item) throws LibraryException {
         Member checkU = checkUsername(item);
+        if(item.getPassword().length() < 8) {
+            throw new LibraryException("Password must be at least 8 characters long!");
+        }
         if(checkU != null) {
             throw new LibraryException("Someone is already using this username");
         }
@@ -123,14 +127,17 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     @Override
     public Member update(Member item) throws LibraryException {
         Member checkU = checkUsername(item);
+        if(item.getPassword().length() < 8) {
+            throw new LibraryException("Password must be at least 8 characters long!");
+        }
         if(checkU != null && checkU.getId() != item.getId()) {
             throw new LibraryException("Someone is already using this username");
         }
-        Member checkP = checkPassword(item);
-        if(checkP != null) {
+     //   Member checkP = checkPassword(item);
+       /* if(checkP != null) {
             if(checkP.getId() == item.getId()) throw new LibraryException("You are already using this password");
            // else throw new LibraryException("Someone is already using this password");
-        }
+        }*/
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row, "MEMBER_ID");
         StringBuilder builder = new StringBuilder();
@@ -215,7 +222,10 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
             throw new LibraryException(e.getMessage(), e);
         }
     }
-
+    @Override
+    public List<Member> searchByUsername(String username) throws LibraryException {
+        return executeQuery("SELECT * FROM MEMBERS WHERE USERNAME LIKE concat('%', ? ,'%')", new Object[]{username});
+    }
     @Override
     public Member searchById(int id) throws LibraryException {
         return executeQueryUnique("SELECT * FROM MEMBERS WHERE MEMBER_ID = ?", new Object[]{id});
@@ -250,7 +260,8 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
 
     @Override
     public Member searchByUserameandPassword(String username, String password) throws LibraryException {
-        return executeQueryUnique("SELECT * FROM MEMBERS WHERE USERNAME = ? AND PASSWORD = ?", new Object[]{username, password});
+        return executeQueryUnique("SELECT * FROM MEMBERS WHERE BINARY USERNAME = ? AND BINARY PASSWORD = ?", new Object[]{username, password});
+        //return executeQueryUnique("SELECT * FROM MEMBERS WHERE USERNAME = ? AND PASSWORD = ?", new Object[]{username, password});
        /* String query = "SELECT * FROM MEMBERS WHERE USERNAME = ? AND PASSWORD = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);

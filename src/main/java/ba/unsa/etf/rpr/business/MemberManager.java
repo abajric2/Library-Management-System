@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.DaoFactory;
+import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 
@@ -35,7 +36,9 @@ public class MemberManager {
     public void delete(Member item) throws LibraryException {
         DaoFactory.memberDao().delete(item);
     }
-
+    public List<Member> searchByUsername(String username) throws LibraryException {
+        return DaoFactory.memberDao().searchByUsername(username);
+    }
     public Member searchById(int id) throws LibraryException {
         return DaoFactory.memberDao().searchById(id);
     }

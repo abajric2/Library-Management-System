@@ -75,7 +75,7 @@
                         <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="manageUserId" mnemonicParsing="false" onAction="#manageUser" prefWidth="122.0" text="Manage users" textAlignment="CENTER">
+                  <Button fx:id="manageUserId" mnemonicParsing="false" onAction="#manageUsers" prefWidth="122.0" text="Manage users" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
