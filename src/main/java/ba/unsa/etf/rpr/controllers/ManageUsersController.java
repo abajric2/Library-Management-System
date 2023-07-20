@@ -112,7 +112,7 @@ public class ManageUsersController {
                     throw new RuntimeException(e);
                 }
                 if(rent == null) {
-                    rentalInfoId.setText("This user currently has no rented books.");
+                    rentalInfoId.setText(memb.getUsername() + " currently has no rented books.");
                 }
                 else {
                     int id = rent.getBookID();
@@ -123,7 +123,7 @@ public class ManageUsersController {
                     } catch (LibraryException e) {
                         throw new RuntimeException(e);
                     }
-                    rentalInfoId.setText("This user currently has a book \"" + book.getTitle() + "\" by author "
+                    rentalInfoId.setText(memb.getUsername() + " currently has a book \"" + book.getTitle() + "\" by author "
                             + book.getAuthor() + ".");
                 }
             }
