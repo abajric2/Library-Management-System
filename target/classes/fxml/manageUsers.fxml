@@ -46,6 +46,11 @@
                                 <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                             </VBox.margin>
                         </Button>
+                  <TextField fx:id="byNameId" promptText="Search by name">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
                         <TextField fx:id="byUsernameId" onAction="#searchByUsername" promptText="Search by username">
                             <VBox.margin>
                                 <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
@@ -89,6 +94,19 @@
                                 <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                             </VBox.margin>
                         </ButtonBar>
+                  <Label fx:id="rentalInfoId" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                    <buttons>
+                      <Button fx:id="manageRentals" mnemonicParsing="false" onAction="#manageRentals" text="Manage rentals" />
+                    </buttons>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ButtonBar>
                         <Label text="Please select the member from the table that you want to delete!" wrapText="true">
                             <VBox.margin>
                                 <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />

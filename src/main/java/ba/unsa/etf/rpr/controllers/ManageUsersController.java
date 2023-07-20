@@ -2,8 +2,10 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.BookManager;
 import ba.unsa.etf.rpr.business.MemberManager;
+import ba.unsa.etf.rpr.business.RentalManager;
 import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
+import ba.unsa.etf.rpr.domain.Rental;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -42,6 +44,8 @@ public class ManageUsersController {
     public Button addBttn;
     public MemberManager manager = new MemberManager();
     public TextField byNameId;
+    public Label rentalInfoId;
+    public Button manageRentals;
     private MemberModel model = new MemberModel();
     private Integer idUpdate;
 
@@ -76,6 +80,7 @@ public class ManageUsersController {
                 }
             }
         });
+
         //  tableId.getSelectionModel().getSelectedItem();
         tableId.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{
             if(o!=null){
@@ -97,7 +102,32 @@ public class ManageUsersController {
                 passwordUpdt.textProperty().bindBidirectional(model.password);
                 adminUpdt.selectedProperty().bindBidirectional(model.admin);
             }
-        });
+            if(n != null) {
+                RentalManager r = new RentalManager();
+                Member memb = (Member) n;
+                Rental rent = null;
+                try {
+                    rent = r.checkUsersRental(memb.getId());
+                } catch (LibraryException e) {
+                    throw new RuntimeException(e);
+                }
+                if(rent == null) {
+                    rentalInfoId.setText("This user currently has no rented books.");
+                }
+                else {
+                    int id = rent.getBookID();
+                    BookManager b = new BookManager();
+                    Book book = null;
+                    try {
+                        book = b.searchById(id);
+                    } catch (LibraryException e) {
+                        throw new RuntimeException(e);
+                    }
+                    rentalInfoId.setText("This user currently has a book \"" + book.getTitle() + "\" by author "
+                            + book.getAuthor() + ".");
+                }
+            }
+         });
 
     }
     public void allUsers(ActionEvent actionEvent) throws LibraryException {
@@ -207,7 +237,7 @@ public class ManageUsersController {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Delete error!");
-                alert.setContentText("You can't delete this member!");
+                alert.setContentText("You can't delete this member! Check if the user currently has a rented book. If yes, the book must be returned before deletion.");
                 alert.showAndWait();
                 idUpdate = null;
             }
@@ -256,6 +286,10 @@ public class ManageUsersController {
             alert.showAndWait();
         }
     }
+
+    public void manageRentals(ActionEvent actionEvent) {
+    }
+
     public class MemberModel {
         public SimpleStringProperty firstName = new SimpleStringProperty("");
         public SimpleStringProperty lastName = new SimpleStringProperty("");
