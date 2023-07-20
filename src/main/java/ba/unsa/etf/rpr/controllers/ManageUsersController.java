@@ -41,6 +41,7 @@ public class ManageUsersController {
     public CheckBox adminAdd;
     public Button addBttn;
     public MemberManager manager = new MemberManager();
+    public TextField byNameId;
     private MemberModel model = new MemberModel();
     private Integer idUpdate;
 
@@ -59,6 +60,17 @@ public class ManageUsersController {
                 MemberManager m = new MemberManager();
                 try {
                     tableId.setItems(FXCollections.observableList(m.searchByUsername(n)));
+                } catch (LibraryException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        byNameId.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                MemberManager m = new MemberManager();
+                try {
+                    tableId.setItems(FXCollections.observableList(m.searchByName(n)));
                 } catch (LibraryException e) {
                     e.printStackTrace();
                 }
