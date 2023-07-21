@@ -1,4 +1,153 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.BookManager;
+import ba.unsa.etf.rpr.business.MemberManager;
+import ba.unsa.etf.rpr.business.RentalManager;
+import ba.unsa.etf.rpr.domain.Book;
+import ba.unsa.etf.rpr.domain.Member;
+import ba.unsa.etf.rpr.domain.Rental;
+import ba.unsa.etf.rpr.exceptions.LibraryException;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+import java.util.Date;
+
 public class ManageRentalsController {
+    public Button deadlineExceedingsId;
+    public DatePicker datePickerId;
+    public TextField firstNameId;
+    public TextField lastNameId;
+    public TextField usernameId;
+    public TextField passwordId;
+    public CheckBox adminId;
+    public TextField titleId;
+    public TextField authorId;
+    public TextField yearId;
+    public TextField genreId;
+    public TextField totalId;
+    public TextField availableId;
+    public Button deleteRentalId;
+    public TableView tableId;
+    public TableColumn<Rental,Integer> id;
+    public TableColumn<Rental,Integer> book;
+    public TableColumn<Rental,Integer> member;
+    public TableColumn<Rental, Date> rentDate;
+    public TableColumn<Rental,Date> returnDeadline;
+    public ChoiceBox chooseUserId;
+    public ChoiceBox chooseBookId;
+    public Button addRentalId;
+    public RentalManager manager = new RentalManager();
+    private RentalModel model = new RentalModel();
+    private Integer idUpdate;
+
+    @FXML
+    public void initialize() throws LibraryException {
+        id.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getId()).asObject();});
+        book.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getBookID()).asObject();});
+        member.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getMemberID()).asObject();});
+        rentDate.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleObjectProperty<Date>(rental.getRentDate());});
+        returnDeadline.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleObjectProperty<Date>(rental.getReturnDeadline());});
+        tableId.setItems(FXCollections.observableList(manager.getAll()));
+
+        //  tableId.getSelectionModel().getSelectedItem();
+        tableId.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{
+            if(o!=null){
+                Rental r = (Rental) o;
+                idUpdate = r.getId();
+                try {
+                    model.fromRental((Rental) n);
+                } catch (LibraryException e) {
+                    throw new RuntimeException(e);
+                }
+                titleId.textProperty().unbindBidirectional(model.bookTitle);
+                authorId.textProperty().unbindBidirectional((model.bookAuthor));
+                yearId.textProperty().unbindBidirectional(model.bookYear);
+                genreId.textProperty().unbindBidirectional(model.bookGenre);
+                totalId.textProperty().unbindBidirectional(model.bookTotalNumber);
+                availableId.textProperty().unbindBidirectional(model.bookAvailableNumber);
+                firstNameId.textProperty().unbindBidirectional(model.memberFirstName);
+                lastNameId.textProperty().unbindBidirectional(model.memberLastName);
+                usernameId.textProperty().unbindBidirectional(model.memberUsername);
+                passwordId.textProperty().unbindBidirectional(model.memberPassword);
+                adminId.selectedProperty().unbindBidirectional(model.isMemberAdmin);
+            }
+            Rental r = (Rental) n;
+            if(r != null) {
+                idUpdate = r.getId();
+                titleId.textProperty().bindBidirectional(model.bookTitle);
+                authorId.textProperty().bindBidirectional((model.bookAuthor));
+                yearId.textProperty().bindBidirectional(model.bookYear);
+                genreId.textProperty().bindBidirectional(model.bookGenre);
+                totalId.textProperty().bindBidirectional(model.bookTotalNumber);
+                availableId.textProperty().bindBidirectional(model.bookAvailableNumber);
+                firstNameId.textProperty().bindBidirectional(model.memberFirstName);
+                lastNameId.textProperty().bindBidirectional(model.memberLastName);
+                usernameId.textProperty().bindBidirectional(model.memberUsername);
+                passwordId.textProperty().bindBidirectional(model.memberPassword);
+                adminId.selectedProperty().bindBidirectional(model.isMemberAdmin);
+            }
+        });
+
+    }
+    public void deadlineExceedings(ActionEvent actionEvent) {
+    }
+
+    public void deleteRental(ActionEvent actionEvent) {
+    }
+
+    public void addRental(ActionEvent actionEvent) {
+    }
+    public class RentalModel {
+        public SimpleIntegerProperty book = new SimpleIntegerProperty(0);
+        public SimpleIntegerProperty member = new SimpleIntegerProperty(0);
+        public SimpleObjectProperty<java.sql.Date> rentDate = new SimpleObjectProperty<java.sql.Date>();
+        public SimpleObjectProperty<java.sql.Date> returnDeadline = new SimpleObjectProperty<java.sql.Date>();
+        public SimpleStringProperty bookTitle = new SimpleStringProperty("");
+        public SimpleStringProperty bookAuthor = new SimpleStringProperty("");
+        public SimpleStringProperty bookYear = new SimpleStringProperty("");
+        public SimpleStringProperty bookGenre = new SimpleStringProperty("");
+        public SimpleStringProperty bookTotalNumber = new SimpleStringProperty("");
+        public SimpleStringProperty bookAvailableNumber = new SimpleStringProperty("");
+        public SimpleStringProperty memberFirstName = new SimpleStringProperty("");
+        public SimpleStringProperty memberLastName = new SimpleStringProperty("");
+        public SimpleStringProperty memberUsername = new SimpleStringProperty("");
+        public SimpleStringProperty memberPassword = new SimpleStringProperty("");
+        public SimpleBooleanProperty isMemberAdmin = new SimpleBooleanProperty(false);
+        private BookManager bookManager = new BookManager();
+        private MemberManager memberManager = new MemberManager();
+        public void fromRental (Rental r) throws LibraryException {
+            this.book.set(r.getBookID());
+            this.member.set(r.getMemberID());
+            this.rentDate.set(r.getRentDate());
+            this.returnDeadline.set(r.getReturnDeadline());
+            this.bookTitle.set(bookManager.searchById(r.getBookID()).getTitle());
+            this.bookAuthor.set(bookManager.searchById(r.getBookID()).getAuthor());
+            this.bookYear.set(bookManager.searchById(r.getBookID()).getYearOfPublication());
+            this.bookGenre.set(bookManager.searchById(r.getBookID()).getGenre());
+            this.bookTotalNumber.set(Integer.toString(bookManager.searchById(r.getBookID()).getTotalNumber()));
+            this.bookAvailableNumber.set(Integer.toString(bookManager.searchById(r.getBookID()).getAvilableNumber()));
+            this.memberFirstName.set(memberManager.searchById(r.getMemberID()).getFirstName());
+            this.memberLastName.set(memberManager.searchById(r.getMemberID()).getLastName());
+            this.memberUsername.set(memberManager.searchById(r.getMemberID()).getUsername());
+            this.memberPassword.set(memberManager.searchById(r.getMemberID()).getPassword());
+            this.isMemberAdmin.set(memberManager.searchById(r.getMemberID()).isAdmin());
+        }
+
+        public Rental toRental(){
+            Rental r = new Rental();
+            r.setBookID(this.book.getValue());
+            r.setMemberID(this.member.getValue());
+            r.setRentDate((java.sql.Date) this.rentDate.getValue());
+            r.setReturnDeadline((java.sql.Date) this.returnDeadline.getValue());
+            return r;
+        }
+    }
 }

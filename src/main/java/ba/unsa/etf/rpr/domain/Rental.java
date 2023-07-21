@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.domain;
 
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.util.Calendar;
 
 /**
  * Class that contains basic information about borrowing a book from the library
@@ -32,8 +33,8 @@ public class Rental implements Idable {
     }
 
     public Rental() {
-        this.rentDate = (java.sql.Date) new java.util.Date();
-        this.returnDeadline = (java.sql.Date) new java.util.Date();
+        this.rentDate = new java.sql.Date(System.currentTimeMillis());
+        this.returnDeadline = new java.sql.Date(System.currentTimeMillis());
     }
 
     public int getBookID() {
