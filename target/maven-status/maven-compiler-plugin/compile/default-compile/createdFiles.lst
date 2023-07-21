@@ -6,6 +6,7 @@ ba\unsa\etf\rpr\controllers\ManageUsersController$2.class
 ba\unsa\etf\rpr\controllers\ManageBooksController$1.class
 ba\unsa\etf\rpr\dao\MemberDao.class
 ba\unsa\etf\rpr\controllers\ManageBooksController.class
+ba\unsa\etf\rpr\controllers\ManageRentalsController.class
 ba\unsa\etf\rpr\dao\BookDaoSQLImpl.class
 ba\unsa\etf\rpr\controllers\MainWindowController$3.class
 ba\unsa\etf\rpr\controllers\ManageUsersController$1.class
@@ -20,6 +21,7 @@ ba\unsa\etf\rpr\business\RentalManager.class
 ba\unsa\etf\rpr\dao\MemberDaoSQLImpl.class
 ba\unsa\etf\rpr\controllers\RegistrationController$1.class
 ba\unsa\etf\rpr\controllers\MainWindowController$2.class
+ba\unsa\etf\rpr\controllers\ManageRentalsController$RentalModel.class
 ba\unsa\etf\rpr\dao\RentalDao.class
 ba\unsa\etf\rpr\dao\BookDao.class
 ba\unsa\etf\rpr\domain\Rental.class
