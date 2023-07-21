@@ -34,6 +34,7 @@ ba\unsa\etf\rpr\domain\Member.class
 ba\unsa\etf\rpr\business\MemberManager.class
 ba\unsa\etf\rpr\dao\Dao.class
 ba\unsa\etf\rpr\domain\Idable.class
+ba\unsa\etf\rpr\controllers\ManageRentalsController$1.class
 ba\unsa\etf\rpr\controllers\RegistrationController$2.class
 ba\unsa\etf\rpr\controllers\ManageBooksController$BookModel.class
 ba\unsa\etf\rpr\controllers\MainWindowController.class

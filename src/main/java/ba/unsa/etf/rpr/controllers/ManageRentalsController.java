@@ -19,8 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 public class ManageRentalsController {
     public Button deadlineExceedingsId;
@@ -43,9 +42,6 @@ public class ManageRentalsController {
     public TableColumn<Rental,Integer> member;
     public TableColumn<Rental, Date> rentDate;
     public TableColumn<Rental,Date> returnDeadline;
-    public ChoiceBox chooseUserId;
-    public ChoiceBox chooseBookId;
-    public Button addRentalId;
     public RentalManager manager = new RentalManager();
     public Button allRentalsId;
     private RentalModel model = new RentalModel();
