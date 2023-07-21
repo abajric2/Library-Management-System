@@ -28,7 +28,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
                 AbstractDao.connection = DriverManager.getConnection(url, username, password);
             } catch (Exception e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 Runtime.getRuntime().addShutdownHook(new Thread(){
                     @Override
                     public void run(){

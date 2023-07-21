@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class ManageRentalsController {
     public Button deadlineExceedingsId;
@@ -62,11 +63,6 @@ public class ManageRentalsController {
             if(o!=null){
                 Rental r = (Rental) o;
                 idUpdate = r.getId();
-                try {
-                    model.fromRental((Rental) n);
-                } catch (LibraryException e) {
-                    throw new RuntimeException(e);
-                }
                 titleId.textProperty().unbindBidirectional(model.bookTitle);
                 authorId.textProperty().unbindBidirectional((model.bookAuthor));
                 yearId.textProperty().unbindBidirectional(model.bookYear);
@@ -82,6 +78,11 @@ public class ManageRentalsController {
             Rental r = (Rental) n;
             if(r != null) {
                 idUpdate = r.getId();
+                try {
+                    model.fromRental((Rental) n);
+                } catch (LibraryException e) {
+                    throw new RuntimeException(e);
+                }
                 titleId.textProperty().bindBidirectional(model.bookTitle);
                 authorId.textProperty().bindBidirectional((model.bookAuthor));
                 yearId.textProperty().bindBidirectional(model.bookYear);
@@ -101,6 +102,58 @@ public class ManageRentalsController {
     }
 
     public void deleteRental(ActionEvent actionEvent) {
+        if (idUpdate == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Delete error!");
+            alert.setContentText("Choose the rental you want to delete from the table!");
+            alert.showAndWait();
+            return;
+        }
+
+        Rental selectedItem = (Rental) tableId.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Delete error!");
+            alert.setContentText("Choose the rental you want to delete from the table!");
+            alert.showAndWait();
+            return;
+        }
+
+       // String usernameToDelete = selectedItem.getUsername();
+
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation Dialog");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Are you sure you want to delete the rental for the user " + usernameId.getText() + ", who currently has the book \"" + titleId.getText() + "\", from the author \"" + authorId.getText() + "\"?");
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Rental r = new Rental();
+            r.setId(idUpdate);
+            r.setBookID(model.book.get());
+            r.setMemberID(model.member.get());
+            r.setRentDate(model.rentDate.get());
+            r.setReturnDeadline(model.returnDeadline.get());
+            try {
+                manager.delete(r);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully deleted!");
+                alert.showAndWait();
+                tableId.setItems(FXCollections.observableList(manager.getAll()));
+                idUpdate = null;
+            } catch (LibraryException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Delete error!");
+                alert.setContentText("You can't delete this rental!");
+                alert.showAndWait();
+                idUpdate = null;
+            }
+        }
     }
 
     public void addRental(ActionEvent actionEvent) {
