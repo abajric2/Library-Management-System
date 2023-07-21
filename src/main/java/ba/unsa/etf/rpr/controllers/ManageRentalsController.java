@@ -46,6 +46,7 @@ public class ManageRentalsController {
     public ChoiceBox chooseBookId;
     public Button addRentalId;
     public RentalManager manager = new RentalManager();
+    public Button allRentalsId;
     private RentalModel model = new RentalModel();
     private Integer idUpdate;
 
@@ -96,9 +97,14 @@ public class ManageRentalsController {
                 adminId.selectedProperty().bindBidirectional(model.isMemberAdmin);
             }
         });
-
     }
-    public void deadlineExceedings(ActionEvent actionEvent) {
+    public void deadlineExceedings(ActionEvent actionEvent) throws LibraryException {
+        id.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getId()).asObject();});
+        book.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getBookID()).asObject();});
+        member.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getMemberID()).asObject();});
+        rentDate.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleObjectProperty<Date>(rental.getRentDate());});
+        returnDeadline.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleObjectProperty<Date>(rental.getReturnDeadline());});
+        tableId.setItems(FXCollections.observableList(manager.getDeadlineExceedings()));
     }
 
     public void deleteRental(ActionEvent actionEvent) {
@@ -158,6 +164,16 @@ public class ManageRentalsController {
 
     public void addRental(ActionEvent actionEvent) {
     }
+
+    public void allRentals(ActionEvent actionEvent) throws LibraryException {
+        id.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getId()).asObject();});
+        book.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getBookID()).asObject();});
+        member.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getMemberID()).asObject();});
+        rentDate.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleObjectProperty<Date>(rental.getRentDate());});
+        returnDeadline.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleObjectProperty<Date>(rental.getReturnDeadline());});
+        tableId.setItems(FXCollections.observableList(manager.getAll()));
+    }
+
     public class RentalModel {
         public SimpleIntegerProperty book = new SimpleIntegerProperty(0);
         public SimpleIntegerProperty member = new SimpleIntegerProperty(0);
