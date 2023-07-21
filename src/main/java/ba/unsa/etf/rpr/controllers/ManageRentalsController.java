@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -95,6 +96,44 @@ public class ManageRentalsController {
                 usernameId.textProperty().bindBidirectional(model.memberUsername);
                 passwordId.textProperty().bindBidirectional(model.memberPassword);
                 adminId.selectedProperty().bindBidirectional(model.isMemberAdmin);
+            }
+        });
+        datePickerId.valueProperty().addListener(new ChangeListener<LocalDate>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+                // Ovdje ćemo dodati kod koji će se izvršiti kada se promijeni datum u datePickeru
+
+                // Prvo dohvatimo novi izabrani datum
+                if(newValue != null) {
+                    java.sql.Date selectedDate = java.sql.Date.valueOf(newValue);
+
+                    // Pozivamo metodu koja će obrađivati promjenu datuma
+                    id.setCellValueFactory(cellData -> {
+                        Rental rental = cellData.getValue();
+                        return new SimpleIntegerProperty(rental.getId()).asObject();
+                    });
+                    book.setCellValueFactory(cellData -> {
+                        Rental rental = cellData.getValue();
+                        return new SimpleIntegerProperty(rental.getBookID()).asObject();
+                    });
+                    member.setCellValueFactory(cellData -> {
+                        Rental rental = cellData.getValue();
+                        return new SimpleIntegerProperty(rental.getMemberID()).asObject();
+                    });
+                    rentDate.setCellValueFactory(cellData -> {
+                        Rental rental = cellData.getValue();
+                        return new SimpleObjectProperty<Date>(rental.getRentDate());
+                    });
+                    returnDeadline.setCellValueFactory(cellData -> {
+                        Rental rental = cellData.getValue();
+                        return new SimpleObjectProperty<Date>(rental.getReturnDeadline());
+                    });
+                    try {
+                        tableId.setItems(FXCollections.observableList(manager.searchByReturnDeadline(selectedDate)));
+                    } catch (LibraryException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         });
     }
