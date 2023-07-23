@@ -296,8 +296,8 @@ public class ManageUsersController {
 
     public void manageRentals(ActionEvent actionEvent) throws IOException {
         Stage myStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manageRentals.fxml"));
-        ManageRentalsController controller = new ManageRentalsController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addNewRental.fxml"));
+        AddNewRentalController controller = new AddNewRentalController();
         loader.setController(controller);
         myStage.setTitle("Manage rentals");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
