@@ -23,6 +23,8 @@ public class AdminMainWindowController {
     public Button manageUserId;
     public Button manageBooksId;
     public Button regularUserId;
+    public Button viewRentalsBttn;
+    public Button addRentalBttn;
     private Member member;
 
     AdminMainWindowController(Member m) {
@@ -69,6 +71,28 @@ public class AdminMainWindowController {
         MainWindowController controller = new MainWindowController(member);
         loader.setController(controller);
         myStage.setTitle("Main window");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.show();
+    }
+
+    public void viewRentals(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manageRentals.fxml"));
+        ManageRentalsController controller = new ManageRentalsController();
+        loader.setController(controller);
+        myStage.setTitle("Manage rentals");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.show();
+    }
+
+    public void addRental(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addNewRental.fxml"));
+        AddNewRentalController controller = new AddNewRentalController();
+        loader.setController(controller);
+        myStage.setTitle("Add rental");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(true);
         myStage.show();

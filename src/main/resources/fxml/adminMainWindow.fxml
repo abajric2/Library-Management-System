@@ -85,6 +85,16 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
+                  <Button fx:id="viewRentalsBttn" mnemonicParsing="false" onAction="#viewRentals" prefWidth="122.0" text="View rentals">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" prefWidth="122.0" text="Add rental">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
                   <Button fx:id="regularUserId" mnemonicParsing="false" onAction="#regularUserMode" prefWidth="122.0" text="Regular user mode" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

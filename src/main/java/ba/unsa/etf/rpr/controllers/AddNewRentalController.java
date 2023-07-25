@@ -54,6 +54,7 @@ public class AddNewRentalController {
     public MemberManager memberManager = new MemberManager();
     public Button allBooksBttn;
     public Button allUsersBttn;
+    public Label checkRental;
     private BookModel bookModel = new BookModel();
     private MemberModel memberModel = new MemberModel();
     private Integer idUser;
@@ -175,6 +176,26 @@ public class AddNewRentalController {
                 usernameSelected.textProperty().bindBidirectional(memberModel.username);
                 passwordSelected.textProperty().bindBidirectional(memberModel.password);
                 adminSelected.selectedProperty().bindBidirectional(memberModel.admin);
+                RentalManager r = new RentalManager();
+                Rental rent = null;
+                try {
+                    rent = r.checkUsersRental(idUser);
+                } catch (LibraryException e) {
+                    throw new RuntimeException(e);
+                }
+                if (rent == null) {
+                    checkRental.setText("The selected user currently has no rented books.");
+                } else {
+                    int id = rent.getBookID();
+                    Book book = null;
+                    try {
+                        book = bookManager.searchById(id);
+                    } catch (LibraryException e) {
+                        throw new RuntimeException(e);
+                    }
+                    checkRental.setText("The selected user currently has the book \"" + book.getTitle() + "\" by author "
+                            + book.getAuthor() + ". To rent a new book, this book must be returned.");
+                }
             }
         });
     }
