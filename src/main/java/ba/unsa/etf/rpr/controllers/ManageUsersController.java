@@ -52,7 +52,6 @@ public class ManageUsersController {
     public MemberManager manager = new MemberManager();
     public TextField byNameId;
     public Label rentalInfoId;
-    public Button manageRentals;
     private MemberModel model = new MemberModel();
     private Integer idUpdate;
 
@@ -294,16 +293,7 @@ public class ManageUsersController {
         }
     }
 
-    public void manageRentals(ActionEvent actionEvent) throws IOException {
-        Stage myStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addNewRental.fxml"));
-        AddNewRentalController controller = new AddNewRentalController();
-        loader.setController(controller);
-        myStage.setTitle("Manage rentals");
-        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        myStage.setResizable(true);
-        myStage.show();
-    }
+
 
     public class MemberModel {
         public SimpleStringProperty firstName = new SimpleStringProperty("");
