@@ -12,13 +12,19 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class MainWindowController {
     public Button profileBttnId;
@@ -40,12 +46,17 @@ public class MainWindowController {
     public ChoiceBox<Book> choiceBoxId;
     public Label labelId;
     public ListView listId;
+    public Button adminModeBttn;
     private Member memeber;
     MainWindowController(Member m) {
         this.memeber = m;
     }
     @FXML
     public void initialize() throws LibraryException {
+        if(memeber.isAdmin()) {
+            adminModeBttn.setVisible(true);
+        }
+        else adminModeBttn.setVisible(false);
         authorNameId.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
@@ -262,5 +273,19 @@ public class MainWindowController {
             alert.showAndWait();
         }
         else listId.setItems(FXCollections.observableList(books));*/
+    }
+
+    public void adminMode(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMainWindow.fxml"));
+        AdminMainWindowController controller = new AdminMainWindowController(memeber);
+        loader.setController(controller);
+        myStage.setTitle("Main window");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 }

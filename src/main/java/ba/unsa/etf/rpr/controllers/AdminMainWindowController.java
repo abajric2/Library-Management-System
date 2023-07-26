@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,6 +39,9 @@ public class AdminMainWindowController {
     }
 
     public void logOut(ActionEvent actionEvent) {
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 
     public void help(ActionEvent actionEvent) {
@@ -47,22 +51,30 @@ public class AdminMainWindowController {
     public void manageBooks(ActionEvent actionEvent) throws IOException {
         Stage myStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manageBooks.fxml"));
-        ManageBooksController controller = new ManageBooksController();
+        ManageBooksController controller = new ManageBooksController(member);
         loader.setController(controller);
         myStage.setTitle("Manage books");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
     public void manageUsers(ActionEvent actionEvent) throws IOException {
         Stage myStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manageUsers.fxml"));
-        ManageUsersController controller = new ManageUsersController();
+        ManageUsersController controller = new ManageUsersController(member);
         loader.setController(controller);
         myStage.setTitle("Manage users");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 
     public void regularUserMode(ActionEvent actionEvent) throws IOException {
@@ -73,28 +85,41 @@ public class AdminMainWindowController {
         myStage.setTitle("Main window");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 
     public void viewRentals(ActionEvent actionEvent) throws IOException {
         Stage myStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manageRentals.fxml"));
-        ManageRentalsController controller = new ManageRentalsController();
+        ManageRentalsController controller = new ManageRentalsController(member);
         loader.setController(controller);
         myStage.setTitle("Manage rentals");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 
     public void addRental(ActionEvent actionEvent) throws IOException {
         Stage myStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addNewRental.fxml"));
-        AddNewRentalController controller = new AddNewRentalController();
+        AddNewRentalController controller = new AddNewRentalController(member);
         loader.setController(controller);
         myStage.setTitle("Add rental");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
+
 }

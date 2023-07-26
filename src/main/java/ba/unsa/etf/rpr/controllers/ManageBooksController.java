@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.BookManager;
 import ba.unsa.etf.rpr.domain.Book;
+import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,9 +12,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Optional;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ManageBooksController {
     public Button allBooksId;
@@ -44,9 +53,12 @@ public class ManageBooksController {
     public TextField updtTotal;
     public TextField updtAvailable;
     public Button deleteBttn;
+    public Button mainPageBttn;
+    public Button logOutBttn;
     private BookModel model = new BookModel();
     private Integer idUpdate;
-
+    private Member member;
+    ManageBooksController(Member m) {this.member = m;}
     @FXML
     public void initialize() throws LibraryException {
         id.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getId()).asObject();});
@@ -299,5 +311,24 @@ public class ManageBooksController {
             b.setAvilableNumber(Integer.parseInt(availableNumber.get()));
             return b;
         }
+    }
+    public void mainPage(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMainWindow.fxml"));
+        AdminMainWindowController controller = new AdminMainWindowController(member);
+        loader.setController(controller);
+        myStage.setTitle("Main window");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+
+    public void logOut(ActionEvent actionEvent) {
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 }

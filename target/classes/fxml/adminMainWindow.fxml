@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <HBox>
+            <HBox style="-fx-background-color: #b1b1b1;">
                <children>
                   <ButtonBar HBox.hgrow="ALWAYS">
                     <buttons>
@@ -44,7 +44,7 @@
       </VBox>
    </top>
    <bottom>
-      <HBox BorderPane.alignment="CENTER">
+      <HBox style="-fx-background-color: #b1b1b1;" BorderPane.alignment="CENTER">
          <children>
             <ButtonBar HBox.hgrow="ALWAYS">
               <buttons>

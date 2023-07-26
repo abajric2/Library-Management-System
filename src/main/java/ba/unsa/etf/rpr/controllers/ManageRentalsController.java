@@ -16,10 +16,18 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ManageRentalsController {
     public Button deadlineExceedingsId;
@@ -44,8 +52,12 @@ public class ManageRentalsController {
     public TableColumn<Rental,Date> returnDeadline;
     public RentalManager manager = new RentalManager();
     public Button allRentalsId;
+    public Button mainPageBttn;
+    public Button logOutBttn;
     private RentalModel model = new RentalModel();
     private Integer idUpdate;
+    private Member logedMember;
+    ManageRentalsController(Member m) {this.logedMember = m;}
 
     @FXML
     public void initialize() throws LibraryException {
@@ -253,5 +265,24 @@ public class ManageRentalsController {
             r.setReturnDeadline((java.sql.Date) this.returnDeadline.getValue());
             return r;
         }
+    }
+    public void mainPage(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMainWindow.fxml"));
+        AdminMainWindowController controller = new AdminMainWindowController(logedMember);
+        loader.setController(controller);
+        myStage.setTitle("Main window");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+
+    public void logOut(ActionEvent actionEvent) {
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 }

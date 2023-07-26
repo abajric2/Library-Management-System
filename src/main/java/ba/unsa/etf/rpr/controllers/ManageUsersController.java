@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -49,12 +50,15 @@ public class ManageUsersController {
     public TextField passwordAdd;
     public CheckBox adminAdd;
     public Button addBttn;
+    public Button mainPageBttn;
+    public Button logOutBttn;
     public MemberManager manager = new MemberManager();
     public TextField byNameId;
     public Label rentalInfoId;
     private MemberModel model = new MemberModel();
     private Integer idUpdate;
-
+    private Member member;
+    ManageUsersController(Member m) {this.member = m;}
     @FXML
     public void initialize() throws LibraryException {
         id.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleIntegerProperty(member.getId()).asObject();});
@@ -319,5 +323,24 @@ public class ManageUsersController {
             m.setAdmin(this.admin.getValue());
             return m;
         }
+    }
+    public void mainPage(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMainWindow.fxml"));
+        AdminMainWindowController controller = new AdminMainWindowController(member);
+        loader.setController(controller);
+        myStage.setTitle("Main window");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+
+    public void logOut(ActionEvent actionEvent) {
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 }
