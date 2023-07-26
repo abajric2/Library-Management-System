@@ -144,7 +144,48 @@ public class ManageUsersController {
                 }
             }
          });
-
+        firstNameAdd.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z -]*")) {
+                checkFirstNameAdd.setText("Only letters, spaces and dashes are allowed.");
+            } else {
+                checkFirstNameAdd.setText("");
+            }
+        });
+        lastNameAdd.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z -]*")) {
+                checkLastNameAdd.setText("Only letters, spaces and dashes are allowed.");
+            } else {
+                checkLastNameAdd.setText("");
+            }
+        });
+        passwordAdd.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() < 8) {
+                checkPasswordAdd.setText("Password must be at least 8 characters long.");
+            } else {
+                checkPasswordAdd.setText("");
+            }
+        });
+        firstNameUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z -]*")) {
+                checkFirstNameUpdt.setText("Only letters, spaces and dashes are allowed.");
+            } else {
+                checkFirstNameUpdt.setText("");
+            }
+        });
+        lastNameUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z -]*")) {
+                checkLastNameUpdt.setText("Only letters, spaces and dashes are allowed.");
+            } else {
+                checkLastNameUpdt.setText("");
+            }
+        });
+        passwordUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (passwordUpdt.getText().length() > 0 && newValue.length() < 8) {
+                checkPasswordUpdt.setText("Password must be at least 8 characters long.");
+            } else {
+                checkPasswordUpdt.setText("");
+            }
+        });
     }
     public void allUsers(ActionEvent actionEvent) throws LibraryException {
         id.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleIntegerProperty(member.getId()).asObject();});
@@ -192,15 +233,20 @@ public class ManageUsersController {
             alert.setContentText("Successfully updated!");
             alert.showAndWait();
             tableId.setItems(FXCollections.observableList(manager.getAll()));
+            firstNameUpdt.setText("");
+            lastNameUpdt.setText("");
+            usernameUpdt.setText("");
+            passwordUpdt.setText("");
+            adminUpdt.setSelected(false);
             idUpdate = null;
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
-            if(m.getPassword().length() < 8) alert.setContentText("Password must be at least 8 characters long!");
-            else alert.setContentText("An error occurred while attempting to update this user. Check if someone is already using the username you entered!");
+            if(!m.getFirstName().matches("[a-zA-Z -]*") || !m.getLastName().matches("[a-zA-Z -]*") || m.getPassword().length() < 8) alert.setContentText("Check that the values you entered are of a valid type.");
+            else alert.setContentText("Check if someone is already using the username you entered!");
             alert.showAndWait();
-            idUpdate = null;
+         //   idUpdate = null;
         }
     }
 
@@ -256,6 +302,11 @@ public class ManageUsersController {
                 alert.setContentText("Successfully deleted!");
                 alert.showAndWait();
                 tableId.setItems(FXCollections.observableList(manager.getAll()));
+                firstNameUpdt.setText("");
+                lastNameUpdt.setText("");
+                usernameUpdt.setText("");
+                passwordUpdt.setText("");
+                adminUpdt.setSelected(false);
                 idUpdate = null;
             } catch (LibraryException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -263,7 +314,7 @@ public class ManageUsersController {
                 alert.setHeaderText("Delete error!");
                 alert.setContentText("You can't delete this member! Check if the user currently has a rented book. If yes, the book must be returned before deletion.");
                 alert.showAndWait();
-                idUpdate = null;
+                //idUpdate = null;
             }
         }
     }
@@ -305,8 +356,8 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("You can't add member!");
-            if(m.getPassword().length() < 8) alert.setContentText("Password must be at least 8 characters long!");
-            else alert.setContentText("An error occurred while attempting to update this user. Check if someone is already using the username you entered!");
+            if(!m.getFirstName().matches("[a-zA-Z -]*") || !m.getLastName().matches("[a-zA-Z -]*") || m.getPassword().length() < 8) alert.setContentText("Check that the values you entered are of a valid type.");
+            else alert.setContentText("Check if someone is already using the username you entered!");
             alert.showAndWait();
         }
     }

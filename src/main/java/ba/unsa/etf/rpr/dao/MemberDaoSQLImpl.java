@@ -73,6 +73,12 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     @Override
     public Member add(Member item) throws LibraryException {
         Member checkU = checkUsername(item);
+        if (!item.getFirstName().matches("[a-zA-Z -]*")) {
+            throw new LibraryException("First name can only contain letters, spaces and dashes");
+        }
+        if (!item.getLastName().matches("[a-zA-Z -]*")) {
+            throw new LibraryException("Last name can only contain letters, spaces and dashes");
+        }
         if(item.getPassword().length() < 8) {
             throw new LibraryException("Password must be at least 8 characters long!");
         }
@@ -127,6 +133,12 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     @Override
     public Member update(Member item) throws LibraryException {
         Member checkU = checkUsername(item);
+        if (!item.getFirstName().matches("[a-zA-Z -]*")) {
+            throw new LibraryException("First name can only contain letters, spaces and dashes");
+        }
+        if (!item.getLastName().matches("[a-zA-Z -]*")) {
+            throw new LibraryException("Last name can only contain letters, spaces and dashes");
+        }
         if(item.getPassword().length() < 8) {
             throw new LibraryException("Password must be at least 8 characters long!");
         }
