@@ -148,13 +148,19 @@ public class ManageBooksController {
         updtTotal.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 totalNumberAddCheck.setText("Only numbers allowed!");
+            } else if(newValue.matches("\\d*") && !updtAvailable.getText().isEmpty() && updtAvailable.getText().matches("\\d*")
+                && Integer.parseInt(newValue) < Integer.parseInt(updtAvailable.getText())) {
+                    totalNumberAddCheck.setText("The number of available books cannot be greater than the total number of books!");
             } else {
-                totalNumberAddCheck.setText("");
+                    totalNumberAddCheck.setText("");
             }
         });
         updtAvailable.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 availableNumberAddCheck.setText("Only numbers allowed!");
+            } else if(newValue.matches("\\d*") && !updtTotal.getText().isEmpty() && updtTotal.getText().matches("\\d*")
+                    &&  Integer.parseInt(newValue) > Integer.parseInt(updtTotal.getText())) {
+                availableNumberAddCheck.setText("The number of available books cannot be greater than the total number of books!");
             } else {
                 availableNumberAddCheck.setText("");
             }
@@ -169,6 +175,10 @@ public class ManageBooksController {
         totalNumberLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 totalNumberUpdateCheck.setText("Only numbers allowed!");
+            }
+            else if(newValue.matches("\\d*") && !availableNumberLabel.getText().isEmpty() && availableNumberLabel.getText().matches("\\d*")
+                    && Integer.parseInt(newValue) < Integer.parseInt(availableNumberLabel.getText())) {
+                totalNumberUpdateCheck.setText("The number of available books cannot be greater than the total number of books!");
             } else {
                 totalNumberUpdateCheck.setText("");
             }
@@ -176,6 +186,10 @@ public class ManageBooksController {
         availableNumberLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 availableNumberUpdateCheck.setText("Only numbers allowed!");
+            }
+            else if(newValue.matches("\\d*") && !totalNumberLabel.getText().isEmpty() && totalNumberLabel.getText().matches("\\d*")
+                    &&  Integer.parseInt(newValue) > Integer.parseInt(totalNumberLabel.getText())) {
+                availableNumberUpdateCheck.setText("The number of available books cannot be greater than the total number of books!");
             } else {
                 availableNumberUpdateCheck.setText("");
             }
@@ -220,7 +234,7 @@ public class ManageBooksController {
             return;
         }
         if(!totalNumberLabel.getText().matches("\\d*") || !availableNumberLabel.getText().matches("\\d*")
-                || !yearLabel.getText().matches("\\d*")) {
+                || !yearLabel.getText().matches("\\d*") || Integer.parseInt(totalNumberLabel.getText()) < Integer.parseInt(availableNumberLabel.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
@@ -266,7 +280,7 @@ public class ManageBooksController {
             return;
         }
         if(!updtTotal.getText().matches("\\d*") || !updtAvailable.getText().matches("\\d*")
-        || !updtYear.getText().matches("\\d*")) {
+        || !updtYear.getText().matches("\\d*") || Integer.parseInt(updtAvailable.getText()) > Integer.parseInt(updtTotal.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Adding error");

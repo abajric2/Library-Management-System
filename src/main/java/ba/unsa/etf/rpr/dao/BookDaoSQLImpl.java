@@ -113,6 +113,9 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         if (!item.getYearOfPublication().matches("\\d*")) {
             throw new LibraryException("The year of publication can only contain numbers!");
         }
+        if(item.getAvilableNumber() > item.getTotalNumber()) {
+            throw new LibraryException("The number of available books cannot be greater than the total number of books!");
+        }
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row, "BOOK_ID");
         StringBuilder builder = new StringBuilder();
@@ -159,6 +162,9 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
     public Book update(Book item) throws LibraryException {
         if (!item.getYearOfPublication().matches("\\d*")) {
             throw new LibraryException("The year of publication can only contain numbers!");
+        }
+        if(item.getAvilableNumber() > item.getTotalNumber()) {
+            throw new LibraryException("The number of available books cannot be greater than the total number of books!");
         }
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row, "BOOK_ID");
