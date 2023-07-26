@@ -38,7 +38,15 @@ public class AdminMainWindowController {
     public void profileAction(ActionEvent actionEvent) {
     }
 
-    public void logOut(ActionEvent actionEvent) {
+    public void logOut(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        LoginController controller = new LoginController();
+        loader.setController(controller);
+        myStage.setTitle("Log in");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
+        myStage.show();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();

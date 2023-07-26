@@ -8,9 +8,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class RegistrationController {
     public TextField firstNameId;
@@ -60,7 +67,7 @@ public class RegistrationController {
  }
 
 
-    public void signUp(ActionEvent actionEvent) throws LibraryException {
+    public void signUp(ActionEvent actionEvent) throws LibraryException, IOException {
         if(firstNameId.getText().isEmpty() || lastNameId.getText().isEmpty() || usernameId.getText().isEmpty() ||
                 passwordId.getText().isEmpty() || confirmPasswordId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -104,6 +111,14 @@ public class RegistrationController {
         alert.setHeaderText(null);
         alert.setContentText("You have successfully created an account! Sign in to continue!");
         alert.showAndWait();
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        LoginController controller = new LoginController();
+        loader.setController(controller);
+        myStage.setTitle("Log in");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
+        myStage.show();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
