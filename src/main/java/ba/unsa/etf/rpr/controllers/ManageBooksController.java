@@ -55,6 +55,18 @@ public class ManageBooksController {
     public Button deleteBttn;
     public Button mainPageBttn;
     public Button logOutBttn;
+    public Label titleUpdateCheck;
+    public Label authorUpdateCheck;
+    public Label yearUpdateCheck;
+    public Label genreUpdateCheck;
+    public Label totalNumberUpdateCheck;
+    public Label availableNumberUpdateCheck;
+    public Label titleAddCheck;
+    public Label authorAddCheck;
+    public Label yearAddCheck;
+    public Label genreAddCheck;
+    public Label totalNumberAddCheck;
+    public Label availableNumberAddCheck;
     private BookModel model = new BookModel();
     private Integer idUpdate;
     private Member member;
@@ -126,7 +138,48 @@ public class ManageBooksController {
                 availableNumberLabel.textProperty().bindBidirectional(model.availableNumber);
             }
         });
-
+        updtYear.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                yearAddCheck.setText("Only numbers allowed!");
+            } else {
+                yearAddCheck.setText("");
+            }
+        });
+        updtTotal.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                totalNumberAddCheck.setText("Only numbers allowed!");
+            } else {
+                totalNumberAddCheck.setText("");
+            }
+        });
+        updtAvailable.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                availableNumberAddCheck.setText("Only numbers allowed!");
+            } else {
+                availableNumberAddCheck.setText("");
+            }
+        });
+        yearLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                yearUpdateCheck.setText("Only numbers allowed!");
+            } else {
+                yearUpdateCheck.setText("");
+            }
+        });
+        totalNumberLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                totalNumberUpdateCheck.setText("Only numbers allowed!");
+            } else {
+                totalNumberUpdateCheck.setText("");
+            }
+        });
+        availableNumberLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                availableNumberUpdateCheck.setText("Only numbers allowed!");
+            } else {
+                availableNumberUpdateCheck.setText("");
+            }
+        });
     }
     public void allBooks(ActionEvent actionEvent) throws LibraryException {
         id.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getId()).asObject();});
@@ -166,6 +219,15 @@ public class ManageBooksController {
             alert.showAndWait();
             return;
         }
+        if(!totalNumberLabel.getText().matches("\\d*") || !availableNumberLabel.getText().matches("\\d*")
+                || !yearLabel.getText().matches("\\d*")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Update error!");
+            alert.setContentText("Check that the values you entered are of a valid type.");
+            alert.showAndWait();
+            return;
+        }
         Book b = new Book();
         b.setId(idUpdate);
         b.setTitle(model.title.get());
@@ -200,6 +262,15 @@ public class ManageBooksController {
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fill in all fields!");
             alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.showAndWait();
+            return;
+        }
+        if(!updtTotal.getText().matches("\\d*") || !updtAvailable.getText().matches("\\d*")
+        || !updtYear.getText().matches("\\d*")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Adding error");
+            alert.setContentText("Check that the values you entered are of a valid type.");
             alert.showAndWait();
             return;
         }
