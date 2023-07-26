@@ -29,6 +29,11 @@
                <children>
                   <ButtonBar HBox.hgrow="ALWAYS">
                     <buttons>
+                        <Button fx:id="adminModeBttn" mnemonicParsing="false" onAction="#adminMode" styleClass="tbButton" text="Admin mode" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
                       <Button fx:id="profileBttnId" alignment="CENTER" mnemonicParsing="false" onAction="#profileBttnAction" styleClass="tbButton" text="Profile" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />

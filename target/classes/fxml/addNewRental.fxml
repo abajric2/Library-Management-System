@@ -8,168 +8,204 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <TableView fx:id="booksTable" GridPane.columnIndex="2" GridPane.rowSpan="2147483647">
-        <columns>
-          <TableColumn fx:id="bookId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="title" prefWidth="75.0" text="TITLE" />
-            <TableColumn fx:id="author" prefWidth="75.0" text="AUTHOR" />
-            <TableColumn fx:id="year" prefWidth="75.0" text="YEAR OF PUBLICATION" />
-            <TableColumn fx:id="genre" prefWidth="75.0" text="GENRE" />
-            <TableColumn fx:id="total" prefWidth="75.0" text="TOTAL NUMBER" />
-            <TableColumn fx:id="available" prefWidth="75.0" text="AVAILABLE NUMBER" />
-        </columns>
-         <GridPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </GridPane.margin>
-      </TableView>
-      <TableView fx:id="usersTable" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
-        <columns>
-          <TableColumn fx:id="userId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="firstName" prefWidth="75.0" text="FIRST NAME" />
-            <TableColumn fx:id="lastName" prefWidth="75.0" text="LAST NAME" />
-            <TableColumn fx:id="username" prefWidth="75.0" text="USERNAME" />
-            <TableColumn fx:id="password" prefWidth="75.0" text="PASSWORD" />
-            <TableColumn fx:id="admin" prefWidth="75.0" text="ADMIN" />
-        </columns>
-         <GridPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </GridPane.margin>
-      </TableView>
-      <VBox GridPane.rowSpan="2147483647">
-         <GridPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </GridPane.margin>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <ButtonBar nodeOrientation="RIGHT_TO_LEFT">
-              <buttons>
-                <Button fx:id="allBooksBttn" mnemonicParsing="false" onAction="#allBooks" text="All books" />
-                  <Button fx:id="allUsersBttn" mnemonicParsing="false" onAction="#allUsers" text="All users" />
-              </buttons>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </ButtonBar>
-            <TextField fx:id="searchByName" promptText="search by name">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="searchByUsername" promptText="search by username">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="searchByTitle" promptText="search by title">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="searchByAuthor" promptText="seach by author">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="searchByGenre" promptText="search by genre">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Please select from the first table the user to whom you want to rent the book!" wrapText="true">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="firstNameSelected" editable="false" promptText="first name">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="lastNameSelected" editable="false" promptText="last name">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="usernameSelected" editable="false" promptText="username">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="passwordSelected" editable="false" promptText="password">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <CheckBox fx:id="adminSelected" disable="true" mnemonicParsing="false" text="CheckBox">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </CheckBox>
-            <Label fx:id="checkRental" wrapText="true">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Please select from the second table the book you want to rent to the selected user!" wrapText="true">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="titleSelected" editable="false" promptText="title">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="authorSelected" editable="false" promptText="author">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="yearSelected" editable="false" promptText="year of publication">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="genreSelected" editable="false" promptText="genre">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="totalSelected" editable="false" promptText="total number">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField fx:id="availableSelected" editable="false" promptText="available number">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <ButtonBar>
-              <buttons>
-                <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" text="Add rental" />
-              </buttons>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </ButtonBar>
+            <TableView fx:id="booksTable" GridPane.columnIndex="2" GridPane.rowSpan="2147483647">
+              <columns>
+                <TableColumn fx:id="bookId" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="title" prefWidth="75.0" text="TITLE" />
+                  <TableColumn fx:id="author" prefWidth="75.0" text="AUTHOR" />
+                  <TableColumn fx:id="year" prefWidth="75.0" text="YEAR OF PUBLICATION" />
+                  <TableColumn fx:id="genre" prefWidth="75.0" text="GENRE" />
+                  <TableColumn fx:id="total" prefWidth="75.0" text="TOTAL NUMBER" />
+                  <TableColumn fx:id="available" prefWidth="75.0" text="AVAILABLE NUMBER" />
+              </columns>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </TableView>
+            <TableView fx:id="usersTable" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
+              <columns>
+                <TableColumn fx:id="userId" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="firstName" prefWidth="75.0" text="FIRST NAME" />
+                  <TableColumn fx:id="lastName" prefWidth="75.0" text="LAST NAME" />
+                  <TableColumn fx:id="username" prefWidth="75.0" text="USERNAME" />
+                  <TableColumn fx:id="password" prefWidth="75.0" text="PASSWORD" />
+                  <TableColumn fx:id="admin" prefWidth="75.0" text="ADMIN" />
+              </columns>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </TableView>
+            <VBox GridPane.rowSpan="2147483647">
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+               <children>
+                  <ButtonBar nodeOrientation="RIGHT_TO_LEFT">
+                    <buttons>
+                      <Button fx:id="allBooksBttn" mnemonicParsing="false" onAction="#allBooks" text="All books" />
+                        <Button fx:id="allUsersBttn" mnemonicParsing="false" onAction="#allUsers" text="All users" />
+                    </buttons>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ButtonBar>
+                  <TextField fx:id="searchByName" promptText="search by name">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="searchByUsername" promptText="search by username">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="searchByTitle" promptText="search by title">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="searchByAuthor" promptText="seach by author">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="searchByGenre" promptText="search by genre">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Please select from the first table the user to whom you want to rent the book!" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="firstNameSelected" editable="false" promptText="first name">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="lastNameSelected" editable="false" promptText="last name">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="usernameSelected" editable="false" promptText="username">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="passwordSelected" editable="false" promptText="password">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <CheckBox fx:id="adminSelected" disable="true" mnemonicParsing="false" text="CheckBox">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <Label fx:id="checkRental" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Please select from the second table the book you want to rent to the selected user!" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="titleSelected" editable="false" promptText="title">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="authorSelected" editable="false" promptText="author">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="yearSelected" editable="false" promptText="year of publication">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="genreSelected" editable="false" promptText="genre">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="totalSelected" editable="false" promptText="total number">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="availableSelected" editable="false" promptText="available number">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ButtonBar>
+                    <buttons>
+                      <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" text="Add rental" />
+                    </buttons>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ButtonBar>
+               </children>
+            </VBox>
          </children>
-      </VBox>
-   </children>
-</GridPane>
+      </GridPane>
+   </center>
+    <top>
+        <HBox style="-fx-background-color: #b1b1b1;" BorderPane.alignment="CENTER">
+            <children>
+                <ButtonBar HBox.hgrow="ALWAYS">
+                    <buttons>
+                        <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" text="Main page" />
+                        <Button mnemonicParsing="false" text="Profile" />
+                        <Button fx:id="logOutBttn" mnemonicParsing="false" onAction="#logOut" text="Log out" />
+                    </buttons>
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                    </HBox.margin>
+                </ButtonBar>
+            </children>
+        </HBox>
+    </top>
+    <bottom>
+        <HBox style="-fx-background-color: #b1b1b1;" BorderPane.alignment="CENTER">
+            <children>
+                <ButtonBar HBox.hgrow="ALWAYS">
+                    <buttons>
+                        <Button mnemonicParsing="false" text="Help" />
+                    </buttons>
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                    </HBox.margin>
+                </ButtonBar>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

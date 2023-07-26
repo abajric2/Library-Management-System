@@ -55,6 +55,12 @@ public class ManageUsersController {
     public MemberManager manager = new MemberManager();
     public TextField byNameId;
     public Label rentalInfoId;
+    public Label checkFirstNameUpdt;
+    public Label checkLastNameUpdt;
+    public Label checkPasswordUpdt;
+    public Label checkFirstNameAdd;
+    public Label checkLastNameAdd;
+    public Label checkPasswordAdd;
     private MemberModel model = new MemberModel();
     private Integer idUpdate;
     private Member member;
@@ -217,7 +223,15 @@ public class ManageUsersController {
             alert.showAndWait();
             return;
         }
-
+        if(idUpdate == member.getId()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Delete error!");
+            alert.setContentText("The account you are trying to delete is yours, and you cannot delete it this way. If you really want to delete your account, go to your profile and select the delete account option.");
+            alert.setResizable(true);
+            alert.showAndWait();
+            return;
+        }
         String usernameToDelete = selectedItem.getUsername();
 
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
