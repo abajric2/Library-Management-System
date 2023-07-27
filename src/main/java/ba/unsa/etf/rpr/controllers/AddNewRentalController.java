@@ -225,7 +225,7 @@ public class AddNewRentalController {
         }
         RentalManager r = new RentalManager();
         try {
-            r.rentABook(idUser, selectedBook.getTitle(), selectedBook.getAuthor());
+            r.rentABook(idUser, idBook, selectedBook.getTitle(), selectedBook.getAuthor());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);

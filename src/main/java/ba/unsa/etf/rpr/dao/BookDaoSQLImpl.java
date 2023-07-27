@@ -60,16 +60,16 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         return books;*/
     }
 
-    @Override
+  /*  @Override
     public Book searchByTitleAndAuthor(String title, String author) throws LibraryException {
-        /*
+
         we can expect that one or no rows will be returned,
         because in practice there is very little chance that
         there will be two different books that have the same
         title and the same author name
-         */
+
         return executeQueryUnique("SELECT * FROM Books WHERE TITLE = ? AND AUTHOR = ?", new Object[]{title, author});
-      /*  String query = "SELECT * FROM Books WHERE TITLE = ? AND AUTHOR = ?";
+        String query = "SELECT * FROM Books WHERE TITLE = ? AND AUTHOR = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
             stmt.setString(1, title);
@@ -82,8 +82,8 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;*/
-    }
+        return null;
+    }*/
 
     @Override
     public boolean isAvailable(String title, String author) throws LibraryException {

@@ -65,5 +65,5 @@ public interface RentalDao extends Dao<Rental> {
      * @param author author of the book given by the second parameter
      * @return new rental or null
      */
-    Rental rentABook (int memberID, String bookTitle, String author) throws LibraryException;
+    Rental rentABook (int memberID, int bookId, String bookTitle, String author) throws LibraryException;
 }

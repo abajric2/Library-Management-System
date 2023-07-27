@@ -236,6 +236,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
 
     @Override
     public void delete(Rental item) throws LibraryException {
+      //  System.out.println("ID KNJIGE JEEEEEEEEEEEE" + item.getBookID());
         String dlt = "DELETE FROM RENTALS WHERE RENTAL_ID = ?";
         try {
             PreparedStatement stmt = getConnection().prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
@@ -251,6 +252,8 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             updatestmt.setInt(1, item.getBookID());
             ResultSet cr = updatestmt.executeQuery();
             if(cr.next()) {
+             //   System.out.println("DOSLO OVDJEEEEEEEEEEEEE");
+               // System.out.println(cr.getInt(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " +  cr.getString(4) + " " + cr.getString(5) + " " +  cr.getInt(6) + " " +  cr.getInt(7));
                 BookDaoSQLImpl b = BookDaoSQLImpl.getInstance();
                 b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
                         cr.getString(5), cr.getInt(6), cr.getInt(7) + 1));
@@ -327,7 +330,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         return (java.sql.Date) cal.getTime();*/
     }
     @Override
-    public Rental rentABook(int memberID, String bookTitle, String author) throws LibraryException {
+    public Rental rentABook(int memberID, int bookId, String bookTitle, String author) throws LibraryException {
         Rental r = checkUsersRental(memberID);
         if(r != null) {
             throw new LibraryException("You can't rent a book because you haven't returned the one you rented earlier.");
@@ -335,7 +338,8 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         BookDaoSQLImpl bimpl = BookDaoSQLImpl.getInstance();
         Book b = new Book();
         try {
-            b = bimpl.searchByTitleAndAuthor(bookTitle, author);
+            b = bimpl.searchById(bookId);
+           // b = bimpl.searchByTitleAndAuthor(bookTitle, author);
         } catch (LibraryException e) {
             throw new LibraryException("No books found");
         }

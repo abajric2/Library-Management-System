@@ -148,20 +148,22 @@ public class ManageBooksController {
         updtTotal.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 totalNumberAddCheck.setText("Only numbers allowed!");
-            } else if(newValue.matches("\\d*") && !updtAvailable.getText().isEmpty() && updtAvailable.getText().matches("\\d*")
-                && Integer.parseInt(newValue) < Integer.parseInt(updtAvailable.getText())) {
+            }
+          /*  } else if(updtTotal.getText().matches("\\d*") && !updtAvailable.getText().isEmpty() && updtAvailable.getText().matches("\\d*")
+                && Integer.parseInt(updtTotal.getText()) < Integer.parseInt(updtAvailable.getText())) {
+              //  System.out.println("GRESKAAAAAAAAA");
                     totalNumberAddCheck.setText("The number of available books cannot be greater than the total number of books!");
-            } else {
+            }*/ else {
                     totalNumberAddCheck.setText("");
             }
         });
         updtAvailable.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 availableNumberAddCheck.setText("Only numbers allowed!");
-            } else if(newValue.matches("\\d*") && !updtTotal.getText().isEmpty() && updtTotal.getText().matches("\\d*")
-                    &&  Integer.parseInt(newValue) > Integer.parseInt(updtTotal.getText())) {
+            } /*else if(updtAvailable.getText().matches("\\d*") && !updtTotal.getText().isEmpty() && updtTotal.getText().matches("\\d*")
+                    &&  Integer.parseInt(updtAvailable.getText()) > Integer.parseInt(updtTotal.getText())) {
                 availableNumberAddCheck.setText("The number of available books cannot be greater than the total number of books!");
-            } else {
+            }*/ else {
                 availableNumberAddCheck.setText("");
             }
         });
@@ -176,21 +178,22 @@ public class ManageBooksController {
             if (!newValue.matches("\\d*")) {
                 totalNumberUpdateCheck.setText("Only numbers allowed!");
             }
-            else if(newValue.matches("\\d*") && !availableNumberLabel.getText().isEmpty() && availableNumberLabel.getText().matches("\\d*")
+            /*else if(newValue.matches("\\d*") && !availableNumberLabel.getText().isEmpty() && availableNumberLabel.getText().matches("\\d*")
                     && Integer.parseInt(newValue) < Integer.parseInt(availableNumberLabel.getText())) {
+            //    System.out.println(Integer.parseInt(newValue) + " " + Integer.parseInt(availableNumberLabel.getText()));
                 totalNumberUpdateCheck.setText("The number of available books cannot be greater than the total number of books!");
-            } else {
+            } */ else {
                 totalNumberUpdateCheck.setText("");
             }
         });
         availableNumberLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 availableNumberUpdateCheck.setText("Only numbers allowed!");
-            }
+            }/*
             else if(newValue.matches("\\d*") && !totalNumberLabel.getText().isEmpty() && totalNumberLabel.getText().matches("\\d*")
                     &&  Integer.parseInt(newValue) > Integer.parseInt(totalNumberLabel.getText())) {
                 availableNumberUpdateCheck.setText("The number of available books cannot be greater than the total number of books!");
-            } else {
+            }*/ else {
                 availableNumberUpdateCheck.setText("");
             }
         });
@@ -234,7 +237,7 @@ public class ManageBooksController {
             return;
         }
         if(!totalNumberLabel.getText().matches("\\d*") || !availableNumberLabel.getText().matches("\\d*")
-                || !yearLabel.getText().matches("\\d*") || Integer.parseInt(totalNumberLabel.getText()) < Integer.parseInt(availableNumberLabel.getText())) {
+                || !yearLabel.getText().matches("\\d*")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
@@ -242,7 +245,15 @@ public class ManageBooksController {
             alert.showAndWait();
             return;
         }
-        Book b = new Book();
+        if(Integer.parseInt(totalNumberLabel.getText()) < Integer.parseInt(availableNumberLabel.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Update error!");
+            alert.setContentText("The number of available books cannot be greater than the total number of books!");
+            alert.showAndWait();
+            return;
+        }
+         Book b = new Book();
         b.setId(idUpdate);
         b.setTitle(model.title.get());
         b.setAuthor(model.author.get());
@@ -280,11 +291,19 @@ public class ManageBooksController {
             return;
         }
         if(!updtTotal.getText().matches("\\d*") || !updtAvailable.getText().matches("\\d*")
-        || !updtYear.getText().matches("\\d*") || Integer.parseInt(updtAvailable.getText()) > Integer.parseInt(updtTotal.getText())) {
+        || !updtYear.getText().matches("\\d*")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Adding error");
             alert.setContentText("Check that the values you entered are of a valid type.");
+            alert.showAndWait();
+            return;
+        }
+        if(Integer.parseInt(updtAvailable.getText()) > Integer.parseInt(updtTotal.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Adding error");
+            alert.setContentText("The number of available books cannot be greater than the total number of books!");
             alert.showAndWait();
             return;
         }
@@ -369,6 +388,33 @@ public class ManageBooksController {
     }
 
 
+    public void mainPage(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMainWindow.fxml"));
+        AdminMainWindowController controller = new AdminMainWindowController(member);
+        loader.setController(controller);
+        myStage.setTitle("Main window");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+
+    public void logOut(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        LoginController controller = new LoginController();
+        loader.setController(controller);
+        myStage.setTitle("Log in");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
     public class BookModel {
         public SimpleStringProperty title = new SimpleStringProperty("");
         public SimpleStringProperty author = new SimpleStringProperty("");
@@ -397,31 +443,5 @@ public class ManageBooksController {
             return b;
         }
     }
-    public void mainPage(ActionEvent actionEvent) throws IOException {
-        Stage myStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMainWindow.fxml"));
-        AdminMainWindowController controller = new AdminMainWindowController(member);
-        loader.setController(controller);
-        myStage.setTitle("Main window");
-        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        myStage.setResizable(false);
-        myStage.show();
-        Node n = (Node) actionEvent.getSource();
-        Stage stage = (Stage) n.getScene().getWindow();
-        stage.close();
-    }
 
-    public void logOut(ActionEvent actionEvent) throws IOException {
-        Stage myStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
-        LoginController controller = new LoginController();
-        loader.setController(controller);
-        myStage.setTitle("Log in");
-        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        myStage.setResizable(false);
-        myStage.show();
-        Node n = (Node) actionEvent.getSource();
-        Stage stage = (Stage) n.getScene().getWindow();
-        stage.close();
-    }
 }

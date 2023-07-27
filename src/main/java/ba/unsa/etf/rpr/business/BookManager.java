@@ -31,9 +31,9 @@ public class BookManager {
         return DaoFactory.bookDao().searchByTitle(title);
     }
 
-    public Book searchByTitleAndAuthor(String title, String author) throws LibraryException {
+   /* public Book searchByTitleAndAuthor(String title, String author) throws LibraryException {
         return DaoFactory.bookDao().searchByTitleAndAuthor(title, author);
-    }
+    }*/
 
     public boolean isAvailable(String title, String author) throws LibraryException {
         return DaoFactory.bookDao().isAvailable(title, author);

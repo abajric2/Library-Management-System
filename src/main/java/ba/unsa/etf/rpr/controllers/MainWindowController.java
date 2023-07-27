@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.domain.Rental;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,6 +21,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,11 +46,15 @@ public class MainWindowController {
     public TextField rentTitleId;
     public TextField returnAuthorId;
     public TextField returnTitleId;
-    public ChoiceBox<Book> choiceBoxId;
     public Label labelId;
     public ListView listId;
     public Button adminModeBttn;
+    public TextField rentGenreId;
+    public TextField rentYearId;
+    public Label rentalExp;
     private Member memeber;
+    private Integer idUpdate;
+    private BookModel model = new BookModel();
     MainWindowController(Member m) {
         this.memeber = m;
     }
@@ -98,6 +105,7 @@ public class MainWindowController {
         Rental rent = r.checkUsersRental(memeber.getId());
         if(rent == null) {
             labelId.setText("According to the current record, you have no rented books.");
+            rentalExp.setText("");
         }
         else {
             int id = rent.getBookID();
@@ -105,10 +113,37 @@ public class MainWindowController {
             Book book = b.searchById(id);
             labelId.setText("According to current records, you currently have book \"" + book.getTitle() + "\" by author "
                     + book.getAuthor() + ". To rent a new book, you need to return this one first.");
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            if(rent.getReturnDeadline().before(sqlDate)) {
+                rentalExp.setText("Your book return deadline has expired. You must return the book!");
+            }
+            else {
+                SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+                String dateString = format.format(rent.getReturnDeadline());
+                rentalExp.setText("The rented book must be returned by the " + dateString + "!");
+            }
         }
-        b = new BookManager();
-        books = new ArrayList<>(b.getAll());
-        choiceBoxId.setItems(FXCollections.observableList(books));
+        listId.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{
+            if(o!=null){
+                Book book = (Book) o;
+                idUpdate = book.getId();
+                rentTitleId.textProperty().unbindBidirectional(model.title);
+                rentAuthorId.textProperty().unbindBidirectional((model.author));
+                rentYearId.textProperty().unbindBidirectional(model.yearOfPublication);
+                rentGenreId.textProperty().unbindBidirectional(model.genre);
+            }
+            Book book = (Book) n;
+            if(book != null) {
+                idUpdate = book.getId();
+                model.fromBook((Book) n);
+                rentTitleId.textProperty().bindBidirectional(model.title);
+                rentAuthorId.textProperty().bindBidirectional(model.author);
+                rentYearId.textProperty().bindBidirectional(model.yearOfPublication);
+                rentGenreId.textProperty().bindBidirectional(model.genre);
+            }
+        });
+    /*    choiceBoxId.setItems(FXCollections.observableList(books));
         choiceBoxId.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -116,7 +151,7 @@ public class MainWindowController {
                 rentTitleId.setText(book.getTitle());
                 rentAuthorId.setText(book.getAuthor());
             }
-        });
+        });*/
         // choiceBoxId.setOnAction(this::getCurrentBook);
     }
     /* public void getCurrentBook(ActionEvent event) {
@@ -147,15 +182,15 @@ public class MainWindowController {
         if(rentTitleId.getText().isEmpty() || rentAuthorId.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
-            alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.setHeaderText("Choose a book!");
+            alert.setContentText("Choose the book you want to rent from the table!");
             alert.showAndWait();
             return;
         }
         BookManager b = new BookManager();
         Book book = new Book();
         try {
-            book = b.searchByTitleAndAuthor(rentTitleId.getText(), rentAuthorId.getText());
+            book = b.searchById(idUpdate);
         } catch(LibraryException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
@@ -166,21 +201,44 @@ public class MainWindowController {
         }
         RentalManager r = new RentalManager();
         try {
-            Rental rental = r.rentABook(memeber.getId(), rentTitleId.getText(), rentAuthorId.getText());
+            Rental rental = r.rentABook(memeber.getId(), idUpdate, rentTitleId.getText(), rentAuthorId.getText());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("You have successfully rented a book!");
             alert.showAndWait();
+            rentTitleId.setText("");
+            rentAuthorId.setText("");
+            rentGenreId.setText("");
+            rentYearId.setText("");
+            idUpdate = null;
             int id = rental.getBookID();
             book = b.searchById(id);
             labelId.setText("According to current records, you currently have book \"" + book.getTitle() + "\" by author "
                     + book.getAuthor() + ". To rent a new book, you need to return this one first.");
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            if(rental.getReturnDeadline().before(sqlDate)) {
+                rentalExp.setText("Your book return deadline has expired. You must return the book!");
+            }
+            else {
+                SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+                String dateString = format.format(rental.getReturnDeadline());
+                rentalExp.setText("The rented book must be returned by the " + dateString + "!");
+            }
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
-            alert.setHeaderText("You already have a rented book!");
-            alert.setContentText("To rent a new book, you must first return the one you currently have!");
+            RentalManager rentalManager = new RentalManager();
+            Rental rent = rentalManager.checkUsersRental(memeber.getId());
+            if(rent != null) {
+                alert.setHeaderText("You already have a rented book!");
+                alert.setContentText("To rent a new book, you must first return the one you currently have!");
+            }
+            else {
+                alert.setHeaderText("You can't rent this book!");
+                alert.setContentText("The selected book is currently unavailable!");
+            }
             alert.showAndWait();
             return;
         }
@@ -231,6 +289,7 @@ public class MainWindowController {
                 alert.setContentText("You have successfully returned the rented book");
                 alert.showAndWait();
                 labelId.setText("According to the current record, you have no rented books.");
+                rentalExp.setText("");
             }
         }
     }
@@ -296,4 +355,33 @@ public class MainWindowController {
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
     }
+    public class BookModel {
+        public SimpleStringProperty title = new SimpleStringProperty("");
+        public SimpleStringProperty author = new SimpleStringProperty("");
+        public SimpleStringProperty yearOfPublication = new SimpleStringProperty("");
+        public SimpleStringProperty genre = new SimpleStringProperty("");
+        public SimpleStringProperty totalNumber = new SimpleStringProperty();
+        public SimpleStringProperty availableNumber = new SimpleStringProperty();
+
+        public void fromBook (Book b){
+            this.title.set(b.getTitle());
+            this.author.set(b.getAuthor());
+            this.yearOfPublication.set(b.getYearOfPublication());
+            this.genre.set(b.getGenre());
+            this.totalNumber.set(Integer.toString(b.getTotalNumber()));
+            this.availableNumber.set(Integer.toString(b.getAvilableNumber()));
+        }
+
+        public Book toBook(){
+            Book b = new Book();
+            b.setTitle(this.title.getValue());
+            b.setAuthor(this.author.getValue());
+            b.setYearOfPublication(this.yearOfPublication.getValue());
+            b.setGenre(this.genre.getValue());
+            b.setTotalNumber(Integer.parseInt(totalNumber.get()));
+            b.setAvilableNumber(Integer.parseInt(availableNumber.get()));
+            return b;
+        }
+    }
+
 }
