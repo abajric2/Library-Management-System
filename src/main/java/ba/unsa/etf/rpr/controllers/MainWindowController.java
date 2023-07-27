@@ -36,7 +36,7 @@ public class MainWindowController {
     public Button allBooksId;
     public Button byAuthorId;
     public Button byTitleId;
-    public Button helpId;
+    public Button aboutBttn;
     public TextField authorNameId;
     public TextField bookTitleId;
     public TextField genreId;
@@ -192,7 +192,19 @@ public class MainWindowController {
     }
 
 
-    public void helpAction(ActionEvent actionEvent) {
+    public void about(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        AboutController controller = new AboutController(member);
+        loader.setController(controller);
+        myStage.setTitle("About");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 
     public void rentAction(ActionEvent actionEvent) throws LibraryException {
@@ -367,7 +379,8 @@ public class MainWindowController {
         loader.setController(controller);
         myStage.setTitle("Main window");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        myStage.setResizable(false);
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();

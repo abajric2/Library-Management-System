@@ -140,7 +140,7 @@
             <children>
                 <ButtonBar HBox.hgrow="ALWAYS">
                     <buttons>
-                        <Button mnemonicParsing="false" text="About" />
+                        <Button fx:id="aboutBttn" mnemonicParsing="false" onAction="#about" text="About" />
                     </buttons>
                     <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />

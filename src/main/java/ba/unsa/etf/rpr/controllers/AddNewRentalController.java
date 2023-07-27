@@ -55,6 +55,7 @@ public class AddNewRentalController {
     public TextField availableSelected;
     public Button addRentalBttn;
     public TextField searchByName;
+    public Button aboutBttn;
     public TextField searchByUsername;
     public TextField searchByTitle;
     public TextField searchByAuthor;
@@ -278,7 +279,8 @@ public class AddNewRentalController {
         loader.setController(controller);
         myStage.setTitle("Main window");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        myStage.setResizable(false);
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
@@ -304,6 +306,20 @@ public class AddNewRentalController {
         ProfileController controller = new ProfileController(member);
         loader.setController(controller);
         myStage.setTitle("Profile");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+    public void about(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        AboutController controller = new AboutController(member);
+        loader.setController(controller);
+        myStage.setTitle("About");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(true);
         myStage.setMaximized(true);

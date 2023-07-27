@@ -69,7 +69,7 @@
          <children>
             <ButtonBar HBox.hgrow="ALWAYS">
               <buttons>
-                <Button fx:id="helpId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#helpAction" styleClass="tbButton" text="Help" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="aboutBttn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#about" styleClass="tbButton" text="About" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

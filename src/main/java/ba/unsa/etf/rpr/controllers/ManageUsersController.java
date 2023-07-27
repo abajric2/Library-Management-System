@@ -61,6 +61,7 @@ public class ManageUsersController {
     public Label checkFirstNameAdd;
     public Label checkLastNameAdd;
     public Button profile;
+    public Button aboutBttn;
     public Label checkPasswordAdd;
     private MemberModel model = new MemberModel();
     private Integer idUpdate;
@@ -251,7 +252,20 @@ public class ManageUsersController {
          //   idUpdate = null;
         }
     }
-
+    public void about(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        AboutController controller = new AboutController(member);
+        loader.setController(controller);
+        myStage.setTitle("About");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
     public void deleteAction(ActionEvent actionEvent) {
         if (idUpdate == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -398,7 +412,8 @@ public class ManageUsersController {
         loader.setController(controller);
         myStage.setTitle("Main window");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        myStage.setResizable(false);
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();

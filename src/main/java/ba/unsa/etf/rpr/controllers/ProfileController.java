@@ -37,6 +37,7 @@ public class ProfileController {
     public Button deleteBttn;
     public Button mainPageBttn;
     public Button logOutBttn;
+    public Button aboutBttn;
     private MemberManager manager = new MemberManager();
     private Member member;
     ProfileController(Member m) {this.member = m;}
@@ -144,7 +145,20 @@ public class ProfileController {
             //   idUpdate = null;
         }
     }
-
+    public void about(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        AboutController controller = new AboutController(member);
+        loader.setController(controller);
+        myStage.setTitle("About");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
     public void deleteAction(ActionEvent actionEvent) throws IOException {
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirmation Dialog");
@@ -198,7 +212,8 @@ public class ProfileController {
             loader.setController(controller);
             myStage.setTitle("Main window");
             myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            myStage.setResizable(false);
+            myStage.setResizable(true);
+            myStage.setMaximized(true);
             myStage.show();
             Node n = (Node) actionEvent.getSource();
             Stage stage = (Stage) n.getScene().getWindow();

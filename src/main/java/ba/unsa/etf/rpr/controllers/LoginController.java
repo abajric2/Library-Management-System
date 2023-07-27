@@ -73,8 +73,8 @@ public class LoginController {
             loader.setController(controller);
             myStage.setTitle("Main window");
             myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            myStage.setResizable(false);
-         //   myStage.setMaximized(true);
+            myStage.setResizable(true);
+            myStage.setMaximized(true);
             myStage.show();
         }
         else {

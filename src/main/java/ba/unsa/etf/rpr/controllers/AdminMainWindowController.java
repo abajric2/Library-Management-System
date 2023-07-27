@@ -20,12 +20,13 @@ public class AdminMainWindowController {
     public Button profileId;
     public Button logOutId;
     public Label welcomeId;
-    public Button helpId;
+    public Button aboutBttn;
     public Button manageUserId;
     public Button manageBooksId;
     public Button regularUserId;
     public Button viewRentalsBttn;
     public Button addRentalBttn;
+
     private Member member;
 
     AdminMainWindowController(Member m) {
@@ -64,7 +65,19 @@ public class AdminMainWindowController {
         stage.close();
     }
 
-    public void help(ActionEvent actionEvent) {
+    public void about(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        AboutController controller = new AboutController(member);
+        loader.setController(controller);
+        myStage.setTitle("About");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 
 

@@ -48,7 +48,7 @@
          <children>
             <ButtonBar HBox.hgrow="ALWAYS">
               <buttons>
-                <Button fx:id="helpId" mnemonicParsing="false" onAction="#help" text="Help" />
+                <Button fx:id="aboutBttn" mnemonicParsing="false" onAction="#about" text="About" />
               </buttons>
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
