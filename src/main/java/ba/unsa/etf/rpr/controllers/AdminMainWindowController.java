@@ -35,7 +35,19 @@ public class AdminMainWindowController {
     public void initialize() throws LibraryException {
         welcomeId.setText(welcomeId.getText() + " " + member.getFirstName() + "!");
     }
-    public void profileAction(ActionEvent actionEvent) {
+    public void profileAction(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
+        ProfileController controller = new ProfileController(member);
+        loader.setController(controller);
+        myStage.setTitle("Profile");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 
     public void logOut(ActionEvent actionEvent) throws IOException {

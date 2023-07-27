@@ -50,15 +50,15 @@ public class MainWindowController {
     public TextField rentGenreId;
     public TextField rentYearId;
     public Label rentalExp;
-    private Member memeber;
+    private Member member;
     private Integer idUpdate;
     private BookModel model = new BookModel();
     MainWindowController(Member m) {
-        this.memeber = m;
+        this.member = m;
     }
     @FXML
     public void initialize() throws LibraryException {
-        if(memeber.isAdmin()) {
+        if(member.isAdmin()) {
             adminModeBttn.setVisible(true);
         }
         else adminModeBttn.setVisible(false);
@@ -105,9 +105,9 @@ public class MainWindowController {
         List<Book> books = new ArrayList<>(b.getAll());
         sortBooks(books);
         listId.setItems(FXCollections.observableList(books));
-        welcomeLabel.setText(welcomeLabel.getText() + " " + memeber.getFirstName() + "!");
+        welcomeLabel.setText(welcomeLabel.getText() + " " + member.getFirstName() + "!");
         RentalManager r = new RentalManager();
-        Rental rent = r.checkUsersRental(memeber.getId());
+        Rental rent = r.checkUsersRental(member.getId());
         if(rent == null) {
             labelId.setText("According to the current record, you have no rented books.");
             rentalExp.setText("");
@@ -162,7 +162,19 @@ public class MainWindowController {
     /* public void getCurrentBook(ActionEvent event) {
          Book book = choiceBoxId.getValue();
      }*/
-    public void profileBttnAction(ActionEvent actionEvent) {
+    public void profileBttnAction(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
+        ProfileController controller = new ProfileController(member);
+        loader.setController(controller);
+        myStage.setTitle("Profile");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 
     public void logOutAction(ActionEvent actionEvent) throws IOException {
@@ -206,7 +218,7 @@ public class MainWindowController {
         }
         RentalManager r = new RentalManager();
         try {
-            Rental rental = r.rentABook(memeber.getId(), idUpdate, rentTitleId.getText(), rentAuthorId.getText());
+            Rental rental = r.rentABook(member.getId(), idUpdate, rentTitleId.getText(), rentAuthorId.getText());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -235,7 +247,7 @@ public class MainWindowController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             RentalManager rentalManager = new RentalManager();
-            Rental rent = rentalManager.checkUsersRental(memeber.getId());
+            Rental rent = rentalManager.checkUsersRental(member.getId());
             if(rent != null) {
                 alert.setHeaderText("You already have a rented book!");
                 alert.setContentText("To rent a new book, you must first return the one you currently have!");
@@ -269,7 +281,7 @@ public class MainWindowController {
             return;
         }*/
         RentalManager r = new RentalManager();
-        Rental rental = r.checkUsersRental(memeber.getId());
+        Rental rental = r.checkUsersRental(member.getId());
         if(rental == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -287,7 +299,7 @@ public class MainWindowController {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                r.returnRentedBook(memeber.getId());
+                r.returnRentedBook(member.getId());
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Dialog");
                 alert.setHeaderText(null);
@@ -351,7 +363,7 @@ public class MainWindowController {
     public void adminMode(ActionEvent actionEvent) throws IOException {
         Stage myStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMainWindow.fxml"));
-        AdminMainWindowController controller = new AdminMainWindowController(memeber);
+        AdminMainWindowController controller = new AdminMainWindowController(member);
         loader.setController(controller);
         myStage.setTitle("Main window");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));

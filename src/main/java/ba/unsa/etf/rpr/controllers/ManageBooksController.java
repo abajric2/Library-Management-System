@@ -67,6 +67,7 @@ public class ManageBooksController {
     public Label genreAddCheck;
     public Label totalNumberAddCheck;
     public Label availableNumberAddCheck;
+    public Button profile;
     private BookModel model = new BookModel();
     private Integer idUpdate;
     private Member member;
@@ -279,7 +280,20 @@ public class ManageBooksController {
             idUpdate = null;
         }
     }
-
+    public void profile(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
+        ProfileController controller = new ProfileController(member);
+        loader.setController(controller);
+        myStage.setTitle("Profile");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
     public void addAction(ActionEvent actionEvent) {
         if(updtTitle.getText().isEmpty() || updtAuthor.getText().isEmpty() || updtYear.getText().isEmpty() ||
                 updtGenre.getText().isEmpty() || updtTotal.getText().isEmpty() || updtAvailable.getText().isEmpty()) {

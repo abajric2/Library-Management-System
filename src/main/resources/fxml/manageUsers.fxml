@@ -230,7 +230,7 @@
             <ButtonBar HBox.hgrow="ALWAYS">
               <buttons>
                 <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" text="Main page" />
-                  <Button mnemonicParsing="false" text="Profile" />
+                  <Button fx:id="profile" mnemonicParsing="false" onAction="#profile" text="Profile" />
                   <Button fx:id="logOutBttn" mnemonicParsing="false" onAction="#logOut" text="Log out" />
               </buttons>
                <HBox.margin>

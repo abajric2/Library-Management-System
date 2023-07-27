@@ -60,6 +60,7 @@ public class ManageUsersController {
     public Label checkPasswordUpdt;
     public Label checkFirstNameAdd;
     public Label checkLastNameAdd;
+    public Button profile;
     public Label checkPasswordAdd;
     private MemberModel model = new MemberModel();
     private Integer idUpdate;
@@ -411,6 +412,20 @@ public class ManageUsersController {
         myStage.setTitle("Log in");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+    public void profile(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
+        ProfileController controller = new ProfileController(member);
+        loader.setController(controller);
+        myStage.setTitle("Profile");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();

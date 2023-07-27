@@ -66,6 +66,7 @@ public class AddNewRentalController {
     public Label checkRental;
     public Button mainPageBttn;
     public Button logOutBttn;
+    public Button profile;
     private BookModel bookModel = new BookModel();
     private MemberModel memberModel = new MemberModel();
     private Integer idUser;
@@ -292,6 +293,20 @@ public class AddNewRentalController {
         myStage.setTitle("Log in");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+    public void profile(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
+        ProfileController controller = new ProfileController(member);
+        loader.setController(controller);
+        myStage.setTitle("Profile");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
