@@ -25,7 +25,9 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     private Member checkUsername (Member m) throws LibraryException {
         Member member = new Member();
         try {
+           // System.out.println(m.getUsername());
             member = executeQueryUnique("SELECT * FROM MEMBERS WHERE USERNAME = ?", new Object[]{m.getUsername()});
+         //   System.out.println(member.getUsername());
         } catch (LibraryException e) {
             member = null;
         }

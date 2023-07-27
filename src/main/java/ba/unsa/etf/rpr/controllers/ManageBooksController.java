@@ -226,7 +226,7 @@ public class ManageBooksController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.setContentText("You must fill in all the fields provided!");
             alert.showAndWait();
             return;
         }
@@ -234,7 +234,7 @@ public class ManageBooksController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
-            alert.setContentText("Choose the book you want to edit in the table!");
+            alert.setContentText("Choose the book you want to edit from the table!");
             alert.showAndWait();
             return;
         }
@@ -315,7 +315,7 @@ public class ManageBooksController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.setContentText("You must fill in all the fields provided!");
             alert.showAndWait();
             return;
         }
@@ -363,7 +363,7 @@ public class ManageBooksController {
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
-            alert.setHeaderText("You can't add book!");
+            alert.setHeaderText("Adding error!");
             alert.setContentText("You can't add book!");
             alert.showAndWait();
         }
@@ -375,7 +375,7 @@ public class ManageBooksController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Delete error!");
-            alert.setContentText("Choose the book you want to delete in the table!");
+            alert.setContentText("Choose the book you want to delete from the table!");
             alert.showAndWait();
             return;
         }

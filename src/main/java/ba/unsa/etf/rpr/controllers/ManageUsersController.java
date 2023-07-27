@@ -208,7 +208,7 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.setContentText("You must fill in all the fields provided!");
             alert.showAndWait();
             return;
         }
@@ -216,7 +216,7 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
-            alert.setContentText("Choose the member you want to edit in the table!");
+            alert.setContentText("Choose the member you want to edit from the table!");
             alert.showAndWait();
             return;
         }
@@ -272,7 +272,7 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Delete error!");
-            alert.setContentText("Choose the member you want to delete in the table!");
+            alert.setContentText("Choose the member you want to delete from the table!");
             alert.showAndWait();
             return;
         }
@@ -282,7 +282,7 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Delete error!");
-            alert.setContentText("Choose the member you want to delete in the table!");
+            alert.setContentText("Choose the member you want to delete from the table!");
             alert.showAndWait();
             return;
         }
@@ -343,7 +343,7 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
+            alert.setContentText("You must fill in all the fields provided!");
             alert.showAndWait();
             return;
         }

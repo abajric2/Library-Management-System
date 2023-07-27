@@ -212,7 +212,7 @@ public class MainWindowController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Choose a book!");
-            alert.setContentText("Choose the book you want to rent from the table!");
+            alert.setContentText("Choose the book you want to rent from the list!");
             alert.showAndWait();
             return;
         }
@@ -307,8 +307,9 @@ public class MainWindowController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText("Are you sure you want to return the book?");
-            alert.setContentText("You currently have book \"" + book.getTitle() + "\" by author " + book.getAuthor() + " rented. Are you sure you want to return it?");
-
+            ScrollPane scrollPane = new ScrollPane(new Label("You currently have book \"" + book.getTitle() + "\" by author " + book.getAuthor() + " rented. Are you sure you want to return it?"));
+            scrollPane.setFitToWidth(true);
+            alert.getDialogPane().setContent(scrollPane);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 r.returnRentedBook(member.getId());

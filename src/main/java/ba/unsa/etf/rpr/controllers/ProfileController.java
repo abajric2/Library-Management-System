@@ -140,7 +140,7 @@ public class ProfileController {
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
             if(!m.getFirstName().matches("[a-zA-Z -]*") || !m.getLastName().matches("[a-zA-Z -]*") || m.getPassword().length() < 8) alert.setContentText("Check that the values you entered are of a valid type.");
-            else alert.setContentText("Check if someone is already using the username you entered!");
+            else alert.setContentText("It seems like someone is already using the username you entered!");
             alert.showAndWait();
             //   idUpdate = null;
         }

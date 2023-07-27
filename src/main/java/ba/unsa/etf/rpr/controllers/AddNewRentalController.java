@@ -220,8 +220,10 @@ public class AddNewRentalController {
         if (selectedMember == null || selectedBook == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
-            alert.setHeaderText("Delete error!");
-            alert.setContentText("Please select from the table the user you want to rent the book to and the book you want to rent to the selected user!");
+            alert.setHeaderText("Adding error!");
+            ScrollPane scrollPane = new ScrollPane(new Label("Please select from the table the user you want to rent the book to and the book you want to rent to the selected user!"));
+            scrollPane.setFitToWidth(true);
+            alert.getDialogPane().setContent(scrollPane);
             alert.showAndWait();
             return;
         }
