@@ -23,9 +23,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -69,7 +67,9 @@ public class MainWindowController {
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
                 BookManager b = new BookManager();
                 try {
-                    listId.setItems(FXCollections.observableList(b.searchByAuthor(n)));
+                    List<Book> books = b.searchByAuthor(n);
+                    sortBooks(books);
+                    listId.setItems(FXCollections.observableList(books));
                 } catch (LibraryException e) {
                     e.printStackTrace();
                 }
@@ -80,7 +80,9 @@ public class MainWindowController {
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
                 BookManager b = new BookManager();
                 try {
-                    listId.setItems(FXCollections.observableList(b.searchByTitle(n)));
+                    List<Book> books = b.searchByTitle(n);
+                    sortBooks(books);
+                    listId.setItems(FXCollections.observableList(books));
                 } catch (LibraryException e) {
                     e.printStackTrace();
                 }
@@ -91,7 +93,9 @@ public class MainWindowController {
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
                 BookManager b = new BookManager();
                 try {
-                    listId.setItems(FXCollections.observableList(b.searchByGenre(n)));
+                    List<Book> books = b.searchByGenre(n);
+                    sortBooks(books);
+                    listId.setItems(FXCollections.observableList(books));
                 } catch (LibraryException e) {
                     e.printStackTrace();
                 }
@@ -99,6 +103,7 @@ public class MainWindowController {
         });
         BookManager b = new BookManager();
         List<Book> books = new ArrayList<>(b.getAll());
+        sortBooks(books);
         listId.setItems(FXCollections.observableList(books));
         welcomeLabel.setText(welcomeLabel.getText() + " " + memeber.getFirstName() + "!");
         RentalManager r = new RentalManager();
@@ -297,6 +302,7 @@ public class MainWindowController {
     public void allBooksAction(ActionEvent actionEvent) throws LibraryException {
         BookManager b = new BookManager();
         List<Book> books = new ArrayList<>(b.getAll());
+        sortBooks(books);
         listId.setItems(FXCollections.observableList(books));
     }
 
@@ -354,6 +360,30 @@ public class MainWindowController {
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
+    }
+    private List<Book> sortBooks(List<Book> books) {
+        Collections.sort(books, new Comparator<Book>() {
+            @Override
+            public int compare(Book b1, Book b2) {
+                int titleComparison = b1.getTitle().compareTo(b2.getTitle());
+                if (titleComparison != 0) {
+                    return titleComparison;
+                } else {
+                    int authorComparison = b1.getAuthor().compareTo(b2.getAuthor());
+                    if (authorComparison != 0) {
+                        return authorComparison;
+                    } else {
+                        int yearComparison = b1.getYearOfPublication().compareTo(b2.getYearOfPublication());
+                        if (yearComparison != 0) {
+                            return yearComparison;
+                        } else {
+                            return b1.getGenre().compareTo(b2.getGenre());
+                        }
+                    }
+                }
+            }
+        });
+        return books;
     }
     public class BookModel {
         public SimpleStringProperty title = new SimpleStringProperty("");

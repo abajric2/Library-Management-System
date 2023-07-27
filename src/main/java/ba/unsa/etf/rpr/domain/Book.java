@@ -85,12 +85,12 @@ public class Book implements Idable {
     }
 
     /**
-     * method for printing a book in the form "book title, author, year of publication"
+     * method for printing a book in the form "book title" - author (genre, year of publication)
      * @return string containing basic information about the book
      */
     @Override
     public String toString() {
-        return title + ", " + author + " (" + genre + ")";
+        return "\"" + title + "\" - " + author + " (" + genre + ", " + yearOfPublication + ")";
     }
 
 
