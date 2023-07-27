@@ -32,6 +32,7 @@ public class RegistrationController {
     public Label checkLastName;
     public Label checkUsername;
     public Hyperlink about;
+    public Hyperlink logIn;
 
     @FXML
  public void initialize() {
@@ -160,6 +161,19 @@ public class RegistrationController {
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(true);
         myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+    public void logIn (ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        LoginController controller = new LoginController();
+        loader.setController(controller);
+        myStage.setTitle("Log in");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
         myStage.show();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();

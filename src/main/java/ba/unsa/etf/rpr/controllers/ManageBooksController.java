@@ -409,7 +409,7 @@ public class ManageBooksController {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("Delete error!");
-                alert.setContentText("You can't delete this book!");
+                alert.setContentText("You can't delete this book. Check if it is currently rented by a user!");
                 alert.showAndWait();
                 idUpdate = null;
             }

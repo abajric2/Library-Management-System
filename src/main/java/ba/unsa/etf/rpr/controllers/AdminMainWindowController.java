@@ -130,7 +130,7 @@ public class AdminMainWindowController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manageRentals.fxml"));
         ManageRentalsController controller = new ManageRentalsController(member);
         loader.setController(controller);
-        myStage.setTitle("Manage rentals");
+        myStage.setTitle("View rentals");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(true);
         myStage.setMaximized(true);

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="404.0" style="-fx-background-color: #f0d89e;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RegistrationController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RegistrationController">
    <stylesheets>
       <URL value="@/css/registration.css" />
    </stylesheets>
@@ -36,7 +36,7 @@
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="firstNameId" style="-fx-background-color: #cfb482;">
+            <TextField fx:id="firstNameId">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
@@ -51,7 +51,7 @@
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="lastNameId" prefHeight="0.0" prefWidth="200.0" style="-fx-background-color: #cfb482;">
+            <TextField fx:id="lastNameId" prefHeight="0.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
@@ -66,7 +66,7 @@
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="usernameId" style="-fx-background-color: #cfb482;">
+            <TextField fx:id="usernameId">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
@@ -81,7 +81,7 @@
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <PasswordField fx:id="passwordId" style="-fx-background-color: #cfb482;">
+            <PasswordField fx:id="passwordId">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
@@ -96,7 +96,7 @@
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <PasswordField fx:id="confirmPasswordId" style="-fx-background-color: #cfb482;">
+            <PasswordField fx:id="confirmPasswordId">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
@@ -108,12 +108,20 @@
             </Label>
             <Button fx:id="signUpId" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: #000000;" text="Sign Up" textFill="WHITE">
                <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="30.0" />
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="30.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <Hyperlink fx:id="logIn" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#logIn" text="Already have an account? Log in!" textAlignment="CENTER" textFill="#151515">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" />
+               </VBox.margin>
+            </Hyperlink>
             <Hyperlink fx:id="about" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#about" text="About application" textAlignment="CENTER" textFill="#151515">
                <font>
                   <Font name="System Italic" size="12.0" />
@@ -133,4 +141,7 @@
          </font>
       </Label>
    </children>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
 </GridPane>

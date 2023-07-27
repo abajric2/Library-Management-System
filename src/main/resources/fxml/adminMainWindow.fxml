@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
@@ -13,15 +14,24 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
+    <stylesheets>
+        <URL value="@/css/mainwindow.css" />
+    </stylesheets>
+    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <HBox style="-fx-background-color: #b1b1b1;">
+            <HBox style="-fx-background-color: black;">
                <children>
                   <ButtonBar HBox.hgrow="ALWAYS">
                     <buttons>
-                      <Button fx:id="profileId" mnemonicParsing="false" onAction="#profileAction" text="Profile" />
-                        <Button fx:id="logOutId" mnemonicParsing="false" onAction="#logOut" text="Log out" />
+                      <Button fx:id="profileId" mnemonicParsing="false" onAction="#profileAction" styleClass="tbButton" text="Profile" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button fx:id="logOutId" mnemonicParsing="false" onAction="#logOut" styleClass="tbButton" text="Log out" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
                     </buttons>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -44,11 +54,14 @@
       </VBox>
    </top>
    <bottom>
-      <HBox style="-fx-background-color: #b1b1b1;" BorderPane.alignment="CENTER">
+      <HBox style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
             <ButtonBar HBox.hgrow="ALWAYS">
               <buttons>
-                <Button fx:id="aboutBttn" mnemonicParsing="false" onAction="#about" text="About" />
+                <Button fx:id="aboutBttn" mnemonicParsing="false" onAction="#about" styleClass="tbButton" text="About" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
               </buttons>
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -75,30 +88,45 @@
                         <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="manageUserId" mnemonicParsing="false" onAction="#manageUsers" prefWidth="122.0" text="Manage users" textAlignment="CENTER">
+                  <Button fx:id="manageUserId" mnemonicParsing="false" onAction="#manageUsers" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: black;" text="Manage users" textAlignment="CENTER" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="manageBooksId" mnemonicParsing="false" onAction="#manageBooks" prefWidth="122.0" text="Manage books" textAlignment="CENTER">
+                  <Button fx:id="manageBooksId" mnemonicParsing="false" onAction="#manageBooks" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: black;" text="Manage books" textAlignment="CENTER" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="viewRentalsBttn" mnemonicParsing="false" onAction="#viewRentals" prefWidth="122.0" text="View rentals">
+                  <Button fx:id="viewRentalsBttn" mnemonicParsing="false" onAction="#viewRentals" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: black;" text="View rentals" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" prefWidth="122.0" text="Add rental">
+                  <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: black;" text="Add rental" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="regularUserId" mnemonicParsing="false" onAction="#regularUserMode" prefWidth="122.0" text="Regular user mode" textAlignment="CENTER">
+                  <Button fx:id="regularUserId" mnemonicParsing="false" onAction="#regularUserMode" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: black;" text="Regular user mode" textAlignment="CENTER" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Button>
                </children>
             </VBox>

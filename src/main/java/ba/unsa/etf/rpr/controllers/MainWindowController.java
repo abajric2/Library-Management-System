@@ -253,7 +253,7 @@ public class MainWindowController {
             else {
                 SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
                 String dateString = format.format(rental.getReturnDeadline());
-                rentalExp.setText("The rented book must be returned by the " + dateString + "!");
+                rentalExp.setText("The rented book must be returned by the " + dateString + ".");
             }
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
