@@ -369,6 +369,12 @@ public class ManageUsersController {
             alert.setHeaderText(null);
             alert.setContentText("Successfully added!");
             alert.showAndWait();
+            firstNameAdd.setText("");
+            lastNameAdd.setText("");
+            usernameAdd.setText("");
+            passwordAdd.setText("");
+            adminAdd.setSelected(false);
+            checkPasswordAdd.setText("");
             tableId.setItems(FXCollections.observableList(manager.getAll()));
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

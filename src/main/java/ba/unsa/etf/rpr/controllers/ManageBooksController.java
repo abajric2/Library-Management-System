@@ -270,6 +270,12 @@ public class ManageBooksController {
             alert.setHeaderText(null);
             alert.setContentText("Successfully updated!");
             alert.showAndWait();
+            titleLabel.setText("");
+            authorLabel.setText("");
+            genreLabel.setText("");
+            yearLabel.setText("");
+            totalNumberLabel.setText("");
+            availableNumberLabel.setText("");
             tableId.setItems(FXCollections.observableList(manager.getAll()));
             idUpdate = null;
         } catch (LibraryException e) {
@@ -359,6 +365,12 @@ public class ManageBooksController {
             alert.setHeaderText(null);
             alert.setContentText("Successfully added!");
             alert.showAndWait();
+            updtTitle.setText("");
+            updtAuthor.setText("");
+            updtGenre.setText("");
+            updtYear.setText("");
+            updtTotal.setText("");
+            updtAvailable.setText("");
             tableId.setItems(FXCollections.observableList(manager.getAll()));
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -403,6 +415,12 @@ public class ManageBooksController {
                 alert.setHeaderText(null);
                 alert.setContentText("Successfully deleted!");
                 alert.showAndWait();
+                titleLabel.setText("");
+                authorLabel.setText("");
+                genreLabel.setText("");
+                yearLabel.setText("");
+                totalNumberLabel.setText("");
+                availableNumberLabel.setText("");
                 tableId.setItems(FXCollections.observableList(manager.getAll()));
                 idUpdate = null;
             } catch (LibraryException e) {

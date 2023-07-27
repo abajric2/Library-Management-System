@@ -198,6 +198,17 @@ public class ManageRentalsController {
                 alert.setHeaderText(null);
                 alert.setContentText("Successfully deleted!");
                 alert.showAndWait();
+                titleId.setText("");
+                authorId.setText("");
+                genreId.setText("");
+                yearId.setText("");
+                totalId.setText("");
+                availableId.setText("");
+                firstNameId.setText("");
+                lastNameId.setText("");
+                usernameId.setText("");
+                passwordId.setText("");
+                adminId.setSelected(false);
                 tableId.setItems(FXCollections.observableList(manager.getAll()));
                 idUpdate = null;
             } catch (LibraryException e) {

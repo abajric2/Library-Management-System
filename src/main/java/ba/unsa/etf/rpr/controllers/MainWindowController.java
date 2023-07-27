@@ -126,7 +126,7 @@ public class MainWindowController {
             else {
                 SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
                 String dateString = format.format(rent.getReturnDeadline());
-                rentalExp.setText("The rented book must be returned by the " + dateString + "!");
+                rentalExp.setText("The rented book must be returned by the " + dateString + ".");
             }
         }
         listId.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{

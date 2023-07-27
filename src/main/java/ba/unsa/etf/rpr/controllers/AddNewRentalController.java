@@ -235,6 +235,17 @@ public class AddNewRentalController {
             alert.setHeaderText(null);
             alert.setContentText("The book has been successfully rented!");
             alert.showAndWait();
+            firstNameSelected.setText("");
+            lastNameSelected.setText("");
+            usernameSelected.setText("");
+            passwordSelected.setText("");
+            adminSelected.setSelected(false);
+            titleSelected.setText("");
+            authorSelected.setText("");
+            genreSelected.setText("");
+            yearSelected.setText("");
+            totalSelected.setText("");
+            availableSelected.setText("");
             bookId.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getId()).asObject();});
             title.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getTitle());});
             author.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getAuthor());});
