@@ -28,24 +28,29 @@ public class RegistrationController {
     public Button signUpId;
     public Label chckPasswordLngth;
     public Label chckPasswordSame;
+    public Label checkFirstName;
+    public Label checkLastName;
+    public Label checkUsername;
+    public Hyperlink about;
 
     @FXML
  public void initialize() {
+
      passwordId.textProperty().addListener(new ChangeListener<String>() {
          @Override
          public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
              if (n.length() >= 8) {
-                 passwordId.setStyle("-fx-background-color: yellowgreen;");
+                // passwordId.setStyle("-fx-background-color: yellowgreen;");
                  chckPasswordLngth.setText("");
              } else {
                  chckPasswordLngth.setText("Password must be at least 8 characters long!");
-                 passwordId.setStyle("-fx-background-color: red;");
+               //  passwordId.setStyle("-fx-background-color: red;");
              }
              if(!confirmPasswordId.getText().isEmpty() && passwordId.getText().equals(confirmPasswordId.getText())) {
                  chckPasswordSame.setText("");
-                 confirmPasswordId.setStyle("-fx-background-color: yellowgreen;");
+                // confirmPasswordId.setStyle("-fx-background-color: yellowgreen;");
              } else {
-                 if(!confirmPasswordId.getText().isEmpty()) confirmPasswordId.setStyle("-fx-background-color: red;");
+            //     if(!confirmPasswordId.getText().isEmpty()) confirmPasswordId.setStyle("-fx-background-color: red;");
                  if(confirmPasswordId.getText().isEmpty()) chckPasswordSame.setText("");
                  else chckPasswordSame.setText("The password does not match!");
              }
@@ -57,13 +62,27 @@ public class RegistrationController {
              // System.out.println(o + " " + n);
              if (confirmPasswordId.getText().equals(passwordId.getText())) {
                  chckPasswordSame.setText("");
-                 confirmPasswordId.setStyle("-fx-background-color: yellowgreen;");
+               //  confirmPasswordId.setStyle("-fx-background-color: yellowgreen;");
              } else {
                  chckPasswordSame.setText("The password does not match!");
-                 confirmPasswordId.setStyle("-fx-background-color: red;");
+                // confirmPasswordId.setStyle("-fx-background-color: red;");
              }
          }
      });
+        firstNameId.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z -]*")) {
+                checkFirstName.setText("Only letters, spaces and dashes are allowed.");
+            } else {
+                checkFirstName.setText("");
+            }
+        });
+        lastNameId.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[a-zA-Z -]*")) {
+                checkLastName.setText("Only letters, spaces and dashes are allowed.");
+            } else {
+                checkLastName.setText("");
+            }
+        });
  }
 
 
@@ -74,6 +93,14 @@ public class RegistrationController {
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fill in all fields!");
             alert.setContentText("You must fill in all the fields provided!");
+            alert.showAndWait();
+            return;
+        }
+        if(!firstNameId.getText().matches("[a-zA-Z -]*") || !lastNameId.getText().matches("[a-zA-Z -]*")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Invalid type!");
+            alert.setContentText("Check that the values you entered are of a valid type.");
             alert.showAndWait();
             return;
         }
@@ -118,6 +145,21 @@ public class RegistrationController {
         myStage.setTitle("Log in");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
+
+    public void about(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        AboutController controller = new AboutController(null);
+        loader.setController(controller);
+        myStage.setTitle("About");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
         myStage.show();
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();

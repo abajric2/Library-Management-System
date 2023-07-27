@@ -23,6 +23,7 @@ public class LoginController {
     public PasswordField passwordId;
     public Button signInBttnId;
     public Hyperlink signUpId;
+    public Hyperlink about;
 
     public void signUp(ActionEvent actionEvent) throws Exception {
         /*Stage stage = new Stage();
@@ -93,4 +94,18 @@ public class LoginController {
         stage.close();
     }
 
+    public void about(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        AboutController controller = new AboutController(null);
+        loader.setController(controller);
+        myStage.setTitle("About");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(true);
+        myStage.setMaximized(true);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
+    }
 }

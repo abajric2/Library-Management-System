@@ -241,6 +241,7 @@ public class ManageUsersController {
             usernameUpdt.setText("");
             passwordUpdt.setText("");
             adminUpdt.setSelected(false);
+            rentalInfoId.setText("");
             idUpdate = null;
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -323,6 +324,7 @@ public class ManageUsersController {
                 usernameUpdt.setText("");
                 passwordUpdt.setText("");
                 adminUpdt.setSelected(false);
+                rentalInfoId.setText("");
                 idUpdate = null;
             } catch (LibraryException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
