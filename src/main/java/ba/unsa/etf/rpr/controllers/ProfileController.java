@@ -8,7 +8,17 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Optional;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ProfileController {
     public Button editBttn;
@@ -112,7 +122,7 @@ public class ProfileController {
         m.setPassword(password.getText());
         m.setAdmin(member.isAdmin());
         try {
-            manager.update(m);
+            member = manager.update(m);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -135,12 +145,92 @@ public class ProfileController {
         }
     }
 
-    public void deleteAction(ActionEvent actionEvent) {
+    public void deleteAction(ActionEvent actionEvent) throws IOException {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation Dialog");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Are you sure you want to delete your account?");
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Member m = new Member();
+            m.setId(member.getId());
+            m.setFirstName(member.getFirstName());
+            m.setLastName(member.getLastName());
+            m.setUsername(member.getUsername());
+            m.setPassword(member.getPassword());
+            m.setAdmin(member.isAdmin());
+            try {
+                manager.delete(m);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully deleted!");
+                alert.showAndWait();
+                Stage myStage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+                LoginController controller = new LoginController();
+                loader.setController(controller);
+                myStage.setTitle("Log in");
+                myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                myStage.setResizable(false);
+                myStage.show();
+                Node n = (Node) actionEvent.getSource();
+                Stage stage = (Stage) n.getScene().getWindow();
+                stage.close();
+            } catch (LibraryException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Delete error!");
+                alert.setContentText("Check if you have rented books. If answer is yes, you need to return them before deleting your account!");
+                alert.showAndWait();
+                //idUpdate = null;
+            }
+        }
+
     }
 
-    public void mainPage(ActionEvent actionEvent) {
+    public void mainPage(ActionEvent actionEvent) throws IOException {
+        if(member.isAdmin()) {
+            Stage myStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMainWindow.fxml"));
+            AdminMainWindowController controller = new AdminMainWindowController(member);
+            loader.setController(controller);
+            myStage.setTitle("Main window");
+            myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            myStage.setResizable(false);
+            myStage.show();
+            Node n = (Node) actionEvent.getSource();
+            Stage stage = (Stage) n.getScene().getWindow();
+            stage.close();
+        }
+        else {
+            Stage myStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainwindow.fxml"));
+            MainWindowController controller = new MainWindowController(member);
+            loader.setController(controller);
+            myStage.setTitle("Main window");
+            myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            myStage.setResizable(true);
+            myStage.setMaximized(true);
+            myStage.show();
+            Node n = (Node) actionEvent.getSource();
+            Stage stage = (Stage) n.getScene().getWindow();
+            stage.close();
+        }
     }
 
-    public void logOut(ActionEvent actionEvent) {
+    public void logOut(ActionEvent actionEvent) throws IOException {
+        Stage myStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        LoginController controller = new LoginController();
+        loader.setController(controller);
+        myStage.setTitle("Log in");
+        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        myStage.setResizable(false);
+        myStage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        stage.close();
     }
 }

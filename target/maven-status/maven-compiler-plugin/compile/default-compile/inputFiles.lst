@@ -24,5 +24,6 @@ C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\controller
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\business\BookManager.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\exceptions\LibraryException.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\domain\Rental.java
+C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\controllers\ProfileController.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\RentalDao.java
 C:\Users\ASUS\IdeaProjects\rpr-projekat\src\main\java\ba\unsa\etf\rpr\dao\MemberDaoSQLImpl.java

@@ -227,7 +227,8 @@ public class ManageUsersController {
         m.setPassword(model.password.get());
         m.setAdmin(model.admin.get());
         try {
-            manager.update(m);
+            Member updatedMember = manager.update(m);
+            if(idUpdate == member.getId()) member = updatedMember;
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
