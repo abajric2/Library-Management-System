@@ -27,7 +27,7 @@ public class App extends Application {
         loader.setController(controller);
         myStage.setTitle("Log in");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        myStage.setResizable(false);
+        myStage.setResizable(true);
         myStage.show();
     }
 }

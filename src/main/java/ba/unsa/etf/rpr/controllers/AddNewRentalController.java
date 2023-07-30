@@ -199,7 +199,7 @@ public class AddNewRentalController {
                     throw new RuntimeException(e);
                 }
                 if (rent == null) {
-                    checkRental.setText("The selected user currently has no rented books.");
+                    checkRental.setText(" The selected user currently has no rented books. ");
                 } else {
                     int id = rent.getBookID();
                     Book book = null;
@@ -208,8 +208,8 @@ public class AddNewRentalController {
                     } catch (LibraryException e) {
                         throw new RuntimeException(e);
                     }
-                    checkRental.setText("The selected user currently has the book \"" + book.getTitle() + "\" by author "
-                            + book.getAuthor() + ". To rent a new book, this book must be returned.");
+                    checkRental.setText(" The selected user currently has the book \"" + book.getTitle() + "\" by author "
+                            + book.getAuthor() + ". To rent a new book, this book must be returned. ");
                 }
             }
         });

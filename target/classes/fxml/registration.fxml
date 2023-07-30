@@ -10,138 +10,159 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RegistrationController">
-   <stylesheets>
-      <URL value="@/css/registration.css" />
-   </stylesheets>
-   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+
+<StackPane prefHeight="683.0" prefWidth="684.0" styleClass="root" stylesheets="@../css/backgrounds.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RegistrationController">
    <children>
-      <VBox prefHeight="586.0" prefWidth="404.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="484.0" style="-fx-border-color: black;" styleClass="gray">
+         <stylesheets>
+            <URL value="@/css/registration.css" />
+         </stylesheets>
+         <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label text="First name">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="firstNameId">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </VBox.margin>
-            </TextField>
-            <Label fx:id="checkFirstName" textFill="RED">
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Last name">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="lastNameId" prefHeight="0.0" prefWidth="200.0">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </VBox.margin>
-            </TextField>
-            <Label fx:id="checkLastName" textFill="RED">
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Username">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="usernameId">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </VBox.margin>
-            </TextField>
-            <Label fx:id="checkUsername" textFill="RED">
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Password">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <PasswordField fx:id="passwordId">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </VBox.margin>
-            </PasswordField>
-            <Label fx:id="chckPasswordLngth" textFill="RED">
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Confirm password">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <PasswordField fx:id="confirmPasswordId">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </VBox.margin>
-            </PasswordField>
-            <Label fx:id="chckPasswordSame" textFill="RED">
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
-            </Label>
-            <Button fx:id="signUpId" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: #000000;" text="Sign Up" textFill="WHITE">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" top="30.0" />
-               </VBox.margin>
+            <VBox GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+               <children>
+                  <Label text="First name">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="firstNameId" promptText="first name" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="checkFirstName" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Last name">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="lastNameId" prefHeight="0.0" prefWidth="200.0" promptText="last name" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="checkLastName" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Username">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameId" promptText="username" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="checkUsername" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Password">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="passwordId" promptText="password" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <Label fx:id="chckPasswordLngth" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Confirm password">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="confirmPasswordId" promptText="confirm password" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <Button fx:id="signUpId" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: #e4caab; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-color: black;" text="Sign Up">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="chckPasswordSame" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Hyperlink fx:id="logIn" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#logIn" text="Already have an account? Log in!" textAlignment="CENTER" textFill="#151515">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+                  <Hyperlink fx:id="about" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#about" text="About application" textAlignment="CENTER" textFill="#151515">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+               </children>
+            </VBox>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Create your account to join eReads!" textAlignment="CENTER" GridPane.columnSpan="2147483647">
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </GridPane.margin>
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="Bell MT Bold" size="28.0" />
                </font>
-            </Button>
-            <Hyperlink fx:id="logIn" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#logIn" text="Already have an account? Log in!" textAlignment="CENTER" textFill="#151515">
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" />
-               </VBox.margin>
-            </Hyperlink>
-            <Hyperlink fx:id="about" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#about" text="About application" textAlignment="CENTER" textFill="#151515">
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </VBox.margin>
-            </Hyperlink>
+            </Label>
          </children>
-      </VBox>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Create your account to join us!" textAlignment="CENTER" GridPane.columnSpan="2147483647">
-         <GridPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </GridPane.margin>
-         <font>
-            <Font name="Book Antiqua Bold Italic" size="22.0" />
-         </font>
-      </Label>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </GridPane>
    </children>
-   <padding>
-      <Insets top="10.0" />
-   </padding>
-</GridPane>
+</StackPane>
