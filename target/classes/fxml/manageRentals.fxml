@@ -23,7 +23,7 @@
         <URL value="@/css/mainwindow.css" />
     </stylesheets>
     <center>
-      <GridPane styleClass="root" stylesheets="@../css/backgrounds.css">
+      <GridPane styleClass="lib8" stylesheets="@../css/backgrounds.css">
           <columnConstraints>
               <ColumnConstraints hgrow="NEVER" maxWidth="43.20001220703125" minWidth="0.0" prefWidth="0.0" />
               <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.20001220703125" minWidth="10.0" prefWidth="343.80004882812494" />
@@ -44,27 +44,27 @@
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
                            <buttons>
-                              <Button fx:id="deadlineExceedingsId" mnemonicParsing="false" onAction="#deadlineExceedings" style="-fx-background-color: black; -fx-border-radius: 20; -fx-background-radius: 20;" text="Deadline exceedings" textFill="WHITE">
+                              <Button fx:id="deadlineExceedingsId" mnemonicParsing="false" onAction="#deadlineExceedings" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Deadline exceedings" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Button>
-                              <Button fx:id="allRentalsId" mnemonicParsing="false" onAction="#allRentals" style="-fx-background-color: black; -fx-border-radius: 20; -fx-background-radius: 20;" text="All rentals" textFill="WHITE">
+                              <Button fx:id="allRentalsId" mnemonicParsing="false" onAction="#allRentals" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="All rentals" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Button>
                            </buttons>
                         </ButtonBar>
-                        <Label style="-fx-background-color: black;" text=" Select a date to display rentals due on that day! " textFill="WHITE" wrapText="true">
+                        <Label styleClass="white" stylesheets="@../css/backgrounds.css" text=" Select a date to display rentals due on that day! " wrapText="true">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <DatePicker fx:id="datePickerId">
+                        <DatePicker fx:id="datePickerId" style="-fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </DatePicker>
-                        <Label style="-fx-background-color: black;" stylesheets="@../css/backgrounds.css" text=" Select a rental from the table to display more detailed information about the user and the rented book! " textFill="WHITE" wrapText="true">
+                        <Label styleClass="white" stylesheets="@../css/backgrounds.css" text=" Select a rental from the table to display more detailed information about the user and the rented book! " wrapText="true">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -73,27 +73,27 @@
                            <children>
                                   <VBox>
                                       <children>
-                                          <TextField fx:id="firstNameId" editable="false" promptText="first name" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                          <TextField fx:id="firstNameId" editable="false" promptText="first name" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                               <VBox.margin>
                                                   <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                               </VBox.margin>
                                           </TextField>
-                                          <TextField fx:id="lastNameId" editable="false" promptText="last name" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                          <TextField fx:id="lastNameId" editable="false" promptText="last name" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                               <VBox.margin>
                                                   <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                               </VBox.margin>
                                           </TextField>
-                                          <TextField fx:id="usernameId" editable="false" promptText="username" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                          <TextField fx:id="usernameId" editable="false" promptText="username" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                               <VBox.margin>
                                                   <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                               </VBox.margin>
                                           </TextField>
-                                          <TextField fx:id="passwordId" editable="false" promptText="password" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                          <TextField fx:id="passwordId" editable="false" promptText="password" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                               <VBox.margin>
                                                   <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                               </VBox.margin>
                                           </TextField>
-                                          <CheckBox fx:id="adminId" disable="true" mnemonicParsing="false" style="-fx-background-color: black;" text="admin" textFill="WHITE">
+                                          <CheckBox fx:id="adminId" disable="true" mnemonicParsing="false" styleClass="white" stylesheets="@../css/backgrounds.css" text="admin">
                                               <VBox.margin>
                                                   <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                               </VBox.margin>
@@ -105,39 +105,39 @@
                                   </VBox>
                               <VBox>
                                  <children>
-                                    <TextField fx:id="titleId" editable="false" promptText="title" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                    <TextField fx:id="titleId" editable="false" promptText="title" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField fx:id="authorId" editable="false" promptText="author" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                    <TextField fx:id="authorId" editable="false" promptText="author" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField fx:id="yearId" editable="false" promptText="year of publication" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                    <TextField fx:id="yearId" editable="false" promptText="year of publication" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField fx:id="genreId" editable="false" promptText="genre" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                    <TextField fx:id="genreId" editable="false" promptText="genre" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField fx:id="totalId" editable="false" promptText="total number" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                    <TextField fx:id="totalId" editable="false" promptText="total number" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField fx:id="availableId" editable="false" promptText="available number" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                                    <TextField fx:id="availableId" editable="false" promptText="available number" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                                        </VBox.margin>
                                     </TextField>
                                     <ButtonBar>
                                       <buttons>
-                                        <Button fx:id="deleteRentalId" mnemonicParsing="false" onAction="#deleteRental" style="-fx-background-color: black; -fx-border-radius: 20; -fx-background-radius: 20;" text="Delete rental" textFill="WHITE">
+                                        <Button fx:id="deleteRentalId" mnemonicParsing="false" onAction="#deleteRental" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Delete rental" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font></Button>
@@ -152,7 +152,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                      <TableView fx:id="tableId" HBox.hgrow="ALWAYS">
+                      <TableView fx:id="tableId" style="-fx-border-color: black;" HBox.hgrow="ALWAYS">
                           <columns>
                               <TableColumn fx:id="id" maxWidth="1.7976931348623157E308" text="ID" />
                               <TableColumn fx:id="book" maxWidth="1.7976931348623157E308" text="BOOK ID" />
@@ -161,7 +161,7 @@
                               <TableColumn fx:id="returnDeadline" maxWidth="1.7976931348623157E308" text="RETURN DEADLINE" />
                           </columns>
                           <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
                           </HBox.margin>
                       </TableView>
                   </children>

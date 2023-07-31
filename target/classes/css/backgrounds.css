@@ -26,3 +26,11 @@
 -fx-background-image:url('../img/library8.png');
 -fx-background-size:cover;
 }
+.loginLight{
+-fx-background-image:url('../img/loginLight.png');
+-fx-background-size:cover;
+}
+.white{
+-fx-background-image:url('../img/whiteLight.png');
+-fx-background-size:cover;
+}

@@ -130,7 +130,7 @@ public class ManageUsersController {
                     throw new RuntimeException(e);
                 }
                 if(rent == null) {
-                    rentalInfoId.setText(memb.getUsername() + " currently has no rented books.");
+                    rentalInfoId.setText(" " +  memb.getUsername() + " currently has no rented books. ");
                 }
                 else {
                     int id = rent.getBookID();
@@ -141,8 +141,8 @@ public class ManageUsersController {
                     } catch (LibraryException e) {
                         throw new RuntimeException(e);
                     }
-                    rentalInfoId.setText(memb.getUsername() + " currently has a book \"" + book.getTitle() + "\" by author "
-                            + book.getAuthor() + ".");
+                    rentalInfoId.setText(" " + memb.getUsername() + " currently has a book \"" + book.getTitle() + "\" by author "
+                            + book.getAuthor() + ". ");
                 }
             }
          });
@@ -376,6 +376,7 @@ public class ManageUsersController {
             adminAdd.setSelected(false);
             checkPasswordAdd.setText("");
             tableId.setItems(FXCollections.observableList(manager.getAll()));
+            tableId.getStyleClass().add("table-row-cell");
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");

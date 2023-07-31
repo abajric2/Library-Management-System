@@ -105,28 +105,28 @@ public class MainWindowController {
         List<Book> books = new ArrayList<>(b.getAll());
         sortBooks(books);
         listId.setItems(FXCollections.observableList(books));
-        welcomeLabel.setText(welcomeLabel.getText() + " " + member.getFirstName() + "!");
+        welcomeLabel.setText(welcomeLabel.getText() + " " + member.getFirstName() + "! ");
         RentalManager r = new RentalManager();
         Rental rent = r.checkUsersRental(member.getId());
         if(rent == null) {
-            labelId.setText("According to the current record, you have no rented books.");
+            labelId.setText(" According to the current record, you have no rented books. ");
             rentalExp.setText("");
         }
         else {
             int id = rent.getBookID();
             b = new BookManager();
             Book book = b.searchById(id);
-            labelId.setText("According to current records, you currently have book \"" + book.getTitle() + "\" by author "
-                    + book.getAuthor() + ". To rent a new book, you need to return this one first.");
+            labelId.setText(" According to current records, you currently have book \"" + book.getTitle() + "\" by author "
+                    + book.getAuthor() + ". To rent a new book, you need to return this one first. ");
             java.util.Date utilDate = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             if(rent.getReturnDeadline().before(sqlDate)) {
-                rentalExp.setText("Your book return deadline has expired. You must return the book!");
+                rentalExp.setText(" Your book return deadline has expired. You must return the book! ");
             }
             else {
                 SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
                 String dateString = format.format(rent.getReturnDeadline());
-                rentalExp.setText("The rented book must be returned by the " + dateString + ".");
+                rentalExp.setText(" The rented book must be returned by the " + dateString + ". ");
             }
         }
         listId.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{
@@ -243,17 +243,17 @@ public class MainWindowController {
             idUpdate = null;
             int id = rental.getBookID();
             book = b.searchById(id);
-            labelId.setText("According to current records, you currently have book \"" + book.getTitle() + "\" by author "
-                    + book.getAuthor() + ". To rent a new book, you need to return this one first.");
+            labelId.setText(" According to current records, you currently have book \"" + book.getTitle() + "\" by author "
+                    + book.getAuthor() + ". To rent a new book, you need to return this one first. ");
             java.util.Date utilDate = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             if(rental.getReturnDeadline().before(sqlDate)) {
-                rentalExp.setText("Your book return deadline has expired. You must return the book!");
+                rentalExp.setText(" Your book return deadline has expired. You must return the book! ");
             }
             else {
                 SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
                 String dateString = format.format(rental.getReturnDeadline());
-                rentalExp.setText("The rented book must be returned by the " + dateString + ".");
+                rentalExp.setText(" The rented book must be returned by the " + dateString + ". ");
             }
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -318,7 +318,7 @@ public class MainWindowController {
                 alert.setHeaderText(null);
                 alert.setContentText("You have successfully returned the rented book");
                 alert.showAndWait();
-                labelId.setText("According to the current record, you have no rented books.");
+                labelId.setText(" According to the current record, you have no rented books. ");
                 rentalExp.setText("");
             }
         }

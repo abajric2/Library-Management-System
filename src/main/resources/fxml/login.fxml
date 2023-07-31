@@ -15,7 +15,7 @@
 
 <StackPane prefHeight="564.0" prefWidth="705.0" styleClass="root" stylesheets="@../css/backgrounds.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="344.0" style="-fx-border-color: black;" styleClass="gray" stylesheets="@../css/backgrounds.css">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="344.0" style="-fx-border-color: black;" styleClass="white" stylesheets="@../css/backgrounds.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

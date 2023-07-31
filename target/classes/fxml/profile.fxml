@@ -17,12 +17,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/mainwindow.css" />
     </stylesheets>
     <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane styleClass="lib6" stylesheets="@../css/backgrounds.css" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="539.2000183105469" minWidth="10.0" prefWidth="511.200048828125" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.5999755859375" minWidth="10.0" prefWidth="195.39995117187493" />
@@ -35,12 +35,12 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="2147483647">
                <children>
-                  <Label text="Your personal information is shown below. If you want to edit your data, click edit to unlock the fields!" wrapText="true">
+                  <Label styleClass="white" text=" Your personal information is shown below. If you want to edit your data, click edit to unlock the fields! " wrapText="true">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="editBttn" mnemonicParsing="false" onAction="#editAction" style="-fx-background-color: black;" text="Edit" textFill="WHITE">
+                  <Button fx:id="editBttn" mnemonicParsing="false" onAction="#editAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Edit" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </VBox.margin>
@@ -48,7 +48,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="firstName" promptText="first name">
+                  <TextField fx:id="firstName" promptText="first name" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -58,7 +58,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="lastName" promptText="last name">
+                  <TextField fx:id="lastName" promptText="last name" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -68,7 +68,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="username" promptText="username">
+                  <TextField fx:id="username" promptText="username" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -83,11 +83,17 @@
                         <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                      <children>
-                        <PasswordField fx:id="passwordField" promptText="password" />
-                        <TextField fx:id="password" managed="false" promptText="password" />
+                        <PasswordField fx:id="passwordField" promptText="password" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" />
+                           </StackPane.margin></PasswordField>
+                        <TextField fx:id="password" managed="false" promptText="password" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" />
+                           </StackPane.margin></TextField>
                      </children>
                   </StackPane>
-                  <CheckBox fx:id="showPassword" mnemonicParsing="false" text="show password">
+                  <CheckBox fx:id="showPassword" mnemonicParsing="false" styleClass="white" text="show password">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin>
@@ -97,14 +103,17 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
-                  <CheckBox fx:id="isAdmin" disable="true" mnemonicParsing="false" text="admin">
+                  <CheckBox fx:id="isAdmin" disable="true" mnemonicParsing="false" styleClass="white" text="admin">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </CheckBox>
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                      <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-color: black;" text="Update" textFill="WHITE">
+                      <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Update" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
@@ -113,14 +122,14 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </ButtonBar>
-                  <Label text="If you want to delete your user account, select the delete option. After deletion, you will be logged out and you will have to register if you decide to use the application again." wrapText="true">
+                  <Label styleClass="white" text=" If you want to delete your user account, select the delete option. After deletion, you will be logged out and you will have to register if you decide to use the application again. " wrapText="true">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                      <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-color: black;" text="Delete" textFill="WHITE">
+                      <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Delete" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>

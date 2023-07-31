@@ -101,7 +101,9 @@ public class AdminMainWindowController {
         ManageUsersController controller = new ManageUsersController(member);
         loader.setController(controller);
         myStage.setTitle("Manage users");
-        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        Scene scene = new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        scene.getStylesheets().add(getClass().getResource("/css/table.css").toExternalForm());
+        myStage.setScene(scene);
         myStage.setResizable(true);
         myStage.setMaximized(true);
         myStage.show();

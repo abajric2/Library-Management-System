@@ -209,7 +209,7 @@ public class AddNewRentalController {
                         throw new RuntimeException(e);
                     }
                     checkRental.setText(" The selected user currently has the book \"" + book.getTitle() + "\" by author "
-                            + book.getAuthor() + ". To rent a new book, this book must be returned. ");
+                            + book.getAuthor() + ". ");
                 }
             }
         });

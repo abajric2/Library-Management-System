@@ -16,10 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <stylesheets>
-      <URL value="@/css/mainwindow.css" />
-   </stylesheets>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="741.0" styleClass="lib3" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -49,9 +46,9 @@
                   </ButtonBar>
                </children>
             </HBox>
-            <Label fx:id="welcomeLabel" text="Welcome">
+            <Label fx:id="welcomeLabel" styleClass="white" stylesheets="@../css/backgrounds.css" text=" Welcome">
                <font>
-                  <Font name="Book Antiqua Bold Italic" size="26.0" />
+                  <Font name="Bell MT Bold" size="37.0" />
                </font>
                <opaqueInsets>
                   <Insets />
@@ -97,7 +94,7 @@
          <children>
             <VBox GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
                <children>
-                  <Label fx:id="labelId" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true">
+                  <Label fx:id="labelId" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="white" stylesheets="@../css/backgrounds.css" wrapText="true">
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
@@ -105,10 +102,13 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="rentalExp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textFill="RED" wrapText="true">
+                  <Label fx:id="rentalExp" maxHeight="1.7976931348623157E308" styleClass="white" stylesheets="@../css/backgrounds.css" textFill="RED" wrapText="true">
                      <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Label>
                   <VBox>
                      <children>
@@ -117,21 +117,21 @@
                               <Insets />
                            </VBox.margin>
                            <children>
-                              <Label text="Choose the book you want to rent from the table!" wrapText="true">
+                              <Label styleClass="white" stylesheets="@../css/backgrounds.css" text=" Choose the book you want to rent from the table! " wrapText="true">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                  </HBox.margin>
                               </Label>
                            </children>
                         </HBox>
-                        <Label text="Are you sure you want to rent this book?" wrapText="true">
+                        <Label styleClass="white" stylesheets="@../css/backgrounds.css" text=" Are you sure you want to rent this book? " wrapText="true">
                            <VBox.margin>
                               <Insets bottom="5.0" left="20.0" right="20.0" top="15.0" />
                            </VBox.margin>
                         </Label>
                         <VBox>
                            <children>
-                              <TextField fx:id="rentTitleId" editable="false" promptText="title">
+                              <TextField fx:id="rentTitleId" editable="false" promptText="title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                                  <font>
                                     <Font name="System Italic" size="12.0" />
                                  </font>
@@ -139,7 +139,7 @@
                                     <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                  </VBox.margin>
                               </TextField>
-                              <TextField fx:id="rentAuthorId" editable="false" promptText="author">
+                              <TextField fx:id="rentAuthorId" editable="false" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                                  <font>
                                     <Font name="System Italic" size="12.0" />
                                  </font>
@@ -147,19 +147,19 @@
                                     <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                  </VBox.margin>
                               </TextField>
-                              <TextField fx:id="rentGenreId" editable="false" promptText="genre">
+                              <TextField fx:id="rentGenreId" editable="false" promptText="genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                                  <VBox.margin>
                                     <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                  </VBox.margin>
                               </TextField>
-                              <TextField fx:id="rentYearId" editable="false" promptText="year of publication">
+                              <TextField fx:id="rentYearId" editable="false" promptText="year of publication" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                                  <VBox.margin>
                                     <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                                  </VBox.margin>
                               </TextField>
                            </children>
                         </VBox>
-                        <Button fx:id="rentId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#rentAction" prefHeight="31.0" prefWidth="162.0" style="-fx-background-color: black;" text="Rent a book" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="rentId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#rentAction" prefHeight="31.0" prefWidth="162.0" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Rent a book" textAlignment="CENTER" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                            </VBox.margin>
@@ -167,7 +167,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="returnId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#returnAction" prefHeight="31.0" prefWidth="162.0" style="-fx-background-color: black;" text="Return the rented book" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="returnId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#returnAction" prefHeight="31.0" prefWidth="162.0" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Return the rented book" textAlignment="CENTER" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                            </VBox.margin>
@@ -183,7 +183,7 @@
                <children>
                   <VBox>
                      <children>
-                        <Button fx:id="allBooksId" mnemonicParsing="false" onAction="#allBooksAction" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: black;" text="List of all books" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Button fx:id="allBooksId" mnemonicParsing="false" onAction="#allBooksAction" prefHeight="31.0" prefWidth="126.0" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="List of all books" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
                            </VBox.margin>
@@ -191,7 +191,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="authorNameId" promptText="search by author" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="authorNameId" promptText="search by author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" />
                            </VBox.margin>
@@ -199,7 +199,7 @@
                               <Font name="System Italic" size="12.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="bookTitleId" promptText="search by title" VBox.vgrow="ALWAYS">
+                        <TextField fx:id="bookTitleId" promptText="search by title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" />
                            </VBox.margin>
@@ -207,16 +207,16 @@
                               <Font name="System Italic" size="12.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="genreId" promptText="search by genre">
+                        <TextField fx:id="genreId" promptText="search by genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" right="10.0" />
                            </VBox.margin>
                         </TextField>
                      </children>
                   </VBox>
-                  <ListView fx:id="listId" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                  <ListView fx:id="listId" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="5.0" right="9.0" top="5.0" />
                      </HBox.margin>
                   </ListView>
                </children>
@@ -229,4 +229,8 @@
          </children>
       </GridPane>
    </center>
+   <stylesheets>
+      <URL value="@../css/backgrounds.css" />
+      <URL value="@../css/mainwindow.css" />
+   </stylesheets>
 </BorderPane>

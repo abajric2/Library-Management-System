@@ -22,7 +22,7 @@
       <URL value="@/css/mainwindow.css" />
    </stylesheets>
    <center>
-      <GridPane styleClass="root" stylesheets="@../css/backgrounds.css">
+      <GridPane styleClass="lib8" stylesheets="@../css/backgrounds.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.20000000000002" minWidth="10.0" prefWidth="187.20000000000002" />
             <ColumnConstraints hgrow="NEVER" maxWidth="43.20001220703125" minWidth="0.0" prefWidth="0.0" />
@@ -47,7 +47,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                      <children>
-                        <Button fx:id="allBooksId" mnemonicParsing="false" onAction="#allBooks" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: black;" text="All books" textFill="WHITE">
+                        <Button fx:id="allBooksId" mnemonicParsing="false" onAction="#allBooks" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: black;" text="All books" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -55,27 +55,27 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="byTitleId" onAction="#searchByTitle" promptText="Search by title" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <TextField fx:id="byTitleId" onAction="#searchByTitle" promptText="Search by title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="byAuthorId" onAction="#searchByAuthor" promptText="Search by author" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <TextField fx:id="byAuthorId" onAction="#searchByAuthor" promptText="Search by author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="byGenreId" onAction="#searchByGenre" promptText="Search by genre" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <TextField fx:id="byGenreId" onAction="#searchByGenre" promptText="Search by genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </TextField>
-                        <Label style="-fx-background-color: black;" text=" Please select the book from the table that you want to edit! " textFill="WHITE" wrapText="true">
+                        <Label styleClass="white" stylesheets="@../css/backgrounds.css" text=" Please select the book from the table that you want to edit! " wrapText="true">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="titleLabel" promptText="title" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <TextField fx:id="titleLabel" promptText="title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -85,7 +85,7 @@
                               <Insets bottom="5.0" left="10.0" right="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="authorLabel" promptText="author" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <TextField fx:id="authorLabel" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -95,7 +95,7 @@
                               <Insets bottom="5.0" left="10.0" right="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="yearLabel" promptText="year of publication" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <TextField fx:id="yearLabel" promptText="year of publication" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -105,7 +105,7 @@
                               <Insets bottom="5.0" left="10.0" right="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="genreLabel" promptText="genre" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <TextField fx:id="genreLabel" promptText="genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -115,7 +115,7 @@
                               <Insets bottom="5.0" left="10.0" right="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="totalNumberLabel" promptText="total number" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <TextField fx:id="totalNumberLabel" promptText="total number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -125,7 +125,7 @@
                               <Insets bottom="5.0" left="10.0" right="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="availableNumberLabel" promptText="available number" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <TextField fx:id="availableNumberLabel" promptText="available number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -137,7 +137,7 @@
                         </Label>
                         <ButtonBar>
                           <buttons>
-                              <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: black;" text="Update" textAlignment="RIGHT" textFill="WHITE">
+                              <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: black;" text="Update" textAlignment="RIGHT" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Button>
@@ -146,14 +146,14 @@
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </ButtonBar>
-                        <Label style="-fx-background-color: black;" text=" Please select the book from the table that you want to delete! " textFill="WHITE" wrapText="true">
+                        <Label styleClass="white" stylesheets="@../css/backgrounds.css" text=" Please select the book from the table that you want to delete! " wrapText="true">
                            <VBox.margin>
                               <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Label>
                         <ButtonBar>
                           <buttons>
-                            <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: black;" text="Delete" textFill="WHITE">
+                            <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: black;" text="Delete" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Button>
@@ -164,7 +164,7 @@
                         </ButtonBar>
                      </children>
                   </VBox>
-                  <TableView fx:id="tableId" HBox.hgrow="ALWAYS">
+                  <TableView fx:id="tableId" style="-fx-border-color: black;" HBox.hgrow="ALWAYS">
                     <columns>
                       <TableColumn fx:id="id" maxWidth="1.7976931348623157E308" text="ID" />
                       <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" text="TITLE" />
@@ -185,12 +185,12 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
                <children>
-                  <Label style="-fx-background-color: black;" text=" Enter information about the book you want to add: " textFill="WHITE" wrapText="true">
+                  <Label styleClass="white" stylesheets="@../css/backgrounds.css" text=" Enter information about the book you want to add: " wrapText="true">
                      <VBox.margin>
                         <Insets bottom="15.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="updtTitle" promptText="title" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                  <TextField fx:id="updtTitle" promptText="title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="2.0" left="5.0" right="5.0" top="15.0" />
                      </VBox.margin>
@@ -200,7 +200,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="updtAuthor" promptText="author" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                  <TextField fx:id="updtAuthor" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="2.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -210,7 +210,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="updtYear" promptText="year of publication" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                  <TextField fx:id="updtYear" promptText="year of publication" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="2.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -220,7 +220,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="updtGenre" promptText="genre" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                  <TextField fx:id="updtGenre" promptText="genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="2.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -230,7 +230,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="updtTotal" promptText="total number" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                  <TextField fx:id="updtTotal" promptText="total number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="2.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -240,7 +240,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="updtAvailable" promptText="available number" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                  <TextField fx:id="updtAvailable" promptText="available number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="2.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -255,7 +255,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                      <buttons>
-                        <Button fx:id="addBttn" mnemonicParsing="false" onAction="#addAction" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: black;" text="Add" textFill="WHITE">
+                        <Button fx:id="addBttn" mnemonicParsing="false" onAction="#addAction" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: black;" text="Add" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
