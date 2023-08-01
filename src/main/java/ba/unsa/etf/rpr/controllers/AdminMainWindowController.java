@@ -85,9 +85,11 @@ public class AdminMainWindowController {
         Stage myStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/manageBooks.fxml"));
         ManageBooksController controller = new ManageBooksController(member);
-        loader.setController(controller);
-        myStage.setTitle("Manage books");
-        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            loader.setController(controller);
+            myStage.setTitle("Manage books");
+        Scene scene = new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        scene.getStylesheets().add(getClass().getResource("/css/table.css").toExternalForm());
+        myStage.setScene(scene);
         myStage.setResizable(true);
         myStage.setMaximized(true);
         myStage.show();
@@ -133,7 +135,9 @@ public class AdminMainWindowController {
         ManageRentalsController controller = new ManageRentalsController(member);
         loader.setController(controller);
         myStage.setTitle("View rentals");
-        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        Scene scene = new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        scene.getStylesheets().add(getClass().getResource("/css/table.css").toExternalForm());
+        myStage.setScene(scene);
         myStage.setResizable(true);
         myStage.setMaximized(true);
         myStage.show();
@@ -148,7 +152,9 @@ public class AdminMainWindowController {
         AddNewRentalController controller = new AddNewRentalController(member);
         loader.setController(controller);
         myStage.setTitle("Add rental");
-        myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        Scene scene = new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        scene.getStylesheets().add(getClass().getResource("/css/table.css").toExternalForm());
+        myStage.setScene(scene);
         myStage.setResizable(true);
         myStage.setMaximized(true);
         myStage.show();

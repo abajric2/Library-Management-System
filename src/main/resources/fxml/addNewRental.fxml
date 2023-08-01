@@ -17,24 +17,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.ScrollPane?>
+<BorderPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="868.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/mainwindow.css" />
     </stylesheets>
     <center>
-      <GridPane styleClass="lib8" stylesheets="@../css/backgrounds.css">
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="lib8" stylesheets="@../css/backgrounds.css">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="300.0000061035156" minHeight="10.0" prefHeight="172.00002136230466" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="453.3999771118164" minHeight="10.0" prefHeight="371.7999786376953" vgrow="ALWAYS" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <TableView fx:id="booksTable" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowSpan="2147483647">
+            <TableView fx:id="booksTable" opacity="0.9" style="-fx-border-color: black; -fx-background-color: black;" GridPane.columnIndex="2" GridPane.rowSpan="2147483647">
               <columns>
                 <TableColumn fx:id="bookId" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="title" prefWidth="75.0" text="TITLE" />
@@ -45,10 +46,10 @@
                   <TableColumn fx:id="available" prefWidth="75.0" text="AVAILABLE NUMBER" />
               </columns>
                <GridPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </TableView>
-            <TableView fx:id="usersTable" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
+            <TableView fx:id="usersTable" opacity="0.9" style="-fx-border-color: black; -fx-background-color: black;" GridPane.columnIndex="1" GridPane.rowSpan="2147483647">
               <columns>
                 <TableColumn fx:id="userId" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="firstName" prefWidth="75.0" text="FIRST NAME" />
@@ -61,136 +62,143 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </TableView>
-            <VBox GridPane.hgrow="SOMETIMES" GridPane.rowSpan="2147483647" GridPane.vgrow="ALWAYS">
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </GridPane.margin>
+            <VBox style="-fx-border-color: black;" styleClass="white">
                <children>
                   <ButtonBar nodeOrientation="RIGHT_TO_LEFT">
                     <buttons>
                       <Button fx:id="allBooksBttn" mnemonicParsing="false" onAction="#allBooks" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="All books" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
-                           </font></Button>
+                           </font>
+                        </Button>
                         <Button fx:id="allUsersBttn" mnemonicParsing="false" onAction="#allUsers" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="All users" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
-                           </font></Button>
+                           </font>
+                        </Button>
                     </buttons>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </ButtonBar>
                   <TextField fx:id="searchByName" promptText="search by name" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="searchByUsername" promptText="search by username" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="searchByTitle" promptText="search by title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="searchByAuthor" promptText="seach by author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="searchByGenre" promptText="search by genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label styleClass="white" stylesheets="@../css/backgrounds.css" text=" Please select from the first table the user to whom you want to rent the book! " wrapText="true">
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </VBox>
+            <VBox style="-fx-border-color: black;" styleClass="white" GridPane.rowIndex="1" GridPane.rowSpan="2">
+               <children>
+                  <Label stylesheets="@../css/backgrounds.css" text=" Please select from the first table the user to whom you want to rent the book! " wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="firstNameSelected" editable="false" promptText="first name" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="lastNameSelected" editable="false" promptText="last name" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="usernameSelected" editable="false" promptText="username" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="passwordSelected" editable="false" promptText="password" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <CheckBox fx:id="adminSelected" disable="true" mnemonicParsing="false" styleClass="white" text="Admin">
+                  <Label stylesheets="@../css/backgrounds.css" text=" Please select from the second table the book you want to rent to the selected user! " wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </CheckBox>
-                  <Label fx:id="checkRental" styleClass="white" stylesheets="@../css/backgrounds.css" wrapText="true" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label styleClass="white" stylesheets="@../css/backgrounds.css" text=" Please select from the second table the book you want to rent to the selected user! " wrapText="true">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="titleSelected" editable="false" promptText="title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="authorSelected" editable="false" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="yearSelected" editable="false" promptText="year of publication" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="genreSelected" editable="false" promptText="genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="totalSelected" editable="false" promptText="total number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="availableSelected" editable="false" promptText="available number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
+                  <CheckBox fx:id="adminSelected" disable="true" mnemonicParsing="false" text="Admin">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <Label fx:id="checkRental" stylesheets="@../css/backgrounds.css" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
                   <ButtonBar>
                     <buttons>
                       <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Add rental" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
-                           </font></Button>
+                           </font>
+                        </Button>
                     </buttons>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </ButtonBar>
                </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+               </GridPane.margin>
             </VBox>
          </children>
       </GridPane>
@@ -203,15 +211,18 @@
                         <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" styleClass="tbButton" text="Main page" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                  </Button>
                         <Button fx:id="profile" mnemonicParsing="false" onAction="#profile" styleClass="tbButton" text="Profile" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                  </Button>
                         <Button fx:id="logOutBttn" mnemonicParsing="false" onAction="#logOut" styleClass="tbButton" text="Log out" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                  </Button>
                     </buttons>
                     <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
@@ -228,7 +239,8 @@
                         <Button fx:id="aboutBttn" mnemonicParsing="false" onAction="#about" styleClass="tbButton" text="About" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                  </Button>
                     </buttons>
                     <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />

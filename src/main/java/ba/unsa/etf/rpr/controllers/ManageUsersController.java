@@ -376,7 +376,7 @@ public class ManageUsersController {
             adminAdd.setSelected(false);
             checkPasswordAdd.setText("");
             tableId.setItems(FXCollections.observableList(manager.getAll()));
-            tableId.getStyleClass().add("table-row-cell");
+          //  tableId.getStyleClass().add("table-row-cell");
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
