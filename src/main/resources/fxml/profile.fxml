@@ -27,122 +27,129 @@
     <center>
       <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="lib6" stylesheets="@../css/backgrounds.css" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="539.2000183105469" minWidth="10.0" prefWidth="511.200048828125" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.5999755859375" minWidth="10.0" prefWidth="195.39995117187493" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="592.7999877929688" minWidth="10.0" prefWidth="520.0000122070312" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.5999755859375" minWidth="10.0" prefWidth="294.3999877929688" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="211.00001220703132" minHeight="10.0" prefHeight="171.79996948242194" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="164.20001831054685" minHeight="10.0" prefHeight="123.4000305175781" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="2147483647">
-               <children>
-                  <Label styleClass="white" text=" Your personal information is shown below. If you want to edit your data, click edit to unlock the fields! " wrapText="true">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
-                     </VBox.margin>
+                  <VBox style="-fx-border-color: black;" styleClass="white" GridPane.rowSpan="2">
+                     <children>
+                  <Label text=" Your personal information is shown below. If you want to edit your data, click edit to unlock the fields! " wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
                   </Label>
                   <Button fx:id="editBttn" mnemonicParsing="false" onAction="#editAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Edit" textFill="WHITE">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </VBox.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
                   </Button>
                   <TextField fx:id="firstName" promptText="first name" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
-                     <VBox.margin>
-                        <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="10.0" right="10.0" top="15.0" />
+                           </VBox.margin>
                   </TextField>
                   <Label fx:id="checkFirstName" textFill="RED">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </VBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" />
+                           </VBox.margin>
                   </Label>
                   <TextField fx:id="lastName" promptText="last name" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
-                     <VBox.margin>
-                        <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
                   </TextField>
                   <Label fx:id="checkLastName" textFill="RED">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </VBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" />
+                           </VBox.margin>
                   </Label>
                   <TextField fx:id="username" promptText="username" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
-                     <VBox.margin>
-                        <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
                   </TextField>
                   <Label fx:id="checkUsername" textFill="RED">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </VBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" />
+                           </VBox.margin>
                   </Label>
                   <StackPane>
-                     <VBox.margin>
-                        <Insets bottom="2.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
                      <children>
-                        <PasswordField fx:id="passwordField" promptText="password" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" />
-                           </StackPane.margin></PasswordField>
                         <TextField fx:id="password" managed="false" promptText="password" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                            <StackPane.margin>
                               <Insets bottom="5.0" />
-                           </StackPane.margin></TextField>
+                           </StackPane.margin>
+                              </TextField>
+                        <PasswordField fx:id="passwordField" promptText="password" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;" />
                      </children>
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
                   </StackPane>
-                  <CheckBox fx:id="showPassword" mnemonicParsing="false" styleClass="white" text="show password">
-                     <VBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </CheckBox>
                   <Label fx:id="checkPassword" textFill="RED">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </VBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" />
+                           </VBox.margin>
                   </Label>
-                  <CheckBox fx:id="isAdmin" disable="true" mnemonicParsing="false" styleClass="white" text="admin">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
+                  <CheckBox fx:id="showPassword" mnemonicParsing="false" text="show password">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" />
+                           </VBox.margin>
                   </CheckBox>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                  <CheckBox fx:id="isAdmin" disable="true" mnemonicParsing="false" text="admin">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="15.0" />
+                           </VBox.margin>
+                  </CheckBox>
+                  <ButtonBar>
                     <buttons>
                       <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Update" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
-                           </font></Button>
+                           </font>
+                              </Button>
                     </buttons>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
                   </ButtonBar>
-                  <Label styleClass="white" text=" If you want to delete your user account, select the delete option. After deletion, you will be logged out and you will have to register if you decide to use the application again. " wrapText="true">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <VBox style="-fx-border-color: black;" styleClass="white" GridPane.rowIndex="2">
+                     <children>
+                  <Label text=" If you want to delete your user account, select the delete option. After deletion, you will be logged out and you will have to register if you decide to use the application again. " wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
                   </Label>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                  <ButtonBar>
                     <buttons>
                       <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Delete" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
-                           </font></Button>
+                           </font>
+                              </Button>
                     </buttons>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
                   </ButtonBar>
-               </children>
-            </VBox>
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </VBox>
          </children>
       </GridPane>
    </center>
