@@ -61,7 +61,9 @@ public class AboutController {
             MainWindowController controller = new MainWindowController(member);
             loader.setController(controller);
             myStage.setTitle("Main window");
-            myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            Scene scene = new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            scene.getStylesheets().add(getClass().getResource("/css/list.css").toExternalForm());
+            myStage.setScene(scene);
             myStage.setResizable(true);
             myStage.setMaximized(true);
             myStage.show();
