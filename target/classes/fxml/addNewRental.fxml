@@ -25,7 +25,7 @@
         <URL value="@/css/mainwindow.css" />
     </stylesheets>
     <center>
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="lib8" stylesheets="@../css/backgrounds.css">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="library" stylesheets="@../css/backgrounds.css">
   <columnConstraints>
     <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
@@ -140,6 +140,11 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </VBox.margin>
             </TextField>
+            <Label fx:id="checkRental" stylesheets="@../css/backgrounds.css" wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Label>
             <Label stylesheets="@../css/backgrounds.css" text=" Please select from the second table the book you want to rent to the selected user! " wrapText="true">
                <VBox.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
@@ -175,16 +180,11 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </VBox.margin>
             </TextField>
-            <CheckBox fx:id="adminSelected" disable="true" mnemonicParsing="false" text="Admin">
+            <CheckBox fx:id="adminSelected" disable="true" mnemonicParsing="false" text="admin">
                <VBox.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </VBox.margin>
             </CheckBox>
-            <Label fx:id="checkRental" stylesheets="@../css/backgrounds.css" wrapText="true">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </VBox.margin>
-            </Label>
             <ButtonBar>
               <buttons>
                 <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Add rental" textFill="WHITE">

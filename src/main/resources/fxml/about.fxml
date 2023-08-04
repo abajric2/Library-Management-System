@@ -21,7 +21,7 @@
       <URL value="@/css/mainwindow.css" />
    </stylesheets>
    <center>
-      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="lib1" stylesheets="@../css/backgrounds.css" BorderPane.alignment="CENTER">
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="library" stylesheets="@../css/backgrounds.css" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" />
         </columnConstraints>

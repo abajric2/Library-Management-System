@@ -17,9 +17,9 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RegistrationController">
    <content>
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="683.0" prefWidth="684.0" styleClass="root" stylesheets="@../css/backgrounds.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="683.0" prefWidth="684.0" styleClass="library" stylesheets="@../css/backgrounds.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="484.0" style="-fx-border-color: black;" styleClass="white">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="484.0" style="-fx-border-color: black;" styleClass="white">
          <stylesheets>
             <URL value="@/css/registration.css" />
          </stylesheets>
@@ -41,11 +41,8 @@
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
                   </Label>
-                  <TextField fx:id="firstNameId" promptText="first name" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                  <TextField fx:id="firstNameId" promptText="first name" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
@@ -59,11 +56,8 @@
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
                   </Label>
-                  <TextField fx:id="lastNameId" prefHeight="0.0" prefWidth="200.0" promptText="last name" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                  <TextField fx:id="lastNameId" prefHeight="0.0" prefWidth="200.0" promptText="last name" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
@@ -77,11 +71,8 @@
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
                   </Label>
-                  <TextField fx:id="usernameId" promptText="username" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                  <TextField fx:id="usernameId" promptText="username" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
@@ -95,11 +86,8 @@
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
                   </Label>
-                  <PasswordField fx:id="passwordId" promptText="password" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                  <PasswordField fx:id="passwordId" promptText="password" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
@@ -113,16 +101,18 @@
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
                   </Label>
-                  <PasswordField fx:id="confirmPasswordId" promptText="confirm password" style="-fx-border-radius: 20; -fx-background-radius: 20;">
+                  <PasswordField fx:id="confirmPasswordId" promptText="confirm password" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <Button fx:id="signUpId" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: #e4caab; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-color: black;" text="Sign Up">
+                  <Label fx:id="chckPasswordSame" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button fx:id="signUpId" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;" text="Sign Up" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="30.0" />
                      </VBox.margin>
@@ -130,11 +120,6 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Label fx:id="chckPasswordSame" textFill="RED">
-                     <VBox.margin>
-                        <Insets left="20.0" />
-                     </VBox.margin>
-                  </Label>
                   <Hyperlink fx:id="logIn" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#logIn" text="Already have an account? Log in!" textAlignment="CENTER" textFill="#151515">
                      <font>
                         <Font name="System Italic" size="12.0" />

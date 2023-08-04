@@ -24,7 +24,7 @@
       <URL value="@/css/mainwindow.css" />
    </stylesheets>
    <center>
-      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="693.0" prefWidth="867.0" styleClass="lib8" stylesheets="@../css/backgrounds.css">
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="693.0" prefWidth="867.0" styleClass="library" stylesheets="@../css/backgrounds.css">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="203.4000244140625" />
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="380.79998779296875" />
