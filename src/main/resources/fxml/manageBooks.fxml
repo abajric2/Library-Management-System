@@ -51,7 +51,7 @@
                   </TextField>
                   <Label fx:id="titleUpdateCheck" textFill="RED">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="authorLabel" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -61,7 +61,7 @@
                   </TextField>
                   <Label fx:id="authorUpdateCheck" textFill="RED">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="yearLabel" promptText="year of publication" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -71,7 +71,7 @@
                   </TextField>
                   <Label fx:id="yearUpdateCheck" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="genreLabel" promptText="genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -81,7 +81,7 @@
                   </TextField>
                   <Label fx:id="genreUpdateCheck" textFill="RED">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="totalNumberLabel" promptText="total number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -91,7 +91,7 @@
                   </TextField>
                   <Label fx:id="totalNumberUpdateCheck" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="availableNumberLabel" promptText="available number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -101,7 +101,7 @@
                   </TextField>
                   <Label fx:id="availableNumberUpdateCheck" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <ButtonBar>
@@ -152,7 +152,7 @@
                   </TextField>
                   <Label fx:id="titleAddCheck" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="updtAuthor" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -162,7 +162,7 @@
                   </TextField>
                   <Label fx:id="authorAddCheck" textFill="RED">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="updtYear" promptText="year of publication" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -172,7 +172,7 @@
                   </TextField>
                   <Label fx:id="yearAddCheck" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="updtGenre" promptText="genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -182,7 +182,7 @@
                   </TextField>
                   <Label fx:id="genreAddCheck" textFill="RED">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="updtTotal" promptText="total number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -192,7 +192,7 @@
                   </TextField>
                   <Label fx:id="totalNumberAddCheck" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="updtAvailable" promptText="available number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -202,7 +202,7 @@
                   </TextField>
                   <Label fx:id="availableNumberAddCheck" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <ButtonBar>

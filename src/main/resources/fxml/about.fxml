@@ -31,17 +31,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="2147483647">
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black;" styleClass="white" GridPane.rowSpan="2">
                <children>
                   <Label text="About application">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="Book Antiqua Bold Italic" size="26.0" />
+                        <Font name="Bell MT Bold" size="35.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• This application provides an online platform for book rentals. Every individual wishing to use our application must first register. Upon successful registration, you gain access to our platform and our range of services." textFill="WHITE" wrapText="true">
+                  <Label text="• This application provides an online platform for book rentals. Every individual wishing to use our application must first register. Upon successful registration, you gain access to our platform and our range of services." wrapText="true">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -49,7 +49,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• At any given time, a user can rent up to one book. If you wish to rent another book, you must first return the current one." textFill="WHITE" wrapText="true">
+                  <Label text="• At any given time, a user can rent up to one book. If you wish to rent another book, you must first return the current one." wrapText="true">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -57,7 +57,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• The rental duration for each book is three months from the day of rental. A reminder of the return deadline is conveniently displayed on your home page, ensuring you are always aware of the due date. If the rental period has expired, a notification will alert you to this fact." textFill="WHITE" wrapText="true">
+                  <Label text="• The rental duration for each book is three months from the day of rental. A reminder of the return deadline is conveniently displayed on your home page, ensuring you are always aware of the due date. If the rental period has expired, a notification will alert you to this fact." wrapText="true">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -65,7 +65,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• You can browse a comprehensive list of all the books available in our library, with the added ability to search for your desired books based on specific criteria." textFill="WHITE" wrapText="true">
+                  <Label text="• You can browse a comprehensive list of all the books available in our library, with the added ability to search for your desired books based on specific criteria." wrapText="true">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -73,7 +73,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• Please be aware that sometimes a book you're looking for may not be available. You'll be notified if this occurs." textFill="WHITE" wrapText="true">
+                  <Label text="• Please be aware that sometimes a book you're looking for may not be available. You'll be notified if this occurs." wrapText="true">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -81,7 +81,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• If you wish to view or edit your personal information, please visit your profile page. Within your profile, you also have the option to delete your account. Upon deletion, you will be automatically logged out. Should you wish to use our application again, re-registration is required." textFill="WHITE" wrapText="true">
+                  <Label text="• If you wish to view or edit your personal information, please visit your profile page. Within your profile, you also have the option to delete your account. Upon deletion, you will be automatically logged out. Should you wish to use our application again, re-registration is required." wrapText="true">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -89,7 +89,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• Users who also serve as administrators can choose to use the application as an administrator or as a regular user in case they themselves want to rent/return a book." textFill="WHITE" wrapText="true">
+                  <Label text="• Users who also serve as administrators can choose to use the application as an administrator or as a regular user in case they themselves want to rent/return a book." wrapText="true">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -97,7 +97,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• In administrator mode, it's possible to view, add, edit, and delete all available books/users in the library. Detailed information about all current rentals is also accessible, including the ability to rent a book to a user, delete a rental, see which users have overdue books, and more." textFill="WHITE" wrapText="true">
+                  <Label text="• In administrator mode, it's possible to view, add, edit, and delete all available books/users in the library. Detailed information about all current rentals is also accessible, including the ability to rent a book to a user, delete a rental, see which users have overdue books, and more." wrapText="true">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -105,7 +105,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• Only other administrators or individuals with database access can grant administrator privileges to a user." textFill="WHITE" wrapText="true">
+                  <Label text="• Only other administrators or individuals with database access can grant administrator privileges to a user." wrapText="true">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -113,7 +113,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label style="-fx-background-color: black;" text="• For further information, please do not hesitate to contact us via email @abajric2@etf.unsa.ba" textFill="WHITE" wrapText="true">
+                  <Label text="• For further information, please do not hesitate to contact us via email @abajric2@etf.unsa.ba" wrapText="true">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -122,6 +122,9 @@
                      </font>
                   </Label>
                </children>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </GridPane.margin>
             </VBox>
          </children>
       </GridPane>

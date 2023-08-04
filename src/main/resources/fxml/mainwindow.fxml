@@ -120,17 +120,11 @@
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="rentTitleId" editable="false" promptText="title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="rentAuthorId" editable="false" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -180,17 +174,11 @@
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
                   </TextField>
                   <TextField fx:id="bookTitleId" promptText="search by title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font>
                   </TextField>
                   <TextField fx:id="genreId" promptText="search by genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>

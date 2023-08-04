@@ -55,7 +55,7 @@
                       </TextField>
                   <Label fx:id="checkFirstNameAdd" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                       <TextField fx:id="lastNameAdd" promptText="last name" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -65,7 +65,7 @@
                       </TextField>
                   <Label fx:id="checkLastNameAdd" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                       <TextField fx:id="usernameAdd" promptText="username" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -75,7 +75,7 @@
                       </TextField>
                   <Label>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                       <TextField fx:id="passwordAdd" promptText="password" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -85,7 +85,7 @@
                       </TextField>
                   <Label fx:id="checkPasswordAdd" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <CheckBox fx:id="adminAdd" mnemonicParsing="false" text="admin">
@@ -120,7 +120,7 @@
                         </TextField>
                   <Label fx:id="checkFirstNameUpdt" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                         <TextField fx:id="lastNameUpdt" promptText="last name" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -130,7 +130,7 @@
                         </TextField>
                   <Label fx:id="checkLastNameUpdt" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                         <TextField fx:id="usernameUpdt" promptText="username" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -140,7 +140,7 @@
                         </TextField>
                   <Label>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                         <TextField fx:id="passwordUpdt" promptText="password" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
@@ -150,7 +150,7 @@
                         </TextField>
                   <Label fx:id="checkPasswordUpdt" textFill="RED" wrapText="true">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </Label>
                   <CheckBox fx:id="adminUpdt" mnemonicParsing="false" stylesheets="@../css/backgrounds.css" text="admin">
