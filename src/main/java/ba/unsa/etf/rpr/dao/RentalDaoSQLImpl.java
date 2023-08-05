@@ -247,18 +247,18 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             we need to increase the number of available books
             for the book that was returned
              */
-            String availableNumberUpdate = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.BOOK_ID = ?";
+           // System.out.println("OBRISANO");
+            String availableNumberUpdate = "SELECT * FROM Books b WHERE BOOK_ID = ?";
             PreparedStatement updatestmt = getConnection().prepareStatement(availableNumberUpdate);
             updatestmt.setInt(1, item.getBookID());
             ResultSet cr = updatestmt.executeQuery();
             if(cr.next()) {
-             //   System.out.println("DOSLO OVDJEEEEEEEEEEEEE");
-               // System.out.println(cr.getInt(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " +  cr.getString(4) + " " + cr.getString(5) + " " +  cr.getInt(6) + " " +  cr.getInt(7));
+               // System.out.println("DOSLO OVDJEEEEEEEEEEEEE");
+              //  System.out.println(cr.getInt(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " +  cr.getString(4) + " " + cr.getString(5) + " " +  cr.getInt(6) + " " +  cr.getInt(7));
                 BookDaoSQLImpl b = BookDaoSQLImpl.getInstance();
                 b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
                         cr.getString(5), cr.getInt(6), cr.getInt(7) + 1));
             }
-
         } catch (SQLException e) {
             throw new LibraryException(e.getMessage(), e);
         } catch (LibraryException e) {

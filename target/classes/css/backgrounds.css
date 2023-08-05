@@ -34,3 +34,7 @@
 -fx-background-image:url('../img/whiteLight.png');
 -fx-background-size:cover;
 }
+.library{
+-fx-background-image:url('../img/library.png');
+-fx-background-size:cover;
+}
