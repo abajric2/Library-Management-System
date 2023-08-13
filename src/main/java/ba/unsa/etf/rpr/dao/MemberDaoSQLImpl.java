@@ -301,4 +301,14 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         }
         return null;*/
     }
+    @Override
+    public List<Member> removeAll() throws LibraryException {
+        List<Member> oldRows = executeQuery("SELECT * FROM MEMBERS", null);
+        /*
+        In order not to change the safe update mode option, the condition is set for id > 0
+        because this will delete all rows, since I know that id is not < 0 anywhere
+         */
+        executeQuery("DELETE FROM MEMBERS WHERE MEMBER_ID > 0", null);
+        return oldRows;
+    }
 }

@@ -388,4 +388,14 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         }
         return rentals;
     }
+    @Override
+    public List<Rental> removeAll() throws LibraryException {
+        List<Rental> oldRows = executeQuery("SELECT * FROM RENTALS", null);
+        /*
+        In order not to change the safe update mode option, the condition is set for id > 0
+        because this will delete all rows, since I know that id is not < 0 anywhere
+         */
+        executeQuery("DELETE FROM RENTALS WHERE RENTAL_ID > 0", null);
+        return oldRows;
+    }
 }

@@ -41,6 +41,11 @@ public interface Dao<T> {
      * @return list of all entities from database
      */
     List<T> getAll () throws LibraryException;
+    /**
+     * deletes all rows from the database
+     * @return list of rows that were in the table before deletion
+     */
+    List<T> removeAll () throws LibraryException;
 
     /**
      * prints all data from the database in the format defined by the toString method

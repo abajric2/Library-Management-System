@@ -266,5 +266,15 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
     public Book searchById(int id) throws LibraryException {
         return executeQueryUnique("SELECT * FROM Books WHERE BOOK_ID = ?", new Object[]{id});
     }
+    @Override
+    public List<Book> removeAll() throws LibraryException {
+        List<Book> oldRows = executeQuery("SELECT * FROM Books", null);
+        /*
+        In order not to change the safe update mode option, the condition is set for id > 0
+        because this will delete all rows, since I know that id is not < 0 anywhere
+         */
+        executeQuery("DELETE FROM Books WHERE BOOK_ID > 0", null);
+        return oldRows;
+    }
 
 }

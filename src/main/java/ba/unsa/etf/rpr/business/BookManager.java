@@ -59,5 +59,8 @@ public class BookManager {
     public Book searchById(int id) throws LibraryException {
         return DaoFactory.bookDao().searchById(id);
     }
+    public List<Book> removeAll() throws LibraryException {
+        return DaoFactory.bookDao().removeAll();
+    }
 
 }

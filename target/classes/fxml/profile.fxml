@@ -88,7 +88,10 @@
                               <Insets bottom="5.0" />
                            </StackPane.margin>
                               </TextField>
-                        <PasswordField fx:id="passwordField" promptText="password" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;" />
+                        <PasswordField fx:id="passwordField" promptText="password" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" />
+                                 </StackPane.margin></PasswordField>
                      </children>
                            <VBox.margin>
                               <Insets bottom="2.0" left="10.0" right="10.0" top="5.0" />
