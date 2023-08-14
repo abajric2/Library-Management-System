@@ -316,4 +316,15 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
             throw new LibraryException("Unable to delete all members!");
         }
     }
+    @Override
+    public List<Member> insertAll(List<Member> items) {
+        List<Member> insertedMembers = new ArrayList<>();
+        for(Member member : items) {
+            try {
+                Member addedMember = add(member);
+                insertedMembers.add(addedMember);
+            } catch (LibraryException e) {}
+        }
+        return insertedMembers;
+    }
 }

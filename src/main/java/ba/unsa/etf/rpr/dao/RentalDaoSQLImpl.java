@@ -403,4 +403,15 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             throw new LibraryException("Unable to delete all rentals!");
         }
     }
+    @Override
+    public List<Rental> insertAll(List<Rental> items) {
+        List<Rental> insertedRentals = new ArrayList<>();
+        for(Rental rental : items) {
+            try {
+                Rental addedRental = add(rental);
+                insertedRentals.add(addedRental);
+            } catch (LibraryException e) {}
+        }
+        return insertedRentals;
+    }
 }

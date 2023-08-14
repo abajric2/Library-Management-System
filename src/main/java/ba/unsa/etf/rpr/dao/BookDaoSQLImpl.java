@@ -283,4 +283,15 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
       //  executeQuery("DELETE FROM Books WHERE BOOK_ID > 0", null);
     }
 
+    @Override
+    public List<Book> insertAll(List<Book> items) {
+        List<Book> insertedBooks = new ArrayList<>();
+        for(Book book : items) {
+            try {
+                Book addedBook = add(book);
+                insertedBooks.add(addedBook);
+            } catch (LibraryException e) {}
+        }
+        return insertedBooks;
+    }
 }
