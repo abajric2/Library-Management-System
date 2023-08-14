@@ -395,7 +395,12 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         In order not to change the safe update mode option, the condition is set for id > 0
         because this will delete all rows, since I know that id is not < 0 anywhere
          */
-        executeQuery("DELETE FROM RENTALS WHERE RENTAL_ID > 0", null);
-        return oldRows;
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM RENTALS WHERE RENTAL_ID > 0");
+            stmt.executeUpdate();
+            return oldRows;
+        } catch (SQLException e) {
+            throw new LibraryException("Unable to delete all rentals!");
+        }
     }
 }

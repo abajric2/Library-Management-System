@@ -273,8 +273,14 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         In order not to change the safe update mode option, the condition is set for id > 0
         because this will delete all rows, since I know that id is not < 0 anywhere
          */
-        executeQuery("DELETE FROM Books WHERE BOOK_ID > 0", null);
-        return oldRows;
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM Books WHERE BOOK_ID > 0");
+            stmt.executeUpdate();
+            return oldRows;
+        } catch (SQLException e) {
+            throw new LibraryException("Unable to delete all books!");
+        }
+      //  executeQuery("DELETE FROM Books WHERE BOOK_ID > 0", null);
     }
 
 }

@@ -308,7 +308,12 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         In order not to change the safe update mode option, the condition is set for id > 0
         because this will delete all rows, since I know that id is not < 0 anywhere
          */
-        executeQuery("DELETE FROM MEMBERS WHERE MEMBER_ID > 0", null);
-        return oldRows;
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement("DELETE FROM MEMBERS WHERE MEMBER_ID > 0");
+            stmt.executeUpdate();
+            return oldRows;
+        } catch (SQLException e) {
+            throw new LibraryException("Unable to delete all members!");
+        }
     }
 }

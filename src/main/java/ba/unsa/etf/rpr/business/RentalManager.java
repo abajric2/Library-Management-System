@@ -63,4 +63,7 @@ public class RentalManager {
     public List<Rental> searchByReturnDeadline(java.sql.Date returnDeadline) throws LibraryException {
         return DaoFactory.rentalDao().searchByReturnDeadline(returnDeadline);
     }
+    public List<Rental> removeAll() throws LibraryException {
+        return DaoFactory.rentalDao().removeAll();
+    }
 }

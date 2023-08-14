@@ -50,4 +50,7 @@ public class MemberManager {
     public Member searchByUserameandPassword(String username, String password) throws LibraryException {
         return DaoFactory.memberDao().searchByUserameandPassword(username, password);
     }
+    public List<Member> removeAll() throws LibraryException {
+        return DaoFactory.memberDao().removeAll();
+    }
 }
