@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.domain;
 
 
+import java.util.Objects;
+
 /**
  * Class for basic information and methods for managing books in a library
  * It follows the POJO specification
@@ -13,16 +15,16 @@ public class Book implements Idable {
     private String yearOfPublication;
     private String genre;
     private int totalNumber;
-    private int avilableNumber;
+    private int availableNumber;
 
-    public Book(int bookID, String title, String author, String yearOfPublication, String genre, int totalNumber, int avilableNumber) {
+    public Book(int bookID, String title, String author, String yearOfPublication, String genre, int totalNumber, int availableNumber) {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
         this.yearOfPublication = yearOfPublication;
         this.genre = genre;
         this.totalNumber = totalNumber;
-        this.avilableNumber = avilableNumber;
+        this.availableNumber = availableNumber;
     }
 
     public Book() {
@@ -77,11 +79,11 @@ public class Book implements Idable {
     }
 
     public int getAvailableNumber() {
-        return avilableNumber;
+        return availableNumber;
     }
 
-    public void setAvailableNumber(int avilableNumber) {
-        this.avilableNumber = avilableNumber;
+    public void setAvailableNumber(int availableNumber) {
+        this.availableNumber = availableNumber;
     }
 
     /**
@@ -93,7 +95,24 @@ public class Book implements Idable {
         return "\"" + title + "\" - " + author + " (" + genre + ", " + yearOfPublication + ")";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return bookID == book.bookID &&
+                totalNumber == book.totalNumber &&
+                availableNumber == book.availableNumber &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(yearOfPublication, book.yearOfPublication) &&
+                Objects.equals(genre, book.genre);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookID, title, author, yearOfPublication, genre, totalNumber, availableNumber);
+    }
 
 
 }

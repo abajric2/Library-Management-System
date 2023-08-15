@@ -1,7 +1,9 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.business.BookManager;
 import ba.unsa.etf.rpr.business.RentalManager;
 import ba.unsa.etf.rpr.controllers.LoginController;
+import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Rental;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
