@@ -68,4 +68,17 @@ public class Testing {
         assertEquals(updatedBook.getTitle(), "Updated book title", "Update failed!");
         bookManager.delete(addedBook);
     }
+    /*
+    We add the predefined book twice, so the sortByTitle
+    method should return at least 2 rows and each of the returned books must
+    have that corresponding title.
+     */
+    @Test
+    public void testSearchBookByTitle() throws LibraryException {
+        bookManager.add(testBook);
+        bookManager.add(testBook);
+        List<Book> foundBooks = bookManager.searchByTitle("Test Book");
+        assertTrue(foundBooks.size() >= 2, "The list should contain 2 or more elements.");
+        for(Book b : foundBooks) assertEquals(b.getTitle(), "Test Book", "Invalid title!");
+    }
 }
