@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Testing {
 
-    private BookManager bookManager;
+    private BookManager bookManager = new BookManager();
     private Book testBook;
 
     @BeforeEach
@@ -27,12 +27,32 @@ public class Testing {
         testBook.setTotalNumber(100);
         testBook.setAvailableNumber(90);
     }
-
+    /*
+    The add method should return the newly added book with all correct data including an
+    auto-generated id. That id is used to search on it and check to see if the corresponding
+    book is returned.
+     */
     @Test
-    public void testAddAndSearchById() throws LibraryException {
+    public void testAddBookAndSearchById() throws LibraryException {
         Book addedBook = bookManager.add(testBook);
         Book foundBook = bookManager.searchById(addedBook.getId());
         assertEquals(addedBook, foundBook, "Book not found by id!");
         bookManager.delete(addedBook);
+    }
+    /*
+    After the book is added and data about it is saved, it is deleted.
+    The searchById method throws an exception if the search by id does
+    not return any books.
+     */
+    @Test
+    public void testDeleteBook() throws LibraryException {
+        Book addedBook = bookManager.add(testBook);
+        bookManager.delete(addedBook);
+        LibraryException exception = assertThrows(
+                LibraryException.class,
+                () -> bookManager.searchById(addedBook.getId()),
+                "Expected searchById to throw LibraryException, but it didn't"
+        );
+        assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
     }
 }
