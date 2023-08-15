@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.domain;
 
+import java.util.Objects;
+
 /**
  * Class for basic information and methods for managing members of a library
  * It follows the POJO specification
@@ -81,5 +83,21 @@ public class Member implements Idable {
         return firstName + " " + lastName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return memberID == member.memberID &&
+                isAdmin == member.isAdmin &&
+                Objects.equals(firstName, member.firstName) &&
+                Objects.equals(lastName, member.lastName) &&
+                Objects.equals(username, member.username) &&
+                Objects.equals(password, member.password);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(memberID, firstName, lastName, username, password, isAdmin);
+    }
 }
