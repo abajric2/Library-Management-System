@@ -81,7 +81,7 @@ public class ManageBooksController {
         yearOfPublication.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getYearOfPublication());});
         genre.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getGenre());});
         totalNumber.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getTotalNumber()).asObject();});
-        availableNumber.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvilableNumber()).asObject();});
+        availableNumber.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvailableNumber()).asObject();});
         tableId.setItems(FXCollections.observableList(manager.getAll()));
         byAuthorId.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -207,7 +207,7 @@ public class ManageBooksController {
         yearOfPublication.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getYearOfPublication());});
         genre.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getGenre());});
         totalNumber.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getTotalNumber()).asObject();});
-        availableNumber.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvilableNumber()).asObject();});
+        availableNumber.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvailableNumber()).asObject();});
         tableId.setItems(FXCollections.observableList(manager.getAll()));
     }
 
@@ -262,7 +262,7 @@ public class ManageBooksController {
         b.setYearOfPublication(model.yearOfPublication.get());
         b.setGenre(model.genre.get());
         b.setTotalNumber(Integer.parseInt(model.totalNumber.get()));
-        b.setAvilableNumber(Integer.parseInt(model.availableNumber.get()));
+        b.setAvailableNumber(Integer.parseInt(model.availableNumber.get()));
         try {
             manager.update(b);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -357,7 +357,7 @@ public class ManageBooksController {
         b.setYearOfPublication(updtYear.getText());
         b.setGenre(updtGenre.getText());
         b.setTotalNumber(Integer.parseInt(updtTotal.getText()));
-        b.setAvilableNumber(Integer.parseInt(updtAvailable.getText()));
+        b.setAvailableNumber(Integer.parseInt(updtAvailable.getText()));
         try {
             manager.add(b);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -407,7 +407,7 @@ public class ManageBooksController {
             b.setYearOfPublication(model.yearOfPublication.get());
             b.setGenre(model.genre.get());
             b.setTotalNumber(Integer.parseInt(model.totalNumber.get()));
-            b.setAvilableNumber(Integer.parseInt(model.availableNumber.get()));
+            b.setAvailableNumber(Integer.parseInt(model.availableNumber.get()));
             try {
                 manager.delete(b);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -477,7 +477,7 @@ public class ManageBooksController {
             this.yearOfPublication.set(b.getYearOfPublication());
             this.genre.set(b.getGenre());
             this.totalNumber.set(Integer.toString(b.getTotalNumber()));
-            this.availableNumber.set(Integer.toString(b.getAvilableNumber()));
+            this.availableNumber.set(Integer.toString(b.getAvailableNumber()));
         }
 
         public Book toBook(){
@@ -487,7 +487,7 @@ public class ManageBooksController {
             b.setYearOfPublication(this.yearOfPublication.getValue());
             b.setGenre(this.genre.getValue());
             b.setTotalNumber(Integer.parseInt(totalNumber.get()));
-            b.setAvilableNumber(Integer.parseInt(availableNumber.get()));
+            b.setAvailableNumber(Integer.parseInt(availableNumber.get()));
             return b;
         }
     }

@@ -89,7 +89,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
     public boolean isAvailable(String title, String author) throws LibraryException {
         try {
             Book book = executeQueryUnique("SELECT DISTINCT AVAILABLE_NUMBER FROM Books WHERE TITLE = ? AND AUTHOR = ?", new Object[]{author});
-            return book.getAvilableNumber()>0;
+            return book.getAvailableNumber()>0;
         } catch (LibraryException e) {
             return false;
         }
@@ -113,7 +113,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         if (!item.getYearOfPublication().matches("\\d*")) {
             throw new LibraryException("The year of publication can only contain numbers!");
         }
-        if(item.getAvilableNumber() > item.getTotalNumber()) {
+        if(item.getAvailableNumber() > item.getTotalNumber()) {
             throw new LibraryException("The number of available books cannot be greater than the total number of books!");
         }
         Map<String, Object> row = object2row(item);
@@ -163,7 +163,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         if (!item.getYearOfPublication().matches("\\d*")) {
             throw new LibraryException("The year of publication can only contain numbers!");
         }
-        if(item.getAvilableNumber() > item.getTotalNumber()) {
+        if(item.getAvailableNumber() > item.getTotalNumber()) {
             throw new LibraryException("The number of available books cannot be greater than the total number of books!");
         }
         Map<String, Object> row = object2row(item);
@@ -237,7 +237,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
             book.setYearOfPublication(rs.getString("YEAR_OF_PUBLICATION"));
             book.setGenre(rs.getString("GENRE"));
             book.setTotalNumber(rs.getInt("TOTAL_NUMBER"));
-            book.setAvilableNumber(rs.getInt("AVAILABLE_NUMBER"));
+            book.setAvailableNumber(rs.getInt("AVAILABLE_NUMBER"));
             return book;
         } catch (SQLException e) {
             throw new LibraryException(e.getMessage(), e);
@@ -253,7 +253,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         row.put("YEAR_OF_PUBLICATION", object.getYearOfPublication());
         row.put("GENRE", object.getGenre());
         row.put("TOTAL_NUMBER", object.getTotalNumber());
-        row.put("AVAILABLE_NUMBER", object.getAvilableNumber());
+        row.put("AVAILABLE_NUMBER", object.getAvailableNumber());
         return row;
     }
 

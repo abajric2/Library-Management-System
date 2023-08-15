@@ -262,7 +262,7 @@ public class ManageRentalsController {
             this.bookYear.set(bookManager.searchById(r.getBookID()).getYearOfPublication());
             this.bookGenre.set(bookManager.searchById(r.getBookID()).getGenre());
             this.bookTotalNumber.set(Integer.toString(bookManager.searchById(r.getBookID()).getTotalNumber()));
-            this.bookAvailableNumber.set(Integer.toString(bookManager.searchById(r.getBookID()).getAvilableNumber()));
+            this.bookAvailableNumber.set(Integer.toString(bookManager.searchById(r.getBookID()).getAvailableNumber()));
             this.memberFirstName.set(memberManager.searchById(r.getMemberID()).getFirstName());
             this.memberLastName.set(memberManager.searchById(r.getMemberID()).getLastName());
             this.memberUsername.set(memberManager.searchById(r.getMemberID()).getUsername());

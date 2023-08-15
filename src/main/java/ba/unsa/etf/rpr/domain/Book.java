@@ -76,11 +76,11 @@ public class Book implements Idable {
         this.totalNumber = totalNumber;
     }
 
-    public int getAvilableNumber() {
+    public int getAvailableNumber() {
         return avilableNumber;
     }
 
-    public void setAvilableNumber(int avilableNumber) {
+    public void setAvailableNumber(int avilableNumber) {
         this.avilableNumber = avilableNumber;
     }
 

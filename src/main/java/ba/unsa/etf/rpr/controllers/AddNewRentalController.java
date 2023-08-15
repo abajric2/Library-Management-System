@@ -82,7 +82,7 @@ public class AddNewRentalController {
         year.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getYearOfPublication());});
         genre.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getGenre());});
         total.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getTotalNumber()).asObject();});
-        available.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvilableNumber()).asObject();});
+        available.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvailableNumber()).asObject();});
         booksTable.setItems(FXCollections.observableList(bookManager.getAll()));
         userId.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleIntegerProperty(member.getId()).asObject();});
         firstName.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleStringProperty(member.getFirstName());});
@@ -252,7 +252,7 @@ public class AddNewRentalController {
             year.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getYearOfPublication());});
             genre.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getGenre());});
             total.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getTotalNumber()).asObject();});
-            available.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvilableNumber()).asObject();});
+            available.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvailableNumber()).asObject();});
             booksTable.setItems(FXCollections.observableList(bookManager.getAll()));
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -271,7 +271,7 @@ public class AddNewRentalController {
         year.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getYearOfPublication());});
         genre.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getGenre());});
         total.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getTotalNumber()).asObject();});
-        available.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvilableNumber()).asObject();});
+        available.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvailableNumber()).asObject();});
         booksTable.setItems(FXCollections.observableList(bookManager.getAll()));
     }
 
@@ -356,7 +356,7 @@ public class AddNewRentalController {
             this.yearOfPublication.set(b.getYearOfPublication());
             this.genre.set(b.getGenre());
             this.totalNumber.set(Integer.toString(b.getTotalNumber()));
-            this.availableNumber.set(Integer.toString(b.getAvilableNumber()));
+            this.availableNumber.set(Integer.toString(b.getAvailableNumber()));
         }
 
         public Book toBook(){
@@ -366,7 +366,7 @@ public class AddNewRentalController {
             b.setYearOfPublication(this.yearOfPublication.getValue());
             b.setGenre(this.genre.getValue());
             b.setTotalNumber(Integer.parseInt(totalNumber.get()));
-            b.setAvilableNumber(Integer.parseInt(availableNumber.get()));
+            b.setAvailableNumber(Integer.parseInt(availableNumber.get()));
             return b;
         }
     }

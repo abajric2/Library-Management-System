@@ -425,7 +425,7 @@ public class MainWindowController {
             this.yearOfPublication.set(b.getYearOfPublication());
             this.genre.set(b.getGenre());
             this.totalNumber.set(Integer.toString(b.getTotalNumber()));
-            this.availableNumber.set(Integer.toString(b.getAvilableNumber()));
+            this.availableNumber.set(Integer.toString(b.getAvailableNumber()));
         }
 
         public Book toBook(){
@@ -435,7 +435,7 @@ public class MainWindowController {
             b.setYearOfPublication(this.yearOfPublication.getValue());
             b.setGenre(this.genre.getValue());
             b.setTotalNumber(Integer.parseInt(totalNumber.get()));
-            b.setAvilableNumber(Integer.parseInt(availableNumber.get()));
+            b.setAvailableNumber(Integer.parseInt(availableNumber.get()));
             return b;
         }
     }
