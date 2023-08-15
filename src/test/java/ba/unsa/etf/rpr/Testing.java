@@ -55,4 +55,17 @@ public class Testing {
         );
         assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
     }
+    /*
+    Since the id of the book has not been changed, the title of the
+    corresponding book will be updated based on it.
+     */
+    @Test
+    public void testUpdateBook() throws LibraryException {
+        Book addedBook = bookManager.add(testBook);
+        addedBook.setTitle("Updated book title");
+        bookManager.update(addedBook);
+        Book updatedBook = bookManager.searchById(addedBook.getId());
+        assertEquals(updatedBook.getTitle(), "Updated book title", "Update failed!");
+        bookManager.delete(addedBook);
+    }
 }
