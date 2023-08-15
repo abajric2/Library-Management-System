@@ -61,7 +61,7 @@ public class LoginController {
         MemberManager mimp = new MemberManager();
         Member m = new Member();
         try {
-            m = mimp.searchByUserameandPassword(usernameId.getText(), passwordId.getText());
+            m = mimp.searchByUsernameAndPassword(usernameId.getText(), passwordId.getText());
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");

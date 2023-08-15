@@ -273,7 +273,7 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     }
 
     @Override
-    public Member searchByUserameandPassword(String username, String password) throws LibraryException {
+    public Member searchByUsernameAndPassword(String username, String password) throws LibraryException {
         return executeQueryUnique("SELECT * FROM MEMBERS WHERE BINARY USERNAME = ? AND BINARY PASSWORD = ?", new Object[]{username, password});
         //return executeQueryUnique("SELECT * FROM MEMBERS WHERE USERNAME = ? AND PASSWORD = ?", new Object[]{username, password});
        /* String query = "SELECT * FROM MEMBERS WHERE USERNAME = ? AND PASSWORD = ?";

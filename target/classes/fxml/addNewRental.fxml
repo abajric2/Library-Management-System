@@ -140,6 +140,11 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </VBox.margin>
             </TextField>
+            <CheckBox fx:id="adminSelected" disable="true" mnemonicParsing="false" text="admin">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </CheckBox>
             <Label fx:id="checkRental" stylesheets="@../css/backgrounds.css" wrapText="true">
                <VBox.margin>
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
@@ -180,11 +185,6 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </VBox.margin>
             </TextField>
-            <CheckBox fx:id="adminSelected" disable="true" mnemonicParsing="false" text="admin">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </VBox.margin>
-            </CheckBox>
             <ButtonBar>
               <buttons>
                 <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Add rental" textFill="WHITE">
