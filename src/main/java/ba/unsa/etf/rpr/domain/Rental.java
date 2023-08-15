@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.domain;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * Class that contains basic information about borrowing a book from the library
@@ -80,5 +81,21 @@ public class Rental implements Idable {
         String rent = simpleDateFormat.format(rentDate);
         String returndl = simpleDateFormat.format(returnDeadline);
         return "The book was rented on " + rent + " and should be returned until " + returndl;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rental rental = (Rental) o;
+        return rentalID == rental.rentalID &&
+                bookID == rental.bookID &&
+                memberID == rental.memberID &&
+                Objects.equals(rentDate, rental.rentDate) &&
+                Objects.equals(returnDeadline, rental.returnDeadline);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rentalID, bookID, memberID, rentDate, returnDeadline);
     }
 }
