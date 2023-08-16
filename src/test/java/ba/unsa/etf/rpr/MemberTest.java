@@ -92,11 +92,29 @@ public class MemberTest {
         assertEquals("Someone is already using this username", exception.getMessage(), "Unexpected exception message");
         memberManager.delete(addedMember);
     }
+    /*
+    Testing multiple member search methods by various criteria.
+     */
     @Test
-    public void testSearchByUsernameAndPassword() throws LibraryException {
+    public void testMultiCriteriaSearch() throws LibraryException {
         Member addedMember = memberManager.add(testMember);
-        Member foundMember = memberManager.searchByUsernameAndPassword(addedMember.getUsername(), addedMember.getPassword());
-        assertEquals(addedMember, foundMember, "User not found by username and password!");
+        // Testing search by username and password
+        Member memberByUsernameAndPassword = memberManager.searchByUsernameAndPassword(addedMember.getUsername(), addedMember.getPassword());
+        assertEquals(addedMember, memberByUsernameAndPassword, "User not found by username and password!");
+        assertEquals(addedMember.getUsername(), memberByUsernameAndPassword.getUsername(), "Username does not match!");
+        assertEquals(addedMember.getPassword(), memberByUsernameAndPassword.getPassword(), "Password does not match!");
+        // Testing search by username
+        List<Member> memberByUsername = memberManager.searchByUsername(addedMember.getUsername());
+        assertTrue(memberByUsername.contains(addedMember));
+        // Testing search by first and last name using searchByName method
+        List<Member> memberByFirstAndLastName = memberManager.searchByName(addedMember.getFirstName() + " " + addedMember.getLastName());
+        assertTrue(memberByFirstAndLastName.contains(addedMember));
+        // searchByName should also work when we specify only part of the name as a parameter (e.g. only the first name)
+        List<Member> memberByFirstName = memberManager.searchByName(addedMember.getFirstName());
+        assertTrue(memberByFirstName.contains(addedMember));
+        // searchByName should also work when we specify only part of the name as a parameter (e.g. only the last name)
+        List<Member> memberByLastName = memberManager.searchByName(addedMember.getLastName());
+        assertTrue(memberByLastName.contains(addedMember));
         memberManager.delete(addedMember);
     }
 }
