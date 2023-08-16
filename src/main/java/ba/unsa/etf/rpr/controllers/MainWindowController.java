@@ -230,7 +230,7 @@ public class MainWindowController {
         }
         RentalManager r = new RentalManager();
         try {
-            Rental rental = r.rentABook(member.getId(), idUpdate, rentTitleId.getText(), rentAuthorId.getText());
+            Rental rental = r.rentABook(member.getId(), idUpdate);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);

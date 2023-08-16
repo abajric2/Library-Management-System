@@ -52,8 +52,8 @@ public class RentalManager {
         return DaoFactory.rentalDao().getBook(r);
     }
 
-    public Rental rentABook(int memberID, int bookId, String bookTitle, String author) throws LibraryException {
-        return DaoFactory.rentalDao().rentABook(memberID, bookId, bookTitle, author);
+    public Rental rentABook(int memberID, int bookId) throws LibraryException {
+        return DaoFactory.rentalDao().rentABook(memberID, bookId);
     }
 
     public List<Rental> getDeadlineExceedings() throws LibraryException {

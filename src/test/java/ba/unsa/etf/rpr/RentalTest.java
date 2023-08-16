@@ -138,7 +138,7 @@ public class RentalTest {
     }
     @Test
     public void testRentABook() throws LibraryException {
-        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId(), addedBook.getTitle(), addedBook.getAuthor());
+        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId());
         Rental foundRental = rentalManager.searchById(addedRental.getId());
         assertEquals(addedRental, foundRental);
         // Attempting to rent a book to a user who currently owns the book throws an exception!
@@ -146,7 +146,7 @@ public class RentalTest {
         Book addedBookForRent = bookManager.add(testBookForRent);
         LibraryException exceptionById = assertThrows(
                 LibraryException.class,
-                () -> rentalManager.rentABook(addedMember.getId(), addedBookForRent.getId(), addedBookForRent.getTitle(), addedBookForRent.getAuthor()),
+                () -> rentalManager.rentABook(addedMember.getId(), addedBookForRent.getId()),
                 "Expected rentABook to throw LibraryException, but it didn't"
         );
         assertEquals("You can't rent a book because you haven't returned the one you rented earlier.", exceptionById.getMessage(), "Unexpected exception message");
@@ -157,7 +157,7 @@ public class RentalTest {
     }
     @Test
     public void testReturnRentedBook() throws LibraryException {
-        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId(), addedBook.getTitle(), addedBook.getAuthor());
+        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId());
         rentalManager.returnRentedBook(addedRental.getMemberID());
         LibraryException exceptionById = assertThrows(
                 LibraryException.class,
@@ -185,7 +185,7 @@ public class RentalTest {
         Rental checkRental = rentalManager.checkUsersRental(addedMember.getId());
         assertNull(checkRental, "checkUsersRental should return null but it didn't!");
         // After we add a rental to a user, checkUsersRental should return that rental.
-        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId(), addedBook.getTitle(), addedBook.getAuthor());
+        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId());
         Rental checkAfterRenting = rentalManager.checkUsersRental(addedMember.getId());
         assertEquals(addedRental, checkAfterRenting, "checkUsersRental should return recently added rental but it didn't");
         // After returning the book, checkUsersRental should return null

@@ -328,7 +328,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         return (java.sql.Date) cal.getTime();*/
     }
     @Override
-    public Rental rentABook(int memberID, int bookId, String bookTitle, String author) throws LibraryException {
+    public Rental rentABook(int memberID, int bookId) throws LibraryException {
         Rental r = checkUsersRental(memberID);
         if(r != null) {
             throw new LibraryException("You can't rent a book because you haven't returned the one you rented earlier.");
