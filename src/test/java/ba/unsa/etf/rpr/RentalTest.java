@@ -149,13 +149,21 @@ public class RentalTest {
     public void testReturnRentedBook() throws LibraryException {
         Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId(), addedBook.getTitle(), addedBook.getAuthor());
         rentalManager.returnRentedBook(addedRental.getMemberID());
-        LibraryException exception = assertThrows(
+        LibraryException exceptionById = assertThrows(
                 LibraryException.class,
                 () -> rentalManager.searchById(addedRental.getId()),
                 "Expected searchById to throw LibraryException, but it didn't"
         );
-        assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
+        assertEquals("Object not found", exceptionById.getMessage(), "Unexpected exception message");
+        // Attempting to return a book if the user currently has no rented books throws an exception
+        LibraryException exceptionReturn = assertThrows(
+                LibraryException.class,
+                () -> rentalManager.returnRentedBook(addedRental.getMemberID()),
+                "Expected returnRentedBook to throw LibraryException, but it didn't"
+        );
+        assertEquals("You have not rented any books", exceptionReturn.getMessage(), "Unexpected exception message");
         bookManager.delete(addedBook);
         memberManager.delete(addedMember);
     }
+
 }
