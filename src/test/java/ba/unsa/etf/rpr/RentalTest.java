@@ -105,4 +105,11 @@ public class RentalTest {
         );
         assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
     }
+    @Test
+    public void testSearchByReturnDeadline() throws LibraryException {
+        Rental addedRental = rentalManager.add(testRental);
+        List<Rental> foundRentals = rentalManager.searchByReturnDeadline(addedRental.getReturnDeadline());
+        assertTrue(foundRentals.contains(addedRental), "Rental not found by return deadline!");
+        rentalManager.delete(addedRental);
+    }
 }
