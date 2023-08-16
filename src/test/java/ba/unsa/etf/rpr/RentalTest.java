@@ -175,5 +175,22 @@ public class RentalTest {
         bookManager.delete(addedBook);
         memberManager.delete(addedMember);
     }
-
+    @Test
+    public void testCheckUsersRental() throws LibraryException {
+        /*
+        The user whose rentals we are checking was added for test purposes only
+        and at the end of each test his rentals are deleted, so he should not
+        have any rentals at this time.
+         */
+        Rental checkRental = rentalManager.checkUsersRental(addedMember.getId());
+        assertNull(checkRental, "checkUsersRental should return null but it didn't!");
+        // After we add a rental to a user, checkUsersRental should return that rental.
+        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId(), addedBook.getTitle(), addedBook.getAuthor());
+        Rental checkAfterRenting = rentalManager.checkUsersRental(addedMember.getId());
+        assertEquals(addedRental, checkAfterRenting, "checkUsersRental should return recently added rental but it didn't");
+        // After returning the book, checkUsersRental should return null
+        rentalManager.returnRentedBook(addedMember.getId());
+        Rental checkAfterReturn = rentalManager.checkUsersRental(addedMember.getId());
+        assertNull(checkAfterReturn, "checkUsersRental should return null but it didn't!");
+    }
 }
