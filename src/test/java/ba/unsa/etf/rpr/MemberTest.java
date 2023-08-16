@@ -2,11 +2,15 @@ package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.business.BookManager;
 import ba.unsa.etf.rpr.business.MemberManager;
+import ba.unsa.etf.rpr.business.RentalManager;
 import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Member;
+import ba.unsa.etf.rpr.domain.Rental;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +20,7 @@ public class MemberTest {
     private Member testMember;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws LibraryException {
         memberManager = new MemberManager();
         testMember = new Member();
         testMember.setId(1);
@@ -48,5 +52,30 @@ public class MemberTest {
                 "Expected searchById to throw LibraryException, but it didn't"
         );
         assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
+    }
+    /*
+    We add a user, and after that we update some data for him except the username.
+    Adding such a user should throw an exception because the username is unique.
+     */
+    @Test
+    public void testDuplicateUsernameAddition() throws LibraryException {
+        Member addedMember = memberManager.add(testMember);
+        testMember.setFirstName("Second test first name");
+        testMember.setLastName("Second test last name");
+        testMember.setPassword("Second test password");
+        LibraryException exception = assertThrows(
+                LibraryException.class,
+                () -> memberManager.add(testMember),
+                "Expected adding user with existing username to throw LibraryException, but it didn't"
+        );
+        assertEquals("Someone is already using this username", exception.getMessage(), "Unexpected exception message");
+        memberManager.delete(addedMember);
+    }
+    @Test
+    public void testSearchByUsernameAndPassword() throws LibraryException {
+        Member addedMember = memberManager.add(testMember);
+        Member foundMember = memberManager.searchByUsernameAndPassword(addedMember.getUsername(), addedMember.getPassword());
+        assertEquals(addedMember, foundMember, "User not found by username and password!");
+        memberManager.delete(addedMember);
     }
 }
