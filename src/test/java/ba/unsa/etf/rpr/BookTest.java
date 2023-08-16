@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BookTest {
 
-    private BookManager bookManager = new BookManager();
+    private BookManager bookManager;
     private Book testBook;
 
     @BeforeEach
