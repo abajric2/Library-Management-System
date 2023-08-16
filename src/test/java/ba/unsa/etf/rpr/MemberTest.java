@@ -29,6 +29,27 @@ public class MemberTest {
         testMember.setUsername("Test Username");
         testMember.setPassword("Test Password");
         testMember.setAdmin(false);
+        /*
+        In case there is a user with the username of the user
+        we are trying to add, we will delete it because adding
+        it would cause us an exception, and we don't want that here.
+         */
+        List<Member> allMembers = memberManager.getAll();
+        RentalManager rentalManager = new RentalManager();
+        List<Rental> allRentals = rentalManager.getAll();
+        for(Member member : allMembers) {
+            if(member.getUsername().equals(testMember.getUsername())) {
+                /*
+                If there is a rental for a user we want to delete,
+                we won't be able to delete it until we delete that rental.
+                 */
+                for(Rental rental : allRentals) {
+                    if(rental.getMemberID() == member.getId()) rentalManager.delete(rental);
+                }
+                memberManager.delete(member);
+                break;
+            }
+        }
     }
     /*
     The test checks the methods that perform the basic operations
