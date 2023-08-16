@@ -47,6 +47,15 @@ public class BookTest {
         bookManager.update(addedBook);
         Book updatedBook = bookManager.searchById(addedBook.getId());
         assertEquals(updatedBook.getTitle(), "Updated book title", "Update failed!");
+
+        // Invalid data case
+        addedBook.setYearOfPublication("ab");
+        LibraryException exceptionInvalidYear = assertThrows(
+                LibraryException.class,
+                () -> bookManager.update(addedBook),
+                "Expected update to throw LibraryException, but it didn't"
+        );
+        assertEquals("The year of publication can only contain numbers!", exceptionInvalidYear.getMessage(), "Unexpected exception message");
         /*
         After the book is added and data about it is saved, it is deleted.
         The searchById method throws an exception if the search by id does
