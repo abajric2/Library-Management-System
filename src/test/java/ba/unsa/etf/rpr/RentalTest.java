@@ -192,5 +192,7 @@ public class RentalTest {
         rentalManager.returnRentedBook(addedMember.getId());
         Rental checkAfterReturn = rentalManager.checkUsersRental(addedMember.getId());
         assertNull(checkAfterReturn, "checkUsersRental should return null but it didn't!");
+        bookManager.delete(addedBook);
+        memberManager.delete(addedMember);
     }
 }
