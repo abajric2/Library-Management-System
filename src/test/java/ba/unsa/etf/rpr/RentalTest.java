@@ -195,4 +195,25 @@ public class RentalTest {
         bookManager.delete(addedBook);
         memberManager.delete(addedMember);
     }
+    /*
+    If an attempt is made to delete a book while it is rented to a user, or to
+    delete a user who currently has a rented book, an exception should be thrown.
+     */
+    @Test
+    public void testDeleteBookOrMemberBeforeRentalRemoval() throws LibraryException {
+        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId());
+        assertThrows(
+                LibraryException.class,
+                () -> bookManager.delete(addedBook),
+                "Expected delete to throw LibraryException, but it didn't"
+        );
+        assertThrows(
+                LibraryException.class,
+                () -> memberManager.delete(addedMember),
+                "Expected delete to throw LibraryException, but it didn't"
+        );
+        rentalManager.delete(addedRental);
+        bookManager.delete(addedBook);
+        memberManager.delete(addedMember);
+    }
 }
