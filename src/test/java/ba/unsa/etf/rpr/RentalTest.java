@@ -136,5 +136,13 @@ public class RentalTest {
         bookManager.delete(addedBook);
         memberManager.delete(addedMember);
     }
-
+    @Test
+    public void testRentABook() throws LibraryException {
+        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId(), addedBook.getTitle(), addedBook.getAuthor());
+        Rental foundRental = rentalManager.searchById(addedRental.getId());
+        assertEquals(addedRental, foundRental);
+        rentalManager.delete(addedRental);
+        bookManager.delete(addedBook);
+        memberManager.delete(addedMember);
+    }
 }
