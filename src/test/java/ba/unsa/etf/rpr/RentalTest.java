@@ -145,4 +145,17 @@ public class RentalTest {
         bookManager.delete(addedBook);
         memberManager.delete(addedMember);
     }
+    @Test
+    public void testReturnRentedBook() throws LibraryException {
+        Rental addedRental = rentalManager.rentABook(addedMember.getId(), addedBook.getId(), addedBook.getTitle(), addedBook.getAuthor());
+        rentalManager.returnRentedBook(addedRental.getMemberID());
+        LibraryException exception = assertThrows(
+                LibraryException.class,
+                () -> rentalManager.searchById(addedRental.getId()),
+                "Expected searchById to throw LibraryException, but it didn't"
+        );
+        assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
+        bookManager.delete(addedBook);
+        memberManager.delete(addedMember);
+    }
 }
