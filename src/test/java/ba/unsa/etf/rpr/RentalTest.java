@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,8 +44,28 @@ public class RentalTest {
         testMember.setUsername("Test Username");
         testMember.setPassword("Test Password");
         testMember.setAdmin(false);
-        Member addedMember = memberManager.add(testMember);
+        /*
+        In case there is a user with the username of the user
+        we are trying to add, we will delete it because adding
+        it would cause us an exception, and we don't want that here.
+         */
+        List<Member> allMembers = memberManager.getAll();
         rentalManager = new RentalManager();
+        List<Rental> allRentals = rentalManager.getAll();
+        for(Member member : allMembers) {
+            if(member.getUsername().equals(testMember.getUsername())) {
+                /*
+                If there is a rental for a user we want to delete,
+                we won't be able to delete it until we delete that rental.
+                 */
+                for(Rental rental : allRentals) {
+                    if(rental.getMemberID() == member.getId()) rentalManager.delete(rental);
+                }
+                memberManager.delete(member);
+                break;
+            }
+        }
+        Member addedMember = memberManager.add(testMember);
         testRental = new Rental();
         testRental.setId(1);
         testRental.setBookID(addedBook.getId());
@@ -56,5 +77,4 @@ public class RentalTest {
         testRental.setRentDate(sqlCurrentDate);
         testRental.setReturnDeadline(sqlDateThreeMonthsLater);
     }
-
 }

@@ -137,7 +137,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         String updateColumns = prepareUpdateParts(row, "RENTAL_ID");
         StringBuilder builder = new StringBuilder();
         builder.append("UPDATE ")
-                .append("RENTAL")
+                .append("RENTALS")
                 .append(" SET ")
                 .append(updateColumns)
                 .append(" WHERE RENTAL_ID = ?");
