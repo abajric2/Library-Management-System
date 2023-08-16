@@ -66,6 +66,24 @@ public class MemberTest {
         Member foundUpdatedMember = memberManager.searchById(addedMember.getId());
         // When updating the user's name, his id should not be changed.
         assertEquals(foundMember.getId(), foundUpdatedMember.getId(), "Update failure!");
+
+        // Invalid data case
+        addedMember.setFirstName("11");
+        LibraryException exceptionInvalidName = assertThrows(
+                LibraryException.class,
+                () -> memberManager.update(addedMember),
+                "Expected update to throw LibraryException, but it didn't"
+        );
+        assertEquals("First name can only contain letters, spaces and dashes", exceptionInvalidName.getMessage(), "Unexpected exception message");
+        testMember.setFirstName("Test First Name");
+        testMember.setPassword("ab12");
+        LibraryException exceptionInvalidPassword = assertThrows(
+                LibraryException.class,
+                () -> memberManager.add(testMember),
+                "Expected update to throw LibraryException, but it didn't"
+        );
+        assertEquals("Password must be at least 8 characters long!", exceptionInvalidPassword.getMessage(), "Unexpected exception message");
+
         memberManager.delete(addedMember);
         LibraryException exception = assertThrows(
                 LibraryException.class,
