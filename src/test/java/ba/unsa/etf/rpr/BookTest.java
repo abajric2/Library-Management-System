@@ -115,7 +115,8 @@ public class BookTest {
                 /*
                 Deleting a book that is currently rented will throw an exception.
                 Therefore, it is necessary to first delete such a rental if it exists,
-                and then delete the book.
+                and then delete the book. We are doing this because a book with this
+                genre could have been added unrelated to the tests.
                  */
                 for(Rental rental : allRentals) {
                     if(rental.getBookID() == book.getId()) rentalManager.delete(rental);
