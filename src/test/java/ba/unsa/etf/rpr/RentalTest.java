@@ -77,4 +77,29 @@ public class RentalTest {
         testRental.setRentDate(sqlCurrentDate);
         testRental.setReturnDeadline(sqlDateThreeMonthsLater);
     }
+    /*
+    The test checks the methods that perform the basic operations
+    of interacting with the database. As part of that, the search
+    by id is also being tested.
+     */
+    @Test
+    public void CRUDAndSearchByIdTest() throws LibraryException {
+        Rental addedRental = rentalManager.add(testRental);
+        Rental foundRental = rentalManager.searchById(addedRental.getId());
+        assertEquals(foundRental, addedRental, "Rental just added, but search by its id does not find it!");
+        LocalDate updateReturnDeadline = LocalDate.now().plusMonths(4);
+        Date sqlUpdateReturnDeadline = Date.valueOf(updateReturnDeadline);
+        addedRental.setReturnDeadline(sqlUpdateReturnDeadline);
+        rentalManager.update(addedRental);
+        Rental foundUpdatedRental = rentalManager.searchById(addedRental.getId());
+        // When updating the return deadline of rental, rentals id should not be changed.
+        assertEquals(foundRental.getId(), foundUpdatedRental.getId(), "Update failure!");
+        rentalManager.delete(addedRental);
+        LibraryException exception = assertThrows(
+                LibraryException.class,
+                () -> rentalManager.searchById(addedRental.getId()),
+                "Expected searchById to throw LibraryException, but it didn't"
+        );
+        assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
+    }
 }
