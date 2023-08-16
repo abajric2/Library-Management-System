@@ -78,7 +78,7 @@ public class MemberTest {
                 "Expected update to throw LibraryException, but it didn't"
         );
         assertEquals("First name can only contain letters, spaces and dashes", exceptionInvalidName.getMessage(), "Unexpected exception message");
-        testMember.setFirstName("Test First Name");
+        addedMember.setFirstName("Test First Name");
         testMember.setPassword("ab12");
         LibraryException exceptionInvalidPassword = assertThrows(
                 LibraryException.class,
@@ -86,6 +86,7 @@ public class MemberTest {
                 "Expected update to throw LibraryException, but it didn't"
         );
         assertEquals("Password must be at least 8 characters long!", exceptionInvalidPassword.getMessage(), "Unexpected exception message");
+        testMember.setPassword("Test Password");
 
         // testing delete
         memberManager.delete(addedMember);

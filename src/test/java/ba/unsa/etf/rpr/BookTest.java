@@ -59,6 +59,7 @@ public class BookTest {
                 "Expected update to throw LibraryException, but it didn't"
         );
         assertEquals("The year of publication can only contain numbers!", exceptionInvalidYear.getMessage(), "Unexpected exception message");
+        addedBook.setYearOfPublication("2023");
 
         /*
         TESTING DELETE
@@ -73,7 +74,6 @@ public class BookTest {
                 "Expected searchById to throw LibraryException, but it didn't"
         );
         assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
-        bookManager.delete(addedBook);
     }
     /*
     We add the predefined book twice, so the sortByTitle
@@ -82,13 +82,11 @@ public class BookTest {
      */
     @Test
     public void testSearchByTitle() throws LibraryException {
-        Book addedBook1 = bookManager.add(testBook);
-        Book addedBook2 = bookManager.add(testBook);
+        Book addedBook = bookManager.add(testBook);
         List<Book> foundBooks = bookManager.searchByTitle("Test Book");
-        assertTrue(foundBooks.size() >= 2, "The list should contain 2 or more elements.");
+        assertTrue(foundBooks.contains(addedBook), "The list should contain recently added book!");
         for(Book b : foundBooks) assertEquals(b.getTitle(), "Test Book", "Invalid title!");
-        bookManager.delete(addedBook1);
-        bookManager.delete(addedBook2);
+        bookManager.delete(addedBook);
     }
     @Test
     public void testSearchByAuthor() throws LibraryException {
