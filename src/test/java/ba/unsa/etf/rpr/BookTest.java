@@ -1,7 +1,9 @@
 package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.business.BookManager;
+import ba.unsa.etf.rpr.business.RentalManager;
 import ba.unsa.etf.rpr.domain.Book;
+import ba.unsa.etf.rpr.domain.Rental;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -93,5 +95,35 @@ public class BookTest {
         List<Book> foundUpdatedBooks = bookManager.searchByAuthor("Second test Author");
         assertTrue(foundUpdatedBooks.contains(addedBook), "Updated book not found by author!");
         bookManager.delete(addedBook);
+    }
+    /*
+    We first perform a trivial search by genre after adding a book that has
+    exactly the genre we are looking for. Then we delete all the books that
+    are of a certain genre, after which the search by that genre should
+    return an empty list.
+     */
+    @Test
+    public void testSearchByGenre() throws LibraryException {
+        Book addedBook = bookManager.add(testBook);
+        List<Book> foundBooks = bookManager.searchByGenre("Test Genre");
+        assertTrue(foundBooks.contains(addedBook), "Book not found by genre!");
+        List<Book> allBooks = bookManager.getAll();
+        RentalManager rentalManager = new RentalManager();
+        List<Rental> allRentals = rentalManager.getAll();
+        for(Book book : allBooks) {
+            if(book.getGenre().equals("Test Genre")) {
+                /*
+                Deleting a book that is currently rented will throw an exception.
+                Therefore, it is necessary to first delete such a rental if it exists,
+                and then delete the book.
+                 */
+                for(Rental rental : allRentals) {
+                    if(rental.getBookID() == book.getId()) rentalManager.delete(rental);
+                }
+                bookManager.delete(book);
+            }
+        }
+        List<Book> foundBooksAfterDeletion = bookManager.searchByGenre("Test Genre");
+        assertTrue(foundBooksAfterDeletion.isEmpty(), "List should be empty!");
     }
 }
