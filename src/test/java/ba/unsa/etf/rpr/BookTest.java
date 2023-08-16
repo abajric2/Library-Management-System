@@ -30,25 +30,28 @@ public class BookTest {
         testBook.setAvailableNumber(90);
     }
     /*
-    The add method should return the newly added book with all correct data including an
-    auto-generated id. That id is used to search on it and check to see if the corresponding
-    book is returned.
+    The test checks the methods that perform the basic operations
+    of interacting with the database. As part of that, the search
+    by id is also being tested.
      */
     @Test
-    public void testAddAndSearchById() throws LibraryException {
+    public void testCRUDAndSearchById() throws LibraryException {
         Book addedBook = bookManager.add(testBook);
         Book foundBook = bookManager.searchById(addedBook.getId());
         assertEquals(addedBook, foundBook, "Book not found by id!");
-        bookManager.delete(addedBook);
-    }
-    /*
-    After the book is added and data about it is saved, it is deleted.
-    The searchById method throws an exception if the search by id does
-    not return any books.
-     */
-    @Test
-    public void testDelete() throws LibraryException {
-        Book addedBook = bookManager.add(testBook);
+        /*
+        Since the id of the book has not been changed, the title of the
+        corresponding book will be updated based on it.
+         */
+        addedBook.setTitle("Updated book title");
+        bookManager.update(addedBook);
+        Book updatedBook = bookManager.searchById(addedBook.getId());
+        assertEquals(updatedBook.getTitle(), "Updated book title", "Update failed!");
+        /*
+        After the book is added and data about it is saved, it is deleted.
+        The searchById method throws an exception if the search by id does
+        not return any books.
+         */
         bookManager.delete(addedBook);
         LibraryException exception = assertThrows(
                 LibraryException.class,
@@ -56,18 +59,6 @@ public class BookTest {
                 "Expected searchById to throw LibraryException, but it didn't"
         );
         assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
-    }
-    /*
-    Since the id of the book has not been changed, the title of the
-    corresponding book will be updated based on it.
-     */
-    @Test
-    public void testUpdate() throws LibraryException {
-        Book addedBook = bookManager.add(testBook);
-        addedBook.setTitle("Updated book title");
-        bookManager.update(addedBook);
-        Book updatedBook = bookManager.searchById(addedBook.getId());
-        assertEquals(updatedBook.getTitle(), "Updated book title", "Update failed!");
         bookManager.delete(addedBook);
     }
     /*
