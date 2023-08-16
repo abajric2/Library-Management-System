@@ -18,14 +18,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RentalTest {
     private RentalManager rentalManager;
+    private BookManager bookManager;
+    private MemberManager memberManager;
+    private Book testBook;
+    private Book addedBook;
+    private Member testMember;
+    private Member addedMember;
     private Rental testRental;
+
 
     @BeforeEach
     public void setup() throws LibraryException {
         // Creating and adding a test book to be rented.
-        BookManager bookManager;
         bookManager = new BookManager();
-        Book testBook;
         testBook = new Book();
         testBook.setId(1);
         testBook.setTitle("Test Book");
@@ -34,11 +39,9 @@ public class RentalTest {
         testBook.setGenre("Test Genre");
         testBook.setTotalNumber(100);
         testBook.setAvailableNumber(90);
-        Book addedBook = bookManager.add(testBook);
+        addedBook = bookManager.add(testBook);
         // Creating and adding a test article to which the book will be rented.
-        MemberManager memberManager;
         memberManager = new MemberManager();
-        Member testMember;
         testMember = new Member();
         testMember.setId(1);
         testMember.setFirstName("Test First Name");
@@ -67,7 +70,7 @@ public class RentalTest {
                 break;
             }
         }
-        Member addedMember = memberManager.add(testMember);
+        addedMember = memberManager.add(testMember);
         // Creating a test rental and using the ids of the newly added test member and book.
         testRental = new Rental();
         testRental.setId(1);
@@ -104,6 +107,8 @@ public class RentalTest {
                 "Expected searchById to throw LibraryException, but it didn't"
         );
         assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
+        bookManager.delete(addedBook);
+        memberManager.delete(addedMember);
     }
     @Test
     public void testSearchByReturnDeadline() throws LibraryException {
@@ -111,6 +116,8 @@ public class RentalTest {
         List<Rental> foundRentals = rentalManager.searchByReturnDeadline(addedRental.getReturnDeadline());
         assertTrue(foundRentals.contains(addedRental), "Rental not found by return deadline!");
         rentalManager.delete(addedRental);
+        bookManager.delete(addedBook);
+        memberManager.delete(addedMember);
     }
     @Test
     public void testGetRentalExceedings() throws LibraryException {
@@ -126,5 +133,8 @@ public class RentalTest {
         List<Rental> foundRentals = rentalManager.getDeadlineExceedings();
         assertTrue(foundRentals.contains(addedRental), "The rental should have been returned because it expired, but it didn't!");
         rentalManager.delete(addedRental);
+        bookManager.delete(addedBook);
+        memberManager.delete(addedMember);
     }
+
 }

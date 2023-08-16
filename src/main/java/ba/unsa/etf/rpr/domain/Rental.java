@@ -87,11 +87,29 @@ public class Rental implements Idable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rental rental = (Rental) o;
+        /*
+        If I just use the equals method to compare dates, even if the day, month,
+        and year are the same, the dates will be treated as different because of the
+        time component. Therefore, it is necessary to compare day, month and year separately
+        and treat dates as equal if these components are equal.
+         */
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(this.rentDate);
+        cal2.setTime(rental.rentDate);
+        boolean sameRentDate = cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+                cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH) &&
+                cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH);
+        cal1.setTime(this.returnDeadline);
+        cal2.setTime(rental.returnDeadline);
+        boolean sameReturnDeadline = cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+                cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH) &&
+                cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH);
         return rentalID == rental.rentalID &&
                 bookID == rental.bookID &&
                 memberID == rental.memberID &&
-                Objects.equals(rentDate, rental.rentDate) &&
-                Objects.equals(returnDeadline, rental.returnDeadline);
+                sameRentDate &&
+                sameReturnDeadline;
     }
 
     @Override
