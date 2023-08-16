@@ -22,6 +22,7 @@ public class RentalTest {
 
     @BeforeEach
     public void setup() throws LibraryException {
+        // Creating and adding a test book to be rented.
         BookManager bookManager;
         bookManager = new BookManager();
         Book testBook;
@@ -34,6 +35,7 @@ public class RentalTest {
         testBook.setTotalNumber(100);
         testBook.setAvailableNumber(90);
         Book addedBook = bookManager.add(testBook);
+        // Creating and adding a test article to which the book will be rented.
         MemberManager memberManager;
         memberManager = new MemberManager();
         Member testMember;
@@ -66,6 +68,7 @@ public class RentalTest {
             }
         }
         Member addedMember = memberManager.add(testMember);
+        // Creating a test rental and using the ids of the newly added test member and book.
         testRental = new Rental();
         testRental.setId(1);
         testRental.setBookID(addedBook.getId());
