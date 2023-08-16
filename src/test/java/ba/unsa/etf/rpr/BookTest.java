@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Testing {
+public class BookTest {
 
     private BookManager bookManager = new BookManager();
     private Book testBook;
@@ -33,7 +33,7 @@ public class Testing {
     book is returned.
      */
     @Test
-    public void testAddBookAndSearchById() throws LibraryException {
+    public void testAddAndSearchById() throws LibraryException {
         Book addedBook = bookManager.add(testBook);
         Book foundBook = bookManager.searchById(addedBook.getId());
         assertEquals(addedBook, foundBook, "Book not found by id!");
@@ -45,7 +45,7 @@ public class Testing {
     not return any books.
      */
     @Test
-    public void testDeleteBook() throws LibraryException {
+    public void testDelete() throws LibraryException {
         Book addedBook = bookManager.add(testBook);
         bookManager.delete(addedBook);
         LibraryException exception = assertThrows(
@@ -60,7 +60,7 @@ public class Testing {
     corresponding book will be updated based on it.
      */
     @Test
-    public void testUpdateBook() throws LibraryException {
+    public void testUpdate() throws LibraryException {
         Book addedBook = bookManager.add(testBook);
         addedBook.setTitle("Updated book title");
         bookManager.update(addedBook);
@@ -74,11 +74,24 @@ public class Testing {
     have that corresponding title.
      */
     @Test
-    public void testSearchBookByTitle() throws LibraryException {
-        bookManager.add(testBook);
-        bookManager.add(testBook);
+    public void testSearchByTitle() throws LibraryException {
+        Book addedBook1 = bookManager.add(testBook);
+        Book addedBook2 = bookManager.add(testBook);
         List<Book> foundBooks = bookManager.searchByTitle("Test Book");
         assertTrue(foundBooks.size() >= 2, "The list should contain 2 or more elements.");
         for(Book b : foundBooks) assertEquals(b.getTitle(), "Test Book", "Invalid title!");
+        bookManager.delete(addedBook1);
+        bookManager.delete(addedBook2);
+    }
+    @Test
+    public void testSearchByAuthor() throws LibraryException {
+        Book addedBook = bookManager.add(testBook);
+        List<Book> foundBooks = bookManager.searchByAuthor("Test Author");
+        assertTrue(foundBooks.contains(addedBook), "Book not found by author!");
+        addedBook.setAuthor("Second test Author");
+        bookManager.update(addedBook);
+        List<Book> foundUpdatedBooks = bookManager.searchByAuthor("Second test Author");
+        assertTrue(foundUpdatedBooks.contains(addedBook), "Updated book not found by author!");
+        bookManager.delete(addedBook);
     }
 }
