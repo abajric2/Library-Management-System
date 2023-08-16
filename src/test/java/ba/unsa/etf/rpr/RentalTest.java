@@ -112,4 +112,19 @@ public class RentalTest {
         assertTrue(foundRentals.contains(addedRental), "Rental not found by return deadline!");
         rentalManager.delete(addedRental);
     }
+    @Test
+    public void testGetRentalExceedings() throws LibraryException {
+        // Setting the rent date to be two months ago
+        LocalDate updateRentDate = LocalDate.now().minusMonths(2);
+        Date sqlUpdateRentDate = Date.valueOf(updateRentDate);
+        testRental.setRentDate(sqlUpdateRentDate);
+        // Setting the return deadline to be a month ago (to be expired)
+        LocalDate updateReturnDeadline = LocalDate.now().minusMonths(1);
+        Date sqlUpdateReturnDeadline = Date.valueOf(updateReturnDeadline);
+        testRental.setReturnDeadline(sqlUpdateReturnDeadline);
+        Rental addedRental = rentalManager.add(testRental);
+        List<Rental> foundRentals = rentalManager.getDeadlineExceedings();
+        assertTrue(foundRentals.contains(addedRental), "The rental should have been returned because it expired, but it didn't!");
+        rentalManager.delete(addedRental);
+    }
 }
