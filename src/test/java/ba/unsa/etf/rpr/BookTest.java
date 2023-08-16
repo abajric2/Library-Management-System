@@ -36,10 +36,13 @@ public class BookTest {
      */
     @Test
     public void testCRUDAndSearchById() throws LibraryException {
+        // testing add
         Book addedBook = bookManager.add(testBook);
         Book foundBook = bookManager.searchById(addedBook.getId());
         assertEquals(addedBook, foundBook, "Book not found by id!");
+
         /*
+        TESTING UPDATE
         Since the id of the book has not been changed, the title of the
         corresponding book will be updated based on it.
          */
@@ -56,7 +59,9 @@ public class BookTest {
                 "Expected update to throw LibraryException, but it didn't"
         );
         assertEquals("The year of publication can only contain numbers!", exceptionInvalidYear.getMessage(), "Unexpected exception message");
+
         /*
+        TESTING DELETE
         After the book is added and data about it is saved, it is deleted.
         The searchById method throws an exception if the search by id does
         not return any books.

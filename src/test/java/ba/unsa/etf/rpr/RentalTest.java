@@ -90,9 +90,12 @@ public class RentalTest {
      */
     @Test
     public void testCRUDAndSearchById() throws LibraryException {
+        // testing add
         Rental addedRental = rentalManager.add(testRental);
         Rental foundRental = rentalManager.searchById(addedRental.getId());
         assertEquals(foundRental, addedRental, "Rental just added, but search by its id does not find it!");
+
+        // testing update
         LocalDate updateReturnDeadline = LocalDate.now().plusMonths(4);
         Date sqlUpdateReturnDeadline = Date.valueOf(updateReturnDeadline);
         addedRental.setReturnDeadline(sqlUpdateReturnDeadline);
@@ -100,6 +103,8 @@ public class RentalTest {
         Rental foundUpdatedRental = rentalManager.searchById(addedRental.getId());
         // When updating the return deadline of rental, rentals id should not be changed.
         assertEquals(foundRental.getId(), foundUpdatedRental.getId(), "Update failure!");
+
+        // testing delete
         rentalManager.delete(addedRental);
         LibraryException exception = assertThrows(
                 LibraryException.class,
