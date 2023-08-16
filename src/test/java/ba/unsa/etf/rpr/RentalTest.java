@@ -89,7 +89,7 @@ public class RentalTest {
     by id is also being tested.
      */
     @Test
-    public void CRUDAndSearchByIdTest() throws LibraryException {
+    public void testCRUDAndSearchById() throws LibraryException {
         Rental addedRental = rentalManager.add(testRental);
         Rental foundRental = rentalManager.searchById(addedRental.getId());
         assertEquals(foundRental, addedRental, "Rental just added, but search by its id does not find it!");

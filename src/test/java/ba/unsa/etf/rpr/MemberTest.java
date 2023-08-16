@@ -57,7 +57,7 @@ public class MemberTest {
     by id is also being tested.
      */
     @Test
-    public void CRUDAndSearchByIdTest() throws LibraryException {
+    public void testCRUDAndSearchById() throws LibraryException {
         Member addedMember = memberManager.add(testMember);
         Member foundMember = memberManager.searchById(addedMember.getId());
         assertEquals(foundMember, addedMember, "User just added, but search by his id does not find him!");
