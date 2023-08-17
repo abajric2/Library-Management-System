@@ -17,8 +17,8 @@ public class Book implements Idable {
     private int totalNumber;
     private int availableNumber;
 
-    public Book(int bookID, String title, String author, String yearOfPublication, String genre, int totalNumber, int availableNumber) {
-        this.bookID = bookID;
+    public Book(String title, String author, String yearOfPublication, String genre, int totalNumber, int availableNumber) {
+        this.bookID = 0;
         this.title = title;
         this.author = author;
         this.yearOfPublication = yearOfPublication;

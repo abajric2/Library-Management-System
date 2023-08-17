@@ -15,8 +15,8 @@ public class Member implements Idable {
     private String password;
     private boolean isAdmin;
 
-    public Member(int memberID, String firstName, String lastName, String username, String password, boolean isAdmin) {
-        this.memberID = memberID;
+    public Member(String firstName, String lastName, String username, String password, boolean isAdmin) {
+        this.memberID = 0;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;

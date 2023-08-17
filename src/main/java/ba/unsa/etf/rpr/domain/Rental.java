@@ -17,8 +17,8 @@ public class Rental implements Idable {
     private Date rentDate;
     private Date returnDeadline;
 
-    public Rental(int rentalID, int bookID, int memberID, Date rentDate, Date returnDeadline) {
-        this.rentalID = rentalID;
+    public Rental(int bookID, int memberID, Date rentDate, Date returnDeadline) {
+        this.rentalID = 0;
         this.bookID = bookID;
         this.memberID = memberID;
         this.rentDate = rentDate;

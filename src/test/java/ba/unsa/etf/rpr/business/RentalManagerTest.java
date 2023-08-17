@@ -144,7 +144,7 @@ public class RentalManagerTest {
         Rental foundRental = rentalManager.searchById(addedRental.getId());
         assertEquals(addedRental, foundRental);
         // Attempting to rent a book to a user who currently owns the book throws an exception!
-        Book testBookForRent = new Book(1, "", "", "", "", 2, 2);
+        Book testBookForRent = new Book("", "", "", "", 2, 2);
         Book addedBookForRent = bookManager.add(testBookForRent);
         LibraryException exceptionById = assertThrows(
                 LibraryException.class,

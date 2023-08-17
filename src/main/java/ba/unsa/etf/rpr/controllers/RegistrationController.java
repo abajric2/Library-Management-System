@@ -5,7 +5,6 @@ import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -121,7 +120,7 @@ public class RegistrationController {
             alert.showAndWait();
             return;
         }
-        Member member = new Member(1, firstNameId.getText(), lastNameId.getText(), usernameId.getText(),
+        Member member = new Member(firstNameId.getText(), lastNameId.getText(), usernameId.getText(),
                 passwordId.getText(), false);
         MemberManager m = new MemberManager();
         try {

@@ -189,7 +189,9 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             one user can have only one rent, so it will return either only one line or nothing
              */
             if(r.next()) {
-                return new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
+                Rental rental = new Rental(r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
+                rental.setId(r.getInt(1));
+                return rental;
             }
             else return null;
         } catch (SQLException e) {
@@ -277,8 +279,9 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             stmt.setInt(1, r.getId());
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
-                Member m = new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                Member m = new Member(rs.getString(2), rs.getString(3), rs.getString(4),
                         rs.getString(5),rs.getBoolean(6));
+                m.setId(rs.getInt(1));
                 return m;
             }
         } catch (SQLException e) {
@@ -294,8 +297,9 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             stmt.setInt(1, r.getId());
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
-                Book b = new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                Book b = new Book(rs.getString(2), rs.getString(3), rs.getString(4),
                         rs.getString(5), rs.getInt(6), rs.getInt(7));
+                b.setId(rs.getInt(1));
                 return b;
             }
         } catch (SQLException e) {
@@ -347,7 +351,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         As id we send anything because it will generate itself.
         The rental date is the current date and the return deadline is 3 months after the current date
          */
-        Rental newRent = add(new Rental(1, b.getId(), memberID, currDate, addMonths(currDate, 3)));
+        Rental newRent = add(new Rental(b.getId(), memberID, currDate, addMonths(currDate, 3)));
         return newRent;
     }
 
@@ -360,7 +364,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             PreparedStatement stmt = getConnection().prepareStatement(query);
             ResultSet r = stmt.executeQuery();
             while(r.next()) {
-                Rental rental = new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
+                Rental rental = new Rental(r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
                 rentals.add(rental);
             }
             r.close();
@@ -379,7 +383,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             stmt.setDate(1, (java.sql.Date) returnDeadline);
             ResultSet r = stmt.executeQuery();
             while(r.next()) {
-                Rental rental = new Rental(r.getInt(1), r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
+                Rental rental = new Rental(r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
                 rentals.add(rental);
             }
             r.close();
