@@ -1,7 +1,5 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.business;
 
-import ba.unsa.etf.rpr.business.BookManager;
-import ba.unsa.etf.rpr.business.RentalManager;
 import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.domain.Rental;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
@@ -12,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BookTest {
+public class BookManagerTest {
 
     private BookManager bookManager;
     private Book testBook;
