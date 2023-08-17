@@ -42,11 +42,10 @@ public interface BookDao extends Dao<Book> {
    // Book searchByTitleAndAuthor(String title, String author) throws LibraryException;
 
     /**
-     * method that returns true if a book with a given title
-     * and by a given author is currently available in the library,
+     * method that returns true if a book with a given id
+     * is currently available in the library,
      * and false otherwise
-     * @param title
-     * @param author
+     * @param id
      */
-    boolean isAvailable (String title, String author) throws LibraryException;
+    boolean isAvailable (int id) throws LibraryException;
 }

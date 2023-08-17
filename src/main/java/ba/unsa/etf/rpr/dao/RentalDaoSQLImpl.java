@@ -38,11 +38,18 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
     }*/
     @Override
     public Rental add(Rental item) throws LibraryException {
-
-        Rental usercheck = checkUsersRental(item.getMemberID());
-        if(usercheck != null) {
-            throw new LibraryException("You can't rent a book because you haven't returned the one you previously rented");
+        Rental r = checkUsersRental(item.getMemberID());
+        if(r != null) {
+            throw new LibraryException("You can't rent a book because you haven't returned the one you rented earlier.");
         }
+        BookDaoSQLImpl bimpl = BookDaoSQLImpl.getInstance();
+        Book b = new Book();
+        try {
+            b = bimpl.searchById(item.getBookID());
+        } catch (LibraryException e) {
+            throw new LibraryException("No books found");
+        }
+        if(!bimpl.isAvailable(b.getId())) throw new LibraryException("The requested book is currently unavailable!");
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row, "RENTAL_ID");
         StringBuilder builder = new StringBuilder();
@@ -341,10 +348,10 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         Book b = new Book();
         try {
             b = bimpl.searchById(bookId);
-           // b = bimpl.searchByTitleAndAuthor(bookTitle, author);
         } catch (LibraryException e) {
             throw new LibraryException("No books found");
         }
+        if(!bimpl.isAvailable(b.getId())) throw new LibraryException("The requested book is currently unavailable!");
         long millis=System.currentTimeMillis();
         java.sql.Date currDate = new java.sql.Date(millis);
         /*
@@ -365,6 +372,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             ResultSet r = stmt.executeQuery();
             while(r.next()) {
                 Rental rental = new Rental(r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
+                rental.setId(r.getInt(1));
                 rentals.add(rental);
             }
             r.close();
@@ -384,6 +392,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             ResultSet r = stmt.executeQuery();
             while(r.next()) {
                 Rental rental = new Rental(r.getInt(2), r.getInt(3), r.getDate(4), r.getDate(5));
+                rental.setId(r.getInt(1));
                 rentals.add(rental);
             }
             r.close();

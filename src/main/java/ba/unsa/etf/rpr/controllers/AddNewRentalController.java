@@ -258,7 +258,8 @@ public class AddNewRentalController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("It is not possible to rent the selected book to the desired user!");
-            alert.setContentText("Check if the selected user already has a rented book. If he has, he needs to return it to rent a new one.");
+            if(e.getMessage().equals("You can't rent a book because you haven't returned the one you rented earlier.")) alert.setContentText("Check if the selected user already has a rented book. If he has, he needs to return it to rent a new one.");
+            else if (e.getMessage().equals("The requested book is currently unavailable!")) alert.setContentText("The requested book is currently unavailable!");
             alert.showAndWait();
             return;
         }

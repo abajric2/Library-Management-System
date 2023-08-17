@@ -86,9 +86,9 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
     }*/
 
     @Override
-    public boolean isAvailable(String title, String author) throws LibraryException {
+    public boolean isAvailable(int id) throws LibraryException {
         try {
-            Book book = executeQueryUnique("SELECT DISTINCT AVAILABLE_NUMBER FROM Books WHERE TITLE = ? AND AUTHOR = ?", new Object[]{author});
+            Book book = executeQueryUnique("SELECT * FROM Books WHERE BOOK_ID = ?", new Object[]{id});
             return book.getAvailableNumber()>0;
         } catch (LibraryException e) {
             return false;
