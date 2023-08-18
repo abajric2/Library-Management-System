@@ -351,7 +351,6 @@ public class ManageBooksController {
             return;
         }*/
         Book b = new Book();
-        b.setId(1);
         b.setTitle(updtTitle.getText());
         b.setAuthor(updtAuthor.getText());
         b.setYearOfPublication(updtYear.getText());
