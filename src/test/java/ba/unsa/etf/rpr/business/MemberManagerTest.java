@@ -22,7 +22,7 @@ public class MemberManagerTest {
         testMember.setId(1);
         testMember.setFirstName("Test First Name");
         testMember.setLastName("Test Last Name");
-        testMember.setUsername("Test Username");
+        testMember.setUsername("TestUsername");
         testMember.setPassword("Test Password");
         testMember.setAdmin(false);
         /*
