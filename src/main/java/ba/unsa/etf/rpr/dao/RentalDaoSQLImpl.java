@@ -71,8 +71,10 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             /*
             When we add an entity related to book rentals,
             it is necessary to reduce the number of available
-            books for the book that is rented;; update: trigger "after_rental_insert" reduces the number of available books
+            books for the book that is rented;
              */
+            b.setAvailableNumber(b.getAvailableNumber() - 1);
+            bimpl.update(b);
          /*   String check = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.BOOK_ID = ?";
             PreparedStatement checkstmt = getConnection().prepareStatement(check);
             checkstmt.setInt(1, item.getBookID());
@@ -256,6 +258,10 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             we need to increase the number of available books
             for the book that was returned;; update: a trigger "after_rental_delete" in the database increases the number of available books
              */
+            BookDaoSQLImpl bimpl = BookDaoSQLImpl.getInstance();
+            Book returnedBook = bimpl.searchById(item.getBookID());
+            returnedBook.setAvailableNumber(returnedBook.getAvailableNumber() + 1);
+            bimpl.update(returnedBook);
            // System.out.println("OBRISANO");
         /*    String availableNumberUpdate = "SELECT * FROM Books b WHERE BOOK_ID = ?";
             PreparedStatement updatestmt = getConnection().prepareStatement(availableNumberUpdate);
