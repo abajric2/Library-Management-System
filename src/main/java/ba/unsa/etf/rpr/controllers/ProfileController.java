@@ -57,6 +57,14 @@ public class ProfileController {
         passwordField.setEditable(false);
         updateBttn.setVisible(false);
         isAdmin.setSelected(member.isAdmin());
+        if(!member.isAdmin()) {
+            removeAdminLabel.setVisible(false);
+            removeAdminBttn.setVisible(false);
+        }
+        else {
+            removeAdminLabel.setVisible(true);
+            removeAdminBttn.setVisible(true);
+        }
         firstName.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("[a-zA-Z -]*")) {
                 checkFirstName.setText("Only letters, spaces and dashes are allowed.");

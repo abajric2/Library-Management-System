@@ -20,7 +20,7 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <content>
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="738.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/mainwindow.css" />
     </stylesheets>
@@ -124,6 +124,23 @@
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>
                   </ButtonBar>
+                        <Label fx:id="removeAdminLabel" text="If you no longer wish to be an administrator, you will lose that role by clicking the button below. After that, you will be logged out of the app and will only be able to log in as a regular user!" wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="10.0" right="10.0" top="2.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ButtonBar>
+                          <buttons>
+                            <Button fx:id="removeAdminBttn" mnemonicParsing="false" onAction="#removeAdmin" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Exit Admin Role" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                          </buttons>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
+                        </ButtonBar>
                      </children>
                      <GridPane.margin>
                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
