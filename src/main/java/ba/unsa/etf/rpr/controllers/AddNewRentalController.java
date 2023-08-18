@@ -217,7 +217,7 @@ public class AddNewRentalController {
     public void addRental(ActionEvent actionEvent) throws LibraryException {
         Member selectedMember = (Member) usersTable.getSelectionModel().getSelectedItem();
         Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
-        if (selectedMember == null || selectedBook == null) {
+        if (selectedMember == null || selectedBook == null || firstNameSelected.getText().isEmpty() || titleSelected.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Adding error!");
@@ -230,11 +230,28 @@ public class AddNewRentalController {
         RentalManager r = new RentalManager();
         try {
             r.rentABook(idUser, idBook);
+            idUser = null;
+            idBook = null;
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
             alert.setContentText("The book has been successfully rented!");
             alert.showAndWait();
+            bookId.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getId()).asObject();});
+            title.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getTitle());});
+            author.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getAuthor());});
+            year.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getYearOfPublication());});
+            genre.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getGenre());});
+            total.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getTotalNumber()).asObject();});
+            available.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvailableNumber()).asObject();});
+            booksTable.setItems(FXCollections.observableList(bookManager.getAll()));
+            userId.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleIntegerProperty(member.getId()).asObject();});
+            firstName.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleStringProperty(member.getFirstName());});
+            lastName.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleStringProperty(member.getLastName());});
+            username.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleStringProperty(member.getUsername());});
+            password.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleStringProperty(member.getPassword());});
+            admin.setCellValueFactory(cellData->{Member member=cellData.getValue(); return new SimpleBooleanProperty(member.isAdmin());});
+            usersTable.setItems(FXCollections.observableList(memberManager.getAll()));
             firstNameSelected.setText("");
             lastNameSelected.setText("");
             usernameSelected.setText("");
@@ -246,14 +263,7 @@ public class AddNewRentalController {
             yearSelected.setText("");
             totalSelected.setText("");
             availableSelected.setText("");
-            bookId.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getId()).asObject();});
-            title.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getTitle());});
-            author.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getAuthor());});
-            year.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getYearOfPublication());});
-            genre.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleStringProperty(book.getGenre());});
-            total.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getTotalNumber()).asObject();});
-            available.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getAvailableNumber()).asObject();});
-            booksTable.setItems(FXCollections.observableList(bookManager.getAll()));
+            checkRental.setText(" ");
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
