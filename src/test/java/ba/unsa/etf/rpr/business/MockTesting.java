@@ -2,12 +2,16 @@ package ba.unsa.etf.rpr.business;
 
 import ba.unsa.etf.rpr.dao.MemberDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Member;
+import ba.unsa.etf.rpr.exceptions.LibraryException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MockTesting {
     private MemberManager memberManager;
@@ -33,4 +37,5 @@ public class MockTesting {
                 new Member("First Name 4", "Last Name 4", "Username4", "Password4", true)
         ));
     }
+
 }

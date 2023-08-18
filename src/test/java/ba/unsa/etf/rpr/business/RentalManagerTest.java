@@ -29,7 +29,6 @@ public class RentalManagerTest {
         // Creating and adding a test book to be rented.
         bookManager = new BookManager();
         testBook = new Book();
-        testBook.setId(1);
         testBook.setTitle("Test Book");
         testBook.setAuthor("Test Author");
         testBook.setYearOfPublication("2023");
@@ -40,7 +39,6 @@ public class RentalManagerTest {
         // Creating and adding a test article to which the book will be rented.
         memberManager = new MemberManager();
         testMember = new Member();
-        testMember.setId(1);
         testMember.setFirstName("Test First Name");
         testMember.setLastName("Test Last Name");
         testMember.setUsername("TestUsername");
@@ -70,7 +68,6 @@ public class RentalManagerTest {
         addedMember = memberManager.add(testMember);
         // Creating a test rental and using the ids of the newly added test member and book.
         testRental = new Rental();
-        testRental.setId(1);
         testRental.setBookID(addedBook.getId());
         testRental.setMemberID(addedMember.getId());
         LocalDate currentLocalDate = LocalDate.now();

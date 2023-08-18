@@ -19,7 +19,6 @@ public class BookManagerTest {
     public void setup() {
         bookManager = new BookManager();
         testBook = new Book();
-        testBook.setId(1);
         testBook.setTitle("Test Book");
         testBook.setAuthor("Test Author");
         testBook.setYearOfPublication("2023");

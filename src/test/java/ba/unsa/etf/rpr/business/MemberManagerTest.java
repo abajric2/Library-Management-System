@@ -19,7 +19,6 @@ public class MemberManagerTest {
     public void setup() throws LibraryException {
         memberManager = new MemberManager();
         testMember = new Member();
-        testMember.setId(1);
         testMember.setFirstName("Test First Name");
         testMember.setLastName("Test Last Name");
         testMember.setUsername("TestUsername");
@@ -75,10 +74,10 @@ public class MemberManagerTest {
         );
         assertEquals("First name can only contain letters, spaces and dashes", exceptionInvalidName.getMessage(), "Unexpected exception message");
         addedMember.setFirstName("Test First Name");
-        testMember.setPassword("ab12");
+        Member memberWithInvalidPassword = new Member("Second test first name", "Second test last name", "TestUsername", "1", false);
         LibraryException exceptionInvalidPassword = assertThrows(
                 LibraryException.class,
-                () -> memberManager.add(testMember),
+                () -> memberManager.add(memberWithInvalidPassword),
                 "Expected update to throw LibraryException, but it didn't"
         );
         assertEquals("Password must be at least 8 characters long!", exceptionInvalidPassword.getMessage(), "Unexpected exception message");
@@ -100,12 +99,10 @@ public class MemberManagerTest {
     @Test
     public void testDuplicateUsernameAddition() throws LibraryException {
         Member addedMember = memberManager.add(testMember);
-        testMember.setFirstName("Second test first name");
-        testMember.setLastName("Second test last name");
-        testMember.setPassword("Second test password");
+        Member memberWithSameUsername = new Member("Second test first name", "Second test last name", "TestUsername", "Second test password", false);
         LibraryException exception = assertThrows(
                 LibraryException.class,
-                () -> memberManager.add(testMember),
+                () -> memberManager.add(memberWithSameUsername),
                 "Expected adding user with existing username to throw LibraryException, but it didn't"
         );
         assertEquals("Someone is already using this username", exception.getMessage(), "Unexpected exception message");
