@@ -77,19 +77,19 @@ public class RentalManagerTest {
         testRental.setRentDate(sqlCurrentDate);
         testRental.setReturnDeadline(sqlDateThreeMonthsLater);
     }
-    /*
-    The test checks the methods that perform the basic operations
-    of interacting with the database. As part of that, the search
-    by id is also being tested.
-     */
     @Test
-    public void testCRUDAndSearchById() throws LibraryException {
-        // testing add
+    public void testAdd() throws LibraryException {
         Rental addedRental = rentalManager.add(testRental);
         Rental foundRental = rentalManager.searchById(addedRental.getId());
         assertEquals(foundRental, addedRental, "Rental just added, but search by its id does not find it!");
-
-        // testing update
+        rentalManager.delete(addedRental);
+        bookManager.delete(addedBook);
+        memberManager.delete(addedMember);
+    }
+    @Test
+    public void testUpdate() throws LibraryException {
+        Rental addedRental = rentalManager.add(testRental);
+        Rental foundRental = rentalManager.searchById(addedRental.getId());
         LocalDate updateReturnDeadline = LocalDate.now().plusMonths(4);
         Date sqlUpdateReturnDeadline = Date.valueOf(updateReturnDeadline);
         addedRental.setReturnDeadline(sqlUpdateReturnDeadline);
@@ -97,8 +97,13 @@ public class RentalManagerTest {
         Rental foundUpdatedRental = rentalManager.searchById(addedRental.getId());
         // When updating the return deadline of rental, rentals id should not be changed.
         assertEquals(foundRental.getId(), foundUpdatedRental.getId(), "Update failure!");
-
-        // testing delete
+        rentalManager.delete(addedRental);
+        bookManager.delete(addedBook);
+        memberManager.delete(addedMember);
+    }
+    @Test
+    public void testDelete() throws LibraryException {
+        Rental addedRental = rentalManager.add(testRental);
         rentalManager.delete(addedRental);
         LibraryException exception = assertThrows(
                 LibraryException.class,
