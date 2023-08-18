@@ -53,4 +53,18 @@ public class MemberManager {
     public List<Member> removeAll() throws LibraryException {
         return DaoFactory.memberDao().removeAll();
     }
+    public void validateMember(Member item) throws LibraryException {
+        if (!item.getFirstName().matches("[a-zA-Z -]*")) {
+            throw new LibraryException("First name can only contain letters, spaces and dashes");
+        }
+        if (!item.getLastName().matches("[a-zA-Z -]*")) {
+            throw new LibraryException("Last name can only contain letters, spaces and dashes");
+        }
+        if (!item.getUsername().matches("^[a-zA-Z0-9_.-]+$")) {
+            throw new LibraryException("Username can only contain letters, numbers, underscores, dots, and dashes.");
+        }
+        if(item.getPassword().length() < 8) {
+            throw new LibraryException("Password must be at least 8 characters long!");
+        }
+    }
 }
