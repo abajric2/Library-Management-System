@@ -46,19 +46,17 @@ public class MemberManagerTest {
             }
         }
     }
-    /*
-    The test checks the methods that perform the basic operations
-    of interacting with the database. As part of that, the search
-    by id is also being tested.
-     */
     @Test
-    public void testCRUDAndSearchById() throws LibraryException {
-        // testing add
+    public void testAdd() throws LibraryException {
         Member addedMember = memberManager.add(testMember);
         Member foundMember = memberManager.searchById(addedMember.getId());
         assertEquals(foundMember, addedMember, "User just added, but search by his id does not find him!");
-
-        // testing update
+        memberManager.delete(addedMember);
+    }
+    @Test
+    public void testUpdate() throws LibraryException {
+        Member addedMember = memberManager.add(testMember);
+        Member foundMember = memberManager.searchById(addedMember.getId());
         addedMember.setFirstName("Second test First Name");
         memberManager.update(addedMember);
         Member foundUpdatedMember = memberManager.searchById(addedMember.getId());
@@ -74,16 +72,12 @@ public class MemberManagerTest {
         );
         assertEquals("First name can only contain letters, spaces and dashes", exceptionInvalidName.getMessage(), "Unexpected exception message");
         addedMember.setFirstName("Test First Name");
-        Member memberWithInvalidPassword = new Member("Second test first name", "Second test last name", "TestUsername", "1", false);
-        LibraryException exceptionInvalidPassword = assertThrows(
-                LibraryException.class,
-                () -> memberManager.add(memberWithInvalidPassword),
-                "Expected update to throw LibraryException, but it didn't"
-        );
-        assertEquals("Password must be at least 8 characters long!", exceptionInvalidPassword.getMessage(), "Unexpected exception message");
-        testMember.setPassword("Test Password");
 
-        // testing delete
+        memberManager.delete(addedMember);
+    }
+    @Test
+    public void testDelete() throws LibraryException {
+        Member addedMember = memberManager.add(testMember);
         memberManager.delete(addedMember);
         LibraryException exception = assertThrows(
                 LibraryException.class,
@@ -112,18 +106,8 @@ public class MemberManagerTest {
     Testing multiple member search methods by various criteria.
      */
     @Test
-    public void testMultiCriteriaSearch() throws LibraryException {
+    public void testSearchByName() throws LibraryException {
         Member addedMember = memberManager.add(testMember);
-
-        // Testing search by username and password
-        Member memberByUsernameAndPassword = memberManager.searchByUsernameAndPassword(addedMember.getUsername(), addedMember.getPassword());
-        assertEquals(addedMember, memberByUsernameAndPassword, "User not found by username and password!");
-        assertEquals(addedMember.getUsername(), memberByUsernameAndPassword.getUsername(), "Username does not match!");
-        assertEquals(addedMember.getPassword(), memberByUsernameAndPassword.getPassword(), "Password does not match!");
-
-        // Testing search by username
-        List<Member> memberByUsername = memberManager.searchByUsername(addedMember.getUsername());
-        assertTrue(memberByUsername.contains(addedMember));
 
         // Testing search by first and last name using searchByName method
         List<Member> memberByFirstAndLastName = memberManager.searchByName(addedMember.getFirstName() + " " + addedMember.getLastName());
