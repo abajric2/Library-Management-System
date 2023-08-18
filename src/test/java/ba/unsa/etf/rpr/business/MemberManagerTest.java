@@ -102,9 +102,6 @@ public class MemberManagerTest {
         assertEquals("Someone is already using this username", exception.getMessage(), "Unexpected exception message");
         memberManager.delete(addedMember);
     }
-    /*
-    Testing multiple member search methods by various criteria.
-     */
     @Test
     public void testSearchByName() throws LibraryException {
         Member addedMember = memberManager.add(testMember);
