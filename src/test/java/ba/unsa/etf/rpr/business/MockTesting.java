@@ -37,5 +37,23 @@ public class MockTesting {
                 new Member("First Name 4", "Last Name 4", "Username4", "Password4", true)
         ));
     }
-
+    /*
+    The test defines when the right validateMember method will be called, and tests it
+    with correct parameters, and then with incorrect ones, checking whether the expected
+    exception was thrown.
+     */
+    @Test
+    public void testValidateMember() throws LibraryException {
+        Mockito.doCallRealMethod().when(memberManager).validateMember(member);
+        memberManager.validateMember(member);
+        // This username is not in valid format and method validateMember should throw an exception
+        member.setUsername("&&");
+        Mockito.doCallRealMethod().when(memberManager).validateMember(member);
+        LibraryException exception = assertThrows(
+                LibraryException.class,
+                () -> memberManager.validateMember(member),
+                "Expected update to throw LibraryException, but it didn't"
+        );
+        assertEquals(exception.getMessage(), "Username can only contain letters, numbers, underscores, dots, and dashes.");
+    }
 }
