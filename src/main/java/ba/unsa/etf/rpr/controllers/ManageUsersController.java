@@ -243,6 +243,14 @@ public class ManageUsersController {
         m.setUsername(model.username.get());
         m.setPassword(model.password.get());
         m.setAdmin(model.admin.get());
+        if(idUpdate == member.getId() && !m.isAdmin()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Update error!");
+            alert.setContentText("The user you want to update is you. If you want to remove yourself from the admin, go to the profile and select the desired option!");
+            alert.showAndWait();
+            return;
+        }
         try {
             Member updatedMember = manager.update(m);
             if(idUpdate == member.getId()) member = updatedMember;
