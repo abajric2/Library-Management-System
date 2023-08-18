@@ -26,23 +26,20 @@ public class BookManagerTest {
         testBook.setTotalNumber(100);
         testBook.setAvailableNumber(90);
     }
-    /*
-    The test checks the methods that perform the basic operations
-    of interacting with the database. As part of that, the search
-    by id is also being tested.
-     */
     @Test
-    public void testCRUDAndSearchById() throws LibraryException {
-        // testing add
+    public void testAdd() throws LibraryException {
         Book addedBook = bookManager.add(testBook);
         Book foundBook = bookManager.searchById(addedBook.getId());
         assertEquals(addedBook, foundBook, "Book not found by id!");
-
-        /*
-        TESTING UPDATE
-        Since the id of the book has not been changed, the title of the
-        corresponding book will be updated based on it.
-         */
+        bookManager.delete(addedBook);
+    }
+    /*
+    Since the id of the book has not been changed, the title of the
+    corresponding book will be updated based on it.
+     */
+    @Test
+    public void testUpdate()throws LibraryException {
+        Book addedBook = bookManager.add(testBook);
         addedBook.setTitle("Updated book title");
         bookManager.update(addedBook);
         Book updatedBook = bookManager.searchById(addedBook.getId());
@@ -57,13 +54,16 @@ public class BookManagerTest {
         );
         assertEquals("The year of publication can only contain numbers!", exceptionInvalidYear.getMessage(), "Unexpected exception message");
         addedBook.setYearOfPublication("2023");
-
-        /*
-        TESTING DELETE
-        After the book is added and data about it is saved, it is deleted.
-        The searchById method throws an exception if the search by id does
-        not return any books.
-         */
+        bookManager.delete(addedBook);
+    }
+    /*
+    After the book is added and data about it is saved, it is deleted.
+    The searchById method throws an exception if the search by id does
+    not return any books.
+     */
+    @Test
+    public void testDelete() throws LibraryException {
+        Book addedBook = bookManager.add(testBook);
         bookManager.delete(addedBook);
         LibraryException exception = assertThrows(
                 LibraryException.class,
@@ -72,11 +72,6 @@ public class BookManagerTest {
         );
         assertEquals("Object not found", exception.getMessage(), "Unexpected exception message");
     }
-    /*
-    We add the predefined book twice, so the sortByTitle
-    method should return at least 2 rows and each of the returned books must
-    have that corresponding title.
-     */
     @Test
     public void testSearchByTitle() throws LibraryException {
         Book addedBook = bookManager.add(testBook);
