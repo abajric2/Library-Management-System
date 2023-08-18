@@ -382,7 +382,6 @@ public class ManageUsersController {
             return;
         }*/
         Member m = new Member();
-        m.setId(1);
         m.setFirstName(firstNameAdd.getText());
         m.setLastName(lastNameAdd.getText());
         m.setUsername(usernameAdd.getText());
