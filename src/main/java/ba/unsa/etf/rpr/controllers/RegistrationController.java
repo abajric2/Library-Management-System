@@ -83,6 +83,13 @@ public class RegistrationController {
                 checkLastName.setText("");
             }
         });
+        usernameId.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
+                checkUsername.setText("Username can only contain letters, numbers, underscores, dots, and dashes.");
+            } else {
+                checkUsername.setText("");
+            }
+        });
  }
 
 
@@ -101,6 +108,14 @@ public class RegistrationController {
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Invalid type!");
             alert.setContentText("Check that the values you entered are of a valid type.");
+            alert.showAndWait();
+            return;
+        }
+        if(!usernameId.getText().matches("^[a-zA-Z0-9_.-]+$")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Invalid type!");
+            alert.setContentText("Username can only contain letters, numbers, underscores, dots, and dashes.");
             alert.showAndWait();
             return;
         }

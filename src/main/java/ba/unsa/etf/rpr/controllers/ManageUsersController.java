@@ -57,12 +57,14 @@ public class ManageUsersController {
     public Label rentalInfoId;
     public Label checkFirstNameUpdt;
     public Label checkLastNameUpdt;
+    public Label checkUsernameUpdt;
     public Label checkPasswordUpdt;
     public Label checkFirstNameAdd;
     public Label checkLastNameAdd;
     public Button profile;
     public Button aboutBttn;
     public Label checkPasswordAdd;
+    public Label checkUsernameAdd;
     private MemberModel model = new MemberModel();
     private Integer idUpdate;
     private Member member;
@@ -160,6 +162,13 @@ public class ManageUsersController {
                 checkLastNameAdd.setText("");
             }
         });
+        usernameAdd.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
+                checkUsernameAdd.setText("Username can only contain letters, numbers, underscores, dots, and dashes.");
+            } else {
+                checkUsernameAdd.setText("");
+            }
+        });
         passwordAdd.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() < 8) {
                 checkPasswordAdd.setText("Password must be at least 8 characters long.");
@@ -179,6 +188,13 @@ public class ManageUsersController {
                 checkLastNameUpdt.setText("Only letters, spaces and dashes are allowed.");
             } else {
                 checkLastNameUpdt.setText("");
+            }
+        });
+        usernameUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
+                checkUsernameUpdt.setText("Username can only contain letters, numbers, underscores, dots, and dashes.");
+            } else {
+                checkUsernameUpdt.setText("");
             }
         });
         passwordUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -247,7 +263,9 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
-            if(!m.getFirstName().matches("[a-zA-Z -]*") || !m.getLastName().matches("[a-zA-Z -]*") || m.getPassword().length() < 8) alert.setContentText("Check that the values you entered are of a valid type.");
+            if(!m.getUsername().matches("^[a-zA-Z0-9_.-]+$") || !m.getFirstName().matches("[a-zA-Z -]*") ||
+                    !m.getLastName().matches("[a-zA-Z -]*") || m.getPassword().length() < 8)
+                alert.setContentText("Check that the values you entered are of a valid type.");
             else alert.setContentText("Check if someone is already using the username you entered!");
             alert.showAndWait();
          //   idUpdate = null;
@@ -381,7 +399,9 @@ public class ManageUsersController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("You can't add member!");
-            if(!m.getFirstName().matches("[a-zA-Z -]*") || !m.getLastName().matches("[a-zA-Z -]*") || m.getPassword().length() < 8) alert.setContentText("Check that the values you entered are of a valid type.");
+            if(!m.getUsername().matches("^[a-zA-Z0-9_.-]+$") || !m.getFirstName().matches("[a-zA-Z -]*") ||
+                    !m.getLastName().matches("[a-zA-Z -]*") || m.getPassword().length() < 8)
+                alert.setContentText("Check that the values you entered are of a valid type.");
             else alert.setContentText("Check if someone is already using the username you entered!");
             alert.showAndWait();
         }

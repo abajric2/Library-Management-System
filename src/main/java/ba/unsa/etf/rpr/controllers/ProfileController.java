@@ -69,6 +69,13 @@ public class ProfileController {
                 checkLastName.setText("");
             }
         });
+        username.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
+                checkUsername.setText("Username can only contain letters, numbers, underscores, dots, and dashes.");
+            } else {
+                checkUsername.setText("");
+            }
+        });
         password.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() < 8) {
                 checkPassword.setText("Password must be at least 8 characters long.");
@@ -139,7 +146,9 @@ public class ProfileController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
-            if(!m.getFirstName().matches("[a-zA-Z -]*") || !m.getLastName().matches("[a-zA-Z -]*") || m.getPassword().length() < 8) alert.setContentText("Check that the values you entered are of a valid type.");
+            if(!m.getUsername().matches("^[a-zA-Z0-9_.-]+$") || !m.getFirstName().matches("[a-zA-Z -]*") ||
+                    !m.getLastName().matches("[a-zA-Z -]*") || m.getPassword().length() < 8)
+                alert.setContentText("Check that the values you entered are of a valid type.");
             else alert.setContentText("It seems like someone is already using the username you entered!");
             alert.showAndWait();
             //   idUpdate = null;
