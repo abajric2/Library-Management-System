@@ -38,6 +38,8 @@ public class ProfileController {
     public Button mainPageBttn;
     public Button logOutBttn;
     public Button aboutBttn;
+    public Label removeAdminLabel;
+    public Button removeAdminBttn;
     private MemberManager manager = new MemberManager();
     private Member member;
     ProfileController(Member m) {this.member = m;}
@@ -258,5 +260,8 @@ public class ProfileController {
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
+    }
+
+    public void removeAdmin(ActionEvent actionEvent) {
     }
 }
