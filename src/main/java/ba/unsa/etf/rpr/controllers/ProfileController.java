@@ -270,6 +270,34 @@ public class ProfileController {
         stage.close();
     }
 
-    public void removeAdmin(ActionEvent actionEvent) {
+    public void removeAdmin(ActionEvent actionEvent) throws IOException {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation Dialog");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Are you sure you want to remove yourself from administrators?");
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                member.setAdmin(false);
+                member = manager.update(member);
+                Stage myStage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+                LoginController controller = new LoginController();
+                loader.setController(controller);
+                myStage.setTitle("Log in");
+                myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                myStage.setResizable(false);
+                myStage.show();
+                Node n = (Node) actionEvent.getSource();
+                Stage stage = (Stage) n.getScene().getWindow();
+                stage.close();
+            }
+            catch (LibraryException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Update error!");
+                alert.setContentText("An error occurred while removing the administrator role!");
+            }
+        }
     }
 }
