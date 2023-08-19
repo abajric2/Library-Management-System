@@ -1,15 +1,10 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.business.MemberManager;
-import ba.unsa.etf.rpr.business.RentalManager;
-import ba.unsa.etf.rpr.dao.MemberDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Member;
-import ba.unsa.etf.rpr.domain.Rental;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

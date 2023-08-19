@@ -1,2 +1,0 @@
-Main-Class: ba.unsa.etf.rpr.App
-
