@@ -27,7 +27,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
 
  /*   public RentalDaoSQLImpl() {
         try {
-            FileReader reader = new FileReader("db.properties");
+            FileReader reader = new FileReader("db.propertieess");
             Properties p = new Properties();
             p.load(reader);
             this.connection = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_RPRBaza123321", p.getProperty("username"), p.getProperty("password"));

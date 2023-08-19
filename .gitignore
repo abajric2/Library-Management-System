@@ -1,4 +1,3 @@
-/db.properties
 src/main/resources/application.properties
 target
 .idea
