@@ -4,6 +4,8 @@ import ba.unsa.etf.rpr.domain.Book;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
@@ -107,15 +109,35 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         }
         return available;*/
     }
-
-    @Override
-    public Book add(Book item) throws LibraryException {
+    private void validateBook(Book item) throws LibraryException {
         if (!item.getYearOfPublication().matches("\\d*")) {
             throw new LibraryException("The year of publication can only contain numbers!");
+        }
+        if(Integer.parseInt(item.getYearOfPublication()) < 1 || Integer.parseInt(item.getYearOfPublication()) > LocalDate.now().getYear()) {
+            throw new LibraryException("Year can't be negative or greater than current year!");
+        }
+        if(item.getTotalNumber() < 0 || item.getTotalNumber() > 100) {
+            throw new LibraryException("Total number of books can't be negative or greater than 100!");
+        }
+        if(item.getAvailableNumber() < 0 || item.getAvailableNumber() > 100) {
+            throw new LibraryException("Total number of books can't be negative or greater than 100!");
+        }
+        if(item.getTitle().length() < 1 || item.getTitle().length() > 200) {
+            throw new LibraryException("Title can't be empty of longer than 200 characters!");
+        }
+        if(item.getAuthor().length() < 1 || item.getAuthor().length() > 100) {
+            throw new LibraryException("Authors name can't be empty of longer than 100 characters!");
+        }
+        if(item.getGenre().length() < 3 || item.getGenre().length() > 50) {
+            throw new LibraryException("Genre length must be between 3 and 50 characters!");
         }
         if(item.getAvailableNumber() > item.getTotalNumber()) {
             throw new LibraryException("The number of available books cannot be greater than the total number of books!");
         }
+    }
+    @Override
+    public Book add(Book item) throws LibraryException {
+        validateBook(item);
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row, "BOOK_ID");
         StringBuilder builder = new StringBuilder();
@@ -160,12 +182,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
 
     @Override
     public Book update(Book item) throws LibraryException {
-        if (!item.getYearOfPublication().matches("\\d*")) {
-            throw new LibraryException("The year of publication can only contain numbers!");
-        }
-        if(item.getAvailableNumber() > item.getTotalNumber()) {
-            throw new LibraryException("The number of available books cannot be greater than the total number of books!");
-        }
+        validateBook(item);
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row, "BOOK_ID");
         StringBuilder builder = new StringBuilder();
