@@ -149,57 +149,81 @@ public class ManageUsersController {
             }
          });
         firstNameAdd.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z -]*")) {
+            if(newValue.length() < 1) {
+                checkFirstNameAdd.setText("This field can't be empty");
+            } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkFirstNameAdd.setText("Only letters, spaces and dashes are allowed.");
+            } else if (newValue.length() > 30) {
+                checkFirstNameAdd.setText("First name can't be longer than 30 characters!");
             } else {
                 checkFirstNameAdd.setText("");
             }
         });
         lastNameAdd.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z -]*")) {
+            if(newValue.length() < 1) {
+                checkLastNameAdd.setText("This field can't be empty");
+            } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkLastNameAdd.setText("Only letters, spaces and dashes are allowed.");
+            } else if (newValue.length() > 50) {
+                checkLastNameAdd.setText("Last name can't be longer than 50 characters!");
             } else {
                 checkLastNameAdd.setText("");
             }
         });
         usernameAdd.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
-                checkUsernameAdd.setText("Username can only contain letters, numbers, underscores, dots, and dashes.");
+            if(newValue.length() < 1) {
+                checkUsernameAdd.setText("This field can't be empty");
+            } else if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
+                checkUsernameAdd.setText("Username can only contain letters, numbers, underscores, dots, and dashes");
+            } else if (newValue.length() < 3 || newValue.length() > 30) {
+                checkUsernameAdd.setText("Username length must be between 3 and 30 characters");
             } else {
                 checkUsernameAdd.setText("");
             }
         });
         passwordAdd.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() < 8) {
-                checkPasswordAdd.setText("Password must be at least 8 characters long.");
+            if (newValue.length() < 8 || newValue.length() > 128) {
+                checkPasswordAdd.setText("Password must be between 8 and 128 characters long!");
             } else {
                 checkPasswordAdd.setText("");
             }
         });
         firstNameUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z -]*")) {
+            if(newValue.length() < 1) {
+                checkFirstNameUpdt.setText("This field can't be empty");
+            } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkFirstNameUpdt.setText("Only letters, spaces and dashes are allowed.");
+            } else if (newValue.length() > 30) {
+                checkFirstNameUpdt.setText("First name can't be longer than 30 characters!");
             } else {
                 checkFirstNameUpdt.setText("");
             }
         });
         lastNameUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z -]*")) {
+            if(newValue.length() < 1) {
+                checkLastNameUpdt.setText("This field can't be empty");
+            } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkLastNameUpdt.setText("Only letters, spaces and dashes are allowed.");
+            } else if (newValue.length() > 50) {
+                checkLastNameUpdt.setText("Last name can't be longer than 50 characters!");
             } else {
                 checkLastNameUpdt.setText("");
             }
         });
         usernameUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
-                checkUsernameUpdt.setText("Username can only contain letters, numbers, underscores, dots, and dashes.");
+            if(newValue.length() < 1) {
+                checkUsernameUpdt.setText("This field can't be empty");
+            } else if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
+                checkUsernameUpdt.setText("Username can only contain letters, numbers, underscores, dots, and dashes");
+            } else if (newValue.length() < 3 || newValue.length() > 30) {
+                checkUsernameUpdt.setText("Username length must be between 3 and 30 characters");
             } else {
                 checkUsernameUpdt.setText("");
             }
         });
         passwordUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (passwordUpdt.getText().length() > 0 && newValue.length() < 8) {
-                checkPasswordUpdt.setText("Password must be at least 8 characters long.");
+            if (newValue.length() < 8 || newValue.length() > 128) {
+                checkPasswordUpdt.setText("Password must be between 8 and 128 characters long!");
             } else {
                 checkPasswordUpdt.setText("");
             }
@@ -219,21 +243,16 @@ public class ManageUsersController {
     }
 
     public void updateAction(ActionEvent actionEvent) throws LibraryException {
-        if(firstNameUpdt.getText().isEmpty() || lastNameUpdt.getText().isEmpty() || usernameUpdt.getText().isEmpty() ||
-                passwordUpdt.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided!");
-            alert.showAndWait();
-            return;
-        }
         if(idUpdate == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
             alert.setContentText("Choose the member you want to edit from the table!");
             alert.showAndWait();
+            return;
+        }
+        if(!checkPasswordUpdt.getText().isEmpty() || !checkUsernameUpdt.getText().isEmpty()
+            || !checkLastNameUpdt.getText().isEmpty() || !checkFirstNameUpdt.getText().isEmpty()) {
             return;
         }
         Member m = new Member();
@@ -266,6 +285,10 @@ public class ManageUsersController {
             passwordUpdt.setText("");
             adminUpdt.setSelected(false);
             rentalInfoId.setText("");
+            checkFirstNameUpdt.setText("");
+            checkLastNameUpdt.setText("");
+            checkUsernameUpdt.setText("");
+            checkPasswordUpdt.setText("");
             idUpdate = null;
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -302,7 +325,10 @@ public class ManageUsersController {
             alert.showAndWait();
             return;
         }
-
+        if(!checkPasswordUpdt.getText().isEmpty() || !checkUsernameUpdt.getText().isEmpty()
+                || !checkLastNameUpdt.getText().isEmpty() || !checkFirstNameUpdt.getText().isEmpty()) {
+            return;
+        }
         Member selectedItem = (Member) tableId.getSelectionModel().getSelectedItem();
         if (selectedItem == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -351,6 +377,10 @@ public class ManageUsersController {
                 passwordUpdt.setText("");
                 adminUpdt.setSelected(false);
                 rentalInfoId.setText("");
+                firstNameUpdt.setText("");
+                lastNameUpdt.setText("");
+                usernameUpdt.setText("");
+                passwordUpdt.setText("");
                 idUpdate = null;
             } catch (LibraryException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -366,11 +396,14 @@ public class ManageUsersController {
     public void addAction(ActionEvent actionEvent) {
         if(firstNameAdd.getText().isEmpty() || lastNameAdd.getText().isEmpty() || usernameAdd.getText().isEmpty() ||
                 passwordAdd.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided!");
-            alert.showAndWait();
+            if(firstNameAdd.getText().isEmpty()) checkFirstNameAdd.setText("This field can't be empty");
+            if(lastNameAdd.getText().isEmpty()) checkLastNameAdd.setText("This field can't be empty");
+            if(usernameAdd.getText().isEmpty()) checkUsernameAdd.setText("This field can't be empty");
+            if(passwordAdd.getText().isEmpty()) checkPasswordAdd.setText("This field can't be empty");
+            return;
+        }
+        if(!checkFirstNameAdd.getText().isEmpty() || !checkLastNameAdd.getText().isEmpty() ||
+            !checkUsernameAdd.getText().isEmpty() || !checkPasswordAdd.getText().isEmpty()) {
             return;
         }
      /*   if(idUpdate != null) {
@@ -394,13 +427,16 @@ public class ManageUsersController {
             alert.setHeaderText(null);
             alert.setContentText("Successfully added!");
             alert.showAndWait();
+            tableId.setItems(FXCollections.observableList(manager.getAll()));
             firstNameAdd.setText("");
             lastNameAdd.setText("");
             usernameAdd.setText("");
             passwordAdd.setText("");
             adminAdd.setSelected(false);
             checkPasswordAdd.setText("");
-            tableId.setItems(FXCollections.observableList(manager.getAll()));
+            checkFirstNameAdd.setText("");
+            checkLastNameAdd.setText("");
+            checkUsernameAdd.setText("");
           //  tableId.getStyleClass().add("table-row-cell");
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
