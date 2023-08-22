@@ -20,6 +20,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -31,12 +32,12 @@ public class ManageBooksController {
     public TextField byGenreId;
     public TableView tableId;
     public TableColumn<Book,Integer> id;
-    public TableColumn<Book,String> title ;//= new TableColumn<>();
-    public TableColumn<Book,String> author;// = new TableColumn<>();
-    public TableColumn<Book, String> yearOfPublication;// = new TableColumn<>();
-    public TableColumn<Book, String> genre;// = new TableColumn<>();
-    public TableColumn<Book, Integer> totalNumber;// = new TableColumn<>();
-    public TableColumn<Book, Integer> availableNumber;// = new TableColumn<>();
+    public TableColumn<Book,String> title ;
+    public TableColumn<Book,String> author;
+    public TableColumn<Book, String> yearOfPublication;
+    public TableColumn<Book, String> genre;
+    public TableColumn<Book, Integer> totalNumber;
+    public TableColumn<Book, Integer> availableNumber;
     public BookManager manager = new BookManager();
     public TextField titleLabel;
     public TextField authorLabel;
@@ -116,7 +117,7 @@ public class ManageBooksController {
                 }
             }
         });
-      //  tableId.getSelectionModel().getSelectedItem();
+        //  tableId.getSelectionModel().getSelectedItem();
         tableId.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{
             if(o!=null){
                 Book b = (Book) o;
@@ -140,65 +141,142 @@ public class ManageBooksController {
                 availableNumberLabel.textProperty().bindBidirectional(model.availableNumber);
             }
         });
+        updtTitle.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 200) {
+                titleAddCheck.setText("Title can't be longer than 200 characters!");
+            } else if (newValue.length() < 1) {
+                titleAddCheck.setText("This field can't be empty");
+            } else {
+                titleAddCheck.setText("");
+            }
+        });
+        updtAuthor.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 100) {
+                authorAddCheck.setText("Authors name can't be longer than 100 characters!");
+            } else if (newValue.length() < 1) {
+                authorAddCheck.setText("This field can't be empty");
+            } else {
+                authorAddCheck.setText("");
+            }
+        });
         updtYear.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
+            if (newValue.length() < 1) {
+                yearAddCheck.setText("This field can't be empty");
+            } else if (!newValue.matches("\\d*")) {
                 yearAddCheck.setText("Only numbers allowed!");
+            } else if(Integer.parseInt(newValue) > LocalDate.now().getYear()) {
+                yearAddCheck.setText("Year can't be greater than current year!");
             } else {
                 yearAddCheck.setText("");
             }
         });
-        updtTotal.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                totalNumberAddCheck.setText("Only numbers allowed!");
+        updtGenre.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() < 3 || newValue.length() > 50) {
+                genreAddCheck.setText("Genre length must be between 3 and 50 characters!");
+            } else {
+                genreAddCheck.setText("");
             }
-          /*  } else if(updtTotal.getText().matches("\\d*") && !updtAvailable.getText().isEmpty() && updtAvailable.getText().matches("\\d*")
+        });
+        updtTotal.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() < 1) {
+                totalNumberAddCheck.setText("This field can't be empty");
+            } else if (!newValue.matches("\\d*")) {
+                totalNumberAddCheck.setText("Only numbers allowed!");
+            } else if(Integer.parseInt(newValue) > 100) {
+                totalNumberAddCheck.setText("Total number of books can't be greater than 100!");
+            } else {
+                totalNumberAddCheck.setText("");
+            }
+                      /*  } else if(updtTotal.getText().matches("\\d*") && !updtAvailable.getText().isEmpty() && updtAvailable.getText().matches("\\d*")
                 && Integer.parseInt(updtTotal.getText()) < Integer.parseInt(updtAvailable.getText())) {
               //  System.out.println("GRESKAAAAAAAAA");
                     totalNumberAddCheck.setText("The number of available books cannot be greater than the total number of books!");
-            }*/ else {
-                    totalNumberAddCheck.setText("");
-            }
+            }*/
         });
         updtAvailable.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
+            if (newValue.length() < 1) {
+                availableNumberAddCheck.setText("This field can't be empty");
+            } else if (!newValue.matches("\\d*")) {
                 availableNumberAddCheck.setText("Only numbers allowed!");
-            } /*else if(updtAvailable.getText().matches("\\d*") && !updtTotal.getText().isEmpty() && updtTotal.getText().matches("\\d*")
+            } else if(Integer.parseInt(newValue) > 100) {
+                availableNumberAddCheck.setText("Available number of books can't be greater than 100!");
+            } else {
+                availableNumberAddCheck.setText("");
+            }
+            /*else if(updtAvailable.getText().matches("\\d*") && !updtTotal.getText().isEmpty() && updtTotal.getText().matches("\\d*")
                     &&  Integer.parseInt(updtAvailable.getText()) > Integer.parseInt(updtTotal.getText())) {
                 availableNumberAddCheck.setText("The number of available books cannot be greater than the total number of books!");
-            }*/ else {
-                availableNumberAddCheck.setText("");
+            }*/
+        });
+        titleLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 200) {
+                titleUpdateCheck.setText("Title can't be longer than 200 characters!");
+            } else if(newValue.length() < 1){
+                titleUpdateCheck.setText("Title can't be empty");
+            } else {
+                titleUpdateCheck.setText("");
+            }
+        });
+        authorLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 100) {
+                authorUpdateCheck.setText("Authors name can't be longer than 100 characters!");
+            } else if (newValue.length() < 1) {
+                authorUpdateCheck.setText("This field can't be empty");
+            } else {
+                authorUpdateCheck.setText("");
             }
         });
         yearLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
+            if (newValue.length() < 1) {
+                yearUpdateCheck.setText("This field can't be empty");
+            } else if (!newValue.matches("\\d*")) {
                 yearUpdateCheck.setText("Only numbers allowed!");
+            } else if(Integer.parseInt(newValue) > LocalDate.now().getYear()) {
+                yearUpdateCheck.setText("Year can't be greater than current year!");
             } else {
                 yearUpdateCheck.setText("");
             }
         });
+        genreLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() < 3 || newValue.length() > 50) {
+                genreUpdateCheck.setText("Genre length must be between 3 and 50 characters!");
+            } else {
+                genreUpdateCheck.setText("");
+            }
+        });
         totalNumberLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
+            if (newValue.length() < 1) {
+                totalNumberUpdateCheck.setText("This field can't be empty");
+            } else if (!newValue.matches("\\d*")) {
                 totalNumberUpdateCheck.setText("Only numbers allowed!");
+            } else if(Integer.parseInt(newValue) > 100) {
+                totalNumberUpdateCheck.setText("Total number of books can't be greater than 100!");
+            } else {
+                totalNumberUpdateCheck.setText("");
             }
             /*else if(newValue.matches("\\d*") && !availableNumberLabel.getText().isEmpty() && availableNumberLabel.getText().matches("\\d*")
                     && Integer.parseInt(newValue) < Integer.parseInt(availableNumberLabel.getText())) {
             //    System.out.println(Integer.parseInt(newValue) + " " + Integer.parseInt(availableNumberLabel.getText()));
                 totalNumberUpdateCheck.setText("The number of available books cannot be greater than the total number of books!");
-            } */ else {
-                totalNumberUpdateCheck.setText("");
-            }
+            } */
         });
         availableNumberLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
+            if (newValue.length() < 1) {
+                availableNumberUpdateCheck.setText("This field can't be empty");
+            } else if (!newValue.matches("\\d*")) {
                 availableNumberUpdateCheck.setText("Only numbers allowed!");
-            }/*
+            } else if(Integer.parseInt(newValue) > 100) {
+                availableNumberUpdateCheck.setText("Available number of books can't be greater than 100!");
+            } else {
+                availableNumberUpdateCheck.setText("");
+            }
+            /*
             else if(newValue.matches("\\d*") && !totalNumberLabel.getText().isEmpty() && totalNumberLabel.getText().matches("\\d*")
                     &&  Integer.parseInt(newValue) > Integer.parseInt(totalNumberLabel.getText())) {
                 availableNumberUpdateCheck.setText("The number of available books cannot be greater than the total number of books!");
-            }*/ else {
-                availableNumberUpdateCheck.setText("");
-            }
+            }*/
         });
+
     }
     public void allBooks(ActionEvent actionEvent) throws LibraryException {
         id.setCellValueFactory(cellData->{Book book=cellData.getValue(); return new SimpleIntegerProperty(book.getId()).asObject();});
@@ -221,15 +299,10 @@ public class ManageBooksController {
     }
 
     public void updateAction(ActionEvent actionEvent) throws LibraryException {
-        if(titleLabel.getText().isEmpty() || authorLabel.getText().isEmpty() || yearLabel.getText().isEmpty() ||
+     /*   if(titleLabel.getText().isEmpty() || authorLabel.getText().isEmpty() || yearLabel.getText().isEmpty() ||
         genreLabel.getText().isEmpty() || totalNumberLabel.getText().isEmpty() || availableNumberLabel.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided!");
-            alert.showAndWait();
             return;
-        }
+        }*/
         if(idUpdate == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -238,7 +311,12 @@ public class ManageBooksController {
             alert.showAndWait();
             return;
         }
-        if(!totalNumberLabel.getText().matches("\\d*") || !availableNumberLabel.getText().matches("\\d*")
+        if(!titleUpdateCheck.getText().isEmpty() || !authorUpdateCheck.getText().isEmpty() || !yearUpdateCheck.getText().isEmpty()
+                || !genreUpdateCheck.getText().isEmpty() || !totalNumberUpdateCheck.getText().isEmpty()
+                || !availableNumberUpdateCheck.getText().isEmpty()) {
+            return;
+        }
+    /*    if(!totalNumberLabel.getText().matches("\\d*") || !availableNumberLabel.getText().matches("\\d*")
                 || !yearLabel.getText().matches("\\d*")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -246,7 +324,7 @@ public class ManageBooksController {
             alert.setContentText("Check that the values you entered are of a valid type.");
             alert.showAndWait();
             return;
-        }
+        }*/
         if(Integer.parseInt(totalNumberLabel.getText()) < Integer.parseInt(availableNumberLabel.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -255,7 +333,7 @@ public class ManageBooksController {
             alert.showAndWait();
             return;
         }
-         Book b = new Book();
+        Book b = new Book();
         b.setId(idUpdate);
         b.setTitle(model.title.get());
         b.setAuthor(model.author.get());
@@ -270,19 +348,25 @@ public class ManageBooksController {
             alert.setHeaderText(null);
             alert.setContentText("Successfully updated!");
             alert.showAndWait();
+            tableId.setItems(FXCollections.observableList(manager.getAll()));
             titleLabel.setText("");
             authorLabel.setText("");
             genreLabel.setText("");
             yearLabel.setText("");
             totalNumberLabel.setText("");
             availableNumberLabel.setText("");
-            tableId.setItems(FXCollections.observableList(manager.getAll()));
+            titleUpdateCheck.setText("");
+            authorUpdateCheck.setText("");
+            yearUpdateCheck.setText("");
+            genreUpdateCheck.setText("");
+            totalNumberUpdateCheck.setText("");
+            availableNumberUpdateCheck.setText("");
             idUpdate = null;
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Update error!");
-            alert.setContentText("You can't update this book!");
+            alert.setContentText("An error occurred while updating book!");
             alert.showAndWait();
             idUpdate = null;
         }
@@ -315,8 +399,23 @@ public class ManageBooksController {
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
     }
-    public void addAction(ActionEvent actionEvent) {
+    public void addAction(ActionEvent actionEvent) throws LibraryException {
         if(updtTitle.getText().isEmpty() || updtAuthor.getText().isEmpty() || updtYear.getText().isEmpty() ||
+                updtGenre.getText().isEmpty() || updtTotal.getText().isEmpty() || updtAvailable.getText().isEmpty()) {
+            if(updtTitle.getText().isEmpty()) titleAddCheck.setText("This field can't be empty");
+            if(updtAuthor.getText().isEmpty()) authorAddCheck.setText("This field can't be empty");
+            if(updtYear.getText().isEmpty()) yearAddCheck.setText("This field can't be empty");
+            if(updtGenre.getText().isEmpty()) genreAddCheck.setText("This field can't be empty");
+            if(updtTotal.getText().isEmpty()) totalNumberAddCheck.setText("This field can't be empty");
+            if(updtAvailable.getText().isEmpty()) availableNumberAddCheck.setText("This field can't be empty");
+            return;
+        }
+        if(!titleAddCheck.getText().isEmpty() || !authorAddCheck.getText().isEmpty() || !yearAddCheck.getText().isEmpty()
+                || !genreAddCheck.getText().isEmpty() || !totalNumberAddCheck.getText().isEmpty()
+                || !availableNumberAddCheck.getText().isEmpty()) {
+            return;
+        }
+   /*     if(updtTitle.getText().isEmpty() || updtAuthor.getText().isEmpty() || updtYear.getText().isEmpty() ||
                 updtGenre.getText().isEmpty() || updtTotal.getText().isEmpty() || updtAvailable.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -324,8 +423,8 @@ public class ManageBooksController {
             alert.setContentText("You must fill in all the fields provided!");
             alert.showAndWait();
             return;
-        }
-        if(!updtTotal.getText().matches("\\d*") || !updtAvailable.getText().matches("\\d*")
+        }*/
+     /*   if(!updtTotal.getText().matches("\\d*") || !updtAvailable.getText().matches("\\d*")
         || !updtYear.getText().matches("\\d*")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -333,7 +432,7 @@ public class ManageBooksController {
             alert.setContentText("Check that the values you entered are of a valid type.");
             alert.showAndWait();
             return;
-        }
+        }*/
         if(Integer.parseInt(updtAvailable.getText()) > Integer.parseInt(updtTotal.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -364,18 +463,24 @@ public class ManageBooksController {
             alert.setHeaderText(null);
             alert.setContentText("Successfully added!");
             alert.showAndWait();
+            tableId.setItems(FXCollections.observableList(manager.getAll()));
             updtTitle.setText("");
             updtAuthor.setText("");
             updtGenre.setText("");
             updtYear.setText("");
             updtTotal.setText("");
             updtAvailable.setText("");
-            tableId.setItems(FXCollections.observableList(manager.getAll()));
+            titleAddCheck.setText("");
+            authorAddCheck.setText("");
+            yearAddCheck.setText("");
+            genreAddCheck.setText("");
+            totalNumberAddCheck.setText("");
+            availableNumberAddCheck.setText("");
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Adding error!");
-            alert.setContentText("You can't add book!");
+            alert.setContentText("An error occurred while adding book!");
             alert.showAndWait();
         }
     }
@@ -390,7 +495,11 @@ public class ManageBooksController {
             alert.showAndWait();
             return;
         }
-
+        if(!titleUpdateCheck.getText().isEmpty() || !authorUpdateCheck.getText().isEmpty() || !yearUpdateCheck.getText().isEmpty()
+                || !genreUpdateCheck.getText().isEmpty() || !totalNumberUpdateCheck.getText().isEmpty()
+                || !availableNumberUpdateCheck.getText().isEmpty()) {
+            return;
+        }
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirmation Dialog");
         confirmAlert.setHeaderText(null);
@@ -414,13 +523,19 @@ public class ManageBooksController {
                 alert.setHeaderText(null);
                 alert.setContentText("Successfully deleted!");
                 alert.showAndWait();
+                tableId.setItems(FXCollections.observableList(manager.getAll()));
                 titleLabel.setText("");
                 authorLabel.setText("");
                 genreLabel.setText("");
                 yearLabel.setText("");
                 totalNumberLabel.setText("");
                 availableNumberLabel.setText("");
-                tableId.setItems(FXCollections.observableList(manager.getAll()));
+                titleUpdateCheck.setText("");
+                authorUpdateCheck.setText("");
+                yearUpdateCheck.setText("");
+                genreUpdateCheck.setText("");
+                totalNumberUpdateCheck.setText("");
+                availableNumberUpdateCheck.setText("");
                 idUpdate = null;
             } catch (LibraryException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

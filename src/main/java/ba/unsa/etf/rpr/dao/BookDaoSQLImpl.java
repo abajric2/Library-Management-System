@@ -120,7 +120,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
             throw new LibraryException("Total number of books can't be negative or greater than 100!");
         }
         if(item.getAvailableNumber() < 0 || item.getAvailableNumber() > 100) {
-            throw new LibraryException("Total number of books can't be negative or greater than 100!");
+            throw new LibraryException("Available number of books can't be negative or greater than 100!");
         }
         if(item.getTitle().length() < 1 || item.getTitle().length() > 200) {
             throw new LibraryException("Title can't be empty of longer than 200 characters!");
