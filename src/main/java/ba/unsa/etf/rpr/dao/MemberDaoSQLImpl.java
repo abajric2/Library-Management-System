@@ -72,8 +72,7 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         }
         return null;*/
     }
-    @Override
-    public Member add(Member item) throws LibraryException {
+    private void validateMember(Member item) throws LibraryException {
         Member checkU = checkUsername(item);
         if (!item.getFirstName().matches("[a-zA-Z -]*")) {
             throw new LibraryException("First name can only contain letters, spaces and dashes");
@@ -90,6 +89,10 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         if(checkU != null) {
             throw new LibraryException("Someone is already using this username");
         }
+    }
+    @Override
+    public Member add(Member item) throws LibraryException {
+        validateMember(item);
       /*  Member checkP = checkPassword(item);
         if(checkP != null) {
             throw new LibraryException("Someone is already using this password");
@@ -137,22 +140,7 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
 
     @Override
     public Member update(Member item) throws LibraryException {
-        Member checkU = checkUsername(item);
-        if (!item.getFirstName().matches("[a-zA-Z -]*")) {
-            throw new LibraryException("First name can only contain letters, spaces and dashes");
-        }
-        if (!item.getLastName().matches("[a-zA-Z -]*")) {
-            throw new LibraryException("Last name can only contain letters, spaces and dashes");
-        }
-        if (!item.getUsername().matches("^[a-zA-Z0-9_.-]+$")) {
-            throw new LibraryException("Username can only contain letters, numbers, underscores, dots, and dashes.");
-        }
-        if(item.getPassword().length() < 8) {
-            throw new LibraryException("Password must be at least 8 characters long!");
-        }
-        if(checkU != null && checkU.getId() != item.getId()) {
-            throw new LibraryException("Someone is already using this username");
-        }
+        validateMember(item);
      //   Member checkP = checkPassword(item);
        /* if(checkP != null) {
             if(checkP.getId() == item.getId()) throw new LibraryException("You are already using this password");
