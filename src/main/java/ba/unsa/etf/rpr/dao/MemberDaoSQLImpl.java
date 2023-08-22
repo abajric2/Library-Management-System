@@ -73,7 +73,6 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         return null;*/
     }
     private void validateMember(Member item) throws LibraryException {
-        Member checkU = checkUsername(item);
         if (!item.getFirstName().matches("[a-zA-Z -]*")) {
             throw new LibraryException("First name can only contain letters, spaces and dashes");
         }
@@ -95,9 +94,6 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         if(item.getPassword().length() < 8 || item.getPassword().length() > 128) {
             throw new LibraryException("Password must be between 8 and 128 characters long!");
         }
-        if(checkU != null) {
-            throw new LibraryException("Someone is already using this username");
-        }
     }
     @Override
     public Member add(Member item) throws LibraryException {
@@ -106,6 +102,8 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         if(checkP != null) {
             throw new LibraryException("Someone is already using this password");
         }*/
+        Member checkU = checkUsername(item);
+        if(checkU != null) throw new LibraryException("Someone is already using this username");
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row, "MEMBER_ID");
         StringBuilder builder = new StringBuilder();
@@ -150,6 +148,8 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     @Override
     public Member update(Member item) throws LibraryException {
         validateMember(item);
+        Member checkU = checkUsername(item);
+        if(checkU != null && checkU.getId() != item.getId()) throw new LibraryException("Someone is already using this username");
      //   Member checkP = checkPassword(item);
        /* if(checkP != null) {
             if(checkP.getId() == item.getId()) throw new LibraryException("You are already using this password");

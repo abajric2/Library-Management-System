@@ -66,29 +66,41 @@ public class ProfileController {
             removeAdminBttn.setVisible(true);
         }
         firstName.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z -]*")) {
+            if(newValue.length() < 1) {
+                checkFirstName.setText("This field can't be empty");
+            } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkFirstName.setText("Only letters, spaces and dashes are allowed.");
+            } else if (newValue.length() > 30) {
+                checkFirstName.setText("First name can't be longer than 30 characters!");
             } else {
                 checkFirstName.setText("");
             }
         });
         lastName.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z -]*")) {
+            if(newValue.length() < 1) {
+                checkLastName.setText("This field can't be empty");
+            } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkLastName.setText("Only letters, spaces and dashes are allowed.");
+            } else if (newValue.length() > 50) {
+                checkLastName.setText("Last name can't be longer than 50 characters!");
             } else {
                 checkLastName.setText("");
             }
         });
         username.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
+            if(newValue.length() < 1) {
+                checkUsername.setText("This field can't be empty");
+            } else if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
                 checkUsername.setText("Username can only contain letters, numbers, underscores, dots, and dashes.");
+            } else if (newValue.length() < 3 || newValue.length() > 30) {
+                checkUsername.setText("Username length must be between 3 and 30 characters");
             } else {
                 checkUsername.setText("");
             }
         });
         password.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() < 8) {
-                checkPassword.setText("Password must be at least 8 characters long.");
+            if (newValue.length() < 8 || newValue.length() > 128) {
+                checkPassword.setText("Password must be between 8 and 128 characters long!");
             } else {
                 checkPassword.setText("");
             }
@@ -123,13 +135,25 @@ public class ProfileController {
     }
 
     public void updateAction(ActionEvent actionEvent) {
-        if(firstName.getText().isEmpty() || lastName.getText().isEmpty() || username.getText().isEmpty() ||
+       /* if(firstName.getText().isEmpty() || lastName.getText().isEmpty() || username.getText().isEmpty() ||
                 password.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fill in all fields!");
             alert.setContentText("You must fill in all the fields provided!");
             alert.showAndWait();
+            return;
+        }*/
+        if(firstName.getText().isEmpty() || lastName.getText().isEmpty() || username.getText().isEmpty() ||
+                password.getText().isEmpty()) {
+            if(firstName.getText().isEmpty()) checkFirstName.setText("This field can't be empty");
+            if(lastName.getText().isEmpty()) checkLastName.setText("This field can't be empty");
+            if(username.getText().isEmpty()) checkUsername.setText("This field can't be empty");
+            if(password.getText().isEmpty()) checkPassword.setText("This field can't be empty");
+            return;
+        }
+        if(!checkFirstName.getText().isEmpty() || !checkLastName.getText().isEmpty() || !checkUsername.getText().isEmpty()
+                || !checkPassword.getText().isEmpty()) {
             return;
         }
         Member m = new Member();
