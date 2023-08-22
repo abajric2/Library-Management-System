@@ -39,11 +39,11 @@ public class RegistrationController {
      passwordId.textProperty().addListener(new ChangeListener<String>() {
          @Override
          public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-             if (n.length() >= 8) {
+             if (n.length() >= 8 && n.length() <= 128) {
                 // passwordId.setStyle("-fx-background-color: yellowgreen;");
                  chckPasswordLngth.setText("");
              } else {
-                 chckPasswordLngth.setText("Password must be at least 8 characters long!");
+                 chckPasswordLngth.setText("Password must be between 8 and 128 characters long!");
                //  passwordId.setStyle("-fx-background-color: red;");
              }
              if(!confirmPasswordId.getText().isEmpty() && passwordId.getText().equals(confirmPasswordId.getText())) {
@@ -70,22 +70,34 @@ public class RegistrationController {
          }
      });
         firstNameId.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z -]*")) {
+            if(newValue.length() < 1) {
+                checkFirstName.setText("This field can't be empty");
+            } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkFirstName.setText("Only letters, spaces and dashes are allowed.");
+            } else if (newValue.length() > 30) {
+                checkFirstName.setText("First name can't be longer than 30 characters!");
             } else {
                 checkFirstName.setText("");
             }
         });
         lastNameId.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-zA-Z -]*")) {
+            if(newValue.length() < 1) {
+                checkLastName.setText("This field can't be empty");
+            } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkLastName.setText("Only letters, spaces and dashes are allowed.");
+            } else if (newValue.length() > 50) {
+                checkLastName.setText("Last name can't be longer than 50 characters!");
             } else {
                 checkLastName.setText("");
             }
         });
         usernameId.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
-                checkUsername.setText("Username can only contain letters, numbers, underscores, dots, and dashes.");
+            if(newValue.length() < 1) {
+                checkUsername.setText("This field can't be empty");
+            } else if (!newValue.isEmpty() && !newValue.matches("^[a-zA-Z0-9_.-]+$")) {
+                checkUsername.setText("Username can only contain letters, numbers, underscores, dots, and dashes");
+            } else if (newValue.length() < 3 || newValue.length() > 30) {
+                checkUsername.setText("Username length must be between 3 and 30 characters");
             } else {
                 checkUsername.setText("");
             }
@@ -96,14 +108,18 @@ public class RegistrationController {
     public void signUp(ActionEvent actionEvent) throws LibraryException, IOException {
         if(firstNameId.getText().isEmpty() || lastNameId.getText().isEmpty() || usernameId.getText().isEmpty() ||
                 passwordId.getText().isEmpty() || confirmPasswordId.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided!");
-            alert.showAndWait();
+            if(firstNameId.getText().isEmpty()) checkFirstName.setText("This field can't be empty");
+            if(lastNameId.getText().isEmpty()) checkLastName.setText("This field can't be empty");
+            if(usernameId.getText().isEmpty()) checkUsername.setText("This field can't be empty");
+            if(passwordId.getText().isEmpty()) chckPasswordLngth.setText("This field can't be empty");
+            if(confirmPasswordId.getText().isEmpty()) chckPasswordSame.setText("This field can't be empty");
             return;
         }
-        if(!firstNameId.getText().matches("[a-zA-Z -]*") || !lastNameId.getText().matches("[a-zA-Z -]*")) {
+        if(!checkFirstName.getText().isEmpty() || !checkLastName.getText().isEmpty() || !checkUsername.getText().isEmpty()
+            || !chckPasswordLngth.getText().isEmpty() || !chckPasswordSame.getText().isEmpty()) {
+            return;
+        }
+    /*    if(!firstNameId.getText().matches("[a-zA-Z -]*") || !lastNameId.getText().matches("[a-zA-Z -]*")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Invalid type!");
@@ -134,17 +150,18 @@ public class RegistrationController {
             alert.setContentText("In the confirm password field, you must enter the same password that you entered in the password field!");
             alert.showAndWait();
             return;
-        }
+        }*/
         Member member = new Member(firstNameId.getText(), lastNameId.getText(), usernameId.getText(),
                 passwordId.getText(), false);
         MemberManager m = new MemberManager();
         try {
-            Member check = m.add(member);
+            m.add(member);
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
-            alert.setHeaderText("Username or password error");
-            alert.setContentText("Someone is already using this username or password!");
+            alert.setHeaderText("Sign up error");
+            if(e.getMessage().equals("Someone is already using this username")) alert.setContentText("Someone is already using this username");
+            else alert.setContentText("An error occurred while signing up");
             alert.showAndWait();
             return;
         }
