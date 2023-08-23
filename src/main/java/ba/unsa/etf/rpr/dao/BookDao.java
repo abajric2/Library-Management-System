@@ -48,4 +48,5 @@ public interface BookDao extends Dao<Book> {
      * @param id
      */
     boolean isAvailable (int id) throws LibraryException;
+    void validateBook(Book item) throws LibraryException;
 }

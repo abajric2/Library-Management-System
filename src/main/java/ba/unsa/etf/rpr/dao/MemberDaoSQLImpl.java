@@ -72,7 +72,7 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         }
         return null;*/
     }
-    private void validateMember(Member item) throws LibraryException {
+    public void validateMember(Member item) throws LibraryException {
         if (!item.getFirstName().matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
             throw new LibraryException("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
         }

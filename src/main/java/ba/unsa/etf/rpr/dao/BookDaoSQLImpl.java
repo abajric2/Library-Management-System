@@ -109,7 +109,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         }
         return available;*/
     }
-    private void validateBook(Book item) throws LibraryException {
+    public void validateBook(Book item) throws LibraryException {
         if (!item.getYearOfPublication().matches("\\d*")) {
             throw new LibraryException("The year of publication can only contain numbers!");
         }

@@ -63,5 +63,7 @@ public class BookManager {
     public List<Book> removeAll() throws LibraryException {
         return DaoFactory.bookDao().removeAll();
     }
-
+    public void validateBook(Book item) throws LibraryException {
+        DaoFactory.bookDao().validateBook(item);
+    }
 }

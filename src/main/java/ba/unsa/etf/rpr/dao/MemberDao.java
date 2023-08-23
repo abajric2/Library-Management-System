@@ -19,4 +19,5 @@ public interface MemberDao extends Dao<Member> {
     List<Member> searchByName (String name) throws LibraryException;
     List<Member> searchByUsername(String username) throws LibraryException;
     Member searchByUsernameAndPassword(String username, String password) throws LibraryException;
+    void validateMember(Member item) throws LibraryException;
 }
