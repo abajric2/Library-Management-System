@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,38 @@ public class BookManager {
         return DaoFactory.bookDao().removeAll();
     }
     public void validateBook(Book item) throws LibraryException {
-        DaoFactory.bookDao().validateBook(item);
+        if (!item.getYearOfPublication().matches("\\d*")) {
+            throw new LibraryException("The year of publication can only contain numbers!");
+        }
+        if(Integer.parseInt(item.getYearOfPublication()) < 1 || Integer.parseInt(item.getYearOfPublication()) > LocalDate.now().getYear()) {
+            throw new LibraryException("Year can't be negative or greater than current year!");
+        }
+        if(item.getTotalNumber() < 0 || item.getTotalNumber() > 100) {
+            throw new LibraryException("Total number of books can't be negative or greater than 100!");
+        }
+        if(item.getAvailableNumber() < 0 || item.getAvailableNumber() > 100) {
+            throw new LibraryException("Available number of books can't be negative or greater than 100!");
+        }
+        if(!item.getTitle().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Space can only be located between 2 sets of characters.");
+        }
+        if(item.getTitle().length() < 1 || item.getTitle().length() > 200) {
+            throw new LibraryException("Title can't be empty of longer than 200 characters!");
+        }
+        if(!item.getAuthor().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Space can only be located between 2 sets of characters.");
+        }
+        if(item.getAuthor().length() < 1 || item.getAuthor().length() > 100) {
+            throw new LibraryException("Authors name can't be empty of longer than 100 characters!");
+        }
+        if(!item.getGenre().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Space can only be located between 2 sets of characters.");
+        }
+        if(item.getGenre().length() < 3 || item.getGenre().length() > 50) {
+            throw new LibraryException("Genre length must be between 3 and 50 characters!");
+        }
+        if(item.getAvailableNumber() > item.getTotalNumber()) {
+            throw new LibraryException("The number of available books cannot be greater than the total number of books!");
+        }
     }
 }

@@ -57,6 +57,35 @@ public class MemberManager {
         return DaoFactory.memberDao().removeAll();
     }
     public void validateMember(Member item) throws LibraryException {
-        DaoFactory.memberDao().validateMember(item);
+        if (!item.getFirstName().matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
+            throw new LibraryException("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
+        }
+       /* if(!item.getFirstName().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Spaces can only be located between 2 sets of characters.");
+        }*/
+        if(item.getFirstName().length() > 30) {
+            throw new LibraryException("First name can't be longer than 30 characters!");
+        }
+        if (!item.getLastName().matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
+            throw new LibraryException("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
+        }
+       /* if(!item.getLastName().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Space can only be located between 2 sets of characters.");
+        }*/
+        if(item.getLastName().length() > 50) {
+            throw new LibraryException("Last name can't be longer than 50 characters");
+        }
+        if (!item.getUsername().matches("^[a-zA-Z0-9_.-]+$")) {
+            throw new LibraryException("Username can only contain letters, numbers, underscores, dots, and dashes.");
+        }
+        if(item.getUsername().length() < 3 || item.getUsername().length() > 30) {
+            throw new LibraryException("Username length must be between 3 and 30 characters");
+        }
+        if(!item.getPassword().matches("^[^\\s]+$")) {
+            throw new LibraryException("The password can't be empty, or contain spaces or other blank characters.");
+        }
+        if(item.getPassword().length() < 8 || item.getPassword().length() > 128) {
+            throw new LibraryException("Password must be between 8 and 128 characters long!");
+        }
     }
 }
