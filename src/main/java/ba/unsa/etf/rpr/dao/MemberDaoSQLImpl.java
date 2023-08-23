@@ -76,11 +76,17 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         if (!item.getFirstName().matches("[a-zA-Z -]*")) {
             throw new LibraryException("First name can only contain letters, spaces and dashes");
         }
+        if(!item.getFirstName().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Spaces can only be located between 2 sets of characters.");
+        }
         if(item.getFirstName().length() > 30) {
             throw new LibraryException("First name can't be longer than 30 characters!");
         }
         if (!item.getLastName().matches("[a-zA-Z -]*")) {
             throw new LibraryException("Last name can only contain letters, spaces and dashes");
+        }
+        if(!item.getLastName().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Space can only be located between 2 sets of characters.");
         }
         if(item.getLastName().length() > 50) {
             throw new LibraryException("Last name can't be longer than 50 characters");

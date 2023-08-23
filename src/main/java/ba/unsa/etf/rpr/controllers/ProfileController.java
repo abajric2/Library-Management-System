@@ -70,6 +70,8 @@ public class ProfileController {
                 checkFirstName.setText("This field can't be empty");
             } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkFirstName.setText("Only letters, spaces and dashes are allowed.");
+            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
+                checkFirstName.setText("Space can only be located between 2 sets of characters.");
             } else if (newValue.length() > 30) {
                 checkFirstName.setText("First name can't be longer than 30 characters!");
             } else {
@@ -81,6 +83,8 @@ public class ProfileController {
                 checkLastName.setText("This field can't be empty");
             } else if (!newValue.matches("[a-zA-Z -]*")) {
                 checkLastName.setText("Only letters, spaces and dashes are allowed.");
+            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
+                checkLastName.setText("Space can only be located between 2 sets of characters.");
             } else if (newValue.length() > 50) {
                 checkLastName.setText("Last name can't be longer than 50 characters!");
             } else {
