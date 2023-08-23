@@ -11,13 +11,12 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-public class MockTesting {
+public class MemberManagerMockTest {
     private MemberManager memberManager;
     private Member member;
     private MemberDaoSQLImpl memberDaoSQL;
@@ -35,10 +34,10 @@ public class MockTesting {
         memberDaoSQL = Mockito.mock(MemberDaoSQLImpl.class);
         members = new ArrayList<>();
         members.addAll(Arrays.asList(
-                new Member("First Name 1", "Last Name 1", "Username1", "Password1", false),
-                new Member("First Name 2", "Last Name 2", "Username2", "Password2", false),
-                new Member("First Name 3", "Last Name 3", "Username3", "Password3", true),
-                new Member("First Name 4", "Last Name 4", "Username4", "Password4", true)
+                new Member("First Name a", "Last Name a", "Username1", "Password1", false),
+                new Member("First Name b", "Last Name b", "Username2", "Password2", false),
+                new Member("First Name c", "Last Name c", "Username3", "Password3", true),
+                new Member("First Name d", "Last Name d", "Username4", "Password4", true)
         ));
     }
     /*
@@ -47,7 +46,16 @@ public class MockTesting {
     exception was thrown.
      */
     @Test
-    public void testValidateMember() throws LibraryException {
+    public void testValidateValid() {
+        try {
+            Mockito.doCallRealMethod().when(memberManager).validateMember(member);
+            memberManager.validateMember(member);
+        } catch (LibraryException e) {
+            fail();
+        }
+    }
+    @Test
+    public void testValidateInvalid() throws LibraryException {
         Mockito.doCallRealMethod().when(memberManager).validateMember(member);
         memberManager.validateMember(member);
         // This username is not in valid format and method validateMember should throw an exception
@@ -62,6 +70,12 @@ public class MockTesting {
     }
     @Test
     public void testAdd() throws LibraryException {
+        memberManager.add(member);
+        assertTrue(true);
+        Mockito.verify(memberManager).add(member);
+    }
+    @Test
+    public void testAddWithId() throws LibraryException {
         Mockito.doCallRealMethod().when(memberManager).add(member);
         // member has a value set for id, which should throw an exception
         LibraryException exception = assertThrows(
