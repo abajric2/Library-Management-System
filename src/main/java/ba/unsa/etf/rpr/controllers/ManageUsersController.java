@@ -377,10 +377,10 @@ public class ManageUsersController {
                 passwordUpdt.setText("");
                 adminUpdt.setSelected(false);
                 rentalInfoId.setText("");
-                firstNameUpdt.setText("");
-                lastNameUpdt.setText("");
-                usernameUpdt.setText("");
-                passwordUpdt.setText("");
+                checkFirstNameUpdt.setText("");
+                checkLastNameUpdt.setText("");
+                checkUsernameUpdt.setText("");
+                checkPasswordUpdt.setText("");
                 idUpdate = null;
             } catch (LibraryException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
