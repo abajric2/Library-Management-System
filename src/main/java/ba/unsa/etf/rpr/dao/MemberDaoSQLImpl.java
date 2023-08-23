@@ -91,6 +91,9 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         if(item.getUsername().length() < 3 || item.getUsername().length() > 30) {
             throw new LibraryException("Username length must be between 3 and 30 characters");
         }
+        if(!item.getPassword().matches("^[^\\s]+$")) {
+            throw new LibraryException("The password can't be empty, or contain spaces or other blank characters.");
+        }
         if(item.getPassword().length() < 8 || item.getPassword().length() > 128) {
             throw new LibraryException("Password must be between 8 and 128 characters long!");
         }

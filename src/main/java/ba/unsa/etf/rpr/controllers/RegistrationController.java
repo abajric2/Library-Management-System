@@ -39,7 +39,9 @@ public class RegistrationController {
      passwordId.textProperty().addListener(new ChangeListener<String>() {
          @Override
          public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-             if (n.length() >= 8 && n.length() <= 128) {
+             if(!n.matches("^[^\\s]+$")) {
+                 chckPasswordLngth.setText("The password can't be empty, or contain spaces or other blank characters.");
+             } else if (n.length() >= 8 && n.length() <= 128) {
                 // passwordId.setStyle("-fx-background-color: yellowgreen;");
                  chckPasswordLngth.setText("");
              } else {

@@ -99,7 +99,9 @@ public class ProfileController {
             }
         });
         password.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() < 8 || newValue.length() > 128) {
+            if(!newValue.matches("^[^\\s]+$")) {
+                checkPassword.setText("The password can't be empty, or contain spaces or other blank characters.");
+            } else if (newValue.length() < 8 || newValue.length() > 128) {
                 checkPassword.setText("Password must be between 8 and 128 characters long!");
             } else {
                 checkPassword.setText("");

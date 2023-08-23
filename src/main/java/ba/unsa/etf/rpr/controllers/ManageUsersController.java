@@ -182,7 +182,9 @@ public class ManageUsersController {
             }
         });
         passwordAdd.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() < 8 || newValue.length() > 128) {
+            if(!newValue.matches("^[^\\s]+$")) {
+                checkPasswordAdd.setText("The password can't be empty, or contain spaces or other blank characters.");
+            } else if (newValue.length() < 8 || newValue.length() > 128) {
                 checkPasswordAdd.setText("Password must be between 8 and 128 characters long!");
             } else {
                 checkPasswordAdd.setText("");
@@ -222,7 +224,9 @@ public class ManageUsersController {
             }
         });
         passwordUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() < 8 || newValue.length() > 128) {
+            if(!newValue.matches("^[^\\s]+$")) {
+                checkPasswordUpdt.setText("The password can't be empty, or contain spaces or other blank characters.");
+            } else if (newValue.length() < 8 || newValue.length() > 128) {
                 checkPasswordUpdt.setText("Password must be between 8 and 128 characters long!");
             } else {
                 checkPasswordUpdt.setText("");
