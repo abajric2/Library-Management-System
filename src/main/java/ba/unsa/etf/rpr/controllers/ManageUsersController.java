@@ -151,10 +151,8 @@ public class ManageUsersController {
         firstNameAdd.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.length() < 1) {
                 checkFirstNameAdd.setText("This field can't be empty");
-            } else if (!newValue.matches("[a-zA-Z -]*")) {
-                checkFirstNameAdd.setText("Only letters, spaces and dashes are allowed.");
-            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
-                checkFirstNameAdd.setText("Space can only be located between 2 sets of characters.");
+            } else if (!newValue.matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
+                checkFirstNameAdd.setText("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
             } else if (newValue.length() > 30) {
                 checkFirstNameAdd.setText("First name can't be longer than 30 characters!");
             } else {
@@ -164,10 +162,8 @@ public class ManageUsersController {
         lastNameAdd.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.length() < 1) {
                 checkLastNameAdd.setText("This field can't be empty");
-            } else if (!newValue.matches("[a-zA-Z -]*")) {
-                checkLastNameAdd.setText("Only letters, spaces and dashes are allowed.");
-            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
-                checkLastNameAdd.setText("Space can only be located between 2 sets of characters.");
+            } else if (!newValue.matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
+                checkLastNameAdd.setText("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
             } else if (newValue.length() > 50) {
                 checkLastNameAdd.setText("Last name can't be longer than 50 characters!");
             } else {
@@ -197,11 +193,9 @@ public class ManageUsersController {
         firstNameUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.length() < 1) {
                 checkFirstNameUpdt.setText("This field can't be empty");
-            } else if (!newValue.matches("[a-zA-Z -]*")) {
-                checkFirstNameUpdt.setText("Only letters, spaces and dashes are allowed.");
-            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
-                checkFirstNameUpdt.setText("Space can only be located between 2 sets of characters.");
-            } else if (newValue.length() > 30) {
+            } else if (!newValue.matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
+                checkFirstNameUpdt.setText("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
+            }  else if (newValue.length() > 30) {
                 checkFirstNameUpdt.setText("First name can't be longer than 30 characters!");
             } else {
                 checkFirstNameUpdt.setText("");
@@ -210,10 +204,8 @@ public class ManageUsersController {
         lastNameUpdt.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.length() < 1) {
                 checkLastNameUpdt.setText("This field can't be empty");
-            } else if (!newValue.matches("[a-zA-Z -]*")) {
-                checkLastNameUpdt.setText("Only letters, spaces and dashes are allowed.");
-            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
-                checkLastNameUpdt.setText("Space can only be located between 2 sets of characters.");
+            } else if (!newValue.matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
+                checkLastNameUpdt.setText("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
             } else if (newValue.length() > 50) {
                 checkLastNameUpdt.setText("Last name can't be longer than 50 characters!");
             } else {
