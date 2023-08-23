@@ -142,19 +142,23 @@ public class ManageBooksController {
             }
         });
         updtTitle.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() > 200) {
-                titleAddCheck.setText("Title can't be longer than 200 characters!");
-            } else if (newValue.length() < 1) {
+            if (newValue.length() < 1) {
                 titleAddCheck.setText("This field can't be empty");
+            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
+                titleAddCheck.setText("Space can only be located between 2 sets of characters.");
+            } else if (newValue.length() > 200) {
+                titleAddCheck.setText("Title can't be longer than 200 characters!");
             } else {
                 titleAddCheck.setText("");
             }
         });
         updtAuthor.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() > 100) {
-                authorAddCheck.setText("Authors name can't be longer than 100 characters!");
-            } else if (newValue.length() < 1) {
+            if (newValue.length() < 1) {
                 authorAddCheck.setText("This field can't be empty");
+            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
+                authorAddCheck.setText("Space can only be located between 2 sets of characters.");
+            } else if (newValue.length() > 100) {
+                authorAddCheck.setText("Authors name can't be longer than 100 characters!");
             } else {
                 authorAddCheck.setText("");
             }
@@ -171,7 +175,11 @@ public class ManageBooksController {
             }
         });
         updtGenre.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() < 3 || newValue.length() > 50) {
+            if (newValue.length() < 1) {
+                genreAddCheck.setText("This field can't be empty");
+            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
+                genreAddCheck.setText("Space can only be located between 2 sets of characters.");
+            } else if (newValue.length() < 3 || newValue.length() > 50) {
                 genreAddCheck.setText("Genre length must be between 3 and 50 characters!");
             } else {
                 genreAddCheck.setText("");
@@ -209,19 +217,23 @@ public class ManageBooksController {
             }*/
         });
         titleLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() > 200) {
+            if (newValue.length() < 1) {
+                titleUpdateCheck.setText("This field can't be empty");
+            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
+                titleUpdateCheck.setText("Space can only be located between 2 sets of characters.");
+            } else if (newValue.length() > 200) {
                 titleUpdateCheck.setText("Title can't be longer than 200 characters!");
-            } else if(newValue.length() < 1){
-                titleUpdateCheck.setText("Title can't be empty");
             } else {
                 titleUpdateCheck.setText("");
             }
         });
         authorLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() > 100) {
-                authorUpdateCheck.setText("Authors name can't be longer than 100 characters!");
-            } else if (newValue.length() < 1) {
+            if (newValue.length() < 1) {
                 authorUpdateCheck.setText("This field can't be empty");
+            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
+                authorUpdateCheck.setText("Space can only be located between 2 sets of characters.");
+            } else if (newValue.length() > 100) {
+                authorUpdateCheck.setText("Authors name can't be longer than 100 characters!");
             } else {
                 authorUpdateCheck.setText("");
             }
@@ -238,7 +250,11 @@ public class ManageBooksController {
             }
         });
         genreLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() < 3 || newValue.length() > 50) {
+            if (newValue.length() < 1) {
+                genreUpdateCheck.setText("This field can't be empty");
+            } else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
+                genreUpdateCheck.setText("Space can only be located between 2 sets of characters.");
+            } else if (newValue.length() < 3 || newValue.length() > 50) {
                 genreUpdateCheck.setText("Genre length must be between 3 and 50 characters!");
             } else {
                 genreUpdateCheck.setText("");

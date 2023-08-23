@@ -122,11 +122,20 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         if(item.getAvailableNumber() < 0 || item.getAvailableNumber() > 100) {
             throw new LibraryException("Available number of books can't be negative or greater than 100!");
         }
+        if(!item.getTitle().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Space can only be located between 2 sets of characters.");
+        }
         if(item.getTitle().length() < 1 || item.getTitle().length() > 200) {
             throw new LibraryException("Title can't be empty of longer than 200 characters!");
         }
+        if(!item.getAuthor().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Space can only be located between 2 sets of characters.");
+        }
         if(item.getAuthor().length() < 1 || item.getAuthor().length() > 100) {
             throw new LibraryException("Authors name can't be empty of longer than 100 characters!");
+        }
+        if(!item.getGenre().matches("^[\\S]+(\\s[\\S]+)*$")) {
+            throw new LibraryException("Space can only be located between 2 sets of characters.");
         }
         if(item.getGenre().length() < 3 || item.getGenre().length() > 50) {
             throw new LibraryException("Genre length must be between 3 and 50 characters!");
