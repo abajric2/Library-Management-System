@@ -22,7 +22,7 @@ public class MemberManagerTest {
         testMember.setFirstName("Test First Name");
         testMember.setLastName("Test Last Name");
         testMember.setUsername("TestUsername");
-        testMember.setPassword("Test Password");
+        testMember.setPassword("TestPassword");
         testMember.setAdmin(false);
         /*
         In case there is a user with the username of the user
@@ -70,7 +70,7 @@ public class MemberManagerTest {
                 () -> memberManager.update(addedMember),
                 "Expected update to throw LibraryException, but it didn't"
         );
-        assertEquals("First name can only contain letters, spaces and dashes", exceptionInvalidName.getMessage(), "Unexpected exception message");
+        assertEquals("Only letters, dashes and spaces. Spaces can only be between two sets of characters.", exceptionInvalidName.getMessage(), "Unexpected exception message");
         addedMember.setFirstName("Test First Name");
 
         memberManager.delete(addedMember);
@@ -93,7 +93,7 @@ public class MemberManagerTest {
     @Test
     public void testDuplicateUsernameAddition() throws LibraryException {
         Member addedMember = memberManager.add(testMember);
-        Member memberWithSameUsername = new Member("Second test first name", "Second test last name", "TestUsername", "Second test password", false);
+        Member memberWithSameUsername = new Member("Second test first name", "Second test last name", "TestUsername", "SecondTestPassword", false);
         LibraryException exception = assertThrows(
                 LibraryException.class,
                 () -> memberManager.add(memberWithSameUsername),

@@ -42,7 +42,7 @@ public class RentalManagerTest {
         testMember.setFirstName("Test First Name");
         testMember.setLastName("Test Last Name");
         testMember.setUsername("TestUsername");
-        testMember.setPassword("Test Password");
+        testMember.setPassword("TestPassword");
         testMember.setAdmin(false);
         /*
         In case there is a user with the username of the user
@@ -146,7 +146,7 @@ public class RentalManagerTest {
         Rental foundRental = rentalManager.searchById(addedRental.getId());
         assertEquals(addedRental, foundRental);
         // Attempting to rent a book to a user who currently owns the book throws an exception!
-        Book testBookForRent = new Book("", "", "", "", 2, 2);
+        Book testBookForRent = new Book("b", "b", "2023", "bbb", 2, 2);
         Book addedBookForRent = bookManager.add(testBookForRent);
         LibraryException exceptionById = assertThrows(
                 LibraryException.class,
