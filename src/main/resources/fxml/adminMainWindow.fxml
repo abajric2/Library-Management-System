@@ -74,7 +74,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="manageUserId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageUsers" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="Manage users" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="manageUserId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageUsers" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Manage users" textAlignment="CENTER" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="100.0" right="10.0" top="60.0" />
                      </VBox.margin>
@@ -82,7 +82,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="manageBooksId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageBooks" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="Manage books" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="manageBooksId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageBooks" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Manage books" textAlignment="CENTER" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="100.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -90,7 +90,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="viewRentalsBttn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#viewRentals" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="View rentals" textFill="WHITE">
+                  <Button fx:id="viewRentalsBttn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#viewRentals" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="View rentals" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="100.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -98,7 +98,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="addRentalBttn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addRental" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="Add rental" textFill="WHITE">
+                  <Button fx:id="addRentalBttn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addRental" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Add rental" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="100.0" right="10.0" top="10.0" />
                      </VBox.margin>
@@ -106,7 +106,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="regularUserId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#regularUserMode" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="Regular user mode" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="regularUserId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#regularUserMode" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Regular user mode" textAlignment="CENTER" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="100.0" right="10.0" top="10.0" />
                      </VBox.margin>

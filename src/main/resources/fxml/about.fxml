@@ -134,7 +134,7 @@
          <children>
             <ButtonBar HBox.hgrow="ALWAYS">
                <buttons>
-                  <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" styleClass="tbButton" text="Main page" textFill="WHITE">
+                  <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" prefWidth="80.0" styleClass="tbButton" text="Main page" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>

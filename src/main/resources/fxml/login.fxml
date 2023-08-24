@@ -59,7 +59,7 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                   </PasswordField>
-                  <Button fx:id="signInBttnId" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#signIn" style="-fx-background-color: black; -fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Sign In" textFill="WHITE">
+                  <Button fx:id="signInBttnId" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#signIn" style="-fx-border-radius: 5; -fx-background-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Sign In" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="30.0" />
                      </VBox.margin>

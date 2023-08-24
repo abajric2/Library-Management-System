@@ -43,7 +43,7 @@
                               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                            </VBox.margin>
                   </Label>
-                  <Button fx:id="editBttn" mnemonicParsing="false" onAction="#editAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Edit" textFill="WHITE">
+                  <Button fx:id="editBttn" mnemonicParsing="false" onAction="#editAction" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Edit" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -114,7 +114,7 @@
                   </CheckBox>
                   <ButtonBar>
                     <buttons>
-                      <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Update" textFill="WHITE">
+                      <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Update" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -131,7 +131,7 @@
                         </Label>
                         <ButtonBar>
                           <buttons>
-                            <Button fx:id="removeAdminBttn" mnemonicParsing="false" onAction="#removeAdmin" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Exit Admin Role" textFill="WHITE">
+                            <Button fx:id="removeAdminBttn" mnemonicParsing="false" onAction="#removeAdmin" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Exit Admin Role" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -155,7 +155,7 @@
                   </Label>
                   <ButtonBar>
                     <buttons>
-                      <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Delete" textFill="WHITE">
+                      <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Delete" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -178,7 +178,7 @@
             <children>
                 <ButtonBar HBox.hgrow="ALWAYS">
                     <buttons>
-                        <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" styleClass="tbButton" text="Main page" textFill="WHITE">
+                        <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" prefWidth="80.0" styleClass="tbButton" text="Main page" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>

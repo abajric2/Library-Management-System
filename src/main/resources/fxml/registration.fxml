@@ -112,7 +112,7 @@
                         <Insets left="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="signUpId" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: black;" text="Sign Up" textFill="WHITE">
+                  <Button fx:id="signUpId" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signUp" style="-fx-border-radius: 5; -fx-background-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Sign Up" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="30.0" />
                      </VBox.margin>

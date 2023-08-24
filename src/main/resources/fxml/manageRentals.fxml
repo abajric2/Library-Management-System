@@ -109,7 +109,7 @@
                               </TextField>
                               <ButtonBar>
                                 <buttons>
-                                  <Button fx:id="deleteRentalId" mnemonicParsing="false" onAction="#deleteRental" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Delete rental" textFill="WHITE">
+                                  <Button fx:id="deleteRentalId" mnemonicParsing="false" onAction="#deleteRental" style="-fx-border-radius: 5; -fx-background-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Delete rental" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -147,12 +147,12 @@
                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                      </VBox.margin>
                      <buttons>
-                        <Button fx:id="deadlineExceedingsId" mnemonicParsing="false" onAction="#deadlineExceedings" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Deadline exceedings" textFill="WHITE">
+                        <Button fx:id="deadlineExceedingsId" mnemonicParsing="false" onAction="#deadlineExceedings" style="-fx-border-radius: 5; -fx-background-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Deadline exceedings" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="allRentalsId" mnemonicParsing="false" onAction="#allRentals" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="All rentals" textFill="WHITE">
+                        <Button fx:id="allRentalsId" mnemonicParsing="false" onAction="#allRentals" style="-fx-border-radius: 5; -fx-background-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="All rentals" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -182,7 +182,7 @@
             <children>
                 <ButtonBar HBox.hgrow="ALWAYS">
                     <buttons>
-                        <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" styleClass="tbButton" text="Main page" textFill="WHITE">
+                        <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" prefWidth="80.0" styleClass="tbButton" text="Main page" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>

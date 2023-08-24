@@ -1,12 +1,16 @@
 .tbButton {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 5px;
 }
 .tbButton:pressed {
     -fx-background-color: gray;
 }
 .tbButton:hover {
     -fx-background-color: darkgray;
+}
+.tbButton:focused {
+    -fx-border-color: white;
 }
 /*.choice-box .label {
      -fx-text-fill: white;

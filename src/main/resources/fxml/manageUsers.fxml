@@ -95,7 +95,7 @@
                   </CheckBox>
                       <ButtonBar>
                           <buttons>
-                              <Button fx:id="addBttn" mnemonicParsing="false" onAction="#addAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Add" textFill="WHITE">
+                              <Button fx:id="addBttn" mnemonicParsing="false" onAction="#addAction" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Add" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
@@ -165,7 +165,7 @@
                   </Label>
                         <ButtonBar>
                             <buttons>
-                                <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Update" textAlignment="RIGHT" textFill="WHITE">
+                                <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Update" textAlignment="RIGHT" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -197,7 +197,7 @@
                <children>
                   <ButtonBar nodeOrientation="RIGHT_TO_LEFT">
                      <buttons>
-                              <Button fx:id="allUsersId" mnemonicParsing="false" onAction="#allUsers" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="All users" textFill="WHITE">
+                              <Button fx:id="allUsersId" mnemonicParsing="false" onAction="#allUsers" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="All users" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -231,7 +231,7 @@
                         </Label>
                         <ButtonBar>
                             <buttons>
-                                <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="Delete" textFill="WHITE">
+                                <Button fx:id="deleteBttn" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Delete" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -254,7 +254,7 @@
          <children>
             <ButtonBar HBox.hgrow="ALWAYS">
               <buttons>
-                <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" styleClass="tbButton" text="Main page" textFill="WHITE">
+                <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" prefWidth="80.0" styleClass="tbButton" text="Main page" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>

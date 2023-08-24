@@ -68,12 +68,12 @@
          <children>
             <ButtonBar nodeOrientation="RIGHT_TO_LEFT">
               <buttons>
-                <Button fx:id="allBooksBttn" mnemonicParsing="false" onAction="#allBooks" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="All books" textFill="WHITE">
+                <Button fx:id="allBooksBttn" mnemonicParsing="false" onAction="#allBooks" style="-fx-border-radius: 5; -fx-background-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="All books" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="allUsersBttn" mnemonicParsing="false" onAction="#allUsers" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="All users" textFill="WHITE">
+                  <Button fx:id="allUsersBttn" mnemonicParsing="false" onAction="#allUsers" style="-fx-border-radius: 5; -fx-background-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="All users" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -187,7 +187,7 @@
             </TextField>
             <ButtonBar>
               <buttons>
-                <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" style="-fx-background-color: black; -fx-border-radius: 5; -fx-background-radius: 5;" text="Add rental" textFill="WHITE">
+                <Button fx:id="addRentalBttn" mnemonicParsing="false" onAction="#addRental" style="-fx-border-radius: 5; -fx-background-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Add rental" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -210,7 +210,7 @@
             <children>
                 <ButtonBar HBox.hgrow="ALWAYS">
                     <buttons>
-                        <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" styleClass="tbButton" text="Main page" textFill="WHITE">
+                        <Button fx:id="mainPageBttn" mnemonicParsing="false" onAction="#mainPage" prefWidth="80.0" styleClass="tbButton" text="Main page" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
