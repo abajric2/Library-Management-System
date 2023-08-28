@@ -7,7 +7,6 @@ import java.util.Objects;
 
 /**
  * Class that contains basic information about borrowing a book from the library
- * It follows the POJO specification
  * @author Amina Bajric
  */
 public class Rental implements Idable {
@@ -79,8 +78,8 @@ public class Rental implements Idable {
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String rent = simpleDateFormat.format(rentDate);
-        String returndl = simpleDateFormat.format(returnDeadline);
-        return "The book was rented on " + rent + " and should be returned until " + returndl;
+        String returnDl = simpleDateFormat.format(returnDeadline);
+        return "The book was rented on " + rent + " and should be returned until " + returnDl;
     }
     @Override
     public boolean equals(Object o) {
