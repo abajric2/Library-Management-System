@@ -4,7 +4,6 @@ import java.util.Objects;
 
 /**
  * Class for basic information and methods for managing members of a library
- * It follows the POJO specification
  * @author Amina Bajric
  */
 public class Member implements Idable {
@@ -75,12 +74,12 @@ public class Member implements Idable {
         this.lastName = lastName;
     }
     /**
-     * method for printing a member in the form "first name last name"
+     * method for printing a member in the form "firstName lastName (username)"
      * @return string that contains the name of the library member
      */
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return firstName + " " + lastName + " (" + username + ")";
     }
 
     @Override
