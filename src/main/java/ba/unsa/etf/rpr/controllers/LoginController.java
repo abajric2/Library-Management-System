@@ -3,7 +3,10 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.business.MemberManager;
 import ba.unsa.etf.rpr.domain.Member;
 import ba.unsa.etf.rpr.exceptions.LibraryException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -22,7 +25,33 @@ public class LoginController {
     public Button signInBttnId;
     public Hyperlink signUpId;
     public Hyperlink about;
-
+    public Label checkUsername;
+    public Label checkPassword;
+    @FXML
+    public void initialize() {
+        usernameId.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if(newValue.isEmpty()) {
+                    checkUsername.setText("This field can't be empty");
+                }
+                else {
+                    checkUsername.setText("");
+                }
+            }
+        });
+        passwordId.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if(newValue.isEmpty()) {
+                    checkPassword.setText("This field can't be empty");
+                }
+                else {
+                    checkPassword.setText("");
+                }
+            }
+        });
+    }
     public void signUp(ActionEvent actionEvent) throws Exception {
         /*Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/registration.fxml"));
@@ -46,11 +75,8 @@ public class LoginController {
 
     public void signIn(ActionEvent actionEvent) throws IOException, LibraryException {
         if(usernameId.getText().isEmpty() || passwordId.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided!");
-            alert.showAndWait();
+            if(usernameId.getText().isEmpty()) checkUsername.setText("This field can't be empty");
+            if(passwordId.getText().isEmpty()) checkPassword.setText("This field can't be empty");
             return;
         }
         MemberManager mimp = new MemberManager();
