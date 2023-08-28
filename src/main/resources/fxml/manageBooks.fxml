@@ -37,104 +37,6 @@
             <RowConstraints maxHeight="173.1999572753906" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox style="-fx-border-color: black;" styleClass="white" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
-               <children>
-                  <Label stylesheets="@../css/backgrounds.css" text=" Please select the book from the table that you want to edit! " wrapText="true">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="titleLabel" promptText="title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label fx:id="titleUpdateCheck" textFill="RED">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="authorLabel" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label fx:id="authorUpdateCheck" textFill="RED">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="yearLabel" promptText="year of publication" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label fx:id="yearUpdateCheck" textFill="RED" wrapText="true">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="genreLabel" promptText="genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label fx:id="genreUpdateCheck" textFill="RED">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="totalNumberLabel" promptText="total number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label fx:id="totalNumberUpdateCheck" textFill="RED" wrapText="true">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextField fx:id="availableNumberLabel" promptText="available number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Label fx:id="availableNumberUpdateCheck" textFill="RED" wrapText="true">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <ButtonBar>
-                    <buttons>
-                        <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Update" textAlignment="RIGHT" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                    </buttons>
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </ButtonBar>
-               </children>
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </GridPane.margin>
-            </VBox>
-            <TableView fx:id="tableId" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.9" style="-fx-border-color: black; -fx-background-color: black;" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647">
-              <columns>
-                <TableColumn fx:id="id" maxWidth="1.7976931348623157E308" text="ID" />
-                <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" text="TITLE" />
-                  <TableColumn fx:id="author" maxWidth="1.7976931348623157E308" text="AUTHOR" />
-                  <TableColumn fx:id="yearOfPublication" maxWidth="1.7976931348623157E308" text="YEAR OF PUBLICATION" />
-                  <TableColumn fx:id="genre" maxWidth="1.7976931348623157E308" text="GENRE" />
-                  <TableColumn fx:id="totalNumber" maxWidth="1.7976931348623157E308" text="TOTAL NUMBER" />
-                  <TableColumn fx:id="availableNumber" maxWidth="1.7976931348623157E308" text="AVAILABLE NUMBER" />
-              </columns>
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
-               </GridPane.margin>
-            </TableView>
             <VBox style="-fx-border-color: black;" styleClass="white" GridPane.rowSpan="2">
                <GridPane.margin>
                   <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
@@ -154,6 +56,9 @@
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                   </Label>
                   <TextField fx:id="updtAuthor" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
@@ -164,6 +69,9 @@
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                   </Label>
                   <TextField fx:id="updtYear" promptText="year of publication" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
@@ -174,6 +82,9 @@
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                   </Label>
                   <TextField fx:id="updtGenre" promptText="genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
@@ -184,6 +95,9 @@
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                   </Label>
                   <TextField fx:id="updtTotal" promptText="total number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
@@ -194,6 +108,9 @@
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                   </Label>
                   <TextField fx:id="updtAvailable" promptText="available number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
@@ -204,6 +121,9 @@
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" />
                      </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                   </Label>
                   <ButtonBar>
                      <VBox.margin>
@@ -248,6 +168,108 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </VBox>
+            <VBox style="-fx-border-color: black;" styleClass="white" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
+               <children>
+                  <Label stylesheets="@../css/backgrounds.css" text=" Please select the book from the table that you want to edit! " wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="titleLabel" promptText="title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="titleUpdateCheck" textFill="RED">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
+                     </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                  </Label>
+                  <TextField fx:id="authorLabel" promptText="author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="authorUpdateCheck" textFill="RED">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
+                     </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                  </Label>
+                  <TextField fx:id="yearLabel" promptText="year of publication" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="yearUpdateCheck" textFill="RED" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
+                     </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                  </Label>
+                  <TextField fx:id="genreLabel" promptText="genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="genreUpdateCheck" textFill="RED">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
+                     </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                  </Label>
+                  <TextField fx:id="totalNumberLabel" promptText="total number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="totalNumberUpdateCheck" textFill="RED" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
+                     </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                  </Label>
+                  <TextField fx:id="availableNumberLabel" promptText="available number" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="availableNumberUpdateCheck" textFill="RED" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" />
+                     </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                  </Label>
+                  <ButtonBar>
+                    <buttons>
+                        <Button fx:id="updateBttn" mnemonicParsing="false" onAction="#updateAction" style="-fx-background-radius: 5; -fx-border-radius: 5;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Update" textAlignment="RIGHT" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                    </buttons>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </ButtonBar>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </VBox>
             <VBox style="-fx-border-color: black;" styleClass="white" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <Label stylesheets="@../css/backgrounds.css" text=" Please select the book from the table that you want to delete! " wrapText="true">
@@ -272,6 +294,20 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </VBox>
+            <TableView fx:id="tableId" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" opacity="0.9" style="-fx-border-color: black; -fx-background-color: black;" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647">
+              <columns>
+                <TableColumn fx:id="id" maxWidth="1.7976931348623157E308" text="ID" />
+                <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" text="TITLE" />
+                  <TableColumn fx:id="author" maxWidth="1.7976931348623157E308" text="AUTHOR" />
+                  <TableColumn fx:id="yearOfPublication" maxWidth="1.7976931348623157E308" text="YEAR OF PUBLICATION" />
+                  <TableColumn fx:id="genre" maxWidth="1.7976931348623157E308" text="GENRE" />
+                  <TableColumn fx:id="totalNumber" maxWidth="1.7976931348623157E308" text="TOTAL NUMBER" />
+                  <TableColumn fx:id="availableNumber" maxWidth="1.7976931348623157E308" text="AVAILABLE NUMBER" />
+              </columns>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+               </GridPane.margin>
+            </TableView>
          </children>
       </GridPane>
    </center>

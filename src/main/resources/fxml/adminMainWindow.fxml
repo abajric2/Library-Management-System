@@ -72,6 +72,29 @@
           <RowConstraints maxHeight="117.99997558593748" minHeight="10.0" prefHeight="105.60001220703123" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+            <VBox alignment="TOP_CENTER" style="-fx-border-color: black;" styleClass="white" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" right="20.0" />
+               </GridPane.margin>
+               <children>
+                  <Label fx:id="welcomeId" maxHeight="1.7976931348623157E308" text="Welcome" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Bell MT Bold" size="37.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="You are currently signed in as an administrator. This gives you the ability to manage users, books and rentals. You have the capability to review, add, edit, or delete these as necessary. If preferred, you have the option to log in as a standard user. This would allow you to rent books and review your current rental in a more user-friendly manner. Please select your desired option on the right-hand side. " wrapText="true" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="manageUserId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageUsers" prefHeight="40.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="buttonStyle" stylesheets="@../css/button.css" text="Manage users" textAlignment="CENTER" textFill="WHITE">
@@ -114,29 +137,6 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-               </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER" style="-fx-border-color: black;" styleClass="white" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-               <children>
-                  <Label fx:id="welcomeId" maxHeight="1.7976931348623157E308" text="Welcome" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font name="Bell MT Bold" size="37.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="You are currently signed in as an administrator. This gives you the ability to manage users, books and rentals. You have the capability to review, add, edit, or delete these as necessary. If preferred, you have the option to log in as a standard user. This would allow you to rent books and review your current rental in a more user-friendly manner. Please select your desired option on the right-hand side. " wrapText="true" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
                </children>
             </VBox>
          </children>
