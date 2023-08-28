@@ -5,7 +5,6 @@ import java.util.Objects;
 
 /**
  * Class for basic information and methods for managing books in a library
- * It follows the POJO specification
  * @author Amina BAjric
  */
 public class Book implements Idable {
