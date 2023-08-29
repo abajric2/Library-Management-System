@@ -88,10 +88,20 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             throw new LibraryException(e.getMessage(), e);
         }
     }
+
+    /**
+     * based on the row received as a parameter, we extract the names of the
+     * columns and set as many question marks as there are columns in order
+     * to get the required form for the insert, where we skip the id
+     * because it is automatically generated.
+     * @param row row of a table
+     * @param idName name of id column
+     * @return map containing names of columns separated with commas, and question marks,
+     *         also separated with commas (form for insert query)
+     */
     Map.Entry<String, String> prepareInsertParts(Map<String, Object> row, String idName){
         StringBuilder columns = new StringBuilder();
         StringBuilder questions = new StringBuilder();
-
         int counter = 0;
         for (Map.Entry<String, Object> entry: row.entrySet()) {
             counter++;
@@ -105,6 +115,15 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         }
         return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
     }
+    /**
+     * based on the row received as a parameter, we extract the names of the
+     * columns and set as many question marks as there are columns that need
+     * to be updated in order to get the required form for the update, where
+     * we skip the id because it is automatically generated.
+     * @param row row of a table
+     * @param idName name of id column
+     * @return String in correct form for update query
+     */
     String prepareUpdateParts(Map<String, Object> row, String idName){
         StringBuilder columns = new StringBuilder();
         int counter = 0;
@@ -133,7 +152,6 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             throw new LibraryException("Object not found");
         }
     }
-    /*public abstract T getById(int id) throws LibraryException;*/
     public abstract void delete(T item) throws LibraryException;
     public abstract T add(T item) throws LibraryException;
     public abstract T searchById(int id) throws LibraryException;
