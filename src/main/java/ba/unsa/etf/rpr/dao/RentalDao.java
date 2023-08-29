@@ -23,7 +23,7 @@ public interface RentalDao extends Dao<Rental> {
     /**
      * returns a list of all rentals based on the specified return deadline date
      * (for example, to be able to notify members whose return deadline is about to expire)
-     * @param returnDeadline date of retrun deadline
+     * @param returnDeadline date of return deadline
      * @return list of rentals
      */
     List<Rental> searchByReturnDeadline(Date returnDeadline) throws LibraryException;
@@ -38,7 +38,7 @@ public interface RentalDao extends Dao<Rental> {
 
     /**
      * returns the book that was borrowed to the library
-     * @param memberID member from user who rented the book
+     * @param memberID id from user who rented the book
      */
     void returnRentedBook (int memberID) throws LibraryException;
 
@@ -57,10 +57,10 @@ public interface RentalDao extends Dao<Rental> {
     Book getBook (Rental r) throws LibraryException;
 
     /**
-     * rents the book whose name and author are given by the parameter
+     * rents the book with id given by the parameter
      * to the user whose id is also given by the parameter,
      * unless he already has the book rented, in which case it returns null
-     *
+     * @param bookId id from a book
      * @param memberID id from a library member
      * @return new rental or null
      */
