@@ -9,6 +9,10 @@ import org.apache.commons.cli.*;
 
 import java.io.PrintWriter;
 
+/**
+ * @author Amina Bajric
+ * CLI (Command Line Interface) implementation
+ */
 public class App {
     private static final Option addBook = new Option("b", "add-book", false, "Adding new book to Books database");
     private static final Option addMember = new Option("m", "add-member", false, "Adding new member to MEMBERS database");
