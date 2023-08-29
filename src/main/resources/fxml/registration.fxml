@@ -17,9 +17,9 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RegistrationController">
    <content>
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="687.0" styleClass="library" stylesheets="@../css/backgrounds.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="713.0" prefWidth="723.0" styleClass="library" stylesheets="@../css/backgrounds.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="484.0" style="-fx-border-color: black;" styleClass="white">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="564.0" style="-fx-border-color: black;" styleClass="white">
          <stylesheets>
             <URL value="@/css/registration.css" />
          </stylesheets>
@@ -153,7 +153,7 @@
                   </Hyperlink>
                </children>
             </VBox>
-            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Create your account to join eReads!" textAlignment="CENTER" GridPane.columnSpan="2147483647">
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Create your account to join TheNovelNet!" textAlignment="CENTER" GridPane.columnSpan="2147483647">
                <GridPane.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>

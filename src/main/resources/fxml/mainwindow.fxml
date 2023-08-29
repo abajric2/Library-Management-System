@@ -93,7 +93,7 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </VBox.margin>
                   </Label>
-                        <Label text="eReads provides you with the opportunity to rent books, allowing you to have one book rented at a time, and if you wish to rent a new one, you must return the current one. A list of all books is visible to your right. At any given moment, you are shown when you need to return the book you currently have, and we kindly ask you to adhere to the specified deadline. For more information, please visit the About page." wrapText="true" VBox.vgrow="ALWAYS">
+                        <Label text="TheNovelNet provides you with the opportunity to rent books, allowing you to have one book rented at a time, and if you wish to rent a new one, you must return the current one. A list of all books is visible to your right. At any given moment, you are shown when you need to return the book you currently have, and we kindly ask you to adhere to the specified deadline. For more information, please visit the About page." wrapText="true" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </VBox.margin>
