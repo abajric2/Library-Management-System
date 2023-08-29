@@ -10,5 +10,4 @@ Uncover more of what **TheNovelNet** has in store for you by joining our communi
 
 ### Contact
 - GitHub: [Amina Bajric](https://github.com/abajric2/)
-- Email: [Amina Bajric](abajric2@etf.unsa.ba)
 
