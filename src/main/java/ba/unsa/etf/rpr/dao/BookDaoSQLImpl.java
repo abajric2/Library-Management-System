@@ -38,54 +38,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
     @Override
     public List<Book> searchByTitle(String title) throws LibraryException {
         return executeQuery("SELECT * FROM Books WHERE TITLE LIKE concat('%', ? ,'%')", new Object[]{title});
-     /*   String query = "SELECT * FROM Books WHERE TITLE = ?";
-        List<Book> books = new ArrayList<>();
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setString(1, title);
-            ResultSet r = stmt.executeQuery();
-            while(r.next()) {
-                Book book = new Book();
-                book.setId(r.getInt("BOOK_ID"));
-                book.setTitle(r.getString("TITLE"));
-                book.setAuthor(r.getString("AUTHOR"));
-                book.setYearOfPublication(r.getString("YEAR_OF_PUBLICATION"));
-                book.setGenre(r.getString("GENRE"));
-                book.setTotalNumber(r.getInt("TOTAL_NUMBER"));
-                book.setAvilableNumber(r.getInt("AVAILABLE_NUMBER"));
-                books.add(book);
-            }
-            r.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return books;*/
     }
-
-  /*  @Override
-    public Book searchByTitleAndAuthor(String title, String author) throws LibraryException {
-
-        we can expect that one or no rows will be returned,
-        because in practice there is very little chance that
-        there will be two different books that have the same
-        title and the same author name
-
-        return executeQueryUnique("SELECT * FROM Books WHERE TITLE = ? AND AUTHOR = ?", new Object[]{title, author});
-        String query = "SELECT * FROM Books WHERE TITLE = ? AND AUTHOR = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setString(1, title);
-            stmt.setString(2, author);
-            ResultSet r = stmt.executeQuery();
-            if(r.next()) {
-                return new Book(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),
-                        r.getString(5), r.getInt(6), r.getInt(7));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
 
     @Override
     public boolean isAvailable(int id) throws LibraryException {
@@ -95,20 +48,11 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         } catch (LibraryException e) {
             return false;
         }
-        /*String query = "SELECT DISTINCT AVAILABLE_NUMBER FROM Books WHERE TITLE = ? AND AUTHOR = ?";
-        boolean available = false;
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setString(1, title);
-            stmt.setString(2, author);
-            ResultSet r = stmt.executeQuery();
-            if(r.next() && r.getInt("AVAILABLE_NUMBER")>0) available = true;  // statement returns distinct values, so it will return only one row or none
-            else available = false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return available;*/
     }
+    /*
+    the following constraints on the attributes that make up a book are
+    set by exploring some general rules for constraining these types.
+     */
     public void validateBook(Book item) throws LibraryException {
         if (!item.getYearOfPublication().matches("\\d*")) {
             throw new LibraryException("The year of publication can only contain numbers!");
@@ -151,12 +95,15 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         Map.Entry<String, String> columns = prepareInsertParts(row, "BOOK_ID");
         StringBuilder builder = new StringBuilder();
         builder.append("INSERT INTO ").append("Books");
+        // appending names of columns
         builder.append(" (").append(columns.getKey()).append(") ");
+        // appending as many question marks as there are columns
         builder.append("VALUES (").append(columns.getValue()).append(")");
         try{
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString(), Statement.RETURN_GENERATED_KEYS);
             int counter = 1;
             for (Map.Entry<String, Object> entry: row.entrySet()) {
+                // id is automatically generated
                 if (entry.getKey().equals("BOOK_ID")) continue;
                 stmt.setObject(counter, entry.getValue());
                 counter++;
@@ -169,24 +116,6 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         }catch (SQLException e){
             throw new LibraryException(e.getMessage(), e);
         }
-       /* String insert = "INSERT INTO Books(TITLE, AUTHOR, YEAR_OF_PUBLICATION, GENRE, TOTAL_NUMBER, AVAILABLE_NUMBER) VALUES(?, ?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, item.getTitle());
-            stmt.setString(2, item.getAuthor());
-            stmt.setString(3, item.getYearOfPublication());
-            stmt.setString(4, item.getGenre());
-            stmt.setInt(5, item.getTotalNumber());
-            stmt.setInt(6, item.getAvilableNumber());
-            stmt.executeUpdate();
-            ResultSet r = stmt.getGeneratedKeys();
-            r.next();
-            item.setId(r.getInt(1));
-            return item;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;*/
     }
 
     @Override
@@ -200,12 +129,12 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
                 .append(" SET ")
                 .append(updateColumns)
                 .append(" WHERE BOOK_ID = ?");
-
         try{
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString());
             int counter = 1;
             for (Map.Entry<String, Object> entry: row.entrySet()) {
-                if (entry.getKey().equals("BOOK_ID")) continue; // skip ID
+                // id is automatically generated
+                if (entry.getKey().equals("BOOK_ID")) continue;
                 stmt.setObject(counter, entry.getValue());
                 counter++;
             }
@@ -215,22 +144,6 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         }catch (SQLException e){
             throw new LibraryException(e.getMessage(), e);
         }
-        /*String updt = "UPDATE Books SET TITLE = ?, AUTHOR = ?, YEAR_OF_PUBLICATION = ?, GENRE = ?, TOTAL_NUMBER = ?, AVAILABLE_NUMBER = ? WHERE BOOK_ID = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(updt, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, item.getTitle());
-            stmt.setString(2, item.getAuthor());
-            stmt.setString(3, item.getYearOfPublication());
-            stmt.setString(4, item.getGenre());
-            stmt.setInt(5, item.getTotalNumber());
-            stmt.setInt(6, item.getAvilableNumber());
-            stmt.setInt(7, item.getId());
-            stmt.executeUpdate();
-            return item;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;*/
     }
 
     @Override
@@ -243,14 +156,6 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         }catch (SQLException e){
             throw new LibraryException(e.getMessage(), e);
         }
-       /* String dlt = "DELETE FROM Books WHERE BOOK_ID = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, item.getId());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
     }
 
     @Override
@@ -282,12 +187,6 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         row.put("AVAILABLE_NUMBER", object.getAvailableNumber());
         return row;
     }
-
-   /* @Override
-    public Book getById(int id) throws LibraryException {
-        return executeQueryUnique("SELECT * FROM Books WHERE BOOK_ID = ?", new Object[]{id});
-    }*/
-
     @Override
     public Book searchById(int id) throws LibraryException {
         return executeQueryUnique("SELECT * FROM Books WHERE BOOK_ID = ?", new Object[]{id});
@@ -306,7 +205,6 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         } catch (SQLException e) {
             throw new LibraryException("Unable to delete all books!");
         }
-      //  executeQuery("DELETE FROM Books WHERE BOOK_ID > 0", null);
     }
 
     @Override
