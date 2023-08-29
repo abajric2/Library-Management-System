@@ -15,11 +15,6 @@ public class AppFX extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-     /*   Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
-        primaryStage.setTitle("Welcome");
-        primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        primaryStage.setResizable(false);
-        primaryStage.show();*/
         Stage myStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         LoginController controller = new LoginController();

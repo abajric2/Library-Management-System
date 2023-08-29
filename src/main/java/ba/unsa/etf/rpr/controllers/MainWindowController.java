@@ -148,20 +148,7 @@ public class MainWindowController {
                 rentGenreId.textProperty().bindBidirectional(model.genre);
             }
         });
-    /*    choiceBoxId.setItems(FXCollections.observableList(books));
-        choiceBoxId.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Book book = choiceBoxId.getValue();
-                rentTitleId.setText(book.getTitle());
-                rentAuthorId.setText(book.getAuthor());
-            }
-        });*/
-        // choiceBoxId.setOnAction(this::getCurrentBook);
     }
-    /* public void getCurrentBook(ActionEvent event) {
-         Book book = choiceBoxId.getValue();
-     }*/
     public void profileBttnAction(ActionEvent actionEvent) throws IOException {
         Stage myStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
@@ -274,24 +261,6 @@ public class MainWindowController {
     }
 
     public void returnAction(ActionEvent actionEvent) throws LibraryException {
-        /*if(rentTitleId.getText().isEmpty() || rentAuthorId.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided or select an option from the drop down menu!");
-            alert.showAndWait();
-            return;
-        }*/
-        /*BookDaoSQLImpl b = new BookDaoSQLImpl();
-        Book book = b.searchByTitleAndAuthor(rentTitleId.getText(), rentAuthorId.getText());
-        if(book == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("No books found!");
-            alert.setContentText("No book was found with the title and author you entered!");
-            alert.showAndWait();
-            return;
-        }*/
         RentalManager r = new RentalManager();
         Rental rental = r.checkUsersRental(member.getId());
         if(rental == null) {
@@ -329,48 +298,6 @@ public class MainWindowController {
         List<Book> books = new ArrayList<>(b.getAll());
         sortBooks(books);
         listId.setItems(FXCollections.observableList(books));
-    }
-
-    public void byAuthorAction(ActionEvent actionEvent) throws LibraryException {
-      /*  if(authorNameId.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("The author input field is empty!");
-            alert.setContentText("You must enter the name of the author whose books you want to view!");
-            alert.showAndWait();
-            return;
-        }
-        BookDaoSQLImpl b = new BookDaoSQLImpl();
-        List<Book> books = new ArrayList<>(b.searchByAuthor(authorNameId.getText()));
-        if(books == null || books.size() == 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("No books found!");
-            alert.setContentText("No book was found by the author you entered!");
-            alert.showAndWait();
-        }
-        else listId.setItems(FXCollections.observableList(books));*/
-    }
-
-    public void byTitleAction(ActionEvent actionEvent) throws LibraryException {
-      /*  if(bookTitleId.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("The title input field is empty!");
-            alert.setContentText("You must enter the title of the book you want to view!");
-            alert.showAndWait();
-            return;
-        }
-        BookDaoSQLImpl b = new BookDaoSQLImpl();
-        List<Book> books = new ArrayList<>(b.searchByTitle(bookTitleId.getText()));
-        if(books == null || books.size() == 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("No books found!");
-            alert.setContentText("No book was found with the title you entered!");
-            alert.showAndWait();
-        }
-        else listId.setItems(FXCollections.observableList(books));*/
     }
 
     public void adminMode(ActionEvent actionEvent) throws IOException {

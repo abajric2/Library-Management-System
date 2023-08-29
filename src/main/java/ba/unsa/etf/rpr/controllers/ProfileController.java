@@ -137,15 +137,6 @@ public class ProfileController {
     }
 
     public void updateAction(ActionEvent actionEvent) {
-       /* if(firstName.getText().isEmpty() || lastName.getText().isEmpty() || username.getText().isEmpty() ||
-                password.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided!");
-            alert.showAndWait();
-            return;
-        }*/
         if(firstName.getText().isEmpty() || lastName.getText().isEmpty() || username.getText().isEmpty() ||
                 password.getText().isEmpty()) {
             if(firstName.getText().isEmpty()) checkFirstName.setText("This field can't be empty");
@@ -187,7 +178,6 @@ public class ProfileController {
                 alert.setContentText("Check that the values you entered are of a valid type.");
             else alert.setContentText("It seems like someone is already using the username you entered!");
             alert.showAndWait();
-            //   idUpdate = null;
         }
     }
     public void about(ActionEvent actionEvent) throws IOException {
@@ -243,7 +233,6 @@ public class ProfileController {
                 alert.setHeaderText("Delete error!");
                 alert.setContentText("Check if you have rented books. If answer is yes, you need to return them before deleting your account!");
                 alert.showAndWait();
-                //idUpdate = null;
             }
         }
 

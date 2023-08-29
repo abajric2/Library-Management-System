@@ -69,8 +69,6 @@ public class ManageRentalsController {
         rentDate.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleObjectProperty<Date>(rental.getRentDate());});
         returnDeadline.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleObjectProperty<Date>(rental.getReturnDeadline());});
         tableId.setItems(FXCollections.observableList(manager.getAll()));
-
-        //  tableId.getSelectionModel().getSelectedItem();
         tableId.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{
             if(o!=null){
                 Rental r = (Rental) o;
@@ -111,13 +109,8 @@ public class ManageRentalsController {
         datePickerId.valueProperty().addListener(new ChangeListener<LocalDate>() {
             @Override
             public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
-                // Ovdje ćemo dodati kod koji će se izvršiti kada se promijeni datum u datePickeru
-
-                // Prvo dohvatimo novi izabrani datum
                 if(newValue != null) {
                     java.sql.Date selectedDate = java.sql.Date.valueOf(newValue);
-
-                    // Pozivamo metodu koja će obrađivati promjenu datuma
                     id.setCellValueFactory(cellData -> {
                         Rental rental = cellData.getValue();
                         return new SimpleIntegerProperty(rental.getId()).asObject();
@@ -176,8 +169,6 @@ public class ManageRentalsController {
             return;
         }
 
-       // String usernameToDelete = selectedItem.getUsername();
-
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirmation Dialog");
         confirmAlert.setHeaderText(null);
@@ -222,8 +213,6 @@ public class ManageRentalsController {
         }
     }
 
-    public void addRental(ActionEvent actionEvent) {
-    }
 
     public void allRentals(ActionEvent actionEvent) throws LibraryException {
         id.setCellValueFactory(cellData->{Rental rental=cellData.getValue(); return new SimpleIntegerProperty(rental.getId()).asObject();});

@@ -53,15 +53,6 @@ public class LoginController {
         });
     }
     public void signUp(ActionEvent actionEvent) throws Exception {
-        /*Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/registration.fxml"));
-        //    Parent root = FXMLLoader.load(getClass().getResource("/fxml/starilogin.fxml"));
-        RegistrationController controller = new RegistrationController();
-        loader.setController(controller);
-        stage.setTitle("Sign up");
-        stage.setScene(new Scene((Parent) loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        stage.show();*/
         Stage myStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/registration.fxml"));
         myStage.setTitle("Sign up");

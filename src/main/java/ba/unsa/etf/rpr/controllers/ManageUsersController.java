@@ -243,8 +243,6 @@ public class ManageUsersController {
         tableId.setItems(FXCollections.observableList(manager.getAll()));
     }
 
-    public void searchByUsername(ActionEvent actionEvent) {
-    }
 
     public void updateAction(ActionEvent actionEvent) throws LibraryException {
         if(idUpdate == null) {
@@ -392,7 +390,6 @@ public class ManageUsersController {
                 alert.setHeaderText("Delete error!");
                 alert.setContentText("You can't delete this member! Check if the user currently has a rented book. If yes, the book must be returned before deletion.");
                 alert.showAndWait();
-                //idUpdate = null;
             }
         }
     }
@@ -410,14 +407,6 @@ public class ManageUsersController {
             !checkUsernameAdd.getText().isEmpty() || !checkPasswordAdd.getText().isEmpty()) {
             return;
         }
-     /*   if(idUpdate != null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Add error!");
-            alert.setContentText("You cannot add a book that already exists, if you want to make changes, use the update option!");
-            alert.showAndWait();
-            return;
-        }*/
         Member m = new Member();
         m.setFirstName(firstNameAdd.getText());
         m.setLastName(lastNameAdd.getText());
@@ -441,7 +430,6 @@ public class ManageUsersController {
             checkFirstNameAdd.setText("");
             checkLastNameAdd.setText("");
             checkUsernameAdd.setText("");
-          //  tableId.getStyleClass().add("table-row-cell");
         } catch (LibraryException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");

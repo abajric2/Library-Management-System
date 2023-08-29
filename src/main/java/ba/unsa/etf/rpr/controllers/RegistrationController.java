@@ -42,17 +42,13 @@ public class RegistrationController {
              if(!n.matches("^[^\\s]+$")) {
                  chckPasswordLngth.setText("The password can't be empty, or contain spaces or other blank characters.");
              } else if (n.length() >= 8 && n.length() <= 128) {
-                // passwordId.setStyle("-fx-background-color: yellowgreen;");
                  chckPasswordLngth.setText("");
              } else {
                  chckPasswordLngth.setText("Password must be between 8 and 128 characters long!");
-               //  passwordId.setStyle("-fx-background-color: red;");
              }
              if(!confirmPasswordId.getText().isEmpty() && passwordId.getText().equals(confirmPasswordId.getText())) {
                  chckPasswordSame.setText("");
-                // confirmPasswordId.setStyle("-fx-background-color: yellowgreen;");
              } else {
-            //     if(!confirmPasswordId.getText().isEmpty()) confirmPasswordId.setStyle("-fx-background-color: red;");
                  if(confirmPasswordId.getText().isEmpty()) chckPasswordSame.setText("");
                  else chckPasswordSame.setText("The password does not match!");
              }
@@ -61,13 +57,10 @@ public class RegistrationController {
      confirmPasswordId.textProperty().addListener(new ChangeListener<String>() {
          @Override
          public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-             // System.out.println(o + " " + n);
              if (confirmPasswordId.getText().equals(passwordId.getText())) {
                  chckPasswordSame.setText("");
-               //  confirmPasswordId.setStyle("-fx-background-color: yellowgreen;");
              } else {
                  chckPasswordSame.setText("The password does not match!");
-                // confirmPasswordId.setStyle("-fx-background-color: red;");
              }
          }
      });
@@ -76,9 +69,7 @@ public class RegistrationController {
                 checkFirstName.setText("This field can't be empty");
             } else if (!newValue.matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
                 checkFirstName.setText("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
-            } /*else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
-                checkFirstName.setText("Space can only be located between 2 sets of characters.");
-            }*/ else if (newValue.length() > 30) {
+            } else if (newValue.length() > 30) {
                 checkFirstName.setText("First name can't be longer than 30 characters!");
             } else {
                 checkFirstName.setText("");
@@ -89,9 +80,7 @@ public class RegistrationController {
                 checkLastName.setText("This field can't be empty");
             } else if (!newValue.matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
                 checkLastName.setText("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
-            } /*else if(!newValue.matches("^[\\S]+(\\s[\\S]+)*$")) {
-                checkLastName.setText("Space can only be located between 2 sets of characters.");
-            } */else if (newValue.length() > 50) {
+            } else if (newValue.length() > 50) {
                 checkLastName.setText("Last name can't be longer than 50 characters!");
             } else {
                 checkLastName.setText("");
@@ -125,38 +114,6 @@ public class RegistrationController {
             || !chckPasswordLngth.getText().isEmpty() || !chckPasswordSame.getText().isEmpty()) {
             return;
         }
-    /*    if(!firstNameId.getText().matches("[a-zA-Z -]*") || !lastNameId.getText().matches("[a-zA-Z -]*")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Invalid type!");
-            alert.setContentText("Check that the values you entered are of a valid type.");
-            alert.showAndWait();
-            return;
-        }
-        if(!usernameId.getText().matches("^[a-zA-Z0-9_.-]+$")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Invalid type!");
-            alert.setContentText("Username can only contain letters, numbers, underscores, dots, and dashes.");
-            alert.showAndWait();
-            return;
-        }
-        if(passwordId.getText().length() < 8) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Password error");
-            alert.setContentText("Password must be at least 8 characters long!");
-            alert.showAndWait();
-            return;
-        }
-        if(!passwordId.getText().equals(confirmPasswordId.getText())) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Password error");
-            alert.setContentText("In the confirm password field, you must enter the same password that you entered in the password field!");
-            alert.showAndWait();
-            return;
-        }*/
         Member member = new Member(firstNameId.getText(), lastNameId.getText(), usernameId.getText(),
                 passwordId.getText(), false);
         MemberManager m = new MemberManager();

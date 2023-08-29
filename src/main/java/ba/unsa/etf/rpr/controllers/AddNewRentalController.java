@@ -124,7 +124,6 @@ public class AddNewRentalController {
                 }
             }
         });
-        //  tableId.getSelectionModel().getSelectedItem();
         booksTable.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{
             if(o!=null){
                 Book b = (Book) o;
@@ -170,8 +169,6 @@ public class AddNewRentalController {
                 }
             }
         });
-
-        //  tableId.getSelectionModel().getSelectedItem();
         usersTable.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{
             if(o!=null){
                 Member m = (Member) o;

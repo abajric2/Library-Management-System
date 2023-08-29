@@ -117,7 +117,6 @@ public class ManageBooksController {
                 }
             }
         });
-        //  tableId.getSelectionModel().getSelectedItem();
         tableId.getSelectionModel().selectedItemProperty().addListener((obs,o,n)->{
             if(o!=null){
                 Book b = (Book) o;
@@ -195,11 +194,6 @@ public class ManageBooksController {
             } else {
                 totalNumberAddCheck.setText("");
             }
-                      /*  } else if(updtTotal.getText().matches("\\d*") && !updtAvailable.getText().isEmpty() && updtAvailable.getText().matches("\\d*")
-                && Integer.parseInt(updtTotal.getText()) < Integer.parseInt(updtAvailable.getText())) {
-              //  System.out.println("GRESKAAAAAAAAA");
-                    totalNumberAddCheck.setText("The number of available books cannot be greater than the total number of books!");
-            }*/
         });
         updtAvailable.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() < 1) {
@@ -211,10 +205,6 @@ public class ManageBooksController {
             } else {
                 availableNumberAddCheck.setText("");
             }
-            /*else if(updtAvailable.getText().matches("\\d*") && !updtTotal.getText().isEmpty() && updtTotal.getText().matches("\\d*")
-                    &&  Integer.parseInt(updtAvailable.getText()) > Integer.parseInt(updtTotal.getText())) {
-                availableNumberAddCheck.setText("The number of available books cannot be greater than the total number of books!");
-            }*/
         });
         titleLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() < 1) {
@@ -270,11 +260,6 @@ public class ManageBooksController {
             } else {
                 totalNumberUpdateCheck.setText("");
             }
-            /*else if(newValue.matches("\\d*") && !availableNumberLabel.getText().isEmpty() && availableNumberLabel.getText().matches("\\d*")
-                    && Integer.parseInt(newValue) < Integer.parseInt(availableNumberLabel.getText())) {
-            //    System.out.println(Integer.parseInt(newValue) + " " + Integer.parseInt(availableNumberLabel.getText()));
-                totalNumberUpdateCheck.setText("The number of available books cannot be greater than the total number of books!");
-            } */
         });
         availableNumberLabel.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() < 1) {
@@ -286,11 +271,6 @@ public class ManageBooksController {
             } else {
                 availableNumberUpdateCheck.setText("");
             }
-            /*
-            else if(newValue.matches("\\d*") && !totalNumberLabel.getText().isEmpty() && totalNumberLabel.getText().matches("\\d*")
-                    &&  Integer.parseInt(newValue) > Integer.parseInt(totalNumberLabel.getText())) {
-                availableNumberUpdateCheck.setText("The number of available books cannot be greater than the total number of books!");
-            }*/
         });
 
     }
@@ -305,20 +285,8 @@ public class ManageBooksController {
         tableId.setItems(FXCollections.observableList(manager.getAll()));
     }
 
-    public void searchByTitle(ActionEvent actionEvent) {
-    }
-
-    public void searchByAuthor(ActionEvent actionEvent) {
-    }
-
-    public void searchByGenre(ActionEvent actionEvent) {
-    }
 
     public void updateAction(ActionEvent actionEvent) throws LibraryException {
-     /*   if(titleLabel.getText().isEmpty() || authorLabel.getText().isEmpty() || yearLabel.getText().isEmpty() ||
-        genreLabel.getText().isEmpty() || totalNumberLabel.getText().isEmpty() || availableNumberLabel.getText().isEmpty()) {
-            return;
-        }*/
         if(idUpdate == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -332,15 +300,6 @@ public class ManageBooksController {
                 || !availableNumberUpdateCheck.getText().isEmpty()) {
             return;
         }
-    /*    if(!totalNumberLabel.getText().matches("\\d*") || !availableNumberLabel.getText().matches("\\d*")
-                || !yearLabel.getText().matches("\\d*")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Update error!");
-            alert.setContentText("Check that the values you entered are of a valid type.");
-            alert.showAndWait();
-            return;
-        }*/
         if(Integer.parseInt(totalNumberLabel.getText()) < Integer.parseInt(availableNumberLabel.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -431,24 +390,6 @@ public class ManageBooksController {
                 || !availableNumberAddCheck.getText().isEmpty()) {
             return;
         }
-   /*     if(updtTitle.getText().isEmpty() || updtAuthor.getText().isEmpty() || updtYear.getText().isEmpty() ||
-                updtGenre.getText().isEmpty() || updtTotal.getText().isEmpty() || updtAvailable.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Fill in all fields!");
-            alert.setContentText("You must fill in all the fields provided!");
-            alert.showAndWait();
-            return;
-        }*/
-     /*   if(!updtTotal.getText().matches("\\d*") || !updtAvailable.getText().matches("\\d*")
-        || !updtYear.getText().matches("\\d*")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Adding error");
-            alert.setContentText("Check that the values you entered are of a valid type.");
-            alert.showAndWait();
-            return;
-        }*/
         if(Integer.parseInt(updtAvailable.getText()) > Integer.parseInt(updtTotal.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -457,14 +398,6 @@ public class ManageBooksController {
             alert.showAndWait();
             return;
         }
-     /*   if(idUpdate != null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Add error!");
-            alert.setContentText("You cannot add a book that already exists, if you want to make changes, use the update option!");
-            alert.showAndWait();
-            return;
-        }*/
         Book b = new Book();
         b.setTitle(updtTitle.getText());
         b.setAuthor(updtAuthor.getText());
