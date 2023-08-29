@@ -5,7 +5,7 @@
 }
 .buttonStyle:hover {
     -fx-background-color: #1e1c1c;
-    -fx-border-color: #1e1c1c;
+    -fx-border-color: black;
 }
 .buttonStyle:focused {
     -fx-border-color: white;
