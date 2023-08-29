@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Business Logic Layer for management of Members
+ * @author Amina Bajric
+ */
 public class MemberManager {
     public List<Member> getAll() throws LibraryException {
         return DaoFactory.memberDao().getAll();
@@ -31,11 +35,6 @@ public class MemberManager {
         validateMember(item);
         return DaoFactory.memberDao().update(item);
     }
-
-/*    public Member getById(int id) throws LibraryException {
-        return DaoFactory.memberDao().get
-    }*/
-
     public void delete(Member item) throws LibraryException {
         DaoFactory.memberDao().delete(item);
     }
@@ -60,18 +59,12 @@ public class MemberManager {
         if (!item.getFirstName().matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
             throw new LibraryException("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
         }
-       /* if(!item.getFirstName().matches("^[\\S]+(\\s[\\S]+)*$")) {
-            throw new LibraryException("Spaces can only be located between 2 sets of characters.");
-        }*/
         if(item.getFirstName().length() > 30) {
             throw new LibraryException("First name can't be longer than 30 characters!");
         }
         if (!item.getLastName().matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
             throw new LibraryException("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
         }
-       /* if(!item.getLastName().matches("^[\\S]+(\\s[\\S]+)*$")) {
-            throw new LibraryException("Space can only be located between 2 sets of characters.");
-        }*/
         if(item.getLastName().length() > 50) {
             throw new LibraryException("Last name can't be longer than 50 characters");
         }

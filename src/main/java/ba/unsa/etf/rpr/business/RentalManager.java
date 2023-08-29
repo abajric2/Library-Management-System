@@ -8,6 +8,10 @@ import ba.unsa.etf.rpr.exceptions.LibraryException;
 
 import java.util.List;
 
+/**
+ * Business Logic Layer for management of Rentals
+ * @author Amina Bajric
+ */
 public class RentalManager {
     public List<Rental> getAll() throws LibraryException {
         return DaoFactory.rentalDao().getAll();
@@ -31,11 +35,6 @@ public class RentalManager {
     public void returnRentedBook (int memberID) throws LibraryException {
         DaoFactory.rentalDao().returnRentedBook(memberID);
     }
-
- /*   @Override
-    public Rental getById(int id) throws LibraryException {
-        return executeQueryUnique("SELECT * FROM RENTALS WHERE RENTAL_ID = ?", new Object[]{id});
-    }*/
 
     public void delete(Rental item) throws LibraryException {
         DaoFactory.rentalDao().delete(item);

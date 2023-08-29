@@ -24,18 +24,6 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         if(instance!=null)
             instance=null;
     }
-
- /*   public RentalDaoSQLImpl() {
-        try {
-            FileReader reader = new FileReader("db.propertieess");
-            Properties p = new Properties();
-            p.load(reader);
-            this.connection = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_RPRBaza123321", p.getProperty("username"), p.getProperty("password"));
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-    }*/
     @Override
     public Rental add(Rental item) throws LibraryException {
         Rental r = checkUsersRental(item.getMemberID());
@@ -60,6 +48,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString(), Statement.RETURN_GENERATED_KEYS);
             int counter = 1;
             for (Map.Entry<String, Object> entry: row.entrySet()) {
+                // id is automatically generated
                 if (entry.getKey().equals("RENTAL_ID")) continue;
                 stmt.setObject(counter, entry.getValue());
                 counter++;
@@ -75,69 +64,10 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
              */
             b.setAvailableNumber(b.getAvailableNumber() - 1);
             bimpl.update(b);
-         /*   String check = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.BOOK_ID = ?";
-            PreparedStatement checkstmt = getConnection().prepareStatement(check);
-            checkstmt.setInt(1, item.getBookID());
-            ResultSet cr = checkstmt.executeQuery();*/
-            /*
-            It can return multiple rows, but the data we need will be the same in each row
-            (because it refers to the book_id), so it is enough to consider only one
-             */
-        /*    if(cr.next() && cr.getInt(7) > 0) {
-                BookDaoSQLImpl b = BookDaoSQLImpl.getInstance();
-                b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
-                        cr.getString(5), cr.getInt(6), cr.getInt(7) - 1));
-            }
-            else {
-                Rental rental = new Rental(item.getId(), item.getBookID(), item.getMemberID(), item.getRentDate(), item.getReturnDeadline());
-                delete(rental);
-                throw new LibraryException("The book is not available in the library");
-            }*/
             return item;
         }catch (SQLException e){
             throw new LibraryException(e.getMessage(), e);
-        }///////////
-      /*  String insert = "INSERT INTO RENTALS(BOOK_ID, MEMBER_ID, RENT_DATE, RETURN_DEADLINE) VALUES(?, ?, ?, ?)";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, item.getBookID());
-            stmt.setInt(2, item.getMemberID());
-            stmt.setDate(3, (java.sql.Date) item.getRentDate());
-            stmt.setDate(4, (java.sql.Date) item.getReturnDeadline());
-            stmt.executeUpdate();
-            ResultSet r = stmt.getGeneratedKeys();
-            r.next();
-            item.setId(r.getInt(1));
-            /*
-            When we add an entity related to book rentals,
-            it is necessary to reduce the number of available
-            books for the book that is rented
-             */
-          /*  String check = "SELECT * FROM Books b, RENTALS r WHERE b.BOOK_ID = r.BOOK_ID AND r.BOOK_ID = ?";
-            PreparedStatement checkstmt = this.connection.prepareStatement(check);
-            checkstmt.setInt(1, item.getBookID());
-            ResultSet cr = checkstmt.executeQuery();*/
-            /*
-            It can return multiple rows, but the data we need will be the same in each row
-            (because it refers to the book_id), so it is enough to consider only one
-             */
-           /* if(cr.next() && cr.getInt(7) > 0) {
-                BookDaoSQLImpl b = new BookDaoSQLImpl();
-                b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
-                        cr.getString(5), cr.getInt(6), cr.getInt(7) - 1));
-            }
-            else {
-                Rental rental = new Rental(item.getId(), item.getBookID(), item.getMemberID(), item.getRentDate(), item.getReturnDeadline());
-                delete(rental);
-                throw new SQLException("The book is not available in the library");
-            }
-            return item;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (LibraryException e) {
-            throw new RuntimeException(e);
         }
-        return null;*/
     }
 
     @Override
@@ -155,7 +85,7 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString());
             int counter = 1;
             for (Map.Entry<String, Object> entry: row.entrySet()) {
-                if (entry.getKey().equals("RENTAL_ID")) continue; // skip ID
+                if (entry.getKey().equals("RENTAL_ID")) continue; // skip id
                 stmt.setObject(counter, entry.getValue());
                 counter++;
             }
@@ -165,30 +95,9 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         }catch (SQLException e){
             throw new LibraryException(e.getMessage(), e);
         }
-       /* String updt = "UPDATE RENTALS SET BOOK_ID = ?, MEMBER_ID = ?, RENT_DATE = ?, RETURN_DEADLINE = ? WHERE RENTAL_ID = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(updt, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, item.getBookID());
-            stmt.setInt(2, item.getMemberID());
-            stmt.setDate(3, (java.sql.Date) item.getRentDate());
-            stmt.setDate(4, (java.sql.Date) item.getReturnDeadline());
-            stmt.setInt(5, item.getId());
-            stmt.executeUpdate();
-            return item;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;*/
     }
     @Override
     public Rental checkUsersRental (int memberID) throws LibraryException {
-      /*  Rental r = new Rental();
-        try {
-            r = executeQueryUnique("SELECT * FROM RENTALS WHERE MEMBER_ID = ?", new Object[]{memberID});
-        } catch (LibraryException e) {
-            return null;
-        }
-        return r;*/
         String query = "SELECT * FROM RENTALS WHERE MEMBER_ID = ?";
         try {
             PreparedStatement stmt = getConnection().prepareStatement(query);
@@ -240,14 +149,8 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         return row;
     }
 
-  /*  @Override
-    public Rental getById(int id) throws LibraryException {
-        return executeQueryUnique("SELECT * FROM RENTALS WHERE RENTAL_ID = ?", new Object[]{id});
-    }*/
-
     @Override
     public void delete(Rental item) throws LibraryException {
-      //  System.out.println("ID KNJIGE JEEEEEEEEEEEE" + item.getBookID());
         String dlt = "DELETE FROM RENTALS WHERE RENTAL_ID = ?";
         try {
             PreparedStatement stmt = getConnection().prepareStatement(dlt, Statement.RETURN_GENERATED_KEYS);
@@ -256,24 +159,12 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
             /*
             When we delete an entity related to book rentals,
             we need to increase the number of available books
-            for the book that was returned;; update: a trigger "after_rental_delete" in the database increases the number of available books
+            for the book that was returned
              */
             BookDaoSQLImpl bimpl = BookDaoSQLImpl.getInstance();
             Book returnedBook = bimpl.searchById(item.getBookID());
             returnedBook.setAvailableNumber(returnedBook.getAvailableNumber() + 1);
             bimpl.update(returnedBook);
-           // System.out.println("OBRISANO");
-        /*    String availableNumberUpdate = "SELECT * FROM Books b WHERE BOOK_ID = ?";
-            PreparedStatement updatestmt = getConnection().prepareStatement(availableNumberUpdate);
-            updatestmt.setInt(1, item.getBookID());
-            ResultSet cr = updatestmt.executeQuery();
-            if(cr.next()) {
-               // System.out.println("DOSLO OVDJEEEEEEEEEEEEE");
-              //  System.out.println(cr.getInt(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " +  cr.getString(4) + " " + cr.getString(5) + " " +  cr.getInt(6) + " " +  cr.getInt(7));
-                BookDaoSQLImpl b = BookDaoSQLImpl.getInstance();
-                b.update(new Book(cr.getInt(1), cr.getString(2), cr.getString(3), cr.getString(4),
-                        cr.getString(5), cr.getInt(6), cr.getInt(7) + 1));
-            }*/
         } catch (SQLException e) {
             throw new LibraryException(e.getMessage(), e);
         }
@@ -339,10 +230,6 @@ public class RentalDaoSQLImpl extends AbstractDao<Rental> implements RentalDao {
         } catch (SQLException e) {
             throw new LibraryException(e.getMessage(), e);
         }
-       /* Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.MONTH, n);
-        return (java.sql.Date) cal.getTime();*/
     }
     @Override
     public Rental rentABook(int memberID, int bookId) throws LibraryException {

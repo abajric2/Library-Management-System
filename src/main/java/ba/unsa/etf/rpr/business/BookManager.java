@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Business Logic Layer for management of Books
+ * @author Amina Bajric
+ */
 public class BookManager {
     public List<Book> getAll() throws LibraryException {
         return DaoFactory.bookDao().getAll();
@@ -32,10 +36,6 @@ public class BookManager {
         return DaoFactory.bookDao().searchByTitle(title);
     }
 
-   /* public Book searchByTitleAndAuthor(String title, String author) throws LibraryException {
-        return DaoFactory.bookDao().searchByTitleAndAuthor(title, author);
-    }*/
-
     public boolean isAvailable(int id) throws LibraryException {
         return DaoFactory.bookDao().isAvailable(id);
     }
@@ -53,13 +53,6 @@ public class BookManager {
     public void delete(Book item) throws LibraryException {
         DaoFactory.bookDao().delete(item);
     }
-
-
-   /* @Override
-    public Book getById(int id) throws LibraryException {
-        return DaoFactory.bookDao().getB
-    }*/
-
     public Book searchById(int id) throws LibraryException {
         return DaoFactory.bookDao().searchById(id);
     }

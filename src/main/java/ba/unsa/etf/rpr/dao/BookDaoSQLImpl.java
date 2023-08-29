@@ -50,7 +50,7 @@ public class BookDaoSQLImpl extends AbstractDao<Book> implements BookDao {
         }
     }
     /*
-    the following constraints on the attributes that make up a book are
+    the following constraints on the attributes of a book are
     set by exploring some general rules for constraining these types.
      */
     public void validateBook(Book item) throws LibraryException {
