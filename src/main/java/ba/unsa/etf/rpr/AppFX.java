@@ -21,7 +21,7 @@ public class AppFX extends Application {
         loader.setController(controller);
         myStage.setTitle("Log in");
         myStage.setScene(new Scene(loader.<Parent>load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        myStage.setResizable(true);
+        myStage.setResizable(false);
         myStage.show();
     }
 }

@@ -158,7 +158,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     public abstract T update(T item) throws LibraryException;
 
     public List<T> getAll() throws LibraryException {
-        return executeQuery("SELECT * FROM "+ table, null);
+        return executeQuery("SELECT * FROM " + table, null);
     }
     public abstract List<T> removeAll() throws LibraryException;
     public abstract List<T> insertAll(List<T> items);
