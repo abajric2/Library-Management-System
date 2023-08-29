@@ -45,9 +45,31 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     public static Connection getConnection(){
         return AbstractDao.connection;
     }
+
+    /**
+     * based on the row of the table, creates the object described by that row
+     * @param rs set of results returned by executing query
+     * @return object obtained from the row
+     * @throws LibraryException
+     */
     public abstract T row2object(ResultSet rs) throws LibraryException;
 
+    /**
+     * based on object, creates a table row
+     * @param object object that needs to be converted into row
+     * @return row
+     */
     public abstract Map<String, Object> object2row(T object);
+
+    /**
+     * It sets parameters in the query if there are any, executes the query,
+     * and returns a list of elements containing the results converted to the
+     * corresponding objects that describe the specific table.
+     * @param query
+     * @param parameters
+     * @return list of objects returned by query execution
+     * @throws LibraryException
+     */
     public List<T> executeQuery(String query, Object[] parameters) throws LibraryException {
         try {
             PreparedStatement stmt = getConnection().prepareStatement(query);
