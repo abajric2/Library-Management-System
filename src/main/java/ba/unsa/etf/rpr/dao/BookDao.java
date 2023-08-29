@@ -32,15 +32,6 @@ public interface BookDao extends Dao<Book> {
      */
     List<Book> searchByTitle(String title) throws LibraryException;
 
- /*   /**
-     * returns the book with the title given as a parameter,
-     * by the author whose name is also given by the parameter
-     * @param title
-     * @param author
-     * @return Book
-     */
-   // Book searchByTitleAndAuthor(String title, String author) throws LibraryException;
-
     /**
      * method that returns true if a book with a given id
      * is currently available in the library,
@@ -48,5 +39,12 @@ public interface BookDao extends Dao<Book> {
      * @param id
      */
     boolean isAvailable (int id) throws LibraryException;
+
+    /**
+     * checks that all book attributes are in the correct format and of the correct types,
+     * and throws exception if not
+     * @param item book
+     * @throws LibraryException
+     */
     void validateBook(Book item) throws LibraryException;
 }
