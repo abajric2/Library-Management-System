@@ -148,17 +148,17 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="byTitleId" onAction="#searchByTitle" promptText="Search by title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                  <TextField fx:id="byTitleId" promptText="Search by title" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="byAuthorId" onAction="#searchByAuthor" promptText="Search by author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                  <TextField fx:id="byAuthorId" promptText="Search by author" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="byGenreId" onAction="#searchByGenre" promptText="Search by genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                  <TextField fx:id="byGenreId" promptText="Search by genre" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>

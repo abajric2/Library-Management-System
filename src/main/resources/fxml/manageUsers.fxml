@@ -137,7 +137,7 @@
                         <Insets bottom="5.0" left="10.0" right="10.0" top="15.0" />
                      </VBox.margin>
                   </TextField>
-                        <TextField fx:id="byUsernameId" onAction="#searchByUsername" promptText="Search by username" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
+                        <TextField fx:id="byUsernameId" promptText="Search by username" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </VBox.margin>
