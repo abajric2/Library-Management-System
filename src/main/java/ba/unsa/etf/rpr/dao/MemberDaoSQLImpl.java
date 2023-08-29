@@ -25,69 +25,27 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     private Member checkUsername (Member m) throws LibraryException {
         Member member = new Member();
         try {
-           // System.out.println(m.getUsername());
-            member = executeQueryUnique("SELECT * FROM MEMBERS WHERE USERNAME = ?", new Object[]{m.getUsername()});
-         //   System.out.println(member.getUsername());
+            member = executeQueryUnique("SELECT * FROM MEMBERS WHERE BINARY USERNAME = ?", new Object[]{m.getUsername()});
         } catch (LibraryException e) {
+            // executeQueryUnique throws an exception if object is not found
             member = null;
         }
         return member;
-        /*String query = "SELECT * FROM MEMBERS WHERE USERNAME = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setString(1, m.getUsername());
-            ResultSet r = stmt.executeQuery();
-            /*
-            username is unique so it will return one or no rows
-             */
-          /*  if(r.next()) {
-                return new Member(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),
-                        r.getString(5), r.getBoolean(6));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;*/
     }
-    private Member checkPassword (Member m) {
-        Member member = new Member();
-        try {
-            member = executeQueryUnique("SELECT * FROM MEMBERS WHERE PASSWORD = ?", new Object[]{m.getPassword()});
-        } catch (LibraryException e) {
-            member = null;
-        }
-        return member;
-       /* String query = "SELECT * FROM MEMBERS WHERE PASSWORD = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setString(1, m.getPassword());
-            ResultSet r = stmt.executeQuery();
-            /*
-            username is unique so it will return one or no rows
-             */
-        /*    if(r.next()) return new Member(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),
-                    r.getString(5), r.getBoolean(6));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;*/
-    }
+    /*
+    the following constraints on the attributes of a member are
+    set by exploring some general rules for constraining these types.
+     */
     public void validateMember(Member item) throws LibraryException {
         if (!item.getFirstName().matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
             throw new LibraryException("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
         }
-       /* if(!item.getFirstName().matches("^[\\S]+(\\s[\\S]+)*$")) {
-            throw new LibraryException("Spaces can only be located between 2 sets of characters.");
-        }*/
         if(item.getFirstName().length() > 30) {
             throw new LibraryException("First name can't be longer than 30 characters!");
         }
         if (!item.getLastName().matches("^[a-zA-Z-]+(\\s[a-zA-Z-]+)*$")) {
             throw new LibraryException("Only letters, dashes and spaces. Spaces can only be between two sets of characters.");
         }
-       /* if(!item.getLastName().matches("^[\\S]+(\\s[\\S]+)*$")) {
-            throw new LibraryException("Space can only be located between 2 sets of characters.");
-        }*/
         if(item.getLastName().length() > 50) {
             throw new LibraryException("Last name can't be longer than 50 characters");
         }
@@ -107,11 +65,8 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     @Override
     public Member add(Member item) throws LibraryException {
         validateMember(item);
-      /*  Member checkP = checkPassword(item);
-        if(checkP != null) {
-            throw new LibraryException("Someone is already using this password");
-        }*/
         Member checkU = checkUsername(item);
+        // username has to be unique
         if(checkU != null) throw new LibraryException("Someone is already using this username");
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row, "MEMBER_ID");
@@ -132,38 +87,17 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
             rs.next();
             item.setId(rs.getInt(1));
             return item;
-        }catch (SQLException e){
+        } catch (SQLException e){
             throw new LibraryException(e.getMessage(), e);
         }
-       /* String insert = "INSERT INTO MEMBERS(FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ADMIN) VALUES(?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, item.getFirstName());
-            stmt.setString(2, item.getLastName());
-            stmt.setString(3, item.getUsername());
-            stmt.setString(4, item.getPassword());
-            stmt.setBoolean(5, item.isAdmin());
-            stmt.executeUpdate();
-            ResultSet r = stmt.getGeneratedKeys();
-            r.next();
-            item.setId(r.getInt(1));
-            return item;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;*/
     }
 
     @Override
     public Member update(Member item) throws LibraryException {
         validateMember(item);
         Member checkU = checkUsername(item);
+        // username has to be unique, but if leaving the same username for user that we are updating, than it is ok
         if(checkU != null && checkU.getId() != item.getId()) throw new LibraryException("Someone is already using this username");
-     //   Member checkP = checkPassword(item);
-       /* if(checkP != null) {
-            if(checkP.getId() == item.getId()) throw new LibraryException("You are already using this password");
-           // else throw new LibraryException("Someone is already using this password");
-        }*/
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row, "MEMBER_ID");
         StringBuilder builder = new StringBuilder();
@@ -177,7 +111,7 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString());
             int counter = 1;
             for (Map.Entry<String, Object> entry: row.entrySet()) {
-                if (entry.getKey().equals("MEMBER_ID")) continue; // skip ID
+                if (entry.getKey().equals("MEMBER_ID")) continue; // skip id
                 stmt.setObject(counter, entry.getValue());
                 counter++;
             }
@@ -187,21 +121,6 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         }catch (SQLException e){
             throw new LibraryException(e.getMessage(), e);
         }
-        /*String updt = "UPDATE MEMBERS SET FIRST_NAME = ?, LAST_NAME = ?, USERNAME = ?, PASSWORD = ?, IS_ADMIN = ? WHERE MEMBER_ID = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(updt, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, item.getFirstName());
-            stmt.setString(2, item.getLastName());
-            stmt.setString(3, item.getUsername());
-            stmt.setString(4, item.getPassword());
-            stmt.setBoolean(5, item.isAdmin());
-            stmt.setInt(6, item.getId());
-            stmt.executeUpdate();
-            return item;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;*/
     }
 
     @Override
@@ -232,11 +151,6 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
         return row;
     }
 
-   /* @Override
-    public Member getById(int id) throws LibraryException {
-        return executeQueryUnique("SELECT * FROM MEMBERS WHERE MEMBER_ID = ?", new Object[]{id});
-    }*/
-
     @Override
     public void delete(Member item) throws LibraryException {
         String sql = "DELETE FROM MEMBERS WHERE MEMBER_ID = ?";
@@ -261,57 +175,12 @@ public class MemberDaoSQLImpl extends AbstractDao<Member> implements MemberDao {
     @Override
     public List<Member> searchByName(String name) throws LibraryException {
         return executeQuery("SELECT * FROM MEMBERS WHERE CONCAT(CONCAT(FIRST_NAME, ' '), LAST_NAME) LIKE concat('%', ? ,'%')", new Object[]{name});
-     /*   String query = "SELECT * FROM MEMBERS WHERE CONCAT(CONCAT(FIRST_NAME, ' '), LAST_NAME) = ?";
-        List<Member> members = new ArrayList<>();
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setString(1, name);
-            ResultSet r = stmt.executeQuery();
-            while(r.next()) {
-                Member member = new Member();
-                member.setId(r.getInt("MEMBER_ID"));
-                member.setFirstName(r.getString("FIRST_NAME"));
-                member.setLastName(r.getString("LAST_NAME"));
-                member.setUsername(r.getString("USERNAME"));
-                member.setPassword(r.getString("PASSWORD"));
-                member.setAdmin(r.getBoolean("IS_ADMIN"));
-                members.add(member);
-            }
-            r.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return members;*/
     }
 
     @Override
     public Member searchByUsernameAndPassword(String username, String password) throws LibraryException {
+        // binary is used for case-sensitive search
         return executeQueryUnique("SELECT * FROM MEMBERS WHERE BINARY USERNAME = ? AND BINARY PASSWORD = ?", new Object[]{username, password});
-        //return executeQueryUnique("SELECT * FROM MEMBERS WHERE USERNAME = ? AND PASSWORD = ?", new Object[]{username, password});
-       /* String query = "SELECT * FROM MEMBERS WHERE USERNAME = ? AND PASSWORD = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            ResultSet r = stmt.executeQuery();
-            if(r.next()) {
-                Member member = new Member();
-                member.setId(r.getInt("MEMBER_ID"));
-                member.setFirstName(r.getString("FIRST_NAME"));
-                member.setLastName(r.getString("LAST_NAME"));
-                member.setUsername(r.getString("USERNAME"));
-                member.setPassword(r.getString("PASSWORD"));
-                member.setAdmin(r.getBoolean("IS_ADMIN"));
-                r.close();
-                return member;
-            }
-            else {
-                return null;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;*/
     }
     @Override
     public List<Member> removeAll() throws LibraryException {
